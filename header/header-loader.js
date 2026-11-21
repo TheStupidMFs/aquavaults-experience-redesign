@@ -1,9 +1,23 @@
-(function(){function r(e){const t=window.location.pathname;return t.includes("/swapper/swap/")||t.includes("/swapper/autoswap/")?`/header/header-${e}`:t.includes("/swapper/")?`/header/header-${e}`:`/header/header-${e}`}function n(){const e=document.getElementById("header-container");if(!e){console.warn("Header container not found");return}const t=e.getAttribute("data-header-type")||"simple";e.innerHTML=`
-      <div class="header-loading-skeleton">
-        <div class="header-skeleton-content">
-          <div class="header-skeleton-logo"></div>
-          <div class="header-skeleton-title"></div>
-        </div>
-      </div>
-    `;const i=r(t);fetch(i).then(a=>{if(!a.ok)throw new Error(`Failed to load header: ${a.status}`);return a.text()}).then(a=>{e.innerHTML=a;const d=()=>{window.AquaVaultsHeader&&window.AquaVaultsHeader.init?(window.AquaVaultsHeader.init(),t==="full"&&window.AquaVaultsWalletWidget&&window.AquaVaultsWalletWidget.mount&&window.AquaVaultsWalletWidget.mount({el:"av-wallet",autoConnect:!0})):setTimeout(d,50)};d()}).catch(a=>{console.error("Error loading header:",a),e.innerHTML='<header class="app-header"><div class="header-center"><h1 class="header-title">AquaVaults</h1></div></header>'})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",n):n()})();
-//# sourceMappingURL=header-loader.js.map
+(function(){
+  function basePath(){
+    const p=window.location.pathname;
+    return p.startsWith("/aquavaults-experience-redesign/")?"/aquavaults-experience-redesign":"";
+  }
+  function headerPath(type){return basePath()+"/header/header-"+type+".html"}
+  function init(){
+    const el=document.getElementById("header-container");
+    if(!el){console.warn("Header container not found");return}
+    const type=el.getAttribute("data-header-type")||"simple";
+    el.innerHTML='<div class="header-loading-skeleton"><div class="header-skeleton-content"><div class="header-skeleton-logo"></div><div class="header-skeleton-title"></div></div></div>';
+    fetch(headerPath(type)).then(r=>{if(!r.ok)throw new Error("Failed to load header: "+r.status);return r.text()}).then(html=>{
+      el.innerHTML=html;
+      const root=basePath();
+      if(root){
+        el.querySelectorAll('a[href^="/"]').forEach(a=>a.setAttribute("href",root+a.getAttribute("href")));
+        el.querySelectorAll('img[src^="/"]').forEach(i=>i.setAttribute("src",root+i.getAttribute("src")));
+      }
+      const boot=()=>{if(window.AquaVaultsHeader&&window.AquaVaultsHeader.init){window.AquaVaultsHeader.init();if(type==="full"&&window.AquaVaultsWalletWidget&&window.AquaVaultsWalletWidget.mount)window.AquaVaultsWalletWidget.mount({el:"av-wallet",autoConnect:true})}else setTimeout(boot,50)};boot();
+    }).catch(err=>{console.error("Error loading header:",err);el.innerHTML='<header class="app-header"><a class="header-center" href="'+basePath()+'/"><h1 class="header-title">AquaVaults</h1></a></header>'})
+  }
+  document.readyState==="loading"?document.addEventListener("DOMContentLoaded",init):init();
+})();
