@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AquaVaults SDK — Full Test</title>
+  <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.8/lib/index.iife.min.js" integrity="sha384-ujeTtvHxhu2g5lnu14Roii2ajvVKJ74KQ6eo6GGfAi0IrKZ1YkF8N68Iw5VmIJO0" crossorigin="anonymous"></script>
+  <style>
+    body { background: #0a0a0a; color: #eee; font-family: sans-serif; margin: 0; padding: 2rem; }
+    h1 { font-family: monospace; font-size: 1.2rem; margin-bottom: 0.5rem; }
+    h2 { font-family: monospace; font-size: 1rem; color: #818cf8; margin: 2rem 0 0.5rem; }
+    .demo-area { margin: 1rem 0; max-width: 500px; }
+    .hidden-test { width: 1px; height: 1px; overflow: hidden; position: absolute; left: -9999px; }
+    .pass { color: #10b981; }
+    .fail { color: #ef4444; }
+    .info { color: #94a3b8; }
+    #log { white-space: pre-wrap; font-size: 0.8rem; line-height: 1.5; margin-top: 2rem; font-family: monospace; max-height: 600px; overflow-y: auto; background: #111; padding: 1rem; border-radius: 8px; }
+  </style>
+</head>
+<body>
+
+<h1>AquaVaults SDK — Complete Verification</h1>
+
+<h2>Live SDK Widget</h2>
+<div class="demo-area" id="demo"></div>
+
+<div class="hidden-test" id="test1"></div>
+<div class="hidden-test" id="test2"></div>
+
+<h2>Test Results</h2>
+<div id="log"></div>
+
+<script src="dist/aquavaults-sdk.js"></script>
+<script>
+const log = document.getElementById('log');
+let passed = 0, failed = 0;
+
+function assert(label, fn) {
+  try { fn(); log.innerHTML += `<span class="pass">✅</span> ${label}\n`; passed++; }
+  catch (e) { log.innerHTML += `<span class="fail">❌</span> ${label}\n   → ${e.message}\n`; failed++; }
+}
+function assertThrows(label, fn, sub) {
+  try { fn(); log.innerHTML += `<span class="fail">❌</span> ${label} (no error)\n`; failed++; }
+  catch (e) {
+    if (sub && !e.message.includes(sub)) { log.innerHTML += `<span class="fail">❌</span> ${label}\n   → "${e.message.slice(0,120)}"\n`; failed++; }
+    else { log.innerHTML += `<span class="pass">✅</span> ${label}\n`; passed++; }
+  }
+}
+
+async function runTests() {
+
+// ═══ PHASE 1: Spine ═══
+log.innerHTML += `<span class="info">═══ PHASE 1: Spine ═══</span>\n`;
+assert('SDK on window', () => { if (!window.AquaVaultsSDK) throw new Error('missing'); });
+assert('mount is function', () => { if (typeof AquaVaultsSDK.mount !== 'function') throw new Error('no'); });
+assert('version 1.0.0', () => { if (AquaVaultsSDK.version !== '1.0.0') throw new Error(AquaVaultsSDK.version); });
+
+assertThrows('missing apiBase', () => AquaVaultsSDK.mount('#test1', {}), 'apiBase is required');
+assertThrows('javascript: blocked', () => AquaVaultsSDK.mount('#test1', { apiBase: 'javascript:x' }), 'forbidden');
+assertThrows('http non-localhost blocked', () => AquaVaultsSDK.mount('#test1', { apiBase: 'http://evil.com' }), 'https');
+assertThrows('bad community', () => AquaVaultsSDK.mount('#test1', { apiBase: 'https://aquavaults.com', community: 'fake' }), 'unknown');
+assertThrows('fee > 10', () => AquaVaultsSDK.mount('#test1', { apiBase: 'https://aquavaults.com', settings: { fee: { default: 15 } } }), 'fee.default');
+assertThrows('bad container', () => AquaVaultsSDK.mount('#nope', { apiBase: 'https://aquavaults.com' }), 'no element');
+
+let readyFired = false;
+const inst1 = AquaVaultsSDK.mount('#test1', {
+  apiBase: 'https://aquavaults.com', community: 'demplar', lockCommunity: true,
+  settings: { fee: { default: 1.5 }, slippage: { default: 2.0 } },
+  onReady: () => { readyFired = true; },
+});
+assert('mount returns object', () => { if (!inst1) throw new Error('null'); });
+assert('has destroy', () => { if (typeof inst1.destroy !== 'function') throw new Error('no'); });
+assert('config correct', () => { const c = inst1.getConfig(); if (c.community !== 'demplar') throw new Error(c.community); });
+assert('dom scoped', () => { if (!document.getElementById('test1').classList.contains('av-sdk-root')) throw new Error('no class'); });
+assertThrows('double mount blocked', () => AquaVaultsSDK.mount('#test1', { apiBase: 'https://aquavaults.com' }), 'already');
+
+const inst2 = AquaVaultsSDK.mount('#test2', { apiBase: 'https://aquavaults.com', community: 'pond0x' });
+assert('multi-instance IDs differ', () => {
+  const a = document.getElementById('test1').getAttribute('data-av-instance');
+  const b = document.getElementById('test2').getAttribute('data-av-instance');
+  if (a === b) throw new Error('same');
+});
+inst2.destroy();
+assert('destroy cleans DOM', () => { if (document.getElementById('test2').innerHTML !== '') throw new Error('not empty'); });
+assert('re-mount after destroy', () => { const x = AquaVaultsSDK.mount('#test2', { apiBase: 'https://aquavaults.com' }); x.destroy(); });
+
+// ═══ PHASE 2: Engine + Registries ═══
+log.innerHTML += `\n<span class="info">═══ PHASE 2: Engine + Registries ═══</span>\n`;
+await new Promise(resolve => {
+  if (readyFired) { resolve(); return; }
+  const start = Date.now();
+  const iv = setInterval(() => { if (readyFired || Date.now() - start > 15000) { clearInterval(iv); resolve(); } }, 100);
+});
+
+assert('shared ready', () => { if (!inst1.shared.isReady) throw new Error('not ready'); });
+assert('3 communities', () => { if (inst1.shared.communityRegistry.getAll().length !== 3) throw new Error('count'); });
+assert('7 presets', () => { if (inst1.shared.tokenRegistry.getPresets().length !== 7) throw new Error('count'); });
+assert('SOL decimals 9', () => { if (inst1.shared.tokenRegistry.getDecimals('So11111111111111111111111111111111111111112') !== 9) throw new Error('no'); });
+assert('demplar SOL vault', () => { if (!inst1.shared.communityRegistry.hasTokenVault('demplar', 'So11111111111111111111111111111111111111112')) throw new Error('no'); });
+assert('pond0x no SOL vault', () => { if (inst1.shared.communityRegistry.hasTokenVault('pond0x', 'So11111111111111111111111111111111111111112')) throw new Error('yes'); });
+assert('logo uses apiBase', () => { if (!inst1.shared.communityRegistry.get('aquavaults').logo.startsWith('https://aquavaults.com/')) throw new Error('bad'); });
+assert('swapEngine exists', () => { if (!inst1.swapEngine) throw new Error('null'); });
+assert('onReady fired', () => { if (!readyFired) throw new Error('no'); });
+
+// ═══ PHASE 3: Wallet Adapter ═══
+log.innerHTML += `\n<span class="info">═══ PHASE 3: Wallet Adapter ═══</span>\n`;
+assert('wallet disconnected by default', () => {
+  const s = inst1.getWalletState(); if (s.connected || s.address) throw new Error('unexpected');
+});
+assert('setWalletAdapter validates', () => {
+  let threw = false; try { inst1.setWalletAdapter({}); } catch { threw = true; }
+  if (!threw) throw new Error('should throw');
+});
+assert('setWalletAdapter accepts valid adapter', () => {
+  inst1.setWalletAdapter({
+    connected: false, publicKey: null, publicKeyString: null,
+    signTransaction: async (tx) => tx, connect: async () => {}, disconnect: async () => {},
+    on: () => {}, off: () => {},
+  });
+});
+
+// ═══ PHASE 4: UI Rendering ═══
+log.innerHTML += `\n<span class="info">═══ PHASE 4: UI Rendering ═══</span>\n`;
+const root1 = document.getElementById('test1');
+
+assert('swap card rendered', () => { if (!root1.querySelector('.av-card-shell')) throw new Error('no'); });
+assert('community selector rendered', () => { if (!root1.querySelector('[data-av-id="communitySelector"]')) throw new Error('no'); });
+assert('community shows demplar', () => {
+  const el = root1.querySelector('[data-av-id="communitySelected"]');
+  if (!el || !el.textContent.includes('Knights Demplar')) throw new Error(el?.textContent);
+});
+assert('vault pill rendered', () => { if (!root1.querySelector('[data-av-id="vaultPill"]')) throw new Error('no'); });
+assert('settings rendered', () => { if (!root1.querySelector('[data-av-id="constraintsContainer"]')) throw new Error('no'); });
+assert('fee input shows 1.5', () => {
+  const el = root1.querySelector('[data-av-id="feeInput"]');
+  if (!el || el.value !== '1.5') throw new Error(el?.value);
+});
+assert('slippage input shows 2.0', () => {
+  const el = root1.querySelector('[data-av-id="slippageInput"]');
+  if (!el || el.value !== '2.0') throw new Error(el?.value);
+});
+assert('from select SOL', () => {
+  const el = root1.querySelector('[data-av-id="fromSelect"]');
+  if (el.value !== 'So11111111111111111111111111111111111111112') throw new Error(el.value);
+});
+assert('to select USDC', () => {
+  const el = root1.querySelector('[data-av-id="toSelect"]');
+  if (el.value !== 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v') throw new Error(el.value);
+});
+assert('flip button', () => { if (!root1.querySelector('[data-av-id="flipBtn"]')) throw new Error('no'); });
+assert('amount input', () => { if (!root1.querySelector('[data-av-id="amountInput"]')) throw new Error('no'); });
+assert('swap button disabled', () => {
+  const btn = root1.querySelector('[data-av-id="swapBtn"]');
+  if (!btn || !btn.disabled) throw new Error('should be disabled');
+});
+assert('picker overlay hidden', () => {
+  const el = root1.querySelector('[data-av-id="tokenPickerOverlay"]');
+  if (el.style.display !== 'none') throw new Error('visible');
+});
+assert('settings collapsed', () => {
+  const el = root1.querySelector('[data-av-id="constraintsContainer"]');
+  if (el.classList.contains('expanded')) throw new Error('expanded');
+});
+assert('no inline handlers', () => {
+  if (root1.innerHTML.includes('onclick=') || root1.innerHTML.includes('onchange=')) throw new Error('found');
+});
+assert('no global IDs', () => {
+  if (root1.querySelectorAll('[id]').length > 0) throw new Error('found id=');
+});
+assert('community locked', () => {
+  const el = root1.querySelector('[data-av-id="communitySelector"]');
+  if (el.style.pointerEvents !== 'none') throw new Error('clickable');
+});
+
+// ═══ WALLET CONNECT UI ═══
+log.innerHTML += `\n<span class="info">═══ WALLET CONNECT UI ═══</span>\n`;
+
+assert('wallet bar rendered', () => {
+  if (!root1.querySelector('[data-av-id="walletBar"]')) throw new Error('no wallet bar');
+});
+assert('wallet button rendered', () => {
+  const btn = root1.querySelector('[data-av-id="walletBtn"]');
+  if (!btn) throw new Error('no button');
+});
+assert('wallet button says Connect Wallet or Get Wallet', () => {
+  const btn = root1.querySelector('[data-av-id="walletBtn"]');
+  const text = btn.textContent.trim();
+  if (!text.includes('Connect') && !text.includes('Get Wallet')) throw new Error(text);
+});
+assert('wallet status dot rendered', () => {
+  const dot = root1.querySelector('.av-wallet-status-dot');
+  if (!dot) throw new Error('no dot');
+});
+assert('wallet status dot is disconnected', () => {
+  const dot = root1.querySelector('.av-wallet-status-dot');
+  if (!dot.classList.contains('disconnected')) throw new Error('not disconnected class');
+});
+assert('wallet label shows no wallet', () => {
+  const label = root1.querySelector('[data-av-id="walletLabel"]');
+  if (!label) throw new Error('no label');
+  if (!label.textContent.includes('No wallet') && !label.textContent.includes('detected')) throw new Error(label.textContent);
+});
+assert('wallet select hidden by default', () => {
+  const sel = root1.querySelector('[data-av-id="walletSelect"]');
+  if (!sel || sel.style.display !== 'none') throw new Error('visible');
+});
+
+// ═══ VISUAL DEMO ═══
+log.innerHTML += `\n<span class="info">═══ VISUAL DEMO ═══</span>\n`;
+const demoInst = AquaVaultsSDK.mount('#demo', {
+  apiBase: 'https://aquavaults.com',
+  community: 'aquavaults',
+  settings: { fee: { default: 1.0 }, slippage: { default: 1.0 } },
+});
+await new Promise(resolve => {
+  const start = Date.now();
+  const iv = setInterval(() => {
+    if (document.getElementById('demo').querySelector('.av-card-shell') || Date.now() - start > 15000) {
+      clearInterval(iv); resolve();
+    }
+  }, 100);
+});
+assert('demo widget mounted', () => {
+  if (!document.getElementById('demo').querySelector('.av-card-shell')) throw new Error('not rendered');
+});
+assert('demo has wallet bar', () => {
+  if (!document.getElementById('demo').querySelector('[data-av-id="walletBar"]')) throw new Error('no');
+});
+assert('demo community not locked (selectable)', () => {
+  const el = document.getElementById('demo').querySelector('[data-av-id="communitySelector"]');
+  if (el.style.pointerEvents === 'none') throw new Error('locked');
+});
+
+// Cleanup
+inst1.destroy();
+assert('destroy clears swapView', () => { if (inst1.swapView !== null) throw new Error('not null'); });
+assert('destroy clears engine', () => { if (inst1.swapEngine !== null) throw new Error('not null'); });
+
+// Summary
+log.innerHTML += `\n<span class="info">════════════════════════════════════</span>\n`;
+log.innerHTML += `<span class="${failed === 0 ? 'pass' : 'fail'}">Results: ${passed} passed, ${failed} failed</span>\n`;
+
+for (let i = localStorage.length - 1; i >= 0; i--) {
+  const k = localStorage.key(i); if (k && k.startsWith('av:')) localStorage.removeItem(k);
+}
+
+}
+runTests().catch(e => { log.innerHTML += `\n<span class="fail">FATAL: ${e.message}\n${e.stack||''}</span>\n`; });
+</script>
+</body>
+</html>

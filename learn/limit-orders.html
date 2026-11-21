@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limit Orders — AquaVaults Learn</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <meta property="og:image" content="/assets/logo.png" />
+    <meta name="description" content="The AquaVaults Limit Orders system allows users to define swap conditions ahead of time and execute trades when market conditions reach the specified target price." />
+    <link rel="stylesheet" href="/about.css">
+    <link rel="stylesheet" href="/learn/docs.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/header/header-loader.js" defer></script>
+    <script src="/header/header.js" defer></script>
+    <script src="/learn/docs.js" defer></script>
+    <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+    <div id="header-container" data-header-type="simple"></div>
+
+    <div class="docs-layout">
+
+        <aside id="docs-sidebar" class="docs-sidebar">
+            <!-- injected by docs.js -->
+        </aside>
+
+        <main class="docs-main">
+
+            <nav class="docs-breadcrumbs">
+                <a href="/learn" class="docs-breadcrumb-link">Learn</a>
+                <span class="docs-breadcrumb-sep">›</span>
+                <span>Tools</span>
+            </nav>
+
+            <header class="docs-hero">
+                <div class="docs-hero-badge">Execution Infrastructure</div>
+                <h1>Limit Orders</h1>
+                <p class="docs-hero-sub">AquaVaults Limit Orders allow users to define swap conditions ahead of time so participation can occur when target prices are reached instead of only during manual interaction.</p>
+            </header>
+
+            <div class="docs-content">
+
+                <!-- ── 1. Participation Beyond Immediate Swaps ── -->
+                <div class="docs-section">
+                    <h2 id="participation-beyond-immediate">Participation Beyond Immediate Swaps</h2>
+                    <p>Most swap activity is immediate. A user decides they want to swap, opens the interface, and executes the trade at the current price. That works well for users whose intent aligns with current market conditions, but it requires being present at the right moment — and not every user wants to participate that way.</p>
+                    <p>Limit Orders extend that model. Instead of executing immediately, users define the conditions under which they want a swap to happen. The order persists until those conditions are met, at which point it can execute — without the user needing to be present or monitor the price manually.</p>
+                    <p>This gives users a different relationship with their own participation. Rather than reacting to current conditions, they define future intent and let the system carry that intent forward until the moment it becomes relevant.</p>
+                </div>
+
+                <!-- ── 2. How Limit Orders Work ── -->
+                <div class="docs-section">
+                    <h2 id="how-limit-orders-work">How Limit Orders Work</h2>
+                    <p>The process is straightforward. Users configure the order ahead of time, and the infrastructure monitors for the conditions the user defined until the order becomes eligible for execution.</p>
+                    <div class="docs-steps">
+                        <div class="docs-step">
+                            <div class="docs-step-number">1</div>
+                            <div class="docs-step-body">
+                                <p class="docs-step-title">Select a token pair</p>
+                                <p class="docs-step-desc">Choose the token to sell and the token to receive. This defines the direction of the intended swap.</p>
+                            </div>
+                        </div>
+                        <div class="docs-step">
+                            <div class="docs-step-number">2</div>
+                            <div class="docs-step-body">
+                                <p class="docs-step-title">Set a target price</p>
+                                <p class="docs-step-desc">Define the price condition at which the order should execute. The swap will not proceed until the price reaches or crosses the specified target.</p>
+                            </div>
+                        </div>
+                        <div class="docs-step">
+                            <div class="docs-step-number">3</div>
+                            <div class="docs-step-body">
+                                <p class="docs-step-title">The order waits</p>
+                                <p class="docs-step-desc">The order remains open and monitored. The user does not need to stay active on the platform. The condition persists until it is met, cancelled, or expires.</p>
+                            </div>
+                        </div>
+                        <div class="docs-step">
+                            <div class="docs-step-number">4</div>
+                            <div class="docs-step-body">
+                                <p class="docs-step-title">Execution when conditions align</p>
+                                <p class="docs-step-desc">When the target price is reached and routing conditions allow, the order executes. The swap completes according to the parameters the user set at the time of configuration.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="docs-callout docs-callout-note">
+                        <div class="docs-callout-label">Token-2022 Compatibility</div>
+                        <p>Some Token-2022 assets may not behave reliably with Jupiter Limit Orders depending on the token's configuration and Jupiter Trigger support. If a selected token is identified as Token-2022, a confirmation prompt will appear before the order is placed.</p>
+                    </div>
+                </div>
+
+                <!-- ── 3. Community Routing Is Not Currently Supported ── -->
+                <div class="docs-section">
+                    <h2 id="community-routing-not-supported">Community Routing Is Not Currently Supported</h2>
+                    <p>This is an important distinction to understand before using Limit Orders as part of a community participation strategy.</p>
+                    <div class="docs-callout docs-callout-warn">
+                        <div class="docs-callout-label">Community Routing Unavailable on Limit Orders</div>
+                        <p>Limit Orders currently do not route activity toward selected communities. Community fee routing — the mechanism that directs platform fees toward a community when a user swaps with that community selected — is not part of the Limit Orders flow at this time. This limitation applies regardless of which community a user has selected in other parts of the platform.</p>
+                    </div>
+                    <p>This is not a configuration issue and not something users can work around by adjusting settings. The limit-order infrastructure operates through a different execution pathway than the Solana Swapper and AutoSwap, and that pathway does not currently support the same community routing integration.</p>
+                    <p>Users who want their swap activity to contribute toward community routing should use the <a href="/learn/solana-swapper" class="coop-callout-link">Solana Swapper</a> or <a href="/learn/autoswap" class="coop-callout-link">AutoSwap</a> for that purpose. Limit Orders remain a useful tool within the broader AquaVaults ecosystem — but their current role is user-directed timing flexibility rather than community-directed fee routing.</p>
+                    <p>This distinction is stated clearly here because the rest of the ecosystem docs consistently reinforce community routing as a central feature. Limit Orders are the exception to that, and users deserve to know that before building plans around them.</p>
+                </div>
+
+                <!-- ── 4. Why Users Still Use Limit Orders ── -->
+                <div class="docs-section">
+                    <h2 id="why-users-still-use">Why Users Still Use Limit Orders</h2>
+                    <p>Even without community routing, Limit Orders serve a real purpose for users who prefer not to execute swaps at current prices or who do not want to manually monitor conditions.</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Execution on Your Timeline</h3>
+                            <p>Users who have a view on where they want to participate can configure the order once and let it execute when conditions arrive — without needing to watch price action or act quickly in the moment.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Participation Ahead of Time</h3>
+                            <p>Intent can be locked in before market conditions reach the desired level. Users define where they want to participate; the order carries that intent forward until it becomes relevant.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Reduced Manual Overhead</h3>
+                            <p>For users who would otherwise need to repeatedly monitor prices waiting for specific conditions, Limit Orders reduce that manual overhead significantly. Configure the conditions ahead of time and allow the order to persist until they are met or cancelled.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── 5. User Control and Non-Custodial Design ── -->
+                <div class="docs-section">
+                    <h2 id="user-control">How Funds Are Handled</h2>
+                    <p>Limit Orders on AquaVaults are processed through Jupiter's limit order infrastructure. The custody model for limit orders differs from that of an immediate swap — users should understand this before placing an order.</p>
+                    <p>When a limit order is created and the user confirms the transaction, the sell-side tokens leave the user's wallet and are deposited into Jupiter's limit order program. Jupiter's infrastructure holds those tokens and monitors the price condition until the order executes or the user cancels. This is different from an immediate swap, where tokens only leave the wallet at the exact moment of execution.</p>
+                    <p>AquaVaults does not hold or manage user funds in limit orders. AquaVaults provides the interface and participation layer — the infrastructure that processes and holds funds during an open order is Jupiter's. Users should review the order details presented in their wallet and refer to Jupiter's documentation for a full explanation of how limit order execution and fund handling works before signing.</p>
+                    <p>Users can cancel an open order at any time through the platform. When cancelled, Jupiter's program returns the deposited tokens to the user's wallet. The ability to cancel is always available — but the tokens are held within Jupiter's infrastructure between order placement and execution or cancellation, not in the user's wallet.</p>
+                </div>
+
+                <!-- ── 6. Limit Orders Inside The Broader Ecosystem ── -->
+                <div class="docs-section">
+                    <h2 id="broader-ecosystem">Limit Orders Inside The Broader Ecosystem</h2>
+                    <p>Although Limit Orders do not support community routing, they still exist within the same AquaVaults ecosystem as every other tool. Users who rely on Limit Orders for price-conditioned swaps can use the rest of the platform for community-directed participation activity.</p>
+                    <p>The two functions are complementary rather than competing. A user who sets a Limit Order for price-based execution and also runs AutoSwap sessions for community participation is using both tools for what each one does well. One serves execution timing. The other serves community-directed recurring activity.</p>
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">Using Multiple Tools Together</div>
+                        <p>Limit Orders, the Solana Swapper, AutoSwap, and the Co-op Mining Rig all operate within the same ecosystem. They do not compete with each other. Users who want both execution flexibility and community participation can run both — directing community routing activity through the Swapper or AutoSwap while using Limit Orders separately for price-conditioned trades.</p>
+                    </div>
+                </div>
+
+                <!-- ── 7. More Than Manual Timing ── -->
+                <div class="docs-section">
+                    <h2 id="more-than-manual-timing">More Than Manual Timing</h2>
+                    <p>The underlying value of Limit Orders is not about sophistication or execution precision. It is about something simpler: participation does not always have to happen in the moment.</p>
+                    <p>A user who defines an order today is expressing where they want to participate ahead of time rather than reacting only in the moment. They do not need to constantly monitor the market or manually wait for conditions to align. The order structure allows that intent to persist until the configured conditions become relevant.</p>
+                    <p>That is a different posture toward participation than immediate swaps require — and for the right users in the right situations, it is a more sustainable one. Not all participation has to happen in the moment. Limit Orders allow users to structure participation around future conditions while remaining inside the AquaVaults ecosystem they already use for everything else.</p>
+                </div>
+
+                <!-- ── Continue Exploring ── -->
+                <div class="docs-explore">
+                    <p class="docs-explore-title">Continue Exploring</p>
+                    <div class="docs-explore-links">
+                        <a href="/learn/solana-swapper" class="docs-explore-link">Solana Swapper →</a>
+                        <a href="/learn/autoswap" class="docs-explore-link">AutoSwap →</a>
+                        <a href="/learn/coop-rig" class="docs-explore-link">Co-op Mining Rig →</a>
+                        <a href="/learn/evm-swapper" class="docs-explore-link">EVM Swapper →</a>
+                    </div>
+                </div>
+
+                <!-- ── Pagination ── -->
+                <nav class="docs-pagination">
+                    <a href="/learn/autoswap" class="docs-pag-link">
+                        <span class="docs-pag-direction">← Previous</span>
+                        <span class="docs-pag-title">AutoSwap</span>
+                    </a>
+                    <a href="/learn/evm-swapper" class="docs-pag-link docs-pag-next">
+                        <span class="docs-pag-direction">Next →</span>
+                        <span class="docs-pag-title">EVM Swapper</span>
+                    </a>
+                </nav>
+
+            </div>
+        </main>
+
+    </div>
+
+    <div id="footer-container"></div>
+</body>
+</html>

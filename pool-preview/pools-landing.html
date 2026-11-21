@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AquaVaults — PNDC Pooling System Preview Landing</title>
+  <link rel="icon" type="image/png" href="/assets/logo.png" />
+  <link rel="apple-touch-icon" href="/assets/logo.png" />
+  <meta property="og:image" content="/assets/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg-0: #05080f; --bg-card: #0f1830; --bg-card-hover: #131e3a;
+    --border: rgba(59,130,246,0.12); --border-bright: rgba(59,130,246,0.3);
+    --blue-300: #93C5FD; --blue-400: #60A5FA; --blue-500: #3B82F6; --blue-600: #2563EB;
+    --aqua-400: #22D3EE; --aqua-500: #06B6D4;
+    --purple-400: #C084FC; --green-400: #4ADE80; --green-500: #22C55E;
+    --orange-400: #FB923C; --orange-500: #F59E0B; --red-400: #F87171;
+    --text-primary: #EFF6FF; --text-secondary: #93C5FD; --text-muted: #4B6FA8; --text-dim: #2A4070;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'Instrument Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg-0); color: var(--text-primary); font-family: var(--font-body); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); opacity: 0.022; pointer-events: none; z-index: 0; }
+
+  .grid-bg { position: fixed; inset: 0; background-image: linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
+
+  .glow-orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(120px); }
+  .glow-1 { width: 600px; height: 600px; top: -200px; left: -100px; background: radial-gradient(circle, rgba(37,99,235,0.18) 0%, transparent 70%); }
+  .glow-2 { width: 500px; height: 500px; top: 40%; right: -150px; background: radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 70%); }
+  .glow-3 { width: 400px; height: 400px; bottom: 10%; left: 30%; background: radial-gradient(circle, rgba(168,85,247,0.1) 0%, transparent 70%); }
+
+  main { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 0 32px 120px; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(5,8,15,0.8); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid var(--border); padding: 0 32px; }
+  .nav-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-mark { width: 30px; height: 30px; background: linear-gradient(135deg, #3B82F6, #06B6D4); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 0.65rem; color: #fff; }
+  .nav-logo span { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text-primary); letter-spacing: -0.01em; }
+  .nav-links { display: flex; gap: 18px; list-style: none; }
+  .nav-links a { font-family: var(--font-body); font-size: 0.8rem; font-weight: 500; color: var(--text-muted); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; white-space: nowrap; }
+  .nav-links a:hover { color: var(--blue-400); }
+  .nav-badge { display: none; font-family: var(--font-mono); font-size: 0.68rem; color: var(--aqua-400); border: 1px solid rgba(34,211,238,0.3); background: rgba(34,211,238,0.06); padding: 3px 10px; border-radius: 20px; letter-spacing: 0.04em; }
+
+/* ── PREVIEW DROPDOWN ── */
+.nav-dropdown { position: relative; }
+.nav-dropdown-toggle { display: flex !important; align-items: center; gap: 5px; cursor: pointer; }
+.nav-dropdown-toggle svg { transition: transform 0.2s; flex-shrink: 0; }
+.nav-dropdown:hover .nav-dropdown-toggle svg { transform: rotate(180deg); }
+.nav-dropdown-menu {
+  display: none;
+  position: absolute; top: 100%; right: 0;
+  padding-top: 10px;
+  background: rgba(5,8,15,0.97);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-bright);
+  border-radius: 10px;
+  padding: 6px;
+  min-width: 190px;
+  z-index: 200;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+.nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; gap: 2px; }
+.nav-dropdown-menu ul { display: flex; flex-direction: column; gap: 2px; }
+.nav-dropdown-menu a {
+  display: block;
+  padding: 9px 14px;
+  border-radius: 7px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.nav-dropdown-menu a:hover { background: rgba(59,130,246,0.1); color: var(--blue-400); }
+.nav-dropdown-menu a.active { color: var(--aqua-400); background: rgba(34,211,238,0.06); }
+.nav-dropdown-divider { height: 1px; background: var(--border); margin: 4px 6px; }
+
+/* ── MOBILE NAV ── */
+.nav-back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 600; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; white-space: nowrap; padding: 5px 12px; border: 1px solid var(--border); border-radius: 20px; background: rgba(59,130,246,0.06); transition: all 0.2s; }
+.nav-back:hover { color: var(--blue-400); border-color: var(--border-bright); background: rgba(59,130,246,0.12); }
+.nav-back svg { flex-shrink: 0; }
+.nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; padding: 7px 8px; border: 1px solid var(--border); border-radius: 8px; background: transparent; }
+.nav-hamburger span { display: block; width: 20px; height: 2px; background: var(--text-muted); border-radius: 2px; transition: all 0.3s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 150; backdrop-filter: blur(4px); }
+.mobile-overlay.open { display: block; }
+.mobile-drawer { position: fixed; top: 0; right: -320px; width: min(300px, 90vw); height: 100%; background: #080e1c; border-left: 1px solid var(--border-bright); z-index: 160; transition: right 0.3s ease; overflow-y: auto; }
+.mobile-drawer.open { right: 0; }
+.mobile-drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+.mobile-drawer-title { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; color: var(--text-primary); }
+.mobile-close { background: transparent; border: 1px solid var(--border); border-radius: 6px; color: var(--text-muted); cursor: pointer; padding: 5px 9px; font-size: 0.85rem; line-height: 1; transition: all 0.15s; }
+.mobile-close:hover { color: var(--text-primary); border-color: var(--border-bright); }
+.mobile-nav-section { padding: 20px 20px 0; }
+.mobile-nav-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; padding: 0 2px; }
+.mobile-nav-link { display: block; padding: 10px 12px; border-radius: 8px; font-size: 0.88rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: all 0.15s; }
+.mobile-nav-link:hover { background: rgba(59,130,246,0.1); color: var(--blue-400); }
+.mobile-nav-link.active { background: rgba(34,211,238,0.06); color: var(--aqua-400); border: 1px solid rgba(34,211,238,0.15); }
+.mobile-nav-divider { height: 1px; background: var(--border); margin: 16px 20px; }
+
+  /* ── HERO ── */
+  .hero { padding: 96px 0 80px; text-align: center; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--aqua-400); border: 1px solid rgba(34,211,238,0.25); background: rgba(34,211,238,0.05); padding: 6px 16px; border-radius: 20px; margin-bottom: 32px; }
+  .hero-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--aqua-400); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)} }
+  .hero-logo { display: flex; justify-content: center; margin-bottom: 28px; }
+  .hero-logo-wrap { position: relative; width: 176px; height: 176px; }
+  .hero-logo-mark-lg { display: none; }
+  .hero-logo-wrap::after { content: ''; position: absolute; inset: -16px; background: radial-gradient(circle, rgba(59,130,246,0.35) 0%, transparent 70%); border-radius: 40px; z-index: 0; animation: logoGlow 3s ease-in-out infinite; }
+  @keyframes logoGlow { 0%,100%{opacity:0.8}50%{opacity:1;transform:scale(1.05)} }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(2.8rem,6vw,4.2rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 20px; }
+  .hero h1 .gradient-text { background: linear-gradient(90deg, var(--blue-400) 0%, var(--aqua-400) 50%, var(--blue-300) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-sub { font-size: 1.15rem; color: #7BA8D8; max-width: 580px; margin: 0 auto 40px; line-height: 1.65; }
+  .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 60px; }
+
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--blue-500), var(--blue-600)); color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.02em; padding: 12px 28px; border-radius: 10px; text-decoration: none; border: 1px solid rgba(96,165,250,0.3); transition: all 0.2s; box-shadow: 0 0 30px rgba(37,99,235,0.25); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 40px rgba(37,99,235,0.4); }
+  .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: rgba(59,130,246,0.08); color: var(--blue-300); font-family: var(--font-display); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.02em; padding: 12px 28px; border-radius: 10px; text-decoration: none; border: 1px solid rgba(59,130,246,0.2); transition: all 0.2s; }
+  .btn-secondary:hover { background: rgba(59,130,246,0.15); border-color: rgba(59,130,246,0.4); }
+
+  .stat-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 80px; }
+  .stat-item { background: var(--bg-card); padding: 24px 20px; text-align: center; transition: background 0.2s; }
+  .stat-item:hover { background: var(--bg-card-hover); }
+  .stat-value { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; background: linear-gradient(135deg, var(--blue-300), var(--aqua-400)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-label { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; font-family: var(--font-mono); }
+
+  /* ── LAYOUT ── */
+  section { margin-bottom: 80px; }
+  .section-eyebrow { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+  .section-eyebrow span { color: var(--blue-400); }
+  h2 { font-family: var(--font-display); font-size: clamp(1.6rem,3vw,2rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.2; margin-bottom: 16px; }
+  h2 em { font-style: normal; color: var(--blue-400); }
+  .section-lead { font-size: 1rem; color: #7BA8D8; max-width: 640px; margin-bottom: 36px; line-height: 1.7; }
+
+  /* ── CARDS ── */
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: border-color 0.2s, background 0.2s; position: relative; overflow: hidden; }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(59,130,246,0.4), transparent); opacity: 0; transition: opacity 0.2s; }
+  .card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); }
+  .card:hover::before { opacity: 1; }
+  .card-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 16px; }
+  .icon-blue   { background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.2); }
+  .icon-aqua   { background: rgba(6,182,212,0.12);  border: 1px solid rgba(6,182,212,0.2); }
+  .icon-purple { background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.2); }
+  .icon-green  { background: rgba(34,197,94,0.12);  border: 1px solid rgba(34,197,94,0.2); }
+  .icon-orange { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.2); }
+  .card h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 8px; }
+  .card p { font-size: 0.9rem; color: #6B91C2; line-height: 1.65; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+  /* ── FLOW ── */
+  .flow { display: flex; flex-direction: column; }
+  .flow-item { display: grid; grid-template-columns: 56px 1fr; gap: 24px; align-items: flex-start; padding: 28px 0; border-bottom: 1px solid var(--border); }
+  .flow-item:last-child { border-bottom: none; }
+  .flow-num { width: 42px; height: 42px; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border-bright); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 1rem; color: var(--blue-400); flex-shrink: 0; }
+  .flow-body h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: -0.015em; margin-bottom: 8px; }
+  .flow-body p { font-size: 0.9rem; color: #6B91C2; line-height: 1.65; }
+  .flow-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 9px; border-radius: 20px; margin-bottom: 8px; }
+  .tag-blue   { background: rgba(59,130,246,0.1);  color: var(--blue-400);   border: 1px solid rgba(59,130,246,0.2); }
+  .tag-aqua   { background: rgba(6,182,212,0.1);   color: var(--aqua-400);   border: 1px solid rgba(6,182,212,0.2); }
+  .tag-purple { background: rgba(168,85,247,0.1);  color: var(--purple-400); border: 1px solid rgba(168,85,247,0.2); }
+  .tag-green  { background: rgba(34,197,94,0.1);   color: var(--green-400);  border: 1px solid rgba(34,197,94,0.2); }
+  .tag-orange { background: rgba(245,158,11,0.1);  color: var(--orange-400); border: 1px solid rgba(245,158,11,0.2); }
+  .tag-red    { background: rgba(239,68,68,0.1);   color: var(--red-400);    border: 1px solid rgba(239,68,68,0.2); }
+
+  /* ── SCENARIOS ── */
+  .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .scenario-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px 24px; position: relative; overflow: hidden; transition: all 0.2s; }
+  .scenario-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; }
+  .scenario-win  { border-color: rgba(34,197,94,0.2); }
+  .scenario-win::after  { background: linear-gradient(90deg, transparent, var(--green-500), transparent); }
+  .scenario-queue{ border-color: rgba(59,130,246,0.2); }
+  .scenario-queue::after { background: linear-gradient(90deg, transparent, var(--blue-500), transparent); }
+  .scenario-fail { border-color: rgba(239,68,68,0.18); }
+  .scenario-fail::after { background: linear-gradient(90deg, transparent, var(--red-400), transparent); }
+  .scenario-card:hover { background: var(--bg-card-hover); transform: translateY(-2px); }
+  .scenario-outcome { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; padding: 3px 10px; border-radius: 20px; display: inline-block; }
+  .scenario-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 12px; }
+  .scenario-steps { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .scenario-steps li { font-size: 0.82rem; color: #6B91C2; padding-left: 16px; position: relative; line-height: 1.5; }
+  .scenario-steps li::before { content: '→'; position: absolute; left: 0; color: var(--text-dim); font-size: 0.75rem; }
+
+  /* ── BADGES ── */
+  .badge { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em; padding: 3px 10px; border-radius: 6px; vertical-align: middle; margin: 0 2px; }
+  .badge-green  { background: rgba(34,197,94,0.1);  color: var(--green-400);  border: 1px solid rgba(34,197,94,0.2); }
+  .badge-blue   { background: rgba(59,130,246,0.1);  color: var(--blue-400);   border: 1px solid rgba(59,130,246,0.2); }
+  .badge-aqua   { background: rgba(6,182,212,0.1);   color: var(--aqua-400);   border: 1px solid rgba(6,182,212,0.2); }
+  .badge-purple { background: rgba(168,85,247,0.1);  color: var(--purple-400); border: 1px solid rgba(168,85,247,0.2); }
+  .badge-orange { background: rgba(245,158,11,0.1);  color: var(--orange-400); border: 1px solid rgba(245,158,11,0.2); }
+  .badge-mono   { background: rgba(148,163,184,0.08); color: #94A3B8;           border: 1px solid rgba(148,163,184,0.15); }
+
+  /* ── CONTRACT TABLE ── */
+  .contract-list { display: flex; flex-direction: column; gap: 8px; }
+  .contract-row { display: grid; grid-template-columns: 210px 1fr auto auto; align-items: center; gap: 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 20px; transition: border-color 0.15s; }
+  .contract-row:hover { border-color: var(--border-bright); }
+  .contract-name { font-family: var(--font-mono); font-size: 0.78rem; color: var(--blue-400); font-weight: 500; }
+  .contract-desc { font-size: 0.82rem; color: #6B91C2; }
+  .contract-cat { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em; padding: 2px 8px; border-radius: 5px; white-space: nowrap; text-transform: uppercase; }
+  .contract-status { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 9px; border-radius: 20px; white-space: nowrap; }
+
+  /* ── DETAIL ROWS ── */
+  .detail-row { display: flex; align-items: baseline; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(59,130,246,0.06); }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-key { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); min-width: 210px; flex-shrink: 0; }
+  .detail-val { font-size: 0.88rem; color: #93B8E8; }
+
+  /* ── CALLOUT ── */
+  .callout { display: flex; gap: 16px; background: rgba(59,130,246,0.05); border: 1px solid rgba(59,130,246,0.18); border-radius: 12px; padding: 20px 24px; margin: 24px 0; }
+  .callout-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+  .callout-body { font-size: 0.88rem; color: #7BA8D8; line-height: 1.65; }
+  .callout-body strong { color: var(--blue-300); font-weight: 600; }
+
+  /* ── SUBSCRIPTION ── */
+  .sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .sub-col { background: var(--bg-card); padding: 28px; }
+  .sub-col:hover { background: var(--bg-card-hover); }
+  .sub-col-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; }
+  .sub-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: 20px; margin-bottom: 16px; }
+  .sub-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sub-list li { font-size: 0.88rem; color: #6B91C2; display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+  .sub-bullet { flex-shrink: 0; width: 5px; height: 5px; border-radius: 50%; margin-top: 8px; }
+  .sub-bullet-free { background: var(--text-muted); }
+  .sub-bullet-sub  { background: var(--aqua-400); }
+
+  /* ── TIMELINE ── */
+  .timeline { display: flex; flex-direction: column; position: relative; padding-left: 32px; }
+  .timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(to bottom, var(--blue-600), var(--aqua-500), transparent); }
+  .tl-item { position: relative; padding: 0 0 32px 24px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-dot { position: absolute; left: -28px; top: 5px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid; background: var(--bg-0); }
+  .tl-dot-active { border-color: var(--blue-500); box-shadow: 0 0 10px rgba(59,130,246,0.5); }
+  .tl-dot-next   { border-color: var(--aqua-500); }
+  .tl-dot-future { border-color: var(--text-dim); }
+  .tl-label { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+  .tl-item h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 6px; }
+  .tl-item p { font-size: 0.85rem; color: #6B91C2; line-height: 1.6; }
+
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border-bright), transparent); margin: 64px 0; }
+
+  /* ── FOOTER ── */
+  footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 40px 32px; max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { display: flex; align-items: center; gap: 10px; }
+  .footer-logo-mark { width: 28px; height: 28px; background: linear-gradient(135deg, #3B82F6, #06B6D4); border-radius: 6px; opacity: 0.8; }
+  .footer-brand span { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; color: var(--text-muted); }
+  .footer-meta { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); text-align: right; line-height: 1.8; }
+
+  @media (max-width: 700px) {
+    main { padding: 0 20px 80px; }
+    .grid-2, .grid-3, .scenario-grid, .sub-grid { grid-template-columns: 1fr; }
+    .stat-bar { grid-template-columns: 1fr 1fr; }
+    .contract-row { grid-template-columns: 1fr auto; }
+    .contract-desc, .contract-cat { display: none; }
+    footer { flex-direction: column; align-items: flex-start; }
+    .footer-meta { text-align: left; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="glow-orb glow-1"></div>
+<div class="glow-orb glow-2"></div>
+<div class="glow-orb glow-3"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-back">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      AquaVaults.com
+    </a>
+    <a href="/preview" class="nav-logo">
+      <img src="../assets/logo-transparent.png" alt="AquaVaults" style="width:30px;height:30px;object-fit:contain;border-radius:6px;" />
+      <span class="nav-logo-name">AquaVaults</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#scenarios">Scenarios</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+      <li class="nav-dropdown">
+        <a href="#" class="nav-dropdown-toggle">Preview Pages <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown-menu">
+          <li><a href="/preview" class="active">Landing / Docs</a></li>
+          <div class="nav-dropdown-divider"></div>
+          <li><a href="/preview/browse">Browse Pools</a></li>
+          <li><a href="/preview/details">Pool Detail</a></li>
+          <li><a href="/preview/create">Create Pool</a></li>
+          <li><a href="/preview/dashboard">Dashboard</a></li>
+        </ul>
+      </li>
+    </ul>
+    <button class="nav-hamburger" id="mobileHamburger" onclick="openMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="nav-badge">Preview v1.0</span>
+  </div>
+</nav>
+
+<div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileNav()"></div>
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="mobile-drawer-head">
+    <a href="/" class="mobile-nav-link" style="padding:6px 8px;display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-dim);">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      AquaVaults.com
+    </a>
+    <button class="mobile-close" onclick="closeMobileNav()">✕</button>
+  </div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-label">This Page</div>
+    <a href="#how-it-works" class="mobile-nav-link" onclick="closeMobileNav()">How It Works</a>
+    <a href="#scenarios" class="mobile-nav-link" onclick="closeMobileNav()">Scenarios</a>
+    <a href="#architecture" class="mobile-nav-link" onclick="closeMobileNav()">Architecture</a>
+    <a href="#roadmap" class="mobile-nav-link" onclick="closeMobileNav()">Roadmap</a>
+  </div>
+  <div class="mobile-nav-divider"></div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-label">Preview Pages</div>
+    <a href="/preview" class="mobile-nav-link active">Landing / Docs</a>
+    <a href="/preview/browse" class="mobile-nav-link">Browse Pools</a>
+    <a href="/preview/details" class="mobile-nav-link">Pool Detail</a>
+    <a href="/preview/create" class="mobile-nav-link">Create Pool</a>
+    <a href="/preview/dashboard" class="mobile-nav-link">Dashboard</a>
+  </div>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="overview">
+    <div class="hero-eyebrow">Coming Soon  —  The AquaVaults Pooling System is in preview. No transactions can be made</div>
+    <div class="hero-logo">
+      <div class="hero-logo-wrap"><img src="../assets/logo-transparent.png" alt="AquaVaults" style="width:176px;height:176px;object-fit:contain;position:relative;z-index:1;" /></div>
+    </div>
+    <h1><span class="gradient-text">AquaVaults Pooling System</span></h1>
+    <p class="hero-sub">A PNDC token pooling system that lets individuals or communities coordinate Dutch auction bids on Pond0x — pooling strength, sharing rewards, and managing risk together.</p>
+    <div class="hero-actions">
+      <a href="/preview/browse" class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Browse Pools Preview
+      </a>
+      <a href="#how-it-works" class="btn-secondary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        How It Works
+      </a>
+      <a href="#architecture" class="btn-secondary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        Technical Architecture
+      </a>
+    </div>
+    <div class="stat-bar">
+      <div class="stat-item"><div class="stat-value">50B–1T</div><div class="stat-label">PNDC Pool Range</div></div>
+      <div class="stat-item"><div class="stat-value">1–25</div><div class="stat-label">Week Timeframes</div></div>
+      <div class="stat-item"><div class="stat-value">9</div><div class="stat-label">Smart Contracts</div></div>
+      <div class="stat-item"><div class="stat-value">3%</div><div class="stat-label">Platform Fee</div></div>
+    </div>
+  </section>
+
+  <!-- WHAT IS IT -->
+  <section id="about">
+    <div class="section-eyebrow"><span>//</span> What Is The AquaVaults Pooling System</div>
+    <h2>Pool PNDC. <em>Win auctions.</em> Share rewards.</h2>
+    <p class="section-lead">The Pooling System is a coordination layer built on top of the Pond0x Dutch auction system. Participants pool PNDC tokens together to bid on liquidity mining auctions — giving smaller holders the same auction power as whales, with automated execution and proportional reward sharing.</p>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-icon icon-blue">🌊</div>
+        <h3>PNDC-Only Contributions</h3>
+        <p>All pools are funded exclusively with PNDC. When a pool creates, it designates a <em>mining target</em> — the token Pond0x will liquidity mine if the pool wins an auction. Rewards are distributed in that target token on its native chain.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-aqua">⛓</div>
+        <h3>Cross-Chain Reward Distribution</h3>
+        <p>Rewards are distributed on whichever chain the target token lives on — Ethereum or Solana. The system is designed to handle both scenarios automatically through coordinated multisig infrastructure.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-purple">🔐</div>
+        <h3>Privacy-First Contributions</h3>
+        <p>Contribution records show only amounts — never user IDs, wallet addresses, or timestamps. This prevents anyone from linking contributions to specific wallets. Contribute as many times as you like until the pool goal locks.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-green">♻️</div>
+        <h3>Persistent Auction Queue</h3>
+        <p>Once a pool reaches its goal and enters the queue, it stays there. Losing an auction doesn't expire a pool — it simply rebids on the next one. Tokens remain locked until the pool wins or its timeframe runs out.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works">
+    <div class="section-eyebrow"><span>//</span> User Journey</div>
+    <h2>From contribution <em>to outcome</em></h2>
+    <p class="section-lead">Every pool follows a structured lifecycle from creation to resolution. Here's exactly what happens at each stage.</p>
+
+    <div class="flow">
+      <div class="flow-item">
+        <div class="flow-num">1</div>
+        <div class="flow-body">
+          <span class="flow-tag tag-blue">Pool Creation</span>
+          <h3>Creator sets a mining target, goal, and timeframe</h3>
+          <p>Any user holding at least <strong style="color:#93C5FD">5 billion PNDC</strong> can create a pool. They select a <strong style="color:#93C5FD">mining target token</strong> (ERC-20, SPL, or Token-2022) — the token Pond0x will liquidity mine if the pool wins. They then set a PNDC contribution goal (50B–1T in 50B increments) and a timeframe of 1–25 weeks. The creator's initial PNDC contribution is <strong style="color:#F87171">permanently locked</strong> and cannot be withdrawn under any circumstances.</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">2</div>
+        <div class="flow-body">
+          <span class="flow-tag tag-aqua">Contribution Window</span>
+          <h3>Community members contribute PNDC</h3>
+          <p>Anyone can contribute PNDC to an open pool multiple times — there's no limit on the number of contributions until the goal is reached. The system tracks each wallet's cumulative share proportionally. Early withdrawal is permitted at any point before the goal locks the pool. Contribution records are anonymous — only amounts are visible publicly.</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">3</div>
+        <div class="flow-body">
+          <span class="flow-tag tag-blue">Goal Reached</span>
+          <h3>Pool locks and enters the auction queue</h3>
+          <p>When the contribution goal is hit, tokens move from the growth multisig to a dedicated bid multisig wallet (1-hour timelock for verification). The pool is committed — no new contributions or withdrawals. It enters the auction queue sorted by pool size. Largest pools bid first; ties go to whichever pool reached its goal earliest.</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">4</div>
+        <div class="flow-body">
+          <span class="flow-tag tag-purple">Dutch Auction</span>
+          <h3>Automatic bid at exact price threshold</h3>
+          <p>AquaVaults monitors Pond0x Dutch auctions in real time. When the current price drops to the pool's configured threshold, the system automatically submits a bid using the pool's dedicated multisig wallet. Pond0x is first-bid-wins — the bot uses direct blockchain event listeners and operates with sub-second response times.</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">5</div>
+        <div class="flow-body">
+          <span class="flow-tag tag-green">Resolution</span>
+          <h3>Win, keep queuing, or expire</h3>
+          <p>If the pool wins, rewards are distributed proportionally to all contributors in the mining target token on its native chain (minus the 3% platform fee) after a 24-hour security timelock. If the pool <strong style="color:#93C5FD">loses an auction</strong>, it stays in the queue and automatically bids again on the next auction — no action needed. The pool only expires when its original timeframe runs out without a win, at which point all PNDC is refunded in full after a 12-hour timelock.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SCENARIOS -->
+  <section id="scenarios">
+    <div class="section-eyebrow"><span>//</span> Possible Outcomes</div>
+    <h2>Three scenarios. <em>All handled automatically.</em></h2>
+    <p class="section-lead">Every pool resolves through one of three paths without any manual intervention required.</p>
+
+    <div class="scenario-grid">
+      <div class="scenario-card scenario-win">
+        <span class="scenario-outcome tag-green">Scenario A</span>
+        <h3>Pool Wins an Auction</h3>
+        <ul class="scenario-steps">
+          <li>Goal reached, pool enters queue</li>
+          <li>Bid submitted and auction won</li>
+          <li>Rewards received in target token on its native chain</li>
+          <li>3% fee deducted to platform</li>
+          <li>Rewards distributed proportionally to all contributors</li>
+          <li>24-hour security timelock before distribution</li>
+        </ul>
+      </div>
+      <div class="scenario-card scenario-queue">
+        <span class="scenario-outcome tag-blue">Scenario B</span>
+        <h3>Goal Reached — Auction Lost</h3>
+        <ul class="scenario-steps">
+          <li>Goal reached, pool enters queue</li>
+          <li>Bid submitted, another bidder wins first</li>
+          <li>Pool stays in queue — tokens remain locked</li>
+          <li>Pool automatically bids on the next auction</li>
+          <li>Continues until a win or timeframe expires</li>
+          <li>No fees charged unless the pool wins</li>
+        </ul>
+      </div>
+      <div class="scenario-card scenario-fail">
+        <span class="scenario-outcome tag-red">Scenario C</span>
+        <h3>Pool Expires Without Winning</h3>
+        <ul class="scenario-steps">
+          <li>Timeframe expires before any auction win</li>
+          <li>Pool marked as expired automatically</li>
+          <li>12-hour refund timelock begins</li>
+          <li>All PNDC tokens returned in full</li>
+          <li>No fees charged on expired pools</li>
+          <li>Contributors notified in real time</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 28px;">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Important:</strong> The 3% fee is only charged on wins — taken from received rewards, never from contributed PNDC. Pools that lose auctions keep bidding automatically. Only expired pools trigger refunds.
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- POOL PARAMETERS -->
+  <section id="rules">
+    <div class="section-eyebrow"><span>//</span> Pool Parameters</div>
+    <h2>Configuration <em>rules &amp; constants</em></h2>
+    <p class="section-lead">These values are fixed at the system level.</p>
+
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="detail-row"><span class="detail-key">PNDC Token Address</span><span class="detail-val" style="font-family:var(--font-mono);font-size:0.78rem;color:var(--aqua-400)">0x423f4e6138e475d85cf7ea071ac92097ed631eea</span></div>
+      <div class="detail-row"><span class="detail-key">Contribution Token</span><span class="detail-val">PNDC only — all pools regardless of mining target</span></div>
+      <div class="detail-row"><span class="detail-key">Mining Target Standards</span><span class="detail-val">ERC-20, SPL, Token-2022</span></div>
+      <div class="detail-row"><span class="detail-key">Pool Goal Range</span><span class="detail-val">50B – 1T PNDC, in increments of 50B</span></div>
+      <div class="detail-row"><span class="detail-key">Pool Timeframe</span><span class="detail-val">1 to 25 weeks from creation</span></div>
+      <div class="detail-row"><span class="detail-key">Minimum to Create Pool</span><span class="detail-val">5 billion PNDC (held by pool creator)</span></div>
+      <div class="detail-row"><span class="detail-key">Creator Initial Contribution</span><span class="detail-val"><strong style="color:#F87171">Permanently locked</strong> — cannot be withdrawn under any circumstances</span></div>
+      <div class="detail-row"><span class="detail-key">Contributor Contributions</span><span class="detail-val">Unlimited times until goal reached; withdrawable before goal locks</span></div>
+      <div class="detail-row"><span class="detail-key">Platform Fee</span><span class="detail-val">3% of auction rewards — winners only, never on losses or expirations</span></div>
+      <div class="detail-row"><span class="detail-key">Auction Bid Priority</span><span class="detail-val">Largest pool bids first; ties broken by first-to-goal</span></div>
+      <div class="detail-row"><span class="detail-key">After Auction Loss</span><span class="detail-val">Pool stays in queue and auto-rebids — no refund until timeframe expires</span></div>
+      <div class="detail-row"><span class="detail-key">Reward Chain</span><span class="detail-val">Distributed on the target token's native chain (Ethereum or Solana)</span></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SUBSCRIPTION -->
+  <section id="subscription">
+    <div class="section-eyebrow"><span>//</span> Subscription</div>
+    <h2>Standard vs <em>Subscriber</em> access</h2>
+    <p class="section-lead">All users can create pools and contribute. Subscribers unlock higher limits, reduced fees, and privacy controls for their pools.</p>
+
+    <div class="sub-grid">
+      <div class="sub-col">
+        <div class="sub-col-title">Standard</div>
+        <span class="sub-tag tag-mono">Free</span>
+        <ul class="sub-list">
+          <li><div class="sub-bullet sub-bullet-free"></div>1 active pool at a time</li>
+          <li><div class="sub-bullet sub-bullet-free"></div>Contribute to up to 3 active pools simultaneously</li>
+          <li><div class="sub-bullet sub-bullet-free"></div>3% platform fee on winning pools</li>
+          <li><div class="sub-bullet sub-bullet-free"></div>Public pools only</li>
+          <li><div class="sub-bullet sub-bullet-free"></div>Unlimited contributions per pool until goal locks</li>
+        </ul>
+      </div>
+      <div class="sub-col">
+        <div class="sub-col-title">Subscriber</div>
+        <span class="sub-tag tag-aqua">Paid</span>
+        <ul class="sub-list">
+          <li><div class="sub-bullet sub-bullet-sub"></div>Up to 5 active pools at a time</li>
+          <li><div class="sub-bullet sub-bullet-sub"></div>Contribute to unlimited active pools simultaneously</li>
+          <li><div class="sub-bullet sub-bullet-sub"></div>Reduced platform fee on pools you create that win</li>
+          <li><div class="sub-bullet sub-bullet-sub"></div>Invite-only pools with invite links, wallet allowlists, and subscriber-only access options</li>
+          <li><div class="sub-bullet sub-bullet-sub"></div>Unlimited contributions per pool until goal locks</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ARCHITECTURE -->
+  <section id="architecture">
+    <div class="section-eyebrow"><span>//</span> Technical Architecture</div>
+    <h2>Built on <em>proven infrastructure</em></h2>
+    <p class="section-lead">Nine on-chain contracts, six automated backend services, and a fully automated cross-chain multisig coordination layer — all rigorously tested in a simulated local environment.</p>
+
+    <div class="grid-2" style="margin-bottom: 28px;">
+      <div class="card">
+        <div class="card-icon icon-blue">📜</div>
+        <h3>Smart Contracts (Ethereum)</h3>
+        <p>9 Solidity contracts handle pool lifecycle, token custody, auction coordination, reward distribution, and emergency controls — with reentrancy protection and role-based access.</p>
+        <div style="margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap;">
+          <span class="badge badge-green">101/101 Tests Passing</span>
+          <span class="badge badge-blue">97 Artifacts Compiled</span>
+          <span class="badge badge-orange">Pre-Audit</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-aqua">🤖</div>
+        <h3>Automated Bot Services</h3>
+        <p>Six event-driven services manage the full pool lifecycle — contribution detection, goal locking, queue management, bid submission, reward distribution, and refund processing. No polling, no manual steps.</p>
+        <div style="margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap;">
+          <span class="badge badge-aqua">Sub-second Response</span>
+          <span class="badge badge-blue">Event-Driven</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-purple">🔐</div>
+        <h3>Multisig Wallet System</h3>
+        <p>21+ coordinated Ethereum-Solana multisig pairs handle token custody at every stage. Growth and expansion of multisig infrastructure is fully automated on both chains as pool volume scales.</p>
+        <div style="margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap;">
+          <span class="badge badge-purple">Gnosis Safe (ETH)</span>
+          <span class="badge badge-aqua">Squads (SOL)</span>
+          <span class="badge badge-blue">Fully Automated</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-green">🗄</div>
+        <h3>Database &amp; Caching Layer</h3>
+        <p>PostgreSQL with Redis caching for all state persistence. Event-triggered cache invalidation, read replicas for high-traffic queries, and anonymous contribution records that expose only amounts.</p>
+        <div style="margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap;">
+          <span class="badge badge-green">PostgreSQL</span>
+          <span class="badge badge-blue">Redis Pub/Sub</span>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--font-display);font-weight:700;font-size:0.75rem;letter-spacing:0.1em;color:var(--text-secondary);margin-bottom:12px;text-transform:uppercase;">Core Smart Contracts</h3>
+    <div class="contract-list">
+      <div class="contract-row"><span class="contract-name">PoolManager.sol</span><span class="contract-desc">Creates pools, tracks contributions, manages goal state and locking</span><span class="contract-cat badge-blue badge">Lifecycle</span><span class="contract-status badge-green badge">Tested</span></div>
+      <div class="contract-row"><span class="contract-name">BidManager.sol</span><span class="contract-desc">Auction bid submission, priority queue ordering, and auto-rebid logic</span><span class="contract-cat badge-purple badge">Bidding</span><span class="contract-status badge-green badge">Tested</span></div>
+      <div class="contract-row"><span class="contract-name">RewardDistributor.sol</span><span class="contract-desc">Proportional reward calculation and cross-chain distribution to contributors</span><span class="contract-cat badge-green badge">Rewards</span><span class="contract-status badge-green badge">Tested</span></div>
+      <div class="contract-row"><span class="contract-name">RefundManager.sol</span><span class="contract-desc">PNDC refunds for expired pools with 12-hour timelocks</span><span class="contract-cat badge-orange badge">Refunds</span><span class="contract-status badge-green badge">Tested</span></div>
+      <div class="contract-row"><span class="contract-name">AquaVaultsRegistry.sol</span><span class="contract-desc">Central registry for all pool addresses, IDs, and system state</span><span class="contract-cat badge-mono badge">Registry</span><span class="contract-status badge-green badge">Tested</span></div>
+      <div class="contract-row"><span class="contract-name">FeeManager.sol</span><span class="contract-desc">3% fee calculation on wins; subscriber reduced-fee routing</span><span class="contract-cat badge-aqua badge">Fees</span><span class="contract-status badge-green badge">Tested</span></div>
+      <div class="contract-row"><span class="contract-name">EmergencyControls.sol</span><span class="contract-desc">System-wide pause and emergency override mechanisms</span><span class="contract-cat badge-red badge">Safety</span><span class="contract-status badge-green badge">Tested</span></div>
+      <div class="contract-row"><span class="contract-name">PNDCTokenAdapter.sol</span><span class="contract-desc">ERC-20 interface adapter for PNDC contribution operations</span><span class="contract-cat badge-mono badge">Adapter</span><span class="contract-status badge-green badge">Tested</span></div>
+      <div class="contract-row"><span class="contract-name">CoreFactory.sol</span><span class="contract-desc">Deploys and wires new pool contracts with correct role permissions</span><span class="contract-cat badge-blue badge">Factory</span><span class="contract-status badge-green badge">Tested</span></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SECURITY -->
+  <section id="security">
+    <div class="section-eyebrow"><span>//</span> Security Model</div>
+    <h2>Timelocked at every <em>critical step</em></h2>
+    <p class="section-lead">Every fund movement is governed by a timelock. Speed is preserved for auctions; security enforced everywhere else.</p>
+    <div class="grid-2">
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <span class="flow-tag tag-green" style="margin:0">No Timelock</span>
+          <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--green-400)">Instant</span>
+        </div>
+        <h3>Auction Bid Submission</h3>
+        <p>Speed is everything in a first-bid-wins auction. Bids are submitted the instant the price threshold is reached.</p>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <span class="flow-tag tag-blue" style="margin:0">1 Hour</span>
+          <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--blue-400)">Verification</span>
+        </div>
+        <h3>Growth → Bid Multisig Transfer</h3>
+        <p>When a pool goal is reached, tokens move to the bid wallet after a 1-hour delay to verify legitimacy before funds are committed.</p>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <span class="flow-tag tag-orange" style="margin:0">12 Hours</span>
+          <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--orange-400)">Recovery Window</span>
+        </div>
+        <h3>Refunds &amp; Fee Transfers</h3>
+        <p>Expired pool refunds and fee transfers require 12 hours, giving automated systems time to confirm amounts and flag anomalies.</p>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <span class="flow-tag tag-purple" style="margin:0">24 Hours</span>
+          <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--purple-400)">Maximum Security</span>
+        </div>
+        <h3>Reward Distributions</h3>
+        <p>Reward distributions carry the longest timelock — cross-chain verification, share calculations, and address validation all occur during this window.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ROADMAP -->
+  <section id="roadmap">
+    <div class="section-eyebrow"><span>//</span> Roadmap</div>
+    <h2>Path to <em>production launch</em></h2>
+    <p class="section-lead">Core infrastructure is complete. Remaining work: user-facing interfaces, testnet validation, security audit, and production hardening.</p>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-active"></div>
+        <div class="tl-label">Completed ✓</div>
+        <h3>Core Infrastructure</h3>
+        <p>All 9 smart contracts written and rigorously tested in a simulated local environment (101/101 passing). Six event-driven bot services operational. Backend API with 37+ endpoints. Fully automated cross-chain multisig coordination across 21+ wallet pairs. Admin dashboard functional.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-next"></div>
+        <div class="tl-label">In Progress</div>
+        <h3>User Frontend Development</h3>
+        <p>Building the user-facing interface for pool discovery, PNDC contributions, reward tracking, and pool creation — including invite-only pool management for subscribers.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-next"></div>
+        <div class="tl-label">Next Up</div>
+        <h3>Testnet Deployment (Sepolia)</h3>
+        <p>Full system deployment to Sepolia testnet. Integration with real Pond0x auction contracts. End-to-end testing of all three outcomes including persistent queue behaviour across multiple auction cycles.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-future"></div>
+        <div class="tl-label">Upcoming</div>
+        <h3>Security Audit &amp; Load Testing</h3>
+        <p>Independent security audit of all 9 smart contracts before mainnet. Comprehensive load testing targeting 10,000+ concurrent users, 100+ simultaneous pools, and 1,000+ transactions per hour.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-future"></div>
+        <div class="tl-label">Launch</div>
+        <h3>Production Deployment</h3>
+        <p>Mainnet launch on <strong style="color:var(--blue-300)">www.aquavaults.com</strong>. Full monitoring stack live. User onboarding and subscription tiers go live.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section style="text-align:center;padding:20px 0 0">
+    <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.15);border-radius:12px;padding:20px 36px;flex-direction:column">
+      <p style="font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted)">Stay Updated</p>
+      <p style="font-family:var(--font-display);font-size:1.3rem;font-weight:700;letter-spacing:-0.02em">Launch coming to <span style="color:var(--aqua-400)">www.aquavaults.com</span></p>
+      <p style="font-size:0.85rem;color:#5B83B8;max-width:420px">AquaVaults is currently in development. The system will open to users once testnet validation and the security audit are complete.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-brand">
+    <div class="footer-logo-mark"></div>
+    <span>AquaVaults</span>
+  </div>
+  <div class="footer-meta">
+    Preview Documentation v1.0.0 &nbsp;·&nbsp; Not yet live<br/>
+    github.com/RaptorCapture247/aquavaults<br/>
+    © 2026 AquaVaults. All rights reserved.
+  </div>
+</footer>
+
+<script>
+function openMobileNav() {
+  document.getElementById('mobileDrawer').classList.add('open');
+  document.getElementById('mobileOverlay').classList.add('open');
+  document.getElementById('mobileHamburger').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileNav() {
+  document.getElementById('mobileDrawer').classList.remove('open');
+  document.getElementById('mobileOverlay').classList.remove('open');
+  document.getElementById('mobileHamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+</script>
+</body>
+</html>

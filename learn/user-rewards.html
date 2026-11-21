@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Rewards — AquaVaults Learn</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <meta property="og:image" content="/assets/logo.png" />
+    <meta name="description" content="How AquaVaults User Rewards works — verified participation, monthly points, Loyalty Community, Product Explorer, the sequential Monthly Quest, and how the reward pool is shared." />
+    <link rel="stylesheet" href="/about.css">
+    <link rel="stylesheet" href="/learn/docs.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/header/header-loader.js" defer></script>
+    <script src="/header/header.js" defer></script>
+    <script src="/learn/docs.js" defer></script>
+    <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+    <div id="header-container" data-header-type="simple"></div>
+
+    <div class="docs-layout">
+
+        <aside id="docs-sidebar" class="docs-sidebar">
+            <!-- injected by docs.js -->
+        </aside>
+
+        <main class="docs-main">
+
+            <nav class="docs-breadcrumbs">
+                <a href="/learn" class="docs-breadcrumb-link">Learn</a>
+                <span class="docs-breadcrumb-sep">›</span>
+                <span>Tools</span>
+            </nav>
+
+            <header class="docs-hero">
+                <div class="docs-hero-badge">Participation Rewards</div>
+                <h1>User Rewards</h1>
+                <p class="docs-hero-sub">A monthly score for verified participation across AquaVaults — swaps, listed communities, the Co-op Mining Rig, and more.</p>
+            </header>
+
+            <div class="docs-content">
+
+                <div class="docs-section">
+                    <h2 id="participation-builds">Participation That Builds Across the Ecosystem</h2>
+                    <p>AquaVaults User Rewards is built around a simple idea: the people who consistently participate in an ecosystem are part of what gives that ecosystem momentum.</p>
+                    <p>A swap is one action. Supporting a community is one action. Trying another AquaVaults tool is one action. Contributing to the Co-op Mining Rig is one action. Over time, those actions become something larger: recurring participation.</p>
+                    <p>User Rewards gives that participation a common monthly score. Verified activity across eligible AquaVaults tools earns points, points build leaderboard position, and participants who reach the published qualification threshold become eligible to share in that month's reward pool.</p>
+                    <p>The result is not a reward for simply holding a token or connecting a wallet. It is a system built around showing up and participating.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="why-user-rewards-exists">Why User Rewards Exists</h2>
+                    <p>AquaVaults was originally built around connecting community activity back to the communities creating it. When users select a listed community before swapping, eligible Platform Fees can route between that community and AquaVaults according to the community's active Growth Program share. That gives communities a direct connection to activity their members were already creating.</p>
+                    <p>User Rewards builds the other side of that loop. Instead of only asking what communities receive from activity, it asks what happens when the users creating that activity have a reason to keep exploring, supporting communities, and returning to the ecosystem.</p>
+                    <p>The goal is not to manufacture one burst of activity. It is to make recurring participation worth recognizing.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="one-monthly-score">One Monthly Score</h2>
+                    <p>User Rewards operates in UTC calendar-month cycles. During a cycle, eligible activity from an enrolled wallet is verified and translated into points under the published point matrix. Daily activity, recurring goals, product exploration, community participation, and the monthly quest all contribute to the same score.</p>
+                    <p>That score serves two purposes: it determines whether a participant reaches the minimum qualification threshold for the cycle, and it determines how much weight that participant has in the proportional portion of the reward pool.</p>
+                    <p>Points do not have a fixed dollar value. A point is a measurement of participation inside the program, not a token or a balance that can be withdrawn on its own.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="point-matrix">The Point Matrix Is Public</h2>
+                    <p>There should never be any mystery about what the program is asking participants to do. The daily and cycle point maximums below are published in the AquaVaults Rewards Program Rules, and the complete task-by-task point matrix is published on the User Rewards page — both viewable without connecting a wallet or enrolling in the program.</p>
+                    <p>Before a cycle begins, AquaVaults publishes the applicable rules version, point schedule, maximum available points, qualification threshold, and frozen community roster. Rules are not changed retroactively during the cycle except where a published system-wide correction or waiver is needed because a task becomes unavailable or a technical issue affects everyone.</p>
+
+                    <div class="docs-table-wrap">
+                        <table class="docs-table">
+                            <caption>Version 1.1 daily and cycle point maximums.</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Activity area</th>
+                                    <th scope="col">Maximum</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Qualifying Solana swaps</th>
+                                    <td>7 points per day</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Daily Community Pair</th>
+                                    <td>3 points per day</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Daily Loyalty Community</th>
+                                    <td>2 points per day</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Co-Op participation</th>
+                                    <td>3 points per day</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Secure Session Close</th>
+                                    <td>1 point per day</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Total daily maximum</th>
+                                    <td>16 points per day</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Fixed cycle bonuses and sequential quest</th>
+                                    <td>146 points per cycle</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>The same matrix applies to everyone participating in that cycle. Full task definitions, milestones, validation requirements, and the complete quest order are governed by the published AquaVaults Rewards — Final Point Matrix for the applicable cycle.</p>
+                    <a class="coop-callout-link" href="/rewards#taskCatalogSection">View the full point matrix →</a>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="what-earns-points">What Earns Points</h2>
+                    <p>User Rewards is intentionally broader than a swap counter. Qualifying Solana swaps are part of the program, but they are only one part of it. The current matrix also recognizes participation across listed communities, recurring Loyalty Community support, Co-op Mining Rig activity, deliberate session security, exploration of different AquaVaults products, recurring participation throughout the month, and a sequential monthly quest.</p>
+                    <p>The different paths are designed to reward different kinds of participation. Some activities reward consistency. Some encourage users to explore more of AquaVaults. Some create reasons to discover and support listed communities. Others reward completing larger goals over the course of the month.</p>
+                    <p>One verified action can sometimes contribute toward more than one normal task. The monthly quest is different: its steps unlock in order, so later quest rewards cannot be completed before the steps that come before them.</p>
+                    <p>That balance is intentional. The program rewards activity, but it also rewards breadth, consistency, and progression.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="communities-in-the-system">Communities Are Part of the System</h2>
+                    <p>User Rewards is not meant to turn AquaVaults into the only destination participants support. Listed communities are built directly into the program.</p>
+                    <p>The Daily Community Pair gives participants a reason to support different communities. Loyalty Community gives each participant one community they can return to throughout the cycle. Community milestones expand that participation further, eventually challenging users to reach communities across the frozen monthly roster.</p>
+                    <p>AquaVaults has its own tasks, but it is excluded from the every-community roster requirement because it is not a listed community competing for those community-support milestones.</p>
+                    <p>That distinction matters. AquaVaults User Rewards is designed to create more participation around the ecosystem without taking the existing fee share away from listed communities.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="loyalty-community">Loyalty Community</h2>
+                    <p>Every participant can select one Loyalty Community for the cycle. That community becomes the participant's recurring community-support path for the month. Completing a qualifying swap while supporting the selected Loyalty Community can earn daily Loyalty points, and consistent support can build toward larger streak bonuses.</p>
+                    <p>AquaVaults itself may be selected as a Loyalty Community.</p>
+                    <p>Once selected, the Loyalty Community is locked for the cycle. It cannot be voluntarily changed halfway through the month. That lock makes the choice meaningful — Loyalty is measured as something sustained over time, not something changed whenever another task becomes more convenient.</p>
+                    <p>If a selected community becomes unavailable, AquaVaults can authorize a replacement without erasing the Loyalty days the participant already completed.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="product-explorer">Explore More Than One Tool</h2>
+                    <p>AquaVaults is an ecosystem of tools, not a single swap page. Product Explorer rewards participants who complete point-producing activity across at least three qualifying AquaVaults product surfaces during the cycle.</p>
+                    <p>Under the current Rewards rules, qualifying surfaces include Manual Swap, AutoSwap, Flip-Flop, AquaVaults SDK widgets, the Co-op Mining Rig, and qualifying LP fee-claim activity.</p>
+                    <p>Limit Orders remain available as an AquaVaults product, but they do not earn Rewards V1 points and do not count toward Product Explorer. They remain deferred until the limit-order system has the authoritative fill verification needed for Rewards scoring.</p>
+                    <p>The purpose of Product Explorer is simple: users should have a reason to understand more of what AquaVaults can do, not just repeat one interaction forever.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="monthly-quest">The Monthly Quest</h2>
+                    <p>The monthly quest gives the cycle a progression path. It alternates between community-focused goals and broader AquaVaults goals. Early steps begin with reaching multiple listed communities and using the AquaVaults listing. Later steps expand into Co-op participation, broader community discovery, a post-unlock AquaVaults activity goal, the full cycle community roster, and qualifying LP participation.</p>
+                    <p>Unlike normal tasks, quest steps are sequential. You can continue building verified community progress while a later community step is still locked, but the points for a quest step are not awarded until every earlier step has been completed.</p>
+                    <p>Some goals deliberately begin only after they unlock. That prevents the entire quest from being completed retroactively with activity that happened before the participant reached that stage. Under Version 1.1, for example, Step 6 requires at least $25 in cumulative qualifying AquaVaults-listing swap value within a single UTC day — and only swaps confirmed after the participant actually completes Step 5 count toward it.</p>
+                    <p>The quest is meant to feel like progression through the ecosystem, not a checklist that was already finished before it appeared.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="qualification">Qualification Is Earned, Not Automatic</h2>
+                    <p>Having points on the leaderboard does not automatically mean a participant qualifies for a reward.</p>
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">Qualification Threshold</div>
+                        <p>A participant must finish the cycle with at least 30% of the adjusted maximum points available for that cycle, rounded up to the next whole point.</p>
+                    </div>
+                    <p>Under the current Version 1.1 point matrix, a participant can earn up to 16 daily points plus 146 fixed cycle points. Because months have different numbers of days, the exact maximum and qualification threshold can change with the length of the month. The Rewards page publishes the actual maximum and threshold for the active cycle so participants can see the target from the beginning.</p>
+                    <p>If AquaVaults has to waive a system-wide task because it becomes unavailable, the adjusted maximum can be reduced consistently for everyone. An individual participant choosing not to complete an available task does not reduce that participant's threshold.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="reward-pool-share">How the Reward Pool Is Shared</h2>
+                    <p>Qualifying is the first step. Finalized points determine the distribution.</p>
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">Distribution Split</div>
+                        <p>80% of the finalized reward pool is distributed proportionally among eligible participants based on their finalized points. The remaining 20% is reserved for leaderboard placement bonuses: 10% for first place, 6% for second, and 4% for third.</p>
+                    </div>
+                    <p>Top-three participants still receive their normal proportional share from the 80% pool in addition to any placement bonus.</p>
+                    <p>There is no artificial wallet-address or enrollment-time tiebreaker. When participants finish with the same point total around the top three positions, the affected placement pools are shared according to the published tie rules.</p>
+                    <p>This means points matter even after a participant crosses the qualification threshold. Qualification gets a wallet into the distribution. More finalized points increase its proportional weight.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="funding">Rewards Come From AquaVaults' Side of the Ecosystem</h2>
+                    <p>User Rewards is not funded by taking a listed community's earned fee share away from it. AquaVaults publishes a Revenue Allocation Plan for the portion of verified platform revenue that belongs to AquaVaults. The User Growth allocation exists to fund participation rewards, adoption efforts, and broader ecosystem growth.</p>
+                    <p>User Rewards operates from that AquaVaults-controlled side of the system. Communities continue receiving their applicable Growth Program share of eligible Platform Fees. User Rewards creates another participation loop around that system rather than replacing the community revenue model.</p>
+                    <a class="coop-callout-link" href="/learn/revenue-allocation">Read the Revenue Allocation Plan →</a>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="wallet-enrollment">One Wallet, Chosen Carefully</h2>
+                    <p>Joining User Rewards requires one Solana wallet. Enrollment uses a signed message to prove that the participant controls the wallet and accepts the applicable Rewards rules. That signature does not transfer tokens, authorize a swap, or give AquaVaults custody of the wallet.</p>
+                    <div class="docs-callout docs-callout-warn">
+                        <div class="docs-callout-label">Permanent Enrollment</div>
+                        <p>Once enrolled, that wallet is permanent for the Rewards account. AquaVaults does not offer voluntary wallet changes, migration, recovery, reset, or reward redirection. If access to the wallet is lost, the Rewards account cannot simply be moved to another address.</p>
+                    </div>
+                    <p>That is why enrollment should be treated as a deliberate choice rather than another temporary wallet connection.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="verified-activity">Verified Activity, Not Just Clicks</h2>
+                    <p>Rewards are based on activity AquaVaults can verify. For example, a qualifying swap has to finalize successfully, come from the enrolled wallet, meet the published minimum size and fee requirements, and use a unique transaction signature. Co-op activity has to produce successfully credited contribution records. LP requirements depend on verified claim and community-routing evidence.</p>
+                    <p>Detected activity can therefore move through different states. Recent activity may be recorded before point processing is complete. Verified points appear only after the applicable activity has been processed under the published Rewards rules. Activity can also be held for review or reversed when it is determined to be invalid.</p>
+                    <p>When the cycle ends, a review and reconciliation period occurs before the results become final.</p>
+                    <p>The point is not to reward whoever can make a dashboard number move fastest. It is to reward activity that can actually be accounted for.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="pending-activity">Pending Activity and Points Updates</h2>
+                    <p>The participant dashboard may show recent activity under <strong>Pending Activity</strong> before that activity changes the participant's verified point total. Pending Activity means AquaVaults has recorded the activity and it has not finished User Rewards point processing.</p>
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">Recorded Does Not Mean Awarded</div>
+                        <p>Pending Activity is not a point award and does not guarantee that points will be earned. The activity must still satisfy the applicable verification requirements, eligibility rules, task conditions, daily limits, and other published Rewards requirements.</p>
+                    </div>
+                    <p>Once processing reaches a final result, the item leaves Pending Activity. If it qualifies and produces points, those points appear in the participant's verified point total and normal Rewards records. If the activity is ineligible, already capped, duplicated, or otherwise does not produce additional points, the pending item may disappear without changing the point total.</p>
+                    <p>The dashboard also shows the most recent successful points update and the next scheduled points update. These timestamps help distinguish newly recorded activity from activity that has already gone through scheduled point processing. They do not guarantee that every pending item will resolve or earn points during the next update because some activity may require additional verification.</p>
+                    <p><strong>Activity → verification → points → potential monthly reward.</strong> Points contribute toward potential Rewards at the end of the applicable cycle; Pending Activity itself is not a reward.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="live-leaderboard">The Leaderboard Is Live, but It Is Not Final</h2>
+                    <p>During an active cycle, the public leaderboard shows provisional standings using shortened wallet addresses. That makes the competition visible without presenting a full wallet address as the primary public identity.</p>
+                    <p>The underlying blockchain is still public, so a shortened address should not be treated as anonymity.</p>
+                    <p>Live standings can also change as new activity is verified, records are reviewed, and participants continue earning points. Only finalized points are used to calculate the final distribution.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="distribution">How Distribution Works</h2>
+                    <p>Participants do not claim User Rewards through a smart contract. After the cycle closes, AquaVaults completes the reconciliation and finalization process. Eligible distribution amounts are calculated from the finalized reward pool and finalized points.</p>
+                    <p>AquaVaults then sends the resulting rewards manually in USDC to each enrolled wallet and records the distribution with its transaction signature.</p>
+                    <p>There is no separate claim button and no need to connect to AquaVaults to receive the completed distribution. That also makes the permanent-wallet decision important: the distribution goes to the wallet enrolled in the program.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="non-custodial">Participation Without Custody</h2>
+                    <p>User Rewards does not change the non-custodial nature of AquaVaults. AquaVaults does not take possession of a participant's swap funds through Rewards enrollment. Users continue signing their own blockchain transactions through their own wallets.</p>
+                    <p>The program observes and verifies eligible activity. It does not take control of the assets involved in that activity.</p>
+                    <p>Points and rewards also do not remove the normal risks of on-chain activity. Swaps, liquidity positions, token prices, network fees, protocols, and third-party services can all behave differently than expected.</p>
+                    <p>Participation should make sense on its own. Points are an additional program layer, not a reason to ignore the underlying transaction.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="public-by-design">A Public System by Design</h2>
+                    <p>A reward system works better when participants know the target before they begin. That is why AquaVaults publishes the point matrix, cycle maximum, qualification threshold, roster, rules version, and public leaderboard rather than hiding the mechanics behind enrollment.</p>
+                    <p>A wallet connection should tell you your progress. It should not be required to tell you the rules of the game.</p>
+                    <p>Anyone should be able to visit the Rewards page, understand how points work, see what the program asks participants to do, and decide whether they want to participate before connecting a wallet.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="stronger-loop">Building a Stronger Participation Loop</h2>
+                    <p>AquaVaults started with a simple premise: same users, same swaps, better direction.</p>
+                    <p>User Rewards extends that idea beyond where a platform fee goes. It creates a reason for users to explore more tools, discover more communities, return throughout the month, and build participation that compounds instead of disappearing after one interaction.</p>
+                    <p>The Growth Program gives communities a way to participate in the value created by the activity they help generate. User Rewards gives the people creating that activity a way to be recognized for consistently showing up.</p>
+                    <p>Together, they create a stronger loop between users, communities, and the infrastructure connecting them.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="faq">FAQ</h2>
+
+                    <h3>Do I need to connect a wallet to see how points work?</h3>
+                    <p>No. The complete point matrix, cycle information, qualification target, and public leaderboard are designed to be viewable without connecting or enrolling a wallet. Connecting is only necessary when you want AquaVaults to identify your wallet-specific Rewards state.</p>
+
+                    <h3>Are points worth a fixed amount of USDC?</h3>
+                    <p>No. Points do not have a fixed dollar value. They determine qualification, proportional reward weight, and leaderboard placement under the rules for the applicable cycle.</p>
+
+                    <h3>Why did my activity appear but my points did not change yet?</h3>
+                    <p>Recent activity can appear under Pending Activity before User Rewards point processing is complete. This confirms that AquaVaults has recorded the activity; it does not mean points have already been awarded. Once processing is complete, qualifying points appear in the verified point total. Activity that does not qualify or does not produce additional points may leave Pending Activity without changing the point total.</p>
+
+                    <h3>Do I have to claim my reward?</h3>
+                    <p>No. After finalization, qualifying rewards are manually distributed in USDC to the enrolled wallet.</p>
+
+                    <h3>Can I change my Rewards wallet later?</h3>
+                    <p>No. Enrollment is permanent. AquaVaults does not provide voluntary wallet replacement, migration, reset, recovery, or reward redirection.</p>
+
+                    <h3>Do Limit Orders earn points?</h3>
+                    <p>Not under Rewards Version 1.1. Limit Orders remain available as an AquaVaults product but are excluded from Rewards until authoritative fill verification and the related product modernization work are completed.</p>
+
+                    <h3>Do User Rewards reduce the fee share paid to listed communities?</h3>
+                    <p>No. User Rewards operates from AquaVaults-controlled funding under the Revenue Allocation Plan. It does not take back a listed community's applicable Growth Program fee share to fund participant rewards.</p>
+
+                    <h3>What happens if a task becomes impossible for everyone?</h3>
+                    <p>AquaVaults can publish a system-wide waiver or adjustment when an unavailable task or technical failure prevents reasonable completion. Any resulting maximum-point adjustment applies consistently across the affected cycle.</p>
+                </div>
+
+                <!-- Continue Exploring -->
+                <div class="docs-explore">
+                    <p class="docs-explore-title">Continue Exploring</p>
+                    <div class="docs-explore-links">
+                        <a href="/rewards" class="docs-explore-link">Open User Rewards →</a>
+                        <a href="/rewards/rules" class="docs-explore-link">Read the Complete Program Rules →</a>
+                        <a href="/learn/revenue-allocation" class="docs-explore-link">Revenue Allocation & Wallets →</a>
+                        <a href="/tos" class="docs-explore-link">Terms of Service →</a>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <nav class="docs-pagination">
+                    <a href="/learn/wheel-spinner" class="docs-pag-link">
+                        <span class="docs-pag-direction">← Previous</span>
+                        <span class="docs-pag-title">Wheel Spinner</span>
+                    </a>
+                    <a href="/learn/lp" class="docs-pag-link docs-pag-next">
+                        <span class="docs-pag-direction">Next →</span>
+                        <span class="docs-pag-title">LP System</span>
+                    </a>
+                </nav>
+
+            </div>
+        </main>
+
+    </div>
+
+    <div id="footer-container"></div>
+</body>
+</html>

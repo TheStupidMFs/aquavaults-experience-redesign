@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="en"><head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Founder Listing Setup | AquaVaults</title>
+<link rel="icon" href="/assets/logo-transparent.png"><link rel="stylesheet" href="/about.css">
+<link rel="stylesheet" href="/header/header.css"><link rel="stylesheet" href="/footer/footer.css"><link rel="stylesheet" href="/portal/portal.css">
+<link rel="stylesheet" href="/portal/onboarding.css">
+<script defer src="/header/header-loader.js"></script><script defer src="/header/header.js"></script><script defer src="/footer/footer-loader.js"></script><script defer src="/portal/onboarding.js"></script></head>
+<body><div id="header-container" data-header-type="simple"></div>
+<main class="portal-auth"><section class="portal-card portal-onboarding" aria-labelledby="obTitle">
+<h1 id="obTitle">Founder listing setup</h1>
+<p class="portal-sub">Your application was approved. You can prepare the listing, but production Command Center controls remain locked until AquaVaults verifies the deployed listing.</p>
+<p id="obStatus" role="status" aria-live="polite">Checking your Founder session…</p>
+<p><strong>Community:</strong> <span id="obCommunity">—</span></p>
+<p><strong>Listing progress:</strong> <span id="obStage">—</span></p>
+<form id="obForm"><h2>Community information</h2>
+<label for="obName">Project name</label><input id="obName" required minlength="2" maxlength="100">
+<label for="obDescription">Production description</label><textarea id="obDescription" required minlength="40" maxlength="4000" rows="5"></textarea>
+<label for="obWebsite">Website (optional HTTPS URL)</label><input id="obWebsite" type="url" maxlength="240" placeholder="https://">
+<label for="obX">X profile (HTTPS URL)</label><input id="obX" type="url" required maxlength="240" placeholder="https://x.com/">
+<h2>Fee treasuries</h2>
+<label for="obSol">Solana treasury (required for this stage)</label><input id="obSol" required autocomplete="off" maxlength="44">
+<label for="obEvm">EVM treasury (optional draft only)</label><input id="obEvm" maxlength="42" placeholder="0x…" autocomplete="off">
+<p class="portal-onboarding-note">EVM setup is optional. An address entered here is an unverified proposal, not a production fee recipient. You can defer EVM and submit a Solana-only listing for review. This form never moves funds.</p>
+<button type="submit" id="obSave" class="portal-btn">Save listing draft</button></form>
+<h2>Receive-only treasury authorization</h2>
+<p id="obProof">AquaVaults will confirm the public receiving address with the community's official account. No treasury wallet connection or signature is required.</p>
+<h2>Submit to AquaVaults</h2>
+<p id="obFreezeHint">Your listing is not yet ready for production.</p>
+<label id="obEvmDeferWrap" hidden><input id="obDeferEvm" type="checkbox"> Defer EVM setup and submit for Solana-only review. My proposed EVM treasury will remain unverified and cannot receive platform fees through AquaVaults.</label>
+<p class="portal-onboarding-note">This stage submits public receiving addresses and community details for Admin review only. AquaVaults will independently confirm treasury authorization through the community's official account. EVM remains deferred until independently configured and verified. Production fee routing and Founder activation are separate gates.</p>
+<button type="button" id="obSubmit" class="portal-btn" disabled>Submit listing for review</button>
+<hr><p><a href="/portal/login/">Founder sign in</a></p>
+<button id="obSignOut" class="portal-btn" type="button">Sign out</button>
+</section></main><div id="footer-container"></div></body></html>

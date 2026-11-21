@@ -1,0 +1,137 @@
+# AQUAVAULTS STAGE4 STATIC COMMUNITY SHARE ROUTES
+/sol/aquavaults /design-preview/share-aquavaults.html 200
+/sol/pond0x /design-preview/share-pond0x.html 200
+/sol/demplar /design-preview/share-demplar.html 200
+/sol/randycoin /design-preview/share-randycoin.html 200
+/sol/swampai /design-preview/share-swampai.html 200
+/sol/fatmemes /design-preview/share-fatmemes.html 200
+/sol/pokeahoe /design-preview/share-pokeahoe.html 200
+/sol/lazypos /design-preview/share-lazypos.html 200
+/sol/tazomania /design-preview/share-tazomania.html 200
+/sol/derpydave /design-preview/share-derpydave.html 200
+/sol/sirnasty /design-preview/share-sirnasty.html 200
+/sol/pissin /design-preview/share-pissin.html 200
+/sol/toez /design-preview/share-toez.html 200
+/sol/aisocket /design-preview/share-aisocket.html 200
+/sol/dnc /design-preview/share-dnc.html 200
+/sol/gorba /design-preview/share-gorba.html 200
+/sol/shork /design-preview/share-shork.html 200
+/sol/bawlsonu /design-preview/share-bawlsonu.html 200
+/sol/ufocoin /design-preview/share-ufocoin.html 200
+/sol/stupidmfs /design-preview/share-stupidmfs.html 200
+/sol/touchgrass /design-preview/share-touchgrass.html 200
+/sol/avtest01 /design-preview/share-avtest01.html 200
+/sol/aquavaults/ /design-preview/share-aquavaults.html 200
+/sol/pond0x/ /design-preview/share-pond0x.html 200
+/sol/demplar/ /design-preview/share-demplar.html 200
+/sol/randycoin/ /design-preview/share-randycoin.html 200
+/sol/swampai/ /design-preview/share-swampai.html 200
+/sol/fatmemes/ /design-preview/share-fatmemes.html 200
+/sol/pokeahoe/ /design-preview/share-pokeahoe.html 200
+/sol/lazypos/ /design-preview/share-lazypos.html 200
+/sol/tazomania/ /design-preview/share-tazomania.html 200
+/sol/derpydave/ /design-preview/share-derpydave.html 200
+/sol/sirnasty/ /design-preview/share-sirnasty.html 200
+/sol/pissin/ /design-preview/share-pissin.html 200
+/sol/toez/ /design-preview/share-toez.html 200
+/sol/aisocket/ /design-preview/share-aisocket.html 200
+/sol/dnc/ /design-preview/share-dnc.html 200
+/sol/gorba/ /design-preview/share-gorba.html 200
+/sol/shork/ /design-preview/share-shork.html 200
+/sol/bawlsonu/ /design-preview/share-bawlsonu.html 200
+/sol/ufocoin/ /design-preview/share-ufocoin.html 200
+/sol/stupidmfs/ /design-preview/share-stupidmfs.html 200
+/sol/touchgrass/ /design-preview/share-touchgrass.html 200
+/sol/avtest01/ /design-preview/share-avtest01.html 200
+/sol/* /design-preview/share-router.html 200
+
+# Block source map files
+/*.map  /404.html  404
+
+# Canonicalize trailing slashes (avoid any implicit 308s)
+/about/    /about    301
+/tos/      /tos      301
+/swap/     /swap     301
+/autoswap/          /autoswap          301
+/autoswap/how-to/   /autoswap/how-to   301
+/autoswap/estimator/ /autoswap/estimator 301
+/limit-order/ /limit-order 301
+/communities/  /communities  301
+/coop-rig/     /coop-rig/index     301
+/preview/          /preview           301
+/preview/browse/   /preview/browse    301
+/preview/details/  /preview/details   301
+/preview/create/   /preview/create    301
+/preview/dashboard/ /preview/dashboard 301
+
+# Main routes (proxy/200 keeps URL the same)
+/swap      /swapper/swap/swap-card               200
+/lp        /lp/                                  301
+# EVM swap page
+/evm-swap/   /evm-swap                301
+/evm-swap    /swapper/evm/swap-card   200
+
+# Hidden preview — kept as legacy alias
+/__av-evm-preview-3f9a   /evm-swap   301
+
+/autoswap           /swapper/autoswap/autoswap-card    200
+/limit-order        /swapper/limit-order/limit-order   200
+/coop-rig           /coop-rig/index                    200
+/rewards/rules      /rewards/rules/                    301
+/rewards            /rewards/index                     200
+/connector          /connector/index                   200
+/apply/artwork /apply/artwork/index.html 200
+/apply              /apply/index                       200
+/connect            /connect/index                     200
+# Account route: Pages serves account/index.html at /account/ and redirects /account -> /account/ automatically.
+# Do not add /account/ -> /account; it creates a 301/308 loop.
+/campaigns          /campaigns/index                   200
+/preview            /pool-preview/pools-landing        200
+/preview/browse     /pool-preview/pools-index          200
+/preview/details    /pool-preview/pools-detail         200
+/preview/create     /pool-preview/pools-create         200
+/preview/dashboard  /pool-preview/pools-dashboard      200
+
+# Learn / docs section
+/learn/    /learn/index    301
+/learn     /learn/index    200
+
+# Trailing-slash normalization for all docs sub-pages
+/learn/account/                  /learn/account                  301
+/learn/intro/                    /learn/intro                    301
+/learn/solana-swapper/           /learn/solana-swapper           301
+/learn/autoswap/                 /learn/autoswap                 301
+/learn/limit-orders/             /learn/limit-orders             301
+/learn/evm-swapper/              /learn/evm-swapper              301
+/learn/swap-widget/              /learn/swap-widget              301
+/learn/coop-rig/                 /learn/coop-rig                 301
+/learn/revenue-allocation/       /learn/revenue-allocation       301
+/learn/community-revenue/        /learn/community-revenue        301
+/learn/liquidity-engine/         /learn/liquidity-engine         301
+/learn/for-token-communities/    /learn/for-token-communities    301
+/learn/for-nft-projects/         /learn/for-nft-projects         301
+/learn/campaign-ideas/           /learn/campaign-ideas           301
+/learn/community-campaigns/             /learn/community-campaigns      301
+/learn/community-wheel/           /learn/community-wheel           301
+/learn/holder-intelligence/       /learn/holder-intelligence       301
+/learn/wheel-spinner/             /learn/wheel-spinner             301
+/learn/get-listed/               /learn/get-listed               301
+/learn/connectors/               /learn/connectors               301
+
+# Legacy routes (optional, keeps old deep links working)
+/swapper/swap/swap-card        /swap      301
+/swapper/swap/swap-card.html   /swap      301
+
+/swapper/autoswap/autoswap-card       /autoswap  301
+/swapper/autoswap/how-to              /autoswap/how-to  301
+/swapper/autoswap/estimator           /autoswap/estimator 301
+/swapper/autoswap/estimator/index.html /autoswap/estimator 301
+/swapper/autoswap/autoswap-card.html  /autoswap  301
+/swapper   /swap                           301
+
+# Case variants
+/About      /about   301
+/ABOUT      /about   301
+/about.html /about   301
+/TOS        /tos     301
+/TOS.html   /tos     301

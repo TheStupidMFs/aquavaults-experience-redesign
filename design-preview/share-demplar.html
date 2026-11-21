@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="robots" content="noindex,nofollow"><title>AquaVaults DESIGN preview link</title></head><body>
+<p id="share-status">Opening a synthetic swap preview...</p><script>
+/* STAGE4 SHARE ROUTE: static ID, same-origin target, no wallet or signature call. */
+(function(){'use strict';
+const community="demplar";
+const dst=new URL('/swap',location.origin);
+dst.searchParams.set('community',community);
+const query=new URLSearchParams(location.search);
+for(const key of ['inputMint','outputMint']){
+ const v=query.get(key);
+ if(v && /^[a-zA-Z0-9]{32,44}$/.test(v))dst.searchParams.set(key,v);
+}
+dst.searchParams.set('src','design-share');
+location.replace(dst.pathname+dst.search);
+})();
+</script></body></html>

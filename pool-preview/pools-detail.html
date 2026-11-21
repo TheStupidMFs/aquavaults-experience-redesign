@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AquaVaults — Pool Details Preview</title>
+  <link rel="icon" type="image/png" href="/assets/logo.png" />
+  <link rel="apple-touch-icon" href="/assets/logo.png" />
+  <meta property="og:image" content="/assets/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --bg-0: #05080f; --bg-card: #0f1830; --bg-card-hover: #131e3a; --bg-elevated: #1a2845;
+  --border: rgba(59,130,246,0.12); --border-bright: rgba(59,130,246,0.3);
+  --blue-300: #93C5FD; --blue-400: #60A5FA; --blue-500: #3B82F6; --blue-600: #2563EB;
+  --aqua-400: #22D3EE; --aqua-500: #06B6D4;
+  --purple-400: #C084FC; --green-400: #4ADE80; --green-500: #22C55E;
+  --orange-400: #FB923C; --red-400: #F87171; --warn: #F59E0B;
+  --text-primary: #EFF6FF; --text-secondary: #93C5FD; --text-muted: #4B6FA8; --text-dim: #2A4070;
+  --font-display: 'Syne', sans-serif; --font-body: sans-serif; --font-mono: 'DM Mono', monospace;
+  --gb: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #2563EB 100%);
+  --gaq: linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%);
+  --r: 12px; --rs: 8px;
+}
+
+body { font-family: var(--font-body); background: var(--bg-0); color: var(--text-primary); line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased; display: flex; flex-direction: column; overflow-x: hidden; }
+body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); opacity: 0.022; pointer-events: none; z-index: 0; }
+.grid-bg { position: fixed; inset: 0; background-image: linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
+.glow-orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(120px); }
+.glow-1 { width: 600px; height: 600px; top: -200px; left: -100px; background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%); }
+.glow-2 { width: 500px; height: 500px; top: 40%; right: -150px; background: radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 70%); }
+
+.page { position: relative; z-index: 1; flex: 1; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+/* ── NAV ── */
+nav { position: sticky; top: 0; z-index: 100; background: rgba(5,8,15,0.85); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-mark { width: 30px; height: 30px; background: linear-gradient(135deg, #3B82F6, #06B6D4); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 0.65rem; color: #fff; }
+.nav-logo-name { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text-primary); letter-spacing: -0.01em; }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { font-size: 0.78rem; font-weight: 500; color: var(--text-muted); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover { color: var(--blue-400); }
+.nav-badge { font-family: var(--font-mono); font-size: 0.68rem; color: var(--aqua-400); border: 1px solid rgba(34,211,238,0.3); background: rgba(34,211,238,0.06); padding: 3px 10px; border-radius: 20px; letter-spacing: 0.04em; }
+
+/* ── PREVIEW DROPDOWN ── */
+.nav-dropdown { position: relative; }
+.nav-dropdown-toggle { display: flex !important; align-items: center; gap: 5px; cursor: pointer; }
+.nav-dropdown-toggle svg { transition: transform 0.2s; flex-shrink: 0; }
+.nav-dropdown:hover .nav-dropdown-toggle svg { transform: rotate(180deg); }
+.nav-dropdown-menu {
+  display: none;
+  position: absolute; top: 100%; right: 0;
+  padding-top: 10px;
+  background: rgba(5,8,15,0.97);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-bright);
+  border-radius: 10px;
+  padding: 6px;
+  min-width: 190px;
+  z-index: 200;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+.nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; gap: 2px; }
+.nav-dropdown-menu ul { display: flex; flex-direction: column; gap: 2px; }
+.nav-dropdown-menu a {
+  display: block;
+  padding: 9px 14px;
+  border-radius: 7px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.nav-dropdown-menu a:hover { background: rgba(59,130,246,0.1); color: var(--blue-400); }
+.nav-dropdown-menu a.active { color: var(--aqua-400); background: rgba(34,211,238,0.06); }
+.nav-dropdown-divider { height: 1px; background: var(--border); margin: 4px 6px; }
+
+/* ── MOBILE NAV ── */
+.nav-back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 600; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; white-space: nowrap; padding: 5px 12px; border: 1px solid var(--border); border-radius: 20px; background: rgba(59,130,246,0.06); transition: all 0.2s; }
+.nav-back:hover { color: var(--blue-400); border-color: var(--border-bright); background: rgba(59,130,246,0.12); }
+.nav-back svg { flex-shrink: 0; }
+.nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; padding: 7px 8px; border: 1px solid var(--border); border-radius: 8px; background: transparent; }
+.nav-hamburger span { display: block; width: 20px; height: 2px; background: var(--text-muted); border-radius: 2px; transition: all 0.3s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 150; backdrop-filter: blur(4px); }
+.mobile-overlay.open { display: block; }
+.mobile-drawer { position: fixed; top: 0; right: -320px; width: min(300px, 90vw); height: 100%; background: #080e1c; border-left: 1px solid var(--border-bright); z-index: 160; transition: right 0.3s ease; overflow-y: auto; }
+.mobile-drawer.open { right: 0; }
+.mobile-drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+.mobile-drawer-title { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; color: var(--text-primary); }
+.mobile-close { background: transparent; border: 1px solid var(--border); border-radius: 6px; color: var(--text-muted); cursor: pointer; padding: 5px 9px; font-size: 0.85rem; line-height: 1; transition: all 0.15s; }
+.mobile-close:hover { color: var(--text-primary); border-color: var(--border-bright); }
+.mobile-nav-section { padding: 20px 20px 0; }
+.mobile-nav-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; padding: 0 2px; }
+.mobile-nav-link { display: block; padding: 10px 12px; border-radius: 8px; font-size: 0.88rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: all 0.15s; }
+.mobile-nav-link:hover { background: rgba(59,130,246,0.1); color: var(--blue-400); }
+.mobile-nav-link.active { background: rgba(34,211,238,0.06); color: var(--aqua-400); border: 1px solid rgba(34,211,238,0.15); }
+.mobile-nav-divider { height: 1px; background: var(--border); margin: 16px 20px; }
+
+/* ── BANNER ── */
+.preview-banner { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 10px; background: rgba(34,211,238,0.04); border-bottom: 1px solid rgba(34,211,238,0.15); padding: 10px 24px; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.preview-banner::before { content: ''; width: 6px; height: 6px; background: var(--aqua-400); border-radius: 50%; animation: pulse 2s ease-in-out infinite; flex-shrink: 0; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)} }
+.preview-banner strong { color: var(--aqua-400); font-weight: 500; }
+
+/* ── BUTTONS ── */
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--gb); color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 0.82rem; letter-spacing: 0.02em; padding: 10px 22px; border-radius: var(--rs); text-decoration: none; border: 1px solid rgba(96,165,250,0.3); transition: all 0.2s; box-shadow: 0 0 20px rgba(37,99,235,0.2); cursor: pointer; }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 30px rgba(37,99,235,0.4); }
+.btn-primary-lg { padding: 13px 26px; font-size: 0.9rem; width: 100%; justify-content: center; }
+.btn-outline { display: inline-flex; align-items: center; gap: 8px; background: rgba(59,130,246,0.06); color: var(--blue-300); font-family: var(--font-display); font-weight: 600; font-size: 0.82rem; padding: 10px 22px; border-radius: var(--rs); text-decoration: none; border: 1px solid rgba(59,130,246,0.2); transition: all 0.2s; }
+.btn-outline:hover { background: rgba(59,130,246,0.12); border-color: rgba(59,130,246,0.4); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--text-muted); font-size: 0.82rem; padding: 8px 0; text-decoration: none; border: none; cursor: pointer; transition: color 0.2s; }
+.btn-ghost:hover { color: var(--blue-400); }
+
+/* ── BADGES ── */
+.badge { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em; padding: 3px 9px; border-radius: 6px; text-transform: uppercase; white-space: nowrap; }
+.badge-active   { color: var(--green-400);    background: rgba(74,222,128,0.08);   border: 1px solid rgba(74,222,128,0.2); }
+.badge-token    { color: var(--text-secondary);background: rgba(59,130,246,0.06);   border: 1px solid rgba(59,130,246,0.12); text-transform: none; }
+.badge-priority { color: var(--purple-400);   background: rgba(192,132,252,0.08);  border: 1px solid rgba(192,132,252,0.2); }
+.badge-blue     { color: var(--blue-400);     background: rgba(59,130,246,0.08);   border: 1px solid rgba(59,130,246,0.2); }
+.badge-green    { color: var(--green-400);    background: rgba(74,222,128,0.08);   border: 1px solid rgba(74,222,128,0.2); }
+.badge-aqua     { color: var(--aqua-400);     background: rgba(34,211,238,0.08);   border: 1px solid rgba(34,211,238,0.2); }
+@keyframes pd { 0%,100%{opacity:1}50%{opacity:0.4} }
+.badge-active::before { content:''; width:5px; height:5px; background:var(--green-400); border-radius:50%; animation: pd 2s ease-in-out infinite; }
+
+/* ── CARDS ── */
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; position: relative; transition: border-color 0.2s; }
+.card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(59,130,246,0.5), transparent); opacity: 0; transition: opacity 0.2s; }
+.card:hover { border-color: var(--border-bright); }
+.card:hover::before { opacity: 1; }
+.card-head { padding: 18px 22px 0; }
+/* Card titles use display font — they're section headings */
+.card-title { font-family: var(--font-display); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary); }
+.card-body { padding: 16px 22px 22px; }
+.sep { height: 1px; background: rgba(59,130,246,0.06); margin: 14px 0; }
+
+/* ── PAGE LAYOUT ── */
+.back-wrap { padding: 18px 0 4px; }
+.detail-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
+/* Page-level heading — Syne */
+.detail-title { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; letter-spacing: -0.03em; }
+/* Creator line — body text */
+.detail-creator { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+.detail-token-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.detail-token-sym { font-family: var(--font-display); font-weight: 800; font-size: 1rem; }
+/* Address — mono */
+.detail-addr { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); margin-top: 4px; }
+
+.detail-grid { display: grid; grid-template-columns: 1fr 360px; gap: 22px; padding-bottom: 80px; }
+.detail-main { display: flex; flex-direction: column; gap: 20px; }
+.detail-sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+/* ── PROGRESS HERO ── */
+.prog-hero { padding: 24px; }
+.prog-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 16px; }
+.prog-amounts { display: flex; align-items: baseline; gap: 8px; }
+/* Big number — display font */
+.prog-current { font-family: var(--font-display); font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; background: linear-gradient(90deg, var(--blue-400), var(--aqua-400)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+/* Goal label — body text, muted */
+.prog-goal { font-size: 0.9rem; color: var(--text-muted); }
+/* Percentage — display font */
+.prog-pct { font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: var(--blue-400); }
+.prog-track { width: 100%; height: 6px; background: rgba(59,130,246,0.1); border-radius: 999px; overflow: hidden; margin-bottom: 18px; }
+.prog-fill { height: 100%; border-radius: 999px; background: var(--gb); transition: width 1.4s ease; }
+
+.stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.stat-mini { text-align: center; padding: 12px 8px; background: rgba(59,130,246,0.04); border-radius: var(--rs); border: 1px solid var(--border); }
+.stat-mini-icon { display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
+.stat-mini-icon svg { width: 14px; height: 14px; color: var(--text-muted); }
+/* Mini stat value — display font */
+.stat-mini-val { font-family: var(--font-display); font-size: 0.95rem; font-weight: 800; letter-spacing: -0.02em; }
+/* Mini stat label — body text */
+.stat-mini-lbl { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 2px; }
+
+/* ── ANALYTICS ── */
+.analytics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.analytics-item { padding: 14px; background: rgba(59,130,246,0.04); border-radius: var(--rs); border: 1px solid var(--border); }
+/* Label — body text */
+.analytics-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 5px; }
+/* Value — display font */
+.analytics-value { font-family: var(--font-display); font-weight: 800; font-size: 1rem; letter-spacing: -0.02em; }
+
+/* ── HISTORY TABLE ── */
+.hist-table { width: 100%; border-collapse: collapse; }
+.hist-table th { font-size: 0.72rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; padding: 10px 0; text-align: left; border-bottom: 1px solid var(--border); }
+/* Table body — body text */
+.hist-table td { font-size: 0.82rem; color: var(--text-muted); padding: 11px 0; border-bottom: 1px solid rgba(59,130,246,0.05); }
+/* Amount column — slightly stronger */
+.hist-table td:nth-child(2) { font-weight: 600; color: var(--text-primary); }
+/* Tx hash — mono */
+.tx-link { font-family: var(--font-mono); font-size: 0.68rem; color: var(--blue-400); text-decoration: none; }
+.tx-link:hover { text-decoration: underline; }
+
+/* ── PRIORITY BARS ── */
+.priority-list { display: flex; flex-direction: column; gap: 8px; }
+.priority-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: var(--rs); border: 1px solid var(--border); background: rgba(59,130,246,0.03); transition: all 0.2s; }
+.priority-item.current { border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.07); }
+/* Rank number — display font */
+.priority-rank { font-family: var(--font-display); font-weight: 800; font-size: 0.82rem; color: var(--text-muted); min-width: 24px; text-align: center; }
+.priority-item.current .priority-rank { color: var(--blue-400); }
+/* Pool ID — mono (it's a data identifier) */
+.priority-pid { font-family: var(--font-mono); font-size: 0.7rem; min-width: 90px; }
+.priority-bar-track { flex: 1; height: 4px; background: rgba(59,130,246,0.1); border-radius: 999px; overflow: hidden; }
+.priority-bar-fill { height: 100%; border-radius: 999px; transition: width 1s ease; }
+.pb-1 { background: var(--gaq); } .pb-2 { background: linear-gradient(90deg, #67E8F9,#06B6D4); }
+.pb-3 { background: var(--gb); }  .pb-4 { background: linear-gradient(90deg, #93C5FD,#60A5FA); }
+/* Size — mono (data value) */
+.priority-size { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); min-width: 60px; text-align: right; }
+
+/* ── SIDEBAR DETAIL ROWS ── */
+.detail-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; }
+.detail-row + .detail-row { border-top: 1px solid rgba(59,130,246,0.06); }
+/* Label — body text */
+.detail-row-label { font-size: 0.82rem; color: var(--text-muted); }
+/* Value — display font for important values */
+.detail-row-value { font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; }
+
+/* ── HOW IT WORKS ── */
+.hiw-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.hiw-item { display: flex; gap: 10px; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+.hiw-dot { flex-shrink: 0; width: 5px; height: 5px; background: var(--blue-400); border-radius: 50%; margin-top: 8px; }
+
+/* ── CONTRIBUTE CARD ── */
+.contribute-card { background: var(--bg-card); border: 1px solid rgba(59,130,246,0.25); border-radius: var(--r); overflow: hidden; position: relative; box-shadow: 0 0 40px rgba(37,99,235,0.08); }
+.contribute-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gb); }
+.contribute-card-inner { padding: 22px; }
+/* Contribute title — display font */
+.contribute-title { font-family: var(--font-display); font-weight: 800; font-size: 1rem; letter-spacing: -0.01em; margin-bottom: 4px; }
+/* Contribute desc — body text */
+.contribute-desc { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px; }
+
+.form-group { margin-bottom: 14px; }
+.form-label { display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 500; color: var(--text-muted); margin-bottom: 8px; }
+.form-balance { font-size: 0.78rem; color: var(--text-dim); font-weight: 400; }
+.input-wrap { position: relative; }
+.form-input { width: 100%; background: rgba(5,8,15,0.8); border: 1px solid var(--border); border-radius: var(--rs); padding: 12px 90px 12px 16px; color: var(--text-primary); font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
+.form-input:focus { border-color: var(--border-bright); }
+.form-input::placeholder { color: var(--text-dim); }
+.input-suffix { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 8px; }
+.max-btn { font-family: var(--font-mono); font-size: 0.65rem; color: var(--blue-400); background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.25); border-radius: 4px; padding: 3px 8px; cursor: pointer; transition: all 0.15s; }
+.max-btn:hover { background: rgba(59,130,246,0.2); }
+/* Unit label — body text */
+.input-unit { font-size: 0.75rem; color: var(--text-muted); }
+
+.form-details { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.form-detail-row { display: flex; justify-content: space-between; font-size: 0.82rem; }
+.form-detail-label { color: var(--text-muted); }
+.form-detail-value { font-weight: 600; color: var(--text-secondary); }
+
+.form-warning { display: flex; gap: 10px; padding: 12px 14px; background: rgba(245,158,11,0.05); border: 1px solid rgba(245,158,11,0.15); border-radius: var(--rs); margin-bottom: 16px; }
+.form-warning svg { color: var(--warn); flex-shrink: 0; margin-top: 2px; }
+/* Warning text — body text */
+.form-warning-text { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+.form-warning-text strong { color: var(--warn); font-weight: 600; }
+
+/* ── FOOTER ── */
+footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 32px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; max-width: 1200px; margin: 0 auto; width: 100%; }
+.footer-brand { display: flex; align-items: center; gap: 10px; }
+.footer-logo-mark { width: 24px; height: 24px; background: linear-gradient(135deg, #3B82F6, #06B6D4); border-radius: 5px; opacity: 0.7; }
+.footer-brand span { font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; color: var(--text-muted); }
+.footer-links { display: flex; gap: 20px; align-items: center; }
+.footer-link { font-size: 0.8rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+.footer-link:hover { color: var(--blue-400); }
+.footer-meta { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)} }
+.ani { animation: fadeUp 0.4s ease both; }
+.d1{animation-delay:.06s}.d2{animation-delay:.12s}.d3{animation-delay:.18s}.d4{animation-delay:.24s}
+
+@media (max-width: 1024px) { .detail-grid { grid-template-columns: 1fr; } .stat-row { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .detail-header { flex-direction: column; } .prog-current { font-size: 1.5rem; } .nav-links { display: none; } .nav-hamburger { display: flex; } }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="glow-orb glow-1"></div>
+<div class="glow-orb glow-2"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-back">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      AquaVaults.com
+    </a>
+    <a href="/preview" class="nav-logo">
+      <img src="../assets/logo-transparent.png" alt="AquaVaults" style="width:30px;height:30px;object-fit:contain;border-radius:6px;" />
+      <span class="nav-logo-name">AquaVaults</span>
+    </a>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="#" class="nav-dropdown-toggle">Preview Pages <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown-menu">
+          <li><a href="/preview">Landing / Docs</a></li>
+          <div class="nav-dropdown-divider"></div>
+          <li><a href="/preview/browse">Browse Pools</a></li>
+          <li><a href="/preview/details" class="active">Pool Detail</a></li>
+          <li><a href="/preview/create">Create Pool</a></li>
+          <li><a href="/preview/dashboard">Dashboard</a></li>
+        </ul>
+      </li>
+    </ul>
+    <button class="nav-hamburger" id="mobileHamburger" onclick="openMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="nav-badge">Preview v1.0</span>
+  </div>
+</nav>
+
+<div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileNav()"></div>
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="mobile-drawer-head">
+    <a href="/" class="mobile-nav-link" style="padding:6px 8px;display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-dim);">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      AquaVaults.com
+    </a>
+    <button class="mobile-close" onclick="closeMobileNav()">✕</button>
+  </div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-label">Docs</div>
+    <a href="/preview#overview" class="mobile-nav-link">Overview</a>
+    <a href="/preview#how-it-works" class="mobile-nav-link">How It Works</a>
+    <a href="/preview#scenarios" class="mobile-nav-link">Scenarios</a>
+    <a href="/preview#architecture" class="mobile-nav-link">Architecture</a>
+  </div>
+  <div class="mobile-nav-divider"></div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-label">Preview Pages</div>
+    <a href="/preview" class="mobile-nav-link">Landing / Docs</a>
+    <a href="/preview/browse" class="mobile-nav-link">Browse Pools</a>
+    <a href="/preview/details" class="mobile-nav-link active">Pool Detail</a>
+    <a href="/preview/create" class="mobile-nav-link">Create Pool</a>
+    <a href="/preview/dashboard" class="mobile-nav-link">Dashboard</a>
+  </div>
+</div>
+
+<div class="preview-banner">
+  <strong>Coming Soon</strong> &nbsp;—&nbsp; The AquaVaults Pooling System is in preview. No transactions can be made.
+</div>
+
+<div class="page">
+<main>
+  <div class="container">
+    <div class="back-wrap">
+      <a href="/preview/browse" class="btn-ghost">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Back to Pools
+      </a>
+    </div>
+
+    <div class="detail-header ani" id="detailHeader"></div>
+
+    <div class="detail-grid">
+      <div class="detail-main">
+        <div class="card ani d1" id="progressHero"></div>
+        <div class="card ani d2">
+          <div class="card-head"><div class="card-title">Pool Analytics</div></div>
+          <div class="card-body"><div class="analytics-grid" id="analyticsGrid"></div></div>
+        </div>
+        <div class="card ani d3">
+          <div class="card-head"><div class="card-title">Recent Contributions</div></div>
+          <div class="card-body"><table class="hist-table" id="histTable"></table></div>
+        </div>
+        <div class="card ani d4">
+          <div class="card-head"><div class="card-title">Bid Priority Ranking</div></div>
+          <div class="card-body"><div class="priority-list" id="priorityList"></div></div>
+        </div>
+      </div>
+
+      <div class="detail-sidebar">
+        <div class="contribute-card ani d1">
+          <div class="contribute-card-inner">
+            <div class="contribute-title">Contribute to Pool</div>
+            <div class="contribute-desc">Add PNDC — contribute as many times as you like until the goal locks</div>
+            <div class="form-group">
+              <div class="form-label"><span>Amount</span><span class="form-balance">Balance: 2,500B PNDC</span></div>
+              <div class="input-wrap">
+                <input type="number" class="form-input" placeholder="0" id="amtInput">
+                <div class="input-suffix">
+                  <button class="max-btn" id="maxBtn">MAX</button>
+                  <span class="input-unit">PNDC</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-details">
+              <div class="form-detail-row"><span class="form-detail-label">Min Contribution</span><span class="form-detail-value">1B PNDC</span></div>
+              <div class="form-detail-row"><span class="form-detail-label">Max Contribution</span><span class="form-detail-value">80B PNDC</span></div>
+              <div class="form-detail-row"><span class="form-detail-label">Estimated Gas</span><span class="form-detail-value">~0.002 ETH</span></div>
+            </div>
+            <div class="form-warning">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <div class="form-warning-text"><strong>Note:</strong> Your tokens lock once the pool reaches its goal. You may withdraw before that point. If the pool loses an auction it stays in the queue — tokens remain locked until the pool wins or its timeframe expires.</div>
+            </div>
+            <button class="btn-primary btn-primary-lg" id="contBtn">Contribute to Pool</button>
+          </div>
+        </div>
+
+        <div class="card ani d2">
+          <div class="card-head"><div class="card-title">Pool Details</div></div>
+          <div class="card-body" id="poolDetails"></div>
+        </div>
+
+        <div class="card ani d3">
+          <div class="card-head"><div class="card-title">How It Works</div></div>
+          <div class="card-body">
+            <ul class="hiw-list">
+              <li class="hiw-item"><div class="hiw-dot"></div><span>Once the goal is reached, the pool joins the auction queue — largest pools bid first</span></li>
+              <li class="hiw-item"><div class="hiw-dot"></div><span>If an auction is lost, the pool stays in the queue and bids again on the next auction</span></li>
+              <li class="hiw-item"><div class="hiw-dot"></div><span>Contributions lock once the goal is reached — early withdrawal allowed before that point</span></li>
+              <li class="hiw-item"><div class="hiw-dot"></div><span>Rewards distributed automatically if pool wins an auction</span></li>
+              <li class="hiw-item"><div class="hiw-dot"></div><span>Full refunds if the pool's timeframe expires without winning</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+
+<footer>
+  <div class="footer-brand"><div class="footer-logo-mark"></div><span>AquaVaults</span></div>
+  <div class="footer-links">
+    <a href="#" class="footer-link">Terms of Service</a>
+    <a href="#" class="footer-link">Get Phantom Wallet</a>
+    <a href="#" class="footer-link">Powered by Jupiter</a>
+  </div>
+  <div class="footer-meta">Preview v1.0 · Not yet live</div>
+  <div class="footer-meta" style="margin-top:4px">© 2026 AquaVaults. All rights reserved.</div>
+</footer>
+
+<script>
+var P = { id:'POOL-12345', creator:'USER-7a3f..b2c1', token:{symbol:'WETH',standard:'ERC-20',address:'0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',relatedPools:3}, currentAmount:420000000000, goalAmount:500000000000, remainingAmount:80000000000, contributors:47, expiryDays:8, expiryDate:'2025-02-14', createdDate:'2025-01-20', bidPriority:3, status:'active', size:420000000000, avgContribution:8936170213, largestContribution:50000000000 };
+var RP = [{id:'POOL-34567',size:1000000000000,priority:1},{id:'POOL-23456',size:800000000000,priority:2},{id:'POOL-12345',size:420000000000,priority:3},{id:'POOL-45678',size:150000000000,priority:4}];
+var C = [{user:'USER-12345',amount:50000000000,time:'1 hour ago',tx:'0x1234...cdef'},{user:'USER-67890',amount:25000000000,time:'2 hours ago',tx:'0xabcd...5678'},{user:'USER-54321',amount:100000000000,time:'4 hours ago',tx:'0x5678...ef12'},{user:'USER-11223',amount:15000000000,time:'6 hours ago',tx:'0x9abc...3456'},{user:'USER-44556',amount:75000000000,time:'12 hours ago',tx:'0xdef0...7890'}];
+
+function fmt(n){if(n>=1e12)return(n/1e12).toFixed(2)+'T';if(n>=1e9)return(n/1e9).toFixed(0)+'B';if(n>=1e6)return(n/1e6).toFixed(0)+'M';return n.toLocaleString();}
+
+document.getElementById('detailHeader').innerHTML=
+  '<div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'
+  +'<h1 class="detail-title">'+P.id+'</h1><span class="badge badge-active">Active</span></div>'
+  +'<div class="detail-token-row"><span class="detail-token-sym">'+P.token.symbol+'</span>'
+  +'<span class="badge badge-token">Mining Target</span>'
+  +'<span class="badge badge-token">'+P.token.standard+'</span>'
+  +'<span class="badge badge-token">'+(P.token.relatedPools-1)+' other pools</span></div>'
+  +'<div class="detail-addr">'+P.token.address+'</div></div>'
+  +'<div><span class="badge badge-priority">Priority #'+P.bidPriority+'</span></div>';
+
+var pct=(P.currentAmount/P.goalAmount*100).toFixed(1);
+document.getElementById('progressHero').innerHTML=
+  '<div class="prog-hero"><div class="prog-top"><div class="prog-amounts">'
+  +'<span class="prog-current">'+fmt(P.currentAmount)+'</span>'
+  +'<span class="prog-goal">/ '+fmt(P.goalAmount)+' PNDC</span></div>'
+  +'<span class="prog-pct">'+pct+'%</span></div>'
+  +'<div class="prog-track"><div class="prog-fill" style="width:0%"></div></div>'
+  +'<div class="stat-row">'
+  +'<div class="stat-mini"><div class="stat-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="stat-mini-val">'+P.contributors+'</div><div class="stat-mini-lbl">Contributors</div></div>'
+  +'<div class="stat-mini"><div class="stat-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="stat-mini-val">'+P.expiryDays+'d</div><div class="stat-mini-lbl">Remaining</div></div>'
+  +'<div class="stat-mini"><div class="stat-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></div><div class="stat-mini-val">#'+P.bidPriority+'</div><div class="stat-mini-lbl">Bid Priority</div></div>'
+  +'<div class="stat-mini"><div class="stat-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="stat-mini-val">Locked</div><div class="stat-mini-lbl">Status</div></div>'
+  +'</div></div>';
+
+requestAnimationFrame(function(){requestAnimationFrame(function(){document.querySelector('.prog-fill').style.width=pct+'%';});});
+
+document.getElementById('analyticsGrid').innerHTML=
+  '<div class="analytics-item"><div class="analytics-label">Total Contributions</div><div class="analytics-value">'+fmt(P.currentAmount)+' <span style="font-size:0.6em;color:var(--text-muted)">PNDC</span></div></div>'
+  +'<div class="analytics-item"><div class="analytics-label">Average Contribution</div><div class="analytics-value">'+fmt(P.avgContribution)+' <span style="font-size:0.6em;color:var(--text-muted)">PNDC</span></div></div>'
+  +'<div class="analytics-item"><div class="analytics-label">Largest Contribution</div><div class="analytics-value">'+fmt(P.largestContribution)+' <span style="font-size:0.6em;color:var(--text-muted)">PNDC</span></div></div>'
+  +'<div class="analytics-item"><div class="analytics-label">Remaining to Goal</div><div class="analytics-value" style="color:var(--blue-400)">'+fmt(P.remainingAmount)+' <span style="font-size:0.6em;color:var(--text-muted)">PNDC</span></div></div>';
+
+var rows='';
+for(var i=0;i<C.length;i++){var c=C[i];rows+='<tr><td>'+fmt(c.amount)+' PNDC</td></tr>';}
+document.getElementById('histTable').innerHTML='<thead><tr><th>Contribution Amount</th></tr></thead><tbody>'+rows+'</tbody>';
+
+var mx=0;for(var j=0;j<RP.length;j++)if(RP[j].size>mx)mx=RP[j].size;
+var plist='';
+for(var k=0;k<RP.length;k++){var r=RP[k];var w=(r.size/mx*100).toFixed(0);var cur=r.id===P.id;plist+='<div class="priority-item'+(cur?' current':'')+'"><span class="priority-rank">#'+r.priority+'</span><span class="priority-pid">'+r.id+(cur?' (You)':'')+'</span><div class="priority-bar-track"><div class="priority-bar-fill pb-'+(k+1)+'" style="width:'+w+'%"></div></div><span class="priority-size">'+fmt(r.size)+'</span></div>';}
+document.getElementById('priorityList').innerHTML=plist;
+
+document.getElementById('poolDetails').innerHTML=
+  '<div class="detail-row"><span class="detail-row-label">Pool Size</span><span class="detail-row-value">'+fmt(P.size)+' PNDC</span></div>'
+  +'<div class="detail-row"><span class="detail-row-label">Bid Priority</span><span class="badge badge-priority">#'+P.bidPriority+'</span></div>'
+  +'<div class="detail-row"><span class="detail-row-label">Mining Target</span><span class="detail-row-value">'+P.token.symbol+' ('+P.token.standard+')</span></div>'
+  +'<div class="sep"></div>'
+  +'<div class="detail-row"><span class="detail-row-label">Expiry Date</span><span class="detail-row-value">'+P.expiryDate+'</span></div>'
+  +'<div class="detail-row"><span class="detail-row-label">Created</span><span class="detail-row-value">'+P.createdDate+'</span></div>';
+
+document.getElementById('contBtn').addEventListener('click',function(){
+  var v=document.getElementById('amtInput').value;
+  if(!v||parseFloat(v)<=0){document.getElementById('amtInput').style.borderColor='var(--red-400)';setTimeout(function(){document.getElementById('amtInput').style.borderColor='';},2000);return;}
+  this.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Processing...';
+  this.style.pointerEvents='none';this.style.opacity='0.7';
+  var btn=this;
+  setTimeout(function(){btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg> Contribution Submitted!';btn.style.background='linear-gradient(135deg,#22C55E,#16A34A)';btn.style.boxShadow='0 0 20px rgba(34,197,94,0.3)';},2000);
+});
+document.getElementById('maxBtn').addEventListener('click',function(){document.getElementById('amtInput').value=80;document.getElementById('amtInput').focus();});
+var s=document.createElement('style');s.textContent='@keyframes spin{to{transform:rotate(360deg)}}';document.head.appendChild(s);
+function openMobileNav() {
+  document.getElementById('mobileDrawer').classList.add('open');
+  document.getElementById('mobileOverlay').classList.add('open');
+  document.getElementById('mobileHamburger').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileNav() {
+  document.getElementById('mobileDrawer').classList.remove('open');
+  document.getElementById('mobileOverlay').classList.remove('open');
+  document.getElementById('mobileHamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+</script>
+</body>
+</html>

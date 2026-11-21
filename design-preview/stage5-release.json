@@ -1,0 +1,66 @@
+{
+  "release": "aquavaults-redesign-stage5-visual-v1",
+  "environment": "synthetic-design-only",
+  "pages_project": "nothing-design",
+  "route_kind": "specific static Pages 200 proxies, not live functions",
+  "reference": "Nov 18, 2026",
+  "known_community_routes": [
+    "aquavaults",
+    "pond0x",
+    "demplar",
+    "randycoin",
+    "swampai",
+    "fatmemes",
+    "pokeahoe",
+    "lazypos",
+    "tazomania",
+    "derpydave",
+    "sirnasty",
+    "pissin",
+    "toez",
+    "aisocket",
+    "dnc",
+    "gorba",
+    "shork",
+    "bawlsonu",
+    "ufocoin",
+    "stupidmfs",
+    "touchgrass",
+    "avtest01"
+  ],
+  "frontend_version": "stage5-visual-parity-v1",
+  "safe_wallet": true,
+  "sha256": {
+    "design-preview/mock-extension.js": "f28928c3fdcce3f7521621180c56b4a87405f5e63b1682a017aac346ee6b77ca",
+    "design-preview/preview-controls.js": "a0cf83070a0e790e42912f7c6816091a14dac4105cf353f8b3760b130c3af3aa",
+    "design-preview/mock-wallet-widget.js": "5a86aa9045b0dae9b1c262014caca08fd0172015e6f3a9b7ff06ebfadd1f24f8",
+    "community-affiliates/index.html": "33447b7b638217d7f334e2a52316b79f28f7bda0805fccd4ac835fe6ab070039"
+  },
+  "redirects_sha256": "44b1b87e53f748ae2857f0a9351f6f8475448ac0583cf7bba9929e0cb838d746",
+  "note": "AquaVaults DESIGN mock. No live onchain/payment, wallet or admin writes.",
+  "visual_basis": "existing AquaVaults HTML, CSS and JS; mock response contracts only",
+  "stage5_mock_endpoints": [
+    "/api/volume/stats/global-sol",
+    "/api/volume/stats/leaderboard-sol",
+    "/api/program/public-badges",
+    "/api/admin/connector-manual-rewards"
+  ],
+  "notes": "Synthetic design only. Existing production frontend renderer, no live writes or wallet execution.",
+  "route_checker_version": "redirect-aware-content-v2",
+  "route_checker_sha256": "a3d646a701921254064b97aa1bb942250422af0d8ea96c22c8b511e4a8ca3043",
+  "route_alias_patch": "clean-route-aliases-v1",
+  "clean_url_assets": {
+    "/communities": {
+      "file": "communities.html",
+      "sha256": "33447b7b638217d7f334e2a52316b79f28f7bda0805fccd4ac835fe6ab070039"
+    },
+    "/autoswap/estimator": {
+      "file": "autoswap/estimator.html",
+      "sha256": "1af89562eee8752dd01eebb55a5f2f43bd12af434b95e978c131f21ccf2de90e"
+    },
+    "/autoswap/how-to": {
+      "file": "autoswap/how-to.html",
+      "sha256": "03db9bc3d63ed1e36ef17a321b632cebce12dd801c0bd45410895a7c216c3d2f"
+    }
+  }
+}

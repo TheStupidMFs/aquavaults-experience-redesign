@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Listing Requirements — AquaVaults Learn</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <meta property="og:image" content="/assets/logo.png" />
+    <meta name="description" content="Learn what communities need to get listed on AquaVaults, including branding, referral setup, treasury wallets, and ecosystem onboarding information." />
+    <link rel="stylesheet" href="/about.css">
+    <link rel="stylesheet" href="/learn/docs.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/header/header-loader.js" defer></script>
+    <script src="/header/header.js" defer></script>
+    <script src="/learn/docs.js" defer></script>
+    <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+    <div id="header-container" data-header-type="simple"></div>
+
+    <div class="docs-layout">
+
+        <aside id="docs-sidebar" class="docs-sidebar">
+            <!-- injected by docs.js -->
+        </aside>
+
+        <main class="docs-main">
+
+            <nav class="docs-breadcrumbs">
+                <a href="/learn" class="docs-breadcrumb-link">Learn</a>
+                <span class="docs-breadcrumb-sep">›</span>
+                <span>Join</span>
+            </nav>
+
+            <header class="docs-hero">
+                <div class="docs-hero-badge">Get Listed</div>
+                <h1>Community Listing Requirements</h1>
+                <p class="docs-hero-sub">Getting listed on AquaVaults is designed to be simple. Communities provide a few core pieces of information, configure their routing setup if desired, and become part of the ecosystem.</p>
+            </header>
+
+            <div class="docs-content">
+                
+                <div class="docs-callout docs-callout-info">
+                    <div class="docs-callout-label">Before You List</div>
+                    <p>Learn how listed communities earn through the Growth Program: <a href="/learn/growth-program">fee share, monthly tiers, Partner status, and dashboards</a>.</p>
+                </div>
+
+                <!-- ── 1. What Communities Need To Get Listed ── -->
+                <div class="docs-section">
+                    <h2 id="what-you-need">What Communities Need To Get Listed</h2>
+                    <p>The listing process is intentionally lightweight. AquaVaults already has the platform infrastructure — the swapper, fee routing, widget system, and participation layer are all built. Communities do not need to build any of that. They need to provide the information that places them inside it.</p>
+                    <p>There is no custom development required, no technical integration project, and no complex onboarding process to navigate. The setup comes down to three things: basic community information, a registered community treasury wallet, and optional Jupiter referral accounts. Communities can start participating in the ecosystem as soon as those pieces are in place.</p>
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">What The Listing Covers</div>
+                        <p>Once listed, a community appears in the AquaVaults community selector. Users can select that community before swapping, and swap activity directs platform fees toward the community through the fee routing system — with the community's registered treasury wallet as the core routing destination. Communities can also create custom AquaVaults deep links that preload their community selection alongside specific token configurations, turning campaign announcements into prepared participation flows.</p>
+                    </div>
+                </div>
+
+                <!-- ── 2. Basic Community Information ── -->
+                <div class="docs-section">
+                    <h2 id="basic-information">Basic Community Information</h2>
+                    <p>Communities provide the information that represents them inside the AquaVaults ecosystem. This is how members find and recognize the community in the selector, and how the community presents itself to the broader platform.</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Community Name</h3>
+                            <p>The name used to identify the community inside AquaVaults. This is what users see when selecting a community to support before they swap.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Short Bio</h3>
+                            <p>A brief description of the community — what it is, what it represents, and why members would want to support it. Helps users connect with the communities that are meaningful to them.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Logo and Branding</h3>
+                            <p>A logo or branding asset that represents the community visually inside the platform. Displayed alongside the community name in the selector and in leaderboard contexts.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Social and Website Links</h3>
+                            <p>Links to the community's primary social presence and website, if applicable. Helps members and prospective users verify and connect with the community outside the platform.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── 3. Referral Accounts (Optional But Recommended) ── -->
+                <div class="docs-section">
+                    <h2 id="referral-accounts">Referral Accounts — Optional Routing Enhancement</h2>
+                    <p>When users select a community other than AquaVaults and the platform fee is above 0%, routed platform fees direct the community's share toward their registered community treasury wallet. Jupiter referral accounts are an optional additional routing layer — they provide token-specific routing paths that expand coverage and can help communities structure their fee destinations with greater granularity.</p>
+                    <p>A Jupiter referral account is a standard Solana account created through Jupiter's referral system. Once created, a community's referral account address is registered with AquaVaults, and the fee routing system can direct community-eligible portions of platform fees toward it when swaps occur with that community selected.</p>
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">Supported Token Accounts</div>
+                        <p>Fee routing through Jupiter referral accounts is supported for Wrapped SOL (wSOL), USDC, and USDT. Communities that register referral accounts for these tokens add token-specific routing paths that expand coverage across the widest range of Solana swap activity on the platform.</p>
+                    </div>
+                    <div class="docs-callout docs-callout-note">
+                        <div class="docs-callout-label">Can Be Added Later</div>
+                        <p>Communities can list without referral accounts and add them at any time. A community without referral accounts still appears in the selector, participates in campaigns, receives routed platform fees through their treasury wallet when selected by users, uses the Co-op Rig, and builds presence in the ecosystem from day one. Referral accounts expand the routing infrastructure — they are not a prerequisite for participation.</p>
+                    </div>
+                </div>
+
+                <!-- ── 4. Community Treasury Wallets ── -->
+                <div class="docs-section">
+                    <h2 id="treasury-wallets">Community Treasury Wallets</h2>
+                    <p>Communities register their treasury wallet addresses as part of the listing configuration. These are the core routing destinations for community-directed platform fees — serving all Solana swap activity not covered by a configured Jupiter referral account, and all EVM swap activity.</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Solana Wallet</h3>
+                            <p>A community-controlled Solana wallet address. The registered routing destination for community-directed fees across Solana swap activity. Fees for tokens not covered by a configured Jupiter referral account route here directly.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>EVM Wallet</h3>
+                            <p>A community-controlled EVM wallet address. Used for routing associated with EVM swapper activity on networks like Ethereum, Base, and Polygon, where Jupiter referral accounts do not apply.</p>
+                        </div>
+                    </div>
+                    <p>These wallets are community-controlled addresses — AquaVaults does not take custody of them. They serve as registered routing destinations within the platform configuration.</p>
+                </div>
+
+                <!-- ── 5. Why The Setup Matters ── -->
+                <div class="docs-section">
+                    <h2 id="why-setup-matters">Why The Setup Matters</h2>
+                    <p>The listing configuration is not just administrative. It is what connects a community to the infrastructure that makes ongoing participation possible.</p>
+                    <p>A properly configured listing allows a community to participate fully in the AquaVaults ecosystem — including community fee routing, custom deep link campaigns, Swap Widget integration, AutoSwap coordination, and Co-op Mining Rig participation tied to community selection and recurring engagement.</p>
+                    <p>The setup is simple because the infrastructure is already built. Communities are not building a new system — they are connecting into one that already exists and is already running. The listing configuration is the handshake between a community and that infrastructure.</p>
+                    <p>Getting those pieces in place from the start gives communities access to the full ecosystem from day one rather than needing to come back and configure things later when they are ready to run their first campaign.</p>
+                </div>
+
+                <!-- ── 6. Communities Can Start Small ── -->
+                <div class="docs-section">
+                    <h2 id="start-small">Communities Can Start Small</h2>
+                    <p>Nothing about the listing process requires a community to have everything figured out before it starts. A small but active community with a clear identity and engaged members is exactly the kind of community AquaVaults is designed for. The platform does not require large teams, extensive infrastructure, or an established track record of on-chain activity.</p>
+                    <p>A community can list with a basic setup — name, bio, logo, one or two social links, a treasury wallet — and immediately become available for community-directed fee routing when users select them on the platform. They can add Jupiter referral accounts when they want to extend their routing infrastructure with additional token-specific paths. They can introduce the Swap Widget to their community when they want to run a campaign. They can build toward AutoSwap coordination and Rig participation over time as their members become familiar with the platform.</p>
+                    <p>The ecosystem meets communities where they are. The infrastructure scales with their participation — communities do not need to scale their participation to fit the infrastructure.</p>
+                </div>
+
+                <!-- ── 7. Joining The Ecosystem ── -->
+                <div class="docs-section">
+                    <h2 id="joining-the-ecosystem">Joining The Ecosystem</h2>
+                    <p>Getting listed is a beginning, not a formality. A community that adds a logo and a name to a selector page has set up a presence. A community that actively directs its members, runs campaigns, coordinates Rig participation, and uses the Swap Widget on their own site has built something much more substantial — a recurring participation structure that strengthens over time through consistent engagement.</p>
+                    <p>The difference between those two outcomes is not a technical configuration. It is whether the community actively organizes around the infrastructure AquaVaults provides, or treats the listing as something passive after setup.</p>
+                    <p>The communities that get the most from the platform are the ones that show up consistently — that give their members recurring reasons to participate, that run campaigns with structure and follow-through, and that use AquaVaults as a layer of their community identity rather than a one-time experiment.</p>
+                    <p>AquaVaults works best when active communities participate consistently over time. That is what the listing is the first step toward.</p>
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">Ready to List?</div>
+                        <p>Start with the <a href="/apply">public community application</a>. Share whatever project details you have; no wallet or application fee is required. If a Connector introduced you, you may enter their optional code for candidate attribution, subject to independent verification. AquaVaults reviews applications before any listing is approved, and may request branding and verified treasury details afterward.</p>
+                    </div>
+                </div>
+
+                <!-- ── Continue Exploring ── -->
+                <div class="docs-explore">
+                    <p class="docs-explore-title">Continue Exploring</p>
+                    <div class="docs-explore-links">
+                        <a href="/learn/for-token-communities" class="docs-explore-link">Why Token Communities List →</a>
+                        <a href="/learn/for-nft-projects" class="docs-explore-link">Why NFT Projects List →</a>
+                        <a href="/learn/connectors" class="docs-explore-link">Connector Program →</a>
+                        <a href="/learn/swap-widget" class="docs-explore-link">Swap Widget →</a>
+                    </div>
+                </div>
+
+                <!-- ── Pagination ── -->
+                <nav class="docs-pagination">
+                    <a href="/learn/campaign-ideas" class="docs-pag-link">
+                        <span class="docs-pag-direction">← Previous</span>
+                        <span class="docs-pag-title">Campaign Ideas</span>
+                    </a>
+                    <a href="/learn/connectors" class="docs-pag-link docs-pag-next">
+                        <span class="docs-pag-direction">Next →</span>
+                        <span class="docs-pag-title">Connector Program</span>
+                    </a>
+                </nav>
+
+            </div>
+        </main>
+
+    </div>
+
+    <div id="footer-container"></div>
+</body>
+</html>

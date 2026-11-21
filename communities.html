@@ -1,0 +1,340 @@
+<!DOCTYPE html> <html lang="en"> <head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+ <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>AquaVaults - Community Affiliates</title> <link rel="icon" type="image/png" href="/assets/logo.png" /> <link rel="apple-touch-icon" href="/assets/logo.png" /> <meta property="og:image" content="/assets/logo.png" /> <meta name="description" content="Community Affiliates - Support your favorite Solana communities" /> <link rel="stylesheet" href="/community-affiliates/communiity-affiliates.css" /> <link rel="stylesheet" href="/header/header.css" /> <link rel="stylesheet" href="/footer/footer.css" /> <script src="/header/header-loader.js" defer></script> <script src="/header/header.js" defer></script> <script src="/footer/footer-loader.js" defer></script> </head> <body> <div class="page-wrapper"> <div id="header-container" data-header-type="simple"></div> <div class="page-content"> <div class="affiliates-hero"> <h1>Communities</h1> <p class="affiliates-subtitle">Support your favorite communities while swapping on Solana</p> </div> <section id="av-community-leaderboard" class="av-volume-panel av-leaderboard-section"> <h2 class="av-leaderboard-title">Community Volume Leaderboard</h2> <div class="av-volume-sub">Ranked by SOL-equivalent swap volume</div> <div id="av-leaderboard-list" class="av-leaderboard-list">Loading…</div> </section> <div class="affiliates-grid" id="affiliatesGrid"> </div> <div class="join-section"> <div class="join-section-header"> <h2>Bring Your Community to AquaVaults</h2> <p class="join-lead">
+AquaVaults helps communities turn attention into participation. Whether you are building an NFT community, a token community, or something that blends both, a listing on AquaVaults gives your project a place to be discovered, supported, and actively chosen on-platform.
+</p> </div> <div class="join-highlights" aria-label="Community listing benefits"> <div class="join-highlight">Share in the platform fees your activity helps generate</div> <div class="join-highlight">Potential Co-op Mining Rig rewards</div> <div class="join-highlight">Optional Discord-capable notifications</div> </div> <a class="join-button" href="/apply">Apply for Listing</a> <p class="join-lead">Applications are submitted directly to AquaVaults for review, with no wallet or application fee required. If a Connector recommended AquaVaults, you may optionally enter their code on the form.</p> <details class="join-details"> <summary>Learn more about joining</summary> <div class="join-details-content"> <p>
+Your community can gain visibility, share in the platform fees its activity helps generate, and unlock tools built to keep leaders informed and communities engaged. Fee share applies to platform fees that swaps actually generate and depends on confirmed swaps and current program rules — it is not guaranteed revenue. Listed communities also have opportunities to benefit from potential rewards tied to the Co-op Mining Rig, creating another layer of value beyond visibility alone.
+</p> <div class="join-detail-grid"> <div class="join-detail-card"> <h3>What you get</h3> <ul> <li>A dedicated community listing on AquaVaults</li> <li>The ability to share in the platform fees your activity helps generate</li> <li>Potential rewards through the Co-op Mining Rig</li> <li>Access to the AquaVaults Discord for community leaders</li> <li>Optional Discord-capable notifications for important events</li> <li>Visibility to users looking for communities to support</li> <li>Access to future community-focused tools as AquaVaults expands</li> </ul> </div> <div class="join-detail-card join-detail-card-full"> <h3>Who this is for</h3> <p>
+We are looking for NFT communities, token communities, and hybrid projects with real identity, active presence, and people who want to build. Newer projects can apply too, but we care a lot about quality, consistency, and whether the community is genuinely showing up.
+</p> </div> <div class="join-detail-card join-detail-card-full"> <h3>How to join</h3> <p>
+Use the <a href="/apply">public community application</a> to introduce your project. An application is not a listing approval, and you can leave optional fields blank. If you have a Connector code, enter it on the form and verify it before submitting; the introduction remains a candidate until AquaVaults independently verifies it.
+</p> </div> </div> </details> </div> </div> <div id="footer-container"></div> </div> <script src="/swapper/community-registry.js"></script> <script>
+// Load and display communities
+function loadCommunities() {
+const grid = document.getElementById('affiliatesGrid');
+const communities = window.CommunityRegistry.getAll();
+communities.forEach(community => {
+const card = createCommunityCard(community);
+grid.appendChild(card);
+});
+// Display-only: hydrate Growth Program badges per card from the public
+// bulk endpoint. Runs after the synchronous registry render so cards are
+// visible immediately; failures are silent and leave cards unchanged.
+loadCommunityBadges();
+}
+function loadCommunityBadges() {
+fetch('/api/program/public-badges')
+.then(function (r) { return r.ok ? r.json() : null; })
+.then(function (data) {
+if (!data || !data.badges_by_community) return;
+var byId = data.badges_by_community;
+Object.keys(byId).forEach(function (id) {
+var list = byId[id];
+if (!Array.isArray(list) || !list.length) return;
+var card = document.getElementById('community-' + id);
+if (!card) return;
+var header = card.querySelector('.community-header');
+if (!header) return;
+// Build with DOM APIs (textContent + className) — never innerHTML —
+// so badge labels/tones from the server cannot inject markup.
+var wrap = document.createElement('div');
+wrap.className = 'community-badges';
+list.forEach(function (b) {
+if (!b) return;
+var rawTone = String(b.tone || b.key || 'unknown');
+var tone = rawTone.replace(/[^a-zA-Z0-9_]/g, '') || 'unknown';
+var label = String(b.label || b.key || 'badge');
+var span = document.createElement('span');
+span.className = 'community-badge community-badge-' + tone;
+span.textContent = label;
+wrap.appendChild(span);
+});
+if (wrap.childNodes.length) {
+header.insertAdjacentElement('afterend', wrap);
+}
+});
+})
+.catch(function () { /* silent — cards render fine without badges */ });
+}
+function createCommunityCard(community) {
+const card = document.createElement('div');
+card.className = 'community-card';
+card.id = `community-${community.id}`;
+// Build socials HTML
+let socialsHTML = '';
+if (community.socials.twitter || community.socials.discord || community.socials.telegram || community.socials.facebook || community.socials.reddit) {
+socialsHTML = '<div class="community-socials">';
+if (community.socials.twitter) {
+socialsHTML += `<a href="${community.socials.twitter}" target="_blank" rel="noopener" class="social-link" title="Twitter">𝕏</a>`;
+}
+if (community.socials.discord) {
+socialsHTML += `
+<a href="${community.socials.discord}" target="_blank" rel="noopener" class="social-link discord-link" title="Discord" aria-label="Discord"> <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"> <path fill="currentColor" d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.078.037 13.89 13.89 0 0 0-.608 1.249 18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.249.077.077 0 0 0-.078-.037 19.74 19.74 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.579.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.027c.462-.63.874-1.295 1.226-1.995a.076.076 0 0 0-.041-.105 13.11 13.11 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.1.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.04.106c.36.699.772 1.364 1.225 1.994a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028ZM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.419-2.157 2.419Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.947 2.419-2.157 2.419Z"/> </svg> </a>`;
+}
+if (community.socials.telegram) {
+socialsHTML += `<a href="${community.socials.telegram}" target="_blank" rel="noopener" class="social-link" title="Telegram">✈️</a>`;
+}
+if (community.socials.facebook) {
+socialsHTML += `
+<a href="${community.socials.facebook}" target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook" aria-label="Facebook"> <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"> <path fill="currentColor" d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/> </svg> </a>`;
+}
+if (community.socials.reddit) {
+socialsHTML += `
+<a href="${community.socials.reddit}" target="_blank" rel="noopener noreferrer" class="social-link" title="Reddit" aria-label="Reddit"> <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"> <path fill="currentColor" d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/> </svg> </a>`;
+}
+socialsHTML += '</div>';
+}
+// Build website link HTML
+let websiteHTML = '';
+if (community.website) {
+websiteHTML = `<a href="${community.id === 'aquavaults' ? '/' : community.website}" target="_blank" rel="noopener" class="community-website">Visit Website →</a>`;
+}
+if (community.website2) {
+websiteHTML += `<a href="${community.website2}" target="_blank" rel="noopener" class="community-website">Visit Website 2 →</a>`;
+}
+if (community.nftUrl) {
+websiteHTML += `<a href="${community.nftUrl}" target="_blank" rel="noopener" class="community-website">Mint/Buy an NFT →</a>`;
+}
+card.innerHTML = `
+<div class="community-header"> <img src="${community.logo}" alt="${community.name}" class="community-logo" /> <h3 class="community-name">${community.name}</h3> </div> <p class="community-description">${community.description}</p>
+${socialsHTML}
+${websiteHTML}
+<button class="swap-with-community-btn" onclick="swapWithCommunity('${community.id}')">
+Swap with ${community.name}
+</button>
+`;
+return card;
+}
+function scrollToForm() {
+document.getElementById('formSection').scrollIntoView({ behavior: 'smooth' });
+}
+function swapWithCommunity(communityId) {
+// Redirect to swap page with community pre-selected via URL parameter
+window.location.href = `/swap?community=${communityId}`;
+}
+// Load communities on page load
+window.addEventListener('DOMContentLoaded', loadCommunities);
+</script> <script>
+(function() {
+function formatLamportsToSol(rawStr) {
+try {
+var lamports = BigInt(rawStr || "0");
+if (lamports === 0n) return '0 SOL';
+var whole = lamports / 1000000000n;
+var frac = lamports % 1000000000n;
+var wholeStr = whole.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+if (frac === 0n) return wholeStr + ' SOL';
+var fracStr = frac.toString().padStart(9, '0').replace(/0+$/, '');
+if (fracStr.length > 4) fracStr = fracStr.slice(0, 4);
+return wholeStr + '.' + fracStr + ' SOL';
+} catch (e) {
+return String(rawStr || "0");
+}
+}
+function formatTokenAmount(rawStr, mint) {
+try {
+var DECIMALS = {
+'So11111111111111111111111111111111111111112': 9,
+'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v': 6,
+'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB': 6,
+'3JgFwoYV74f6LwWjQWnr3YDPFnmBdwQfNyubv99jqUoq': 9,
+'he1iusmfkpAdwvxLNGV8Y1iSbj4rUy6yMhEA3fotn9A': 9,
+'mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So': 9,
+'B5WTLaRwaUQpKk7ir1wniNB6m5o8GgMrimhKMYan2R6B': 6,
+};
+var decimals = DECIMALS[mint] || 9;
+var raw = BigInt(rawStr || "0");
+var divisor = 10n ** BigInt(decimals);
+var whole = raw / divisor;
+var frac = raw % divisor;
+var wholeStr = whole.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+if (frac === 0n) return wholeStr;
+var fracStr = frac.toString().padStart(decimals, '0').replace(/0+$/, '');
+return wholeStr + '.' + fracStr;
+} catch (e) {
+return String(rawStr || "0");
+}
+}
+function shortenMint(mint) {
+if (!mint || mint.length < 12) return mint || '?';
+return mint.slice(0, 4) + '…' + mint.slice(-4);
+}
+function resolveTokenName(mint) {
+var KNOWN = {
+'So11111111111111111111111111111111111111112': 'SOL',
+'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v': 'USDC',
+'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB': 'USDT',
+'3JgFwoYV74f6LwWjQWnr3YDPFnmBdwQfNyubv99jqUoq': 'wPOND',
+'he1iusmfkpAdwvxLNGV8Y1iSbj4rUy6yMhEA3fotn9A': 'hSOL',
+'mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So': 'mSOL',
+'B5WTLaRwaUQpKk7ir1wniNB6m5o8GgMrimhKMYan2R6B': 'PepeOnSOL',
+};
+if (KNOWN[mint]) return KNOWN[mint];
+try {
+if (window.TokenRegistry && window.TokenRegistry.getSymbol) {
+var sym = window.TokenRegistry.getSymbol(mint);
+if (sym) return sym;
+}
+} catch (e) {}
+return shortenMint(mint);
+}
+function resolveCommunityName(id) {
+try {
+if (window.CommunityRegistry) {
+var c = window.CommunityRegistry.get(id);
+if (c) return c.name;
+}
+} catch (e) {}
+return id;
+}
+var lbEntries = [];
+var lbPlatform = null;
+var lbGlobalTotal = null;
+var lbPage = 0;
+var LB_PAGE_SIZE = 10;
+async function loadLeaderboard() {
+var container = document.getElementById('av-leaderboard-list');
+var globalEl = document.getElementById('av-platform-vol-value');
+if (!container) return;
+try {
+// Fetch leaderboard (includes platform field)
+var res = await fetch('/api/volume/stats/leaderboard-sol');
+if (!res.ok) { container.textContent = 'Unable to load leaderboard.'; return; }
+var data = await res.json();
+// Fetch global total
+var globalRes = await fetch('/api/volume/stats/global-sol');
+var globalData = globalRes.ok ? await globalRes.json() : null;
+// Display global total
+if (globalEl && globalData) {
+globalEl.textContent = formatLamportsToSol(globalData.solLamportsTotal);
+}
+if (!data.leaderboard || data.leaderboard.length === 0) {
+container.textContent = 'No community volume recorded yet.';
+return;
+}
+lbEntries = data.leaderboard;
+lbPlatform = data.platform || null;
+lbGlobalTotal = (globalData && globalData.solLamportsTotal) ? globalData.solLamportsTotal : null;
+lbPage = 0;
+renderLeaderboardPage();
+} catch (e) {
+container.textContent = 'Unable to load leaderboard.';
+}
+}
+function renderLeaderboardPage() {
+var container = document.getElementById('av-leaderboard-list');
+if (!container) return;
+var totalPages = Math.max(1, Math.ceil(lbEntries.length / LB_PAGE_SIZE));
+if (lbPage >= totalPages) lbPage = totalPages - 1;
+if (lbPage < 0) lbPage = 0;
+var start = lbPage * LB_PAGE_SIZE;
+var pageEntries = lbEntries.slice(start, start + LB_PAGE_SIZE);
+container.innerHTML = '';
+// Render ranked communities (current page only)
+pageEntries.forEach(function(entry) {
+var item = document.createElement('div');
+item.className = 'av-leaderboard-item';
+var row = document.createElement('div');
+row.className = 'av-lb-row';
+var rank = document.createElement('span');
+rank.className = 'av-lb-rank';
+rank.textContent = '#' + entry.rank;
+var name = document.createElement('a');
+name.className = 'av-lb-name av-lb-name-link';
+name.href = '#community-' + entry.communityId;
+name.textContent = resolveCommunityName(entry.communityId);
+name.addEventListener('click', function(e) {
+e.preventDefault();
+var target = document.getElementById('community-' + entry.communityId);
+if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+var total = document.createElement('span');
+total.className = 'av-lb-total';
+total.textContent = formatLamportsToSol(entry.totalSolLamports);
+row.appendChild(rank);
+row.appendChild(name);
+row.appendChild(total);
+item.appendChild(row);
+container.appendChild(item);
+});
+// Pagination controls
+if (totalPages > 1) {
+var pagination = document.createElement('div');
+pagination.className = 'av-lb-pagination';
+var firstBtn = document.createElement('button');
+firstBtn.type = 'button';
+firstBtn.className = 'av-lb-page-btn';
+firstBtn.textContent = '«';
+firstBtn.title = 'First page';
+firstBtn.disabled = (lbPage === 0);
+firstBtn.addEventListener('click', function() { lbPage = 0; renderLeaderboardPage(); });
+var prevBtn = document.createElement('button');
+prevBtn.type = 'button';
+prevBtn.className = 'av-lb-page-btn';
+prevBtn.textContent = '‹';
+prevBtn.title = 'Previous page';
+prevBtn.disabled = (lbPage === 0);
+prevBtn.addEventListener('click', function() { lbPage -= 1; renderLeaderboardPage(); });
+var info = document.createElement('span');
+info.className = 'av-lb-page-info';
+info.textContent = 'Page ' + (lbPage + 1) + ' of ' + totalPages;
+var nextBtn = document.createElement('button');
+nextBtn.type = 'button';
+nextBtn.className = 'av-lb-page-btn';
+nextBtn.textContent = '›';
+nextBtn.title = 'Next page';
+nextBtn.disabled = (lbPage >= totalPages - 1);
+nextBtn.addEventListener('click', function() { lbPage += 1; renderLeaderboardPage(); });
+var lastBtn = document.createElement('button');
+lastBtn.type = 'button';
+lastBtn.className = 'av-lb-page-btn';
+lastBtn.textContent = '»';
+lastBtn.title = 'Last page';
+lastBtn.disabled = (lbPage >= totalPages - 1);
+lastBtn.addEventListener('click', function() { lbPage = totalPages - 1; renderLeaderboardPage(); });
+pagination.appendChild(firstBtn);
+pagination.appendChild(prevBtn);
+pagination.appendChild(info);
+pagination.appendChild(nextBtn);
+pagination.appendChild(lastBtn);
+container.appendChild(pagination);
+}
+// Render AquaVaults platform entry at the bottom (unaffected by pagination)
+if (lbPlatform && lbPlatform.totalSolLamports) {
+var divider = document.createElement('div');
+divider.className = 'av-lb-divider';
+container.appendChild(divider);
+var platformEntry = document.createElement('div');
+platformEntry.className = 'av-leaderboard-item av-lb-platform';
+platformEntry.innerHTML =
+'<div class="av-lb-platform-row">' +
+'<span class="av-lb-platform-icon">⚡</span>' +
+'<span class="av-lb-name">' + resolveCommunityName(lbPlatform.communityId) + ' <span class="av-lb-platform-label">Platform</span></span>' +
+'<span class="av-lb-total">' + formatLamportsToSol(lbPlatform.totalSolLamports) + '</span>' +
+'</div>';
+container.appendChild(platformEntry);
+}
+// Render global total at the very bottom (unaffected by pagination)
+if (lbGlobalTotal) {
+var totalDivider = document.createElement('div');
+totalDivider.className = 'av-lb-divider';
+container.appendChild(totalDivider);
+var totalEntry = document.createElement('div');
+totalEntry.className = 'av-lb-global-total';
+totalEntry.innerHTML =
+'<span class="av-lb-global-label">Total Platform Volume</span>' +
+'<span class="av-lb-global-value">' + formatLamportsToSol(lbGlobalTotal) + '</span>';
+container.appendChild(totalEntry);
+}
+}
+if (document.readyState === 'loading') {
+document.addEventListener('DOMContentLoaded', loadLeaderboard);
+} else {
+loadLeaderboard();
+}
+})();
+</script> </body> </html>>

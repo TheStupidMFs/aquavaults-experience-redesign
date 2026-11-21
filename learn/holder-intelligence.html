@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn what AquaVaults Holder Intelligence can and cannot verify: Solana NFT and token holder scans, filters, limits, prices, saved reports, and Community Wheel imports for listed community owners.">
+    <title>Holder Intelligence — AquaVaults Learn</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <meta property="og:image" content="/assets/logo.png" />
+    <link rel="stylesheet" href="/about.css">
+    <link rel="stylesheet" href="/learn/docs.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/header/header-loader.js" defer></script>
+    <script src="/header/header.js" defer></script>
+    <script src="/learn/docs.js" defer></script>
+    <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+    <div id="header-container" data-header-type="simple"></div>
+    <div class="docs-layout">
+        <aside id="docs-sidebar" class="docs-sidebar"></aside>
+        <main class="docs-main">
+            <nav class="docs-breadcrumbs">
+                <a href="/learn" class="docs-breadcrumb-link">Learn</a>
+                <span class="docs-breadcrumb-sep">›</span>
+                <span>For Communities</span>
+            </nav>
+            <header class="docs-hero">
+                <div class="docs-hero-badge">Listed Community Tool · Solana</div>
+                <h1>Holder Intelligence</h1>
+                <p class="docs-hero-sub">Find current NFT and token holders, apply eligibility filters, save and export a report, and optionally turn qualifying results into a Community Wheel draft.</p>
+                <div class="docs-landing-actions">
+                    <a href="#choose-an-audit" class="docs-btn-primary">Explore Audit Types →</a>
+                    <a href="#limits" class="docs-btn-secondary">Read Current Limits</a>
+                </div>
+            </header>
+            <div class="docs-content">
+                <div class="docs-section">
+                    <h2 id="overview">What Holder Intelligence Does</h2>
+                    <p>Holder Intelligence is a research and eligibility tool inside the AquaVaults Community Command Center. It works with <strong>Solana NFT collections and token mints</strong>. You choose what to check, AquaVaults evaluates the available provider and blockchain evidence, and a successful scan produces a saved holder report.</p>
+                    <p>Use it to identify owners of specific NFTs, find holders who meet token balance or value rules, review exclusions, download the findings, or create a new <a href="/learn/community-wheel">Community Wheel</a> drawing with those verified entries. <strong>Running an audit does not automatically create a giveaway or select a winner.</strong></p>
+                    <div class="docs-callout docs-callout-note">
+                        <div class="docs-callout-label">What “verified” means</div>
+                        <p>A result is based on the evidence the supported data providers and Solana network make available. Current ownership and historical holding are different claims. An acquisition date does not prove a marketplace purchase or the real-world identity of a wallet owner.</p>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="access">Who Can Use It?</h2>
+                    <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Community access</th><th>Scan availability</th></tr></thead><tbody>
+                        <tr><td>Founding community owner</td><td>Included Holder Intelligence scans</td></tr>
+                        <tr><td>Active Partner community owner</td><td>Included while the Partner benefit is active</td></tr>
+                        <tr><td>Other eligible listed community owner</td><td>$5 per scan through a separate, confirmed scan credit</td></tr>
+                        <tr><td>Listed community members</td><td>Can explore a read-only feature preview; running scans and accessing private scan reports requires owner permission</td></tr>
+                        <tr><td>Unlisted or public users</td><td>No public scan access in this release</td></tr>
+                    </tbody></table></div>
+                    <p>Paid scan credits are separate from Public Wheel Spinner purchases and Community Wheel drawing access. Where payment is required, the supported checkout uses Solana USDC or USDT and must be confirmed before a scan can consume the credit. Do not send a duplicate payment simply because confirmation is delayed.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="choose-an-audit">Choose an NFT or Token Audit</h2>
+                    <div class="docs-cta-grid">
+                        <a href="#nft" class="docs-cta-card"><p class="docs-cta-title">NFT Audit</p><p class="docs-cta-desc">Check collection ownership, specific NFT numbers, traits, holder counts, wallet exclusions, and supported holding-history filters.</p><span class="docs-cta-action">NFT capabilities →</span></a>
+                        <a href="#token" class="docs-cta-card"><p class="docs-cta-title">Token Audit</p><p class="docs-cta-desc">Check current token balances and USD thresholds, or request a deeper continuous-holding-history audit where supported.</p><span class="docs-cta-action">Token capabilities →</span></a>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="nft">NFT Holder Audit</h2>
+                    <p>Register a Solana NFT collection with your community, select the collection and run a scan. A normal current-owner scan reports the NFTs the provider identifies in that collection, their current owners, and the eligible wallets after your filters are applied. Burned assets are accounted for separately.</p>
+                    <h3>Available NFT filters</h3>
+                    <ul>
+                        <li><strong>NFT numbers:</strong> select individual numbers or a number range.</li>
+                        <li><strong>Traits:</strong> match any selected value or require all selected values on the same NFT.</li>
+                        <li><strong>Holder count:</strong> require a minimum or maximum number of NFTs per wallet; count matching NFTs or all NFTs in that collection.</li>
+                        <li><strong>Wallet exclusions:</strong> exclude known treasury, team, or other addresses from eligibility.</li>
+                        <li><strong>Historical filters:</strong> acquired-from, acquired-through, or minimum continuous holding days, when supported history can be independently reconstructed.</li>
+                    </ul>
+                    <p>Historical NFT verification is an <strong>optional, more limited process</strong>. It checks acquisition and continuous ownership evidence, rather than simply looking at the current wallet. If evidence is incomplete or the NFT standard is unsupported, a historical scan can be rejected instead of returning an unsupported qualification.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="token">Token Holder Audit</h2>
+                    <p>Enter a Solana token mint and choose one of two modes:</p>
+                    <div class="docs-steps">
+                        <div class="docs-step"><div class="docs-step-number">1</div><div class="docs-step-body"><p class="docs-step-title">Current Holder Snapshot</p><p class="docs-step-desc">Checks current token account balances, eligible wallet ownership and the token's estimated USD value. This mode does not prove how long tokens have been held.</p></div></div>
+                        <div class="docs-step"><div class="docs-step-number">2</div><div class="docs-step-body"><p class="docs-step-title">Verified Holding Audit</p><p class="docs-step-desc">Also attempts to reconstruct each candidate wallet's uninterrupted current holding period from finalized on-chain transactions. This may take substantially longer or fail if the provider cannot supply complete history.</p></div></div>
+                    </div>
+                    <h3>Available token filters</h3>
+                    <ul>
+                        <li>Minimum and optional maximum estimated USD token value.</li>
+                        <li>Optional included and excluded wallet lists.</li>
+                        <li>Custom include/exclude rules based on wallet, token balance, and USD value, combined with ALL or ANY logic.</li>
+                        <li>In Verified mode only, minimum continuous holding hours, holding start date, and historical rules.</li>
+                    </ul>
+                    <p><strong>Important:</strong> token USD values use a third-party Jupiter quote. Prices can be delayed or unavailable, and V1 does not provide an independently certified maximum quote age. Do not treat displayed dollar values as a guarantee of an executable market price.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="reports">Saved Reports and Downloads</h2>
+                    <p>Successful audits are stored for the authorized community owner. Review the qualifying wallets and available details, see why records were excluded, reopen a saved report, and download the supported CSV or JSON exports. Larger result sets can span multiple pages; the export checks are intended to reconcile the downloaded total with the saved report.</p>
+                    <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Scan entitlement at completion</th><th>Saved report access</th></tr></thead><tbody>
+                        <tr><td>Founding or active Partner included scan</td><td>180 days</td></tr>
+                        <tr><td>Other eligible listed-community scan</td><td>30 days</td></tr>
+                    </tbody></table></div>
+                    <p>Download important reports before they expire. Once report access expires, the detailed data is no longer available for normal viewing, export or a new Wheel import. Limited receipt summaries may remain separately for operations and payment evidence.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="wheel">Optional Community Wheel Integration</h2>
+                    <p>Choose a successfully saved scan to create a <strong>new Community Wheel draft</strong> based on its eligible entries. The original audit is not changed.</p>
+                    <ul>
+                        <li><strong>NFT:</strong> one chance per eligible wallet, or one chance per qualifying NFT. Per-NFT tickets can display the wallet, NFT number, or both while preserving the underlying mint-to-owner mapping.</li>
+                        <li><strong>Token:</strong> equal chances, value-based tiers, holding-duration tiers, or a combined model where the saved report supports those fields. Configurable weights are capped at nine chances per wallet.</li>
+                        <li><strong>Capacity:</strong> Community Wheel has its own limits, including up to 10,000 distinct entry records and up to 50,000 weighted tickets for supported configurations. Not every audit will fit every drawing mode.</li>
+                    </ul>
+                    <p>The community organizer remains responsible for giveaway rules, consent, eligibility, prizes, awarding and legal compliance. See the <a href="/learn/community-wheel">Community Wheel guide</a> and <a href="/tos">Terms of Service</a>.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="limits">Current V1 Limitations</h2>
+                    <p>These limits describe the current release; they are <strong>not</strong> unlimited or universal scanning claims.</p>
+                    <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Capability</th><th>Current restriction</th></tr></thead><tbody>
+                        <tr><td>NFT collection inventory</td><td>Up to 10,000 total assets in one on-demand scan</td></tr>
+                        <tr><td>NFT holding history</td><td>Up to 500 matching assets; at most 12 pages of 100 signatures per asset</td></tr>
+                        <tr><td>Compressed NFT holding history</td><td>Not supported; current-owner scanning is separate</td></tr>
+                        <tr><td>Token inventory</td><td>Up to 3,000 token accounts (not necessarily 3,000 distinct wallets)</td></tr>
+                        <tr><td>Token historical candidates</td><td>Up to 600 qualifying candidates after initial filters</td></tr>
+                        <tr><td>Token historical depth</td><td>Up to 500 pages of 100 returned transactions per wallet where available</td></tr>
+                        <tr><td>NFT / token submission limits</td><td>5 NFT scans or 4 Token Audit requests per community per hour</td></tr>
+                        <tr><td>Network scope</td><td>Solana only; Holder Intelligence does not audit EVM holdings</td></tr>
+                    </tbody></table></div>
+                    <p>Provider outages, changing ownership during a scan, malformed metadata, unsupported token/NFT standards, missing historical records and resource limits may prevent completion. AquaVaults rejects unsupported historical certification rather than claiming incomplete evidence is complete.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="does-not-prove">What Holder Intelligence Cannot Prove</h2>
+                    <ul>
+                        <li>That an NFT holder originally minted or purchased an NFT, rather than receiving a transfer.</li>
+                        <li>Who controls a wallet in the real world, or whether multiple wallets belong to one person.</li>
+                        <li>That the collection or token is legitimate, safe, appropriately priced or eligible for a particular promotion.</li>
+                        <li>That all historical formats or unlimited holder populations can be verified in one audit.</li>
+                        <li>That a token's displayed USD price is independently time-certified or executable at that value.</li>
+                        <li>That a scan substitutes for an organizer's own giveaway rules, participant verification, legal duties or prize delivery.</li>
+                    </ul>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="get-started">Getting Started</h2>
+                    <p>If you're an authorized listed-community owner, open your Community Command Center and select <strong>Holder Intelligence</strong>. Choose <strong>NFT Audit</strong> or <strong>Token Audit</strong>, enter the source and filters, review the scope and limits, then submit your scan. Token jobs may continue processing after you leave the page; use the job list to check their status.</p>
+                    <p>When the audit completes, review the exclusions and totals before downloading exports or creating an optional Wheel drawing. To learn about listing a community, see <a href="/learn/get-listed">Get Listed</a>.</p>
+                    <div class="docs-cta-grid">
+                        <a href="/learn/community-wheel" class="docs-cta-card"><p class="docs-cta-title">Community Wheel</p><p class="docs-cta-desc">How saved holder results can become verified drawing entries.</p><span class="docs-cta-action">Read the guide →</span></a>
+                        <a href="/learn/for-nft-projects" class="docs-cta-card"><p class="docs-cta-title">NFT Communities</p><p class="docs-cta-desc">Ways NFT communities use AquaVaults participation tools.</p><span class="docs-cta-action">Explore NFT tools →</span></a>
+                        <a href="/tos" class="docs-cta-card"><p class="docs-cta-title">Terms of Service</p><p class="docs-cta-desc">Data sources, scan access, payments and organizer responsibilities.</p><span class="docs-cta-action">Read Terms →</span></a>
+                    </div>
+                </div>
+                <nav class="docs-pagination" aria-label="Learn article navigation">
+                    <a href="/learn/community-wheel" class="docs-pag-link"><span class="docs-pag-direction">← Previous</span><span class="docs-pag-title">Community Wheel</span></a>
+                    <a href="/learn/for-token-communities" class="docs-pag-link docs-pag-next"><span class="docs-pag-direction">Next →</span><span class="docs-pag-title">Token Communities</span></a>
+                </nav>
+            </div>
+        </main>
+    </div>
+    <div id="footer-container"></div>
+</body>
+</html>

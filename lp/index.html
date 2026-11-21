@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+ <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>AquaVaults - Community Liquidity Pools</title> <link rel="icon" type="image/png" href="/assets/logo.png" /> <link rel="apple-touch-icon" href="/assets/logo.png" /> <meta property="og:image" content="/assets/logo.png" /> <meta name="description" content="Find official community-designated Meteora DAMM v2 pools and AquaVaults-supported liquidity routes." /> <link rel="stylesheet" href="/header/header.css" /> <link rel="stylesheet" href="/footer/footer.css" /> <link rel="stylesheet" href="/lp/lp-bundle.css" /> <script src="/header/header-loader.js" defer></script> <script src="/header/header.js" defer></script> <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.8/lib/index.iife.min.js" integrity="sha384-ujeTtvHxhu2g5lnu14Roii2ajvVKJ74KQ6eo6GGfAi0IrKZ1YkF8N68Iw5VmIJO0" crossorigin="anonymous"></script> <script src="/assets/wallet-widget.js"></script> <script src="/footer/footer-loader.js" defer></script> <script src="/lp/lp-bundle.js" defer></script>
+</head>
+<body>
+<div class="page-wrapper"> <div id="header-container" data-header-type="full"></div> <div class="page-content"> <div class="lp-shell"> <main class="lp-inspector" id="lpExploreRoot"> <nav class="lp-subnav" aria-label="LP sections"> <a class="lp-subnav-link active" href="#lpExploreTab" data-lp-tab-btn="explore" aria-current="page">Explore Pools</a> <a class="lp-subnav-link" href="#lpPositionsTab" data-lp-tab-btn="positions">My Positions</a> <span class="lp-subnav-link lp-subnav-link-disabled" aria-disabled="true">Import Existing</span> </nav> <header class="lp-hero"> <h1>AquaVaults LP</h1> <p class="lp-hero-sub">
+Find the specific Meteora DAMM v2 pools that listed communities officially support,
+then inspect AquaVaults technical support before you participate. Your LP position stays
+in your wallet and every token-moving action requires your approval.
+</p> <div class="lp-cluster-indicator" id="lpClusterBadge">
+Cluster: <strong>mainnet</strong> </div> </header> <div class="lp-phase-banner" role="note"> <strong>How AquaVaults LP fee routing works.</strong>
+AquaVaults never takes custody of your LP position. When a supported position has claimable trading fees,
+you choose a community and how much of those claimable fees to keep or share. Saving those support settings
+signs a message only; claiming fees requires a separate wallet-approved transaction. Pools can pay claimable
+fees in both tokens, Token B only, or use Meteora Compounding. AquaVaults shows the actual token ticker and
+amount for each claimable fee before you sign.
+</div> <div class="lp-tab-panel" id="lpExploreTab" data-lp-tab-panel="explore"> <div class="lp-toolbar"> <select class="lp-input lp-community-filter" id="lpCommunityFilter" aria-label="Filter Official Community Pools by community"> <option value="">All communities</option> </select> <input
+class="lp-input"
+id="lpSearchInput"
+type="text"
+placeholder="Filter community pools by token, pool, or label…"
+autocomplete="off"
+/> <button class="lp-btn" id="lpCommunityModeBtn" type="button">Community Pools</button> <button class="lp-btn lp-btn-secondary" id="lpRoutingModeBtn" type="button">Routing Pools</button> <button class="lp-btn lp-btn-secondary" id="lpAllModeBtn" type="button">Search All Meteora</button> </div> <section class="lp-card"> <div class="lp-card-title">Pools</div> <span class="lp-card-subtitle" id="lpPoolSubtitle">
+Showing founder-designated Official Community Pools. Choose a community to find the pool it wants members to support.
+</span> <div class="lp-card-body"> <div class="lp-results-meta"> <span id="lpPoolStatus">Loading community pools…</span> <span id="lpPoolCount"></span> </div> <div class="lp-grid lp-pool-grid" id="lpPoolGrid"> <div class="lp-empty"> <strong>Loading Official Community Pools…</strong>
+Fetching community designations and AquaVaults technical support state.
+</div> </div> </div> </section> </div> <div class="lp-tab-panel" id="lpPositionsTab" data-lp-tab-panel="positions" hidden> <section class="lp-card" id="lpWalletPositionsCard"> <div class="lp-card-title">My Positions</div> <span class="lp-card-subtitle">
+Your detected Meteora DAMM v2 positions. Each card shows the pool pair, position, pool, tokens, fee handling mode, and claimable fees.
+</span> <div class="lp-card-body"> <div class="lp-wallet-row"> <div> <div class="lp-wallet-status" id="lpWalletStatus">Wallet not connected.</div> <div class="lp-claim-note">
+Positions load automatically after wallet connection. Use refresh only when you need to rescan.
+</div> </div> <button class="lp-btn lp-btn-secondary" id="lpRefreshPositionsBtn" type="button" disabled aria-disabled="true">
+Refresh Positions
+</button> </div> <div class="lp-grid lp-position-grid" id="lpPositionGrid"> <div class="lp-empty"> <strong>No wallet connected</strong>
+Connect your wallet to load Meteora DAMM v2 positions automatically.
+</div> </div> </div> </section> <section class="lp-card" id="lpPositionPreviewCard"> <div class="lp-card-title">Routing Preview</div> <span class="lp-card-subtitle">
+Review what this position can claim, see what Meteora handles automatically, choose how much you want to keep or share,
+and select the community you want to support. Nothing moves until you approve a claim transaction in your wallet.
+</span> <div class="lp-card-body" id="lpPositionPreviewBody"> <div class="lp-empty"> <strong>No position selected</strong>
+Connect your wallet, then choose a detected position to preview how its claimed fees would split.
+</div> </div> </section> <section class="lp-card lp-position-history-card" id="lpPositionHistoryCard"> <details class="lp-history-details"> <summary class="lp-history-summary"> <span> <span class="lp-card-title lp-card-title-sub">Recent Claim-Route History</span> <span class="lp-card-subtitle">Human-readable receipts for LP fee claims completed through AquaVaults, with transaction and token details available for verification.</span> </span> <span class="lp-history-toggle" aria-hidden="true">Show history</span> </summary> <div class="lp-history-content" id="lpClaimHistoryBody"> <div class="lp-empty"> <strong>No wallet connected</strong>
+Connect your wallet to load recent LP claim-route receipts.
+</div> </div> </details> </section> </div> </main> </div>
+</div> <div id="footer-container"></div> </div>
+</body>
+</html>

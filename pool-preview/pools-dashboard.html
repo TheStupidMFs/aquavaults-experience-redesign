@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AquaVaults — Dashboard Preview</title>
+  <link rel="icon" type="image/png" href="/assets/logo.png" />
+  <link rel="apple-touch-icon" href="/assets/logo.png" />
+  <meta property="og:image" content="/assets/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --bg-0: #05080f; --bg-card: #0f1830; --bg-card-hover: #131e3a; --bg-elevated: #1a2845; --bg-input: rgba(5,8,15,0.8);
+  --border: rgba(59,130,246,0.12); --border-bright: rgba(59,130,246,0.3);
+  --blue-300: #93C5FD; --blue-400: #60A5FA; --blue-500: #3B82F6; --blue-600: #2563EB;
+  --aqua-400: #22D3EE; --aqua-500: #06B6D4;
+  --purple-400: #C084FC; --green-400: #4ADE80; --green-500: #22C55E;
+  --orange-400: #FB923C; --red-400: #F87171; --warn: #F59E0B;
+  --text-primary: #EFF6FF; --text-secondary: #93C5FD; --text-muted: #4B6FA8; --text-dim: #2A4070;
+  --font-display: 'Syne', sans-serif; --font-body: sans-serif; --font-mono: 'DM Mono', monospace;
+  --gb: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #2563EB 100%);
+  --gaq: linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%);
+  --r: 12px; --rs: 8px;
+}
+
+body { font-family: var(--font-body); background: var(--bg-0); color: var(--text-primary); line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased; display: flex; flex-direction: column; overflow-x: hidden; }
+body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); opacity: 0.022; pointer-events: none; z-index: 0; }
+.grid-bg { position: fixed; inset: 0; background-image: linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
+.glow-orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(120px); }
+.glow-1 { width: 600px; height: 600px; top: -200px; left: -100px; background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%); }
+.glow-2 { width: 500px; height: 500px; top: 40%; right: -150px; background: radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 70%); }
+
+.page { position: relative; z-index: 1; flex: 1; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+/* ── NAV ── */
+nav { position: sticky; top: 0; z-index: 100; background: rgba(5,8,15,0.85); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-mark { width: 30px; height: 30px; background: linear-gradient(135deg, #3B82F6, #06B6D4); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 0.65rem; color: #fff; }
+.nav-logo-name { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text-primary); letter-spacing: -0.01em; }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { font-size: 0.78rem; font-weight: 500; color: var(--text-muted); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover { color: var(--blue-400); }
+.nav-badge { font-family: var(--font-mono); font-size: 0.68rem; color: var(--aqua-400); border: 1px solid rgba(34,211,238,0.3); background: rgba(34,211,238,0.06); padding: 3px 10px; border-radius: 20px; letter-spacing: 0.04em; }
+
+/* ── PREVIEW DROPDOWN ── */
+.nav-dropdown { position: relative; }
+.nav-dropdown-toggle { display: flex !important; align-items: center; gap: 5px; cursor: pointer; }
+.nav-dropdown-toggle svg { transition: transform 0.2s; flex-shrink: 0; }
+.nav-dropdown:hover .nav-dropdown-toggle svg { transform: rotate(180deg); }
+.nav-dropdown-menu {
+  display: none;
+  position: absolute; top: 100%; right: 0;
+  padding-top: 10px;
+  background: rgba(5,8,15,0.97);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-bright);
+  border-radius: 10px;
+  padding: 6px;
+  min-width: 190px;
+  z-index: 200;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+.nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; gap: 2px; }
+.nav-dropdown-menu ul { display: flex; flex-direction: column; gap: 2px; }
+.nav-dropdown-menu a {
+  display: block;
+  padding: 9px 14px;
+  border-radius: 7px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.nav-dropdown-menu a:hover { background: rgba(59,130,246,0.1); color: var(--blue-400); }
+.nav-dropdown-menu a.active { color: var(--aqua-400); background: rgba(34,211,238,0.06); }
+.nav-dropdown-divider { height: 1px; background: var(--border); margin: 4px 6px; }
+
+/* ── MOBILE NAV ── */
+.nav-back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 600; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; white-space: nowrap; padding: 5px 12px; border: 1px solid var(--border); border-radius: 20px; background: rgba(59,130,246,0.06); transition: all 0.2s; }
+.nav-back:hover { color: var(--blue-400); border-color: var(--border-bright); background: rgba(59,130,246,0.12); }
+.nav-back svg { flex-shrink: 0; }
+.nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; padding: 7px 8px; border: 1px solid var(--border); border-radius: 8px; background: transparent; }
+.nav-hamburger span { display: block; width: 20px; height: 2px; background: var(--text-muted); border-radius: 2px; transition: all 0.3s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 150; backdrop-filter: blur(4px); }
+.mobile-overlay.open { display: block; }
+.mobile-drawer { position: fixed; top: 0; right: -320px; width: min(300px, 90vw); height: 100%; background: #080e1c; border-left: 1px solid var(--border-bright); z-index: 160; transition: right 0.3s ease; overflow-y: auto; }
+.mobile-drawer.open { right: 0; }
+.mobile-drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+.mobile-drawer-title { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; color: var(--text-primary); }
+.mobile-close { background: transparent; border: 1px solid var(--border); border-radius: 6px; color: var(--text-muted); cursor: pointer; padding: 5px 9px; font-size: 0.85rem; line-height: 1; transition: all 0.15s; }
+.mobile-close:hover { color: var(--text-primary); border-color: var(--border-bright); }
+.mobile-nav-section { padding: 20px 20px 0; }
+.mobile-nav-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; padding: 0 2px; }
+.mobile-nav-link { display: block; padding: 10px 12px; border-radius: 8px; font-size: 0.88rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: all 0.15s; }
+.mobile-nav-link:hover { background: rgba(59,130,246,0.1); color: var(--blue-400); }
+.mobile-nav-link.active { background: rgba(34,211,238,0.06); color: var(--aqua-400); border: 1px solid rgba(34,211,238,0.15); }
+.mobile-nav-divider { height: 1px; background: var(--border); margin: 16px 20px; }
+
+.preview-banner { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 10px; background: rgba(34,211,238,0.04); border-bottom: 1px solid rgba(34,211,238,0.15); padding: 10px 24px; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.preview-banner::before { content: ''; width: 6px; height: 6px; background: var(--aqua-400); border-radius: 50%; animation: pulse 2s ease-in-out infinite; flex-shrink: 0; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)} }
+.preview-banner strong { color: var(--aqua-400); font-weight: 500; }
+
+/* ── BUTTONS ── */
+.btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 600; font-size: 0.82rem; letter-spacing: 0.02em; padding: 10px 20px; border-radius: var(--rs); border: none; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+.btn-primary { background: var(--gb); color: #fff; box-shadow: 0 0 20px rgba(37,99,235,0.2); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 30px rgba(37,99,235,0.4); }
+.btn-outline { background: rgba(59,130,246,0.06); color: var(--blue-300); border: 1px solid rgba(59,130,246,0.2); }
+.btn-outline:hover { background: rgba(59,130,246,0.12); border-color: rgba(59,130,246,0.4); }
+.btn-ghost { background: transparent; color: var(--text-muted); padding: 8px 12px; }
+.btn-ghost:hover { color: var(--text-primary); background: rgba(255,255,255,0.04); }
+
+/* ── BADGES ── */
+.badge { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em; padding: 3px 9px; border-radius: 6px; text-transform: uppercase; white-space: nowrap; }
+.badge-active  { color: var(--green-400);    background: rgba(74,222,128,0.08);   border: 1px solid rgba(74,222,128,0.2); }
+.badge-locked  { color: var(--blue-400);     background: rgba(59,130,246,0.08);   border: 1px solid rgba(59,130,246,0.2); }
+.badge-won     { color: var(--green-400);    background: rgba(74,222,128,0.1);    border: 1px solid rgba(74,222,128,0.25); }
+.badge-expired { color: var(--text-muted);   background: rgba(75,111,168,0.08);   border: 1px solid rgba(75,111,168,0.2); }
+.badge-refunded{ color: var(--warn);         background: rgba(245,158,11,0.08);   border: 1px solid rgba(245,158,11,0.2); }
+.badge-claimed { color: var(--purple-400);   background: rgba(192,132,252,0.08);  border: 1px solid rgba(192,132,252,0.2); }
+.badge-token   { color: var(--text-secondary);background: rgba(59,130,246,0.06);  border: 1px solid rgba(59,130,246,0.12); text-transform: none; }
+.badge-priority{ color: var(--purple-400);   background: rgba(192,132,252,0.08);  border: 1px solid rgba(192,132,252,0.2); }
+@keyframes pd { 0%,100%{opacity:1}50%{opacity:0.4} }
+.badge-active::before { content:''; width:5px; height:5px; background:var(--green-400); border-radius:50%; animation: pd 2s ease-in-out infinite; }
+
+/* ── WELCOME SECTION ── */
+.welcome-section { padding: 36px 0 28px; }
+.welcome-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+.welcome-title { font-family: var(--font-display); font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; }
+.welcome-wallet { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+/* Wallet address — mono */
+.wallet-addr { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); background: var(--bg-card); padding: 5px 12px; border-radius: var(--rs); border: 1px solid var(--border); }
+.wallet-dot { width: 8px; height: 8px; background: var(--green-400); border-radius: 50%; animation: pd 2s ease-in-out infinite; flex-shrink: 0; }
+.wallet-label { font-size: 0.8rem; color: var(--text-muted); }
+
+/* ── STATS GRID ── */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 28px; }
+.stat-card { background: var(--bg-card); padding: 20px; position: relative; transition: background 0.2s; }
+.stat-card:hover { background: var(--bg-card-hover); }
+.stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.stat-card:nth-child(1)::before { background: var(--gb); }
+.stat-card:nth-child(2)::before { background: linear-gradient(90deg, var(--green-400), var(--green-500)); }
+.stat-card:nth-child(3)::before { background: linear-gradient(90deg, var(--purple-400), #9333EA); }
+.stat-card:nth-child(4)::before { background: linear-gradient(90deg, var(--warn), #EA580C); }
+.stat-top { display: flex; align-items: center; justify-content: space-between; }
+/* Stat label — body text */
+.stat-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; }
+/* Stat value — display font */
+.stat-value { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; }
+.stat-icon { width: 44px; height: 44px; border-radius: var(--rs); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.stat-icon svg { width: 22px; height: 22px; }
+.stat-icon.blue   { background: rgba(59,130,246,0.1);   color: var(--blue-400); }
+.stat-icon.green  { background: rgba(74,222,128,0.1);   color: var(--green-400); }
+.stat-icon.purple { background: rgba(192,132,252,0.1);  color: var(--purple-400); }
+.stat-icon.orange { background: rgba(245,158,11,0.1);   color: var(--warn); }
+
+/* ── TABS ── */
+.tabs-bar { display: flex; gap: 4px; background: var(--bg-card); border-radius: var(--rs); padding: 4px; margin-bottom: 20px; border: 1px solid var(--border); width: fit-content; }
+.tab-btn { font-size: 0.85rem; font-weight: 500; padding: 9px 20px; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; background: transparent; color: var(--text-muted); }
+.tab-btn:hover { color: var(--text-secondary); }
+.tab-btn.active { background: var(--bg-elevated); color: var(--text-primary); font-weight: 600; }
+.tab-count { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); margin-left: 4px; }
+
+/* ── CONTRIBUTION CARDS ── */
+.cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.contrib-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; transition: all 0.25s; position: relative; }
+.contrib-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(59,130,246,0.5), transparent); opacity: 0; transition: opacity 0.2s; }
+.contrib-card:hover { background: var(--bg-card-hover); border-color: var(--border-bright); transform: translateY(-2px); }
+.contrib-card:hover::before { opacity: 1; }
+
+.contrib-card-strip { height: 2px; width: 100%; }
+.contrib-card-strip.active { background: var(--gb); }
+.contrib-card-strip.won    { background: linear-gradient(90deg, var(--green-400), var(--green-500)); }
+.contrib-card-strip.expired{ background: rgba(75,111,168,0.3); }
+
+.contrib-card-header { padding: 18px 18px 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+/* Pool ID — display font */
+.contrib-card-id { font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; text-decoration: none; color: var(--text-primary); transition: color 0.2s; letter-spacing: -0.01em; }
+.contrib-card-id:hover { color: var(--blue-400); }
+/* Token row — body text */
+.contrib-card-token { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 0.85rem; font-weight: 600; }
+
+.contrib-card-body { padding: 14px 18px 18px; }
+
+/* Section title inside card — body text, small caps feel */
+.contrib-section { margin-bottom: 14px; }
+.contrib-section-title { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); margin-bottom: 8px; }
+
+/* Row label/value — body text */
+.contrib-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; padding: 3px 0; }
+.contrib-row-label { color: var(--text-muted); }
+.contrib-row-value { font-weight: 600; color: var(--text-primary); }
+
+.progress-track { width: 100%; height: 4px; background: rgba(59,130,246,0.1); border-radius: 999px; overflow: hidden; margin-top: 8px; }
+.progress-fill  { height: 100%; border-radius: 999px; background: var(--gb); transition: width 1s ease; }
+.progress-text  { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+
+.status-box { padding: 12px; background: rgba(59,130,246,0.04); border: 1px solid var(--border); border-radius: var(--rs); margin-bottom: 12px; }
+.status-box.success { background: rgba(74,222,128,0.05); border-color: rgba(74,222,128,0.18); }
+.status-box.warn    { background: rgba(245,158,11,0.04); border-color: rgba(245,158,11,0.15); }
+
+.contrib-locked { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--text-dim); }
+.contrib-locked svg { width: 12px; height: 12px; }
+
+/* Won card specific */
+.reward-box { padding: 12px; background: rgba(74,222,128,0.06); border: 1px solid rgba(74,222,128,0.18); border-radius: var(--rs); margin-bottom: 12px; }
+.reward-title { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--green-400); margin-bottom: 6px; }
+/* Reward amount — display font for impact */
+.reward-amount { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--green-400); letter-spacing: -0.02em; }
+
+/* ── TX TABLE ── */
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+.card-head { padding: 18px 22px 0; }
+.card-title { font-family: var(--font-display); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary); }
+.card-body { padding: 16px 22px 22px; }
+
+.tx-table { width: 100%; border-collapse: collapse; }
+.tx-table th { font-size: 0.72rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; padding: 10px 0; text-align: left; border-bottom: 1px solid var(--border); }
+.tx-table th:last-child { text-align: right; }
+/* Table body — body text */
+.tx-table td { font-size: 0.82rem; color: var(--text-muted); padding: 12px 0; border-bottom: 1px solid rgba(59,130,246,0.05); }
+.tx-table td:last-child { text-align: right; }
+/* Tx hash — mono */
+.tx-hash { font-family: var(--font-mono); font-size: 0.7rem; color: var(--blue-400); text-decoration: none; }
+.tx-hash:hover { text-decoration: underline; }
+
+/* ── EMPTY STATE ── */
+.empty-state { text-align: center; padding: 60px 24px; }
+.empty-icon { margin: 0 auto 16px; width: 48px; height: 48px; color: var(--text-dim); }
+.empty-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.empty-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; }
+
+/* ── FOOTER ── */
+footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 32px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; max-width: 1200px; margin: 0 auto; width: 100%; }
+.footer-brand { display: flex; align-items: center; gap: 10px; }
+.footer-logo-mark { width: 24px; height: 24px; background: linear-gradient(135deg, #3B82F6, #06B6D4); border-radius: 5px; opacity: 0.7; }
+.footer-brand span { font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; color: var(--text-muted); }
+.footer-links { display: flex; gap: 20px; align-items: center; }
+.footer-link { font-size: 0.8rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+.footer-link:hover { color: var(--blue-400); }
+.footer-meta { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim); }
+
+@keyframes fadeInUp { from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)} }
+.animate-in { animation: fadeInUp 0.45s ease both; }
+.d1{animation-delay:.04s}.d2{animation-delay:.08s}.d3{animation-delay:.12s}.d4{animation-delay:.16s}.d5{animation-delay:.20s}.d6{animation-delay:.24s}
+
+@media (max-width: 1024px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .cards-grid { grid-template-columns: 1fr; } .stats-grid { grid-template-columns: 1fr 1fr; } .welcome-top { flex-direction: column; } .nav-links { display: none; } .nav-hamburger { display: flex; } .tabs-bar { width: 100%; } .tab-btn { flex: 1; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="glow-orb glow-1"></div>
+<div class="glow-orb glow-2"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-back">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      AquaVaults.com
+    </a>
+    <a href="/preview" class="nav-logo">
+      <img src="../assets/logo-transparent.png" alt="AquaVaults" style="width:30px;height:30px;object-fit:contain;border-radius:6px;" />
+      <span class="nav-logo-name">AquaVaults</span>
+    </a>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="#" class="nav-dropdown-toggle">Preview Pages <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown-menu">
+          <li><a href="/preview">Landing / Docs</a></li>
+          <div class="nav-dropdown-divider"></div>
+          <li><a href="/preview/browse">Browse Pools</a></li>
+          <li><a href="/preview/details">Pool Detail</a></li>
+          <li><a href="/preview/create">Create Pool</a></li>
+          <li><a href="/preview/dashboard" class="active">Dashboard</a></li>
+        </ul>
+      </li>
+    </ul>
+    <button class="nav-hamburger" id="mobileHamburger" onclick="openMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="nav-badge">Preview v1.0</span>
+  </div>
+</nav>
+
+<div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileNav()"></div>
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="mobile-drawer-head">
+    <a href="/" class="mobile-nav-link" style="padding:6px 8px;display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-dim);">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      AquaVaults.com
+    </a>
+    <button class="mobile-close" onclick="closeMobileNav()">✕</button>
+  </div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-label">Docs</div>
+    <a href="/preview#overview" class="mobile-nav-link">Overview</a>
+    <a href="/preview#how-it-works" class="mobile-nav-link">How It Works</a>
+    <a href="/preview#scenarios" class="mobile-nav-link">Scenarios</a>
+    <a href="/preview#architecture" class="mobile-nav-link">Architecture</a>
+  </div>
+  <div class="mobile-nav-divider"></div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-label">Preview Pages</div>
+    <a href="/preview" class="mobile-nav-link">Landing / Docs</a>
+    <a href="/preview/browse" class="mobile-nav-link">Browse Pools</a>
+    <a href="/preview/details" class="mobile-nav-link">Pool Detail</a>
+    <a href="/preview/create" class="mobile-nav-link">Create Pool</a>
+    <a href="/preview/dashboard" class="mobile-nav-link active">Dashboard</a>
+  </div>
+</div>
+
+<div class="preview-banner">
+  <strong>Coming Soon</strong> &nbsp;—&nbsp; The AquaVaults Pooling System is in preview. No transactions can be made.
+</div>
+
+<div class="page">
+
+  <!-- WELCOME -->
+  <section class="welcome-section">
+    <div class="container">
+      <div class="welcome-top animate-in">
+        <div>
+          <h1 class="welcome-title">Dashboard</h1>
+          <div class="welcome-wallet">
+            <div class="wallet-dot"></div>
+            <span class="wallet-addr">0x7a3f...b2c1</span>
+            <span class="wallet-label">Connected via MetaMask</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px">
+          <a href="/preview/create" class="btn btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Create Pool
+          </a>
+          <a href="/preview/browse" class="btn btn-outline">Browse Pools</a>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card animate-in d1">
+          <div class="stat-top">
+            <div><div class="stat-label">Total Contributed</div><div class="stat-value">285B <span style="font-size:0.55em;color:var(--text-muted)">PNDC</span></div></div>
+            <div class="stat-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><circle cx="18" cy="16" r="2"/></svg></div>
+          </div>
+        </div>
+        <div class="stat-card animate-in d2">
+          <div class="stat-top">
+            <div><div class="stat-label">Active Pools</div><div class="stat-value">3</div></div>
+            <div class="stat-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          </div>
+        </div>
+        <div class="stat-card animate-in d3">
+          <div class="stat-top">
+            <div><div class="stat-label">Won Auctions</div><div class="stat-value">2</div></div>
+            <div class="stat-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          </div>
+        </div>
+        <div class="stat-card animate-in d4">
+          <div class="stat-top">
+            <div><div class="stat-label">Expired Pools</div><div class="stat-value">1</div></div>
+            <div class="stat-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TABS & CARDS -->
+  <section>
+    <div class="container">
+      <div class="tabs-bar animate-in d5">
+        <button class="tab-btn active" onclick="switchTab('active', this)">Active<span class="tab-count">(3)</span></button>
+        <button class="tab-btn" onclick="switchTab('won', this)">Won<span class="tab-count">(2)</span></button>
+        <button class="tab-btn" onclick="switchTab('expired', this)">Expired<span class="tab-count">(1)</span></button>
+      </div>
+      <div id="tabContent"></div>
+    </div>
+  </section>
+
+  <!-- TX HISTORY -->
+  <section style="padding: 40px 0 0">
+    <div class="container">
+      <div class="card animate-in d6">
+        <div class="card-head"><div class="card-title">Recent Transactions</div></div>
+        <div class="card-body">
+          <table class="tx-table">
+            <thead><tr><th>Type</th><th>Pool</th><th>Date</th><th>Amount</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Contribution</td><td><a href="#" class="tx-hash">POOL-12345</a></td><td>Jan 22, 2025</td><td style="font-weight:600">50B PNDC</td><td><span class="badge badge-active">Confirmed</span></td></tr>
+              <tr><td>Reward Claim</td><td><a href="#" class="tx-hash">POOL-34567</a></td><td>Jan 18, 2025</td><td style="font-weight:600;color:var(--green-400)">+2.5 WETH</td><td><span class="badge badge-claimed">Claimed</span></td></tr>
+              <tr><td>Contribution</td><td><a href="#" class="tx-hash">POOL-23456</a></td><td>Jan 15, 2025</td><td style="font-weight:600">100B PNDC</td><td><span class="badge badge-active">Confirmed</span></td></tr>
+              <tr><td>Reward Claim</td><td><a href="#" class="tx-hash">POOL-67890</a></td><td>Jan 10, 2025</td><td style="font-weight:600;color:var(--green-400)">+450 MATIC</td><td><span class="badge badge-claimed">Claimed</span></td></tr>
+              <tr><td>Refund</td><td><a href="#" class="tx-hash">POOL-89012</a></td><td>Jan 5, 2025</td><td style="font-weight:600;color:var(--warn)">35B PNDC</td><td><span class="badge badge-refunded">Refunded</span></td></tr>
+              <tr><td>Contribution</td><td><a href="#" class="tx-hash">POOL-56789</a></td><td>Dec 28, 2024</td><td style="font-weight:600">60B PNDC</td><td><span class="badge badge-active">Confirmed</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="padding-bottom:80px"></div>
+</div>
+
+<footer>
+  <div class="footer-brand"><div class="footer-logo-mark"></div><span>AquaVaults</span></div>
+  <div class="footer-links">
+    <a href="#" class="footer-link">Terms of Service</a>
+    <a href="#" class="footer-link">Get Phantom Wallet</a>
+    <a href="#" class="footer-link">Powered by Jupiter</a>
+  </div>
+  <div class="footer-meta">Preview v1.0 · Not yet live</div>
+  <div class="footer-meta" style="margin-top:4px">© 2026 AquaVaults. All rights reserved.</div>
+</footer>
+
+<script>
+var ACTIVE = [
+  { id:'POOL-12345', token:'WETH',   standard:'ERC-20',  status:'Active',  contribution:50,  currentAmount:420, goalAmount:500, pct:84,   priority:3, remaining:80,  timeLeft:'8d',  userPct:'11.9' },
+  { id:'POOL-56789', token:'SNX',    standard:'ERC-20',  status:'Active',  contribution:60,  currentAmount:620, goalAmount:750, pct:82.7, priority:5, remaining:130, timeLeft:'14d', userPct:'9.7' },
+  { id:'POOL-90123', token:'GRT',    standard:'ERC-20',  status:'Locked',  contribution:40,  currentAmount:600, goalAmount:600, pct:100,  priority:9, remaining:0,   timeLeft:'6d',  userPct:'6.7' }
+];
+var WON = [
+  { id:'POOL-34567', token:'wPOND',  standard:'SPL', contribution:100, totalPool:1000, userPct:'10',  reward:'2.5 WETH',   bidPrice:1000, distributed:'2 days ago' },
+  { id:'POOL-67890', token:'MATIC', standard:'ERC-20', contribution:35,  totalPool:300,  userPct:'11.7',reward:'450 MATIC', bidPrice:300,  distributed:'1 week ago' }
+];
+var EXPIRED = [
+  { id:'POOL-89012', token:'PORK', standard:'ERC-20', contribution:35, totalPool:180, refund:35, expiredAt:'Jan 3, 2025' }
+];
+
+function fmt(n) { return n >= 1000 ? (n/1000).toFixed(1)+'T' : n+'B'; }
+
+function renderActiveCards() {
+  if (!ACTIVE.length) return '<div class="empty-state"><div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg></div><div class="empty-title">No Active Pools</div><div class="empty-desc">You haven\'t contributed to any active pools yet.</div><a href="/preview/browse" class="btn btn-primary">Browse Pools</a></div>';
+  return '<div class="cards-grid">' + ACTIVE.map(function(c, i) {
+    var isLocked = c.status === 'Locked';
+    return '<div class="contrib-card animate-in d' + (i+1) + '">'
+      + '<div class="contrib-card-strip active"></div>'
+      + '<div class="contrib-card-header"><div>'
+        + '<a href="/preview/details" class="contrib-card-id">' + c.id + '</a>'
+        + '<div class="contrib-card-token"><span>' + c.token + '</span><span class="badge badge-token">Mining Target</span></div>'
+      + '</div><span class="badge ' + (isLocked ? 'badge-locked' : 'badge-active') + '">' + c.status + '</span></div>'
+      + '<div class="contrib-card-body">'
+        + '<div class="contrib-section"><div class="contrib-section-title">Your Contribution</div>'
+          + '<div class="contrib-row"><span class="contrib-row-label">Amount</span><span class="contrib-row-value">' + c.contribution + 'B PNDC (' + c.userPct + '%)</span></div>'
+          + '<div class="contrib-row"><span class="contrib-row-label">Total Pool</span><span class="contrib-row-value">' + fmt(c.currentAmount) + (!isLocked ? ' / ' + fmt(c.goalAmount) : '') + ' PNDC</span></div>'
+          + (!isLocked ? '<div class="progress-track"><div class="progress-fill" style="width:' + c.pct + '%"></div></div><div class="progress-text">' + c.pct + '% complete · Needs ' + c.remaining + 'B more</div>' : '')
+        + '</div>'
+        + '<div class="status-box' + (isLocked ? ' success' : '') + '"><div class="contrib-section-title">Pool Status</div>'
+          + (isLocked
+            ? '<div class="contrib-row"><span style="display:flex;align-items:center;gap:6px;color:var(--blue-400);font-weight:600"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>In Auction Queue</span></div><div class="contrib-row"><span class="contrib-row-label">Priority</span><span class="badge badge-priority">#' + c.priority + '</span></div><div class="contrib-row"><span class="contrib-row-label">Note</span><span class="contrib-row-value" style="font-size:0.75rem;color:var(--text-muted)">Rebids on each auction until ' + c.timeLeft + ' timeframe</span></div>'
+            : '<div class="contrib-row"><span class="contrib-row-label">Status</span><span class="contrib-row-value">Awaiting goal</span></div><div class="contrib-row"><span class="contrib-row-label">Priority</span><span class="badge badge-priority">#' + c.priority + '</span></div>')
+        + '</div>'
+        + '<div class="contrib-row"><span class="contrib-row-label">Time</span><span class="contrib-row-value">' + c.timeLeft + ' remaining</span></div>'
+        + '<div class="contrib-locked" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Locked Contributions</div>'
+      + '</div></div>';
+  }).join('') + '</div>';
+}
+
+function renderWonCards() {
+  return '<div class="cards-grid">' + WON.map(function(c, i) {
+    return '<div class="contrib-card animate-in d' + (i+1) + '" style="border-color:rgba(74,222,128,0.18)">'
+      + '<div class="contrib-card-strip won"></div>'
+      + '<div class="contrib-card-header"><div>'
+        + '<a href="/preview/details" class="contrib-card-id">' + c.id + '</a>'
+        + '<div class="contrib-card-token"><span>' + c.token + '</span><span class="badge badge-token">Mining Target</span></div>'
+      + '</div><span class="badge badge-won"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>Won</span></div>'
+      + '<div class="contrib-card-body">'
+        + '<div class="contrib-section"><div class="contrib-section-title">Your Contribution</div>'
+          + '<div class="contrib-row"><span class="contrib-row-label">Amount</span><span class="contrib-row-value">' + c.contribution + 'B PNDC (' + c.userPct + '%)</span></div>'
+          + '<div class="contrib-row"><span class="contrib-row-label">Total Pool</span><span class="contrib-row-value">' + fmt(c.totalPool) + ' PNDC</span></div>'
+        + '</div>'
+        + '<div class="reward-box"><div class="reward-title">Your Rewards</div>'
+          + '<div class="contrib-row"><span class="contrib-row-label">Amount</span><span class="reward-amount">' + c.reward + '</span></div>'
+          + '<div class="contrib-row"><span class="contrib-row-label">Status</span><span style="display:flex;align-items:center;gap:4px;color:var(--green-400);font-size:0.78rem;font-weight:600"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>Distributed</span></div>'
+        + '</div>'
+        + '<div class="contrib-section"><div class="contrib-row"><span class="contrib-row-label">Bid Price</span><span class="contrib-row-value">EXACTLY ' + fmt(c.bidPrice) + ' PNDC</span></div><div class="contrib-row"><span class="contrib-row-label">Priority</span><span class="badge badge-priority">#1</span></div></div>'
+        + '<div style="display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:var(--text-muted);margin-top:8px"><span>Distributed ' + c.distributed + '</span><a href="#" class="tx-hash" style="display:flex;align-items:center;gap:4px">View Tx <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>'
+      + '</div></div>';
+  }).join('') + '</div>';
+}
+
+function renderExpiredCards() {
+  return '<div class="cards-grid">' + EXPIRED.map(function(c, i) {
+    return '<div class="contrib-card animate-in d' + (i+1) + '" style="opacity:0.88">'
+      + '<div class="contrib-card-strip expired"></div>'
+      + '<div class="contrib-card-header"><div>'
+        + '<a href="/preview/details" class="contrib-card-id">' + c.id + '</a>'
+        + '<div class="contrib-card-token"><span>' + c.token + '</span><span class="badge badge-token">' + c.standard + '</span></div>'
+      + '</div><span class="badge badge-expired">Expired</span></div>'
+      + '<div class="contrib-card-body">'
+        + '<div class="contrib-section"><div class="contrib-section-title">Your Contribution</div>'
+          + '<div class="contrib-row"><span class="contrib-row-label">Original Amount</span><span class="contrib-row-value">' + c.contribution + 'B PNDC</span></div>'
+          + '<div class="contrib-row"><span class="contrib-row-label">Pool Total</span><span class="contrib-row-value">' + fmt(c.totalPool) + ' PNDC</span></div>'
+          + '<div class="contrib-row"><span class="contrib-row-label">Expired</span><span class="contrib-row-value">' + c.expiredAt + '</span></div>'
+        + '</div>'
+        + '<div class="status-box warn"><div class="contrib-section-title" style="color:var(--warn)">Refund</div>'
+          + '<div class="contrib-row"><span class="contrib-row-label">Amount</span><span class="contrib-row-value" style="color:var(--warn)">' + c.refund + 'B PNDC</span></div>'
+          + '<div class="contrib-row"><span class="contrib-row-label">Status</span><span class="badge badge-refunded">Refunded</span></div>'
+        + '</div>'
+        + '<div style="text-align:right;margin-top:8px"><a href="#" class="tx-hash" style="display:inline-flex;align-items:center;gap:4px">View Tx <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>'
+      + '</div></div>';
+  }).join('') + '</div>';
+}
+
+var currentTab = 'active';
+function switchTab(tab, btn) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderTab();
+}
+function renderTab() {
+  var el = document.getElementById('tabContent');
+  if (currentTab === 'active') el.innerHTML = renderActiveCards();
+  else if (currentTab === 'won') el.innerHTML = renderWonCards();
+  else el.innerHTML = renderExpiredCards();
+}
+renderTab();
+function openMobileNav() {
+  document.getElementById('mobileDrawer').classList.add('open');
+  document.getElementById('mobileOverlay').classList.add('open');
+  document.getElementById('mobileHamburger').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileNav() {
+  document.getElementById('mobileDrawer').classList.remove('open');
+  document.getElementById('mobileOverlay').classList.remove('open');
+  document.getElementById('mobileHamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+</script>
+</body>
+</html>

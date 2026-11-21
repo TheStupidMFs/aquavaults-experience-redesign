@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+ <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>User Rewards | AquaVaults</title> <meta name="description" content="Track verified AquaVaults participation, monthly points, Loyalty Community progress, quests, and provisional leaderboard standings."> <meta name="robots" content="noindex"> <link rel="icon" type="image/png" href="/assets/logo-transparent.png"> <link rel="apple-touch-icon" href="/assets/logo-transparent.png"> <link rel="stylesheet" href="/header/header.css"> <link rel="stylesheet" href="/footer/footer.css"> <link rel="stylesheet" href="/rewards/rewards.css"> <link rel="stylesheet" href="/account/auth-dialog.css"> <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.8/lib/index.iife.min.js" integrity="sha384-ujeTtvHxhu2g5lnu14Roii2ajvVKJ74KQ6eo6GGfAi0IrKZ1YkF8N68Iw5VmIJO0" crossorigin="anonymous"></script> <script src="/assets/wallet-widget.js"></script> <script src="/header/header-loader.js" defer></script> <script src="/header/header.js" defer></script> <script src="/footer/footer-loader.js" defer></script> <script src="/account/auth-dialog.js" defer></script> <script src="/rewards/rewards.js" defer></script>
+</head>
+<body> <div id="header-container" data-header-type="full"></div> <main class="rewards-page"> <section class="rewards-hero"> <div class="rewards-kicker">AquaVaults User Rewards</div> <h1>Get rewarded for showing up.</h1> <p>
+Earn points through verified AquaVaults participation, support listed communities,
+and compete for a share of each published reward pool.
+</p> <div class="rewards-status-line" id="rewardsGlobalStatus" role="status" aria-live="polite">
+Loading Rewards status…
+</div> </section> <section class="rewards-public-grid" aria-label="Current cycle overview"> <article class="rewards-card rewards-cycle-card"> <div class="rewards-card-heading"> <div> <span class="rewards-eyebrow">Current cycle</span> <h2 id="cycleTitle">No published cycle</h2> </div> <span class="rewards-pill" id="cyclePhase">Unavailable</span> </div> <div class="rewards-metric-grid" id="cycleMetrics"></div> <p class="rewards-note" id="cycleNote">
+A cycle must be published before points and roster progress can be displayed.
+</p> </article> <article class="rewards-card rewards-auth-card"> <span class="rewards-eyebrow">Your rewards wallet</span> <h2 id="authTitle">Connect a Solana wallet</h2> <p id="authCopy">
+Connect the wallet you intend to use for permanent Rewards enrollment.
+</p> <div class="rewards-wallet-row"> <span id="connectedWallet">Not connected</span> <button class="rewards-button rewards-button-secondary" id="connectWalletButton" type="button">
+Connect Wallet
+</button> </div> <div class="rewards-actions" id="authActions"> <button class="rewards-button" id="signInButton" type="button" disabled>
+Sign In to Rewards
+</button> <button class="rewards-button rewards-button-secondary" id="legacyRewardsSignInButton" type="button" hidden disabled>
+Legacy Rewards Sign In
+</button> <a id="rewardsAccountLink" class="rewards-button rewards-button-secondary" href="/account/?return=%2Frewards%2F" hidden>
+Unify with AquaVaults Account
+</a> <button class="rewards-button rewards-button-secondary" id="showEnrollmentButton" type="button" disabled>
+Review Enrollment
+</button> </div> <div class="rewards-inline-message" id="authMessage" role="status" aria-live="polite"></div> </article> </section> <section class="rewards-card rewards-enrollment" id="enrollmentPanel" hidden> <div class="rewards-card-heading"> <div> <span class="rewards-eyebrow">Permanent wallet enrollment</span> <h2 id="enrollmentHeading">Enroll This Solana Wallet in AquaVaults Rewards</h2> </div> <button class="rewards-icon-button" id="closeEnrollmentButton" type="button" aria-label="Close enrollment review">×</button> </div> <div class="rewards-warning" id="enrollmentGate"></div> <ol class="rewards-acknowledgment" id="enrollmentAcknowledgment"></ol> <p class="rewards-note rewards-enrollment-rules-link">
+Review the complete
+<a class="rewards-link" id="enrollmentRulesLink" href="/rewards/rules" target="_blank" rel="noopener">
+AquaVaults Rewards Program Rules (Version 1.1; Consent Version 1.1)
+</a>
+before enrolling.
+</p> <label class="rewards-check"> <input type="checkbox" id="acceptEnrollment"> <span>
+I have read and accept the current enrollment acknowledgment and
+<a class="rewards-link" id="acceptRulesLink" href="/rewards/rules" target="_blank" rel="noopener">program rules (Version 1.1)</a>.
+</span> </label> <div class="rewards-actions"> <button class="rewards-button" id="enrollButton" type="button" disabled>
+Sign and Enroll This Wallet
+</button> </div> </section> <section id="privateDashboard" hidden> <div class="rewards-dashboard-header"> <div> <span class="rewards-eyebrow">Participant dashboard</span> <h2 id="participantWallet">—</h2> </div> <div class="rewards-actions"> <button class="rewards-button rewards-button-secondary" id="refreshDashboardButton" type="button">Refresh</button> <button class="rewards-button rewards-button-danger" id="closeSessionButton" type="button">Sign Out of Rewards</button> </div> </div> <section class="rewards-card" id="rewardsPrivateStatePanel" hidden> <span class="rewards-eyebrow">Your Rewards account</span> <h3 id="rewardsPrivateStateTitle">Rewards status</h3> <p class="rewards-note" id="rewardsPrivateStateCopy"></p> </section> <div id="activeCycleDashboard"> <section class="rewards-card rewards-score-card"> <div class="rewards-score-main"> <div> <span class="rewards-eyebrow">Verified points</span> <div class="rewards-score" id="verifiedPoints">0</div> </div> <div class="rewards-threshold-copy" id="thresholdCopy">No active cycle</div> </div> <div class="rewards-progress" aria-hidden="true"> <span id="overallProgressBar"></span> </div> <div class="rewards-score-meta" id="scoreMeta"></div> </section> <section class="rewards-card" id="pendingActivityPanel"> <div class="rewards-card-heading"> <div> <span class="rewards-eyebrow">Your recent activity</span> <h3>Pending Activity</h3> </div> <span class="rewards-pill" id="pendingActivityCount">0 pending</span> </div> <div class="rewards-history-list" id="pendingActivityList"></div> <div class="rewards-score-meta"> <span>
+Last points update:
+<strong id="lastPointsUpdate">—</strong> </span> <span>
+Next points update:
+<strong id="nextPointsUpdate">—</strong> </span> </div> <p class="rewards-note" id="pendingActivityNote">
+Recent activity may appear here before points are added.
+Pending activity is reviewed during scheduled points updates and may require
+additional verification before points appear.
+</p> </section> <section class="rewards-dashboard-grid"> <article class="rewards-card"> <div class="rewards-card-heading"> <div> <span class="rewards-eyebrow">Today · UTC</span> <h3 id="dailyTitle">Daily tasks</h3> </div> <span class="rewards-pill" id="dailyPoints">0 / 16</span> </div> <div class="rewards-task-list" id="dailyTasks"></div> </article> <article class="rewards-card"> <div class="rewards-card-heading"> <div> <span class="rewards-eyebrow">Your cycle selection</span> <h3>Loyalty Community</h3> </div> </div> <div id="loyaltyPanel"></div> </article> </section> <section class="rewards-dashboard-grid"> <article class="rewards-card"> <div class="rewards-card-heading"> <div> <span class="rewards-eyebrow">This cycle</span> <h3>Cycle bonuses</h3> </div> </div> <div class="rewards-task-list" id="bonusTasks"></div> </article> <article class="rewards-card"> <div class="rewards-card-heading"> <div> <span class="rewards-eyebrow">Explore AquaVaults</span> <h3>Product Explorer</h3> </div> <span class="rewards-pill" id="productExplorerCount">0 / 3</span> </div> <div id="productExplorerPanel"></div> </article> </section> <section class="rewards-card"> <div class="rewards-card-heading"> <div> <span class="rewards-eyebrow">Monthly progression</span> <h3>Monthly quest</h3> </div> <span class="rewards-pill" id="questProgress">0 / 8</span> </div> <div class="rewards-quest-grid" id="questTasks"></div> </section> <section class="rewards-card"> <div class="rewards-card-heading"> <div> <span class="rewards-eyebrow">Community progress</span> <h3>Listed communities</h3> </div> <span class="rewards-pill" id="rosterCount">0 active</span> </div> <div class="rewards-roster" id="rosterList"></div> </section> <section class="rewards-card"> <div class="rewards-card-heading"> <div> <span class="rewards-eyebrow">Your records</span> <h3>Recent activity and points</h3> </div> </div> <div class="rewards-history-grid"> <div> <h4>Verified activity</h4> <div class="rewards-history-list" id="eventHistory"></div> </div> <div> <h4>Point ledger</h4> <div class="rewards-history-list" id="pointHistory"></div> </div> </div> </section> </div> </section> <section class="rewards-card rewards-task-catalog-card" id="taskCatalogSection"> <div class="rewards-card-heading"> <div> <span class="rewards-eyebrow">Public point matrix</span> <h2>How points are earned</h2> </div> <span class="rewards-pill" id="taskCatalogMode">Program Preview</span> </div> <p class="rewards-note" id="taskCatalogNote">
+Loading the published Rewards point matrix…
+</p> <div class="rewards-catalog-summary" id="taskCatalogSummary"></div> <div class="rewards-catalog-scenarios" id="taskCatalogScenarios"></div> <div class="rewards-catalog-groups" id="taskCatalogGroups"></div> </section> <section class="rewards-card rewards-leaderboard-card"> <div class="rewards-card-heading"> <div> <span class="rewards-eyebrow">Public standings</span> <h2>Provisional leaderboard</h2> </div> <span class="rewards-pill" id="leaderboardSummary">0 participants</span> </div> <p class="rewards-note">
+Wallets are shortened for display. Standings remain provisional until cycle review and finalization are complete.
+</p> <div class="rewards-table-wrap"> <table class="rewards-table"> <thead> <tr><th>Rank</th><th>Wallet</th><th>Points</th><th>Threshold</th></tr> </thead> <tbody id="leaderboardRows"></tbody> </table> </div> </section> <section class="rewards-card rewards-rules-card"> <div class="rewards-card-heading"> <div> <span class="rewards-eyebrow">Program rules summary</span> <h2>What participation means</h2> </div> <span class="rewards-pill" id="rulesVersion">Version —</span> </div> <ul class="rewards-rules" id="rulesSummary"></ul> <p class="rewards-note"> <a class="rewards-link" id="fullRulesLink" href="/rewards/rules">Read the complete AquaVaults Rewards Program Rules.</a> </p> <p class="rewards-note" id="rulesPublicationNote"></p> </section> </main> <div class="rewards-modal" id="loyaltyLockModal" hidden> <div
+class="rewards-modal-backdrop"
+id="loyaltyLockModalBackdrop"
+></div> <section
+class="rewards-modal-dialog"
+role="dialog"
+aria-modal="true"
+aria-labelledby="loyaltyLockModalTitle"
+aria-describedby="loyaltyLockModalDescription"
+tabindex="-1"
+> <div class="rewards-card-heading"> <div> <span class="rewards-eyebrow">Cycle-locked selection</span> <h2 id="loyaltyLockModalTitle">
+Lock Loyalty Community?
+</h2> </div> <button
+class="rewards-icon-button"
+id="closeLoyaltyLockModalButton"
+type="button"
+aria-label="Cancel Loyalty Community lock"
+>×</button> </div> <div class="rewards-modal-selection"> <div> <span>Selected community</span> <strong id="loyaltyLockCommunity">—</strong> </div> <div> <span>Rewards cycle</span> <strong id="loyaltyLockCycle">—</strong> </div> </div> <div
+class="rewards-warning"
+id="loyaltyLockModalDescription"
+>
+This choice is locked for the entire cycle and cannot
+be changed voluntarily.
+</div> <p class="rewards-note">
+A replacement is allowed only if the selected community
+becomes unavailable and AquaVaults authorizes the
+replacement.
+</p> <div class="rewards-actions rewards-modal-actions"> <button
+class="rewards-button rewards-button-secondary"
+id="cancelLoyaltyLockButton"
+type="button"
+>Cancel</button> <button
+class="rewards-button"
+id="confirmLoyaltyLockButton"
+type="button"
+>Lock Community</button> </div> </section> </div> <div id="footer-container"></div>
+</body>
+</html>

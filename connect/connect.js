@@ -1,0 +1,2 @@
+(function(){"use strict";const t=new URL(location.href).searchParams,e=t.get("code")||"",n=/^(?!avc_)[a-z0-9][a-z0-9_-]{1,31}$/.test(e)&&t.getAll("code").length===1&&[...t.keys()].every(c=>c==="code"),o=document.getElementById("connectStatus");if(!n){o.textContent="Invalid community introduction link. Nothing was submitted.";return}location.replace("/apply?connector="+encodeURIComponent(e))})();
+//# sourceMappingURL=connect.js.map

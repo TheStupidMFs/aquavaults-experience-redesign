@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AquaVaults — Create Pool Preview</title>
+  <link rel="icon" type="image/png" href="/assets/logo.png" />
+  <link rel="apple-touch-icon" href="/assets/logo.png" />
+  <meta property="og:image" content="/assets/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --bg-0: #05080f; --bg-card: #0f1830; --bg-card-hover: #131e3a; --bg-elevated: #1a2845; --bg-input: rgba(5,8,15,0.8);
+  --border: rgba(59,130,246,0.12); --border-bright: rgba(59,130,246,0.3);
+  --blue-300: #93C5FD; --blue-400: #60A5FA; --blue-500: #3B82F6; --blue-600: #2563EB;
+  --aqua-400: #22D3EE; --aqua-500: #06B6D4;
+  --purple-400: #C084FC; --green-400: #4ADE80; --green-500: #22C55E;
+  --orange-400: #FB923C; --red-400: #F87171; --warn: #F59E0B;
+  --text-primary: #EFF6FF; --text-secondary: #93C5FD; --text-muted: #4B6FA8; --text-dim: #2A4070;
+  --font-display: 'Syne', sans-serif; --font-body: sans-serif; --font-mono: 'DM Mono', monospace;
+  --gb: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #2563EB 100%);
+  --gaq: linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%);
+  --r: 12px; --rs: 8px;
+}
+
+body { font-family: var(--font-body); background: var(--bg-0); color: var(--text-primary); line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased; display: flex; flex-direction: column; overflow-x: hidden; }
+body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); opacity: 0.022; pointer-events: none; z-index: 0; }
+.grid-bg { position: fixed; inset: 0; background-image: linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
+.glow-orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(120px); }
+.glow-1 { width: 600px; height: 600px; top: -200px; left: -100px; background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%); }
+.glow-2 { width: 400px; height: 400px; bottom: 10%; right: -100px; background: radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%); }
+
+.page { position: relative; z-index: 1; flex: 1; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+/* ── NAV ── */
+nav { position: sticky; top: 0; z-index: 100; background: rgba(5,8,15,0.85); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-mark { width: 30px; height: 30px; background: linear-gradient(135deg, #3B82F6, #06B6D4); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 0.65rem; color: #fff; }
+.nav-logo-name { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text-primary); letter-spacing: -0.01em; }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { font-size: 0.78rem; font-weight: 500; color: var(--text-muted); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover { color: var(--blue-400); }
+.nav-badge { font-family: var(--font-mono); font-size: 0.68rem; color: var(--aqua-400); border: 1px solid rgba(34,211,238,0.3); background: rgba(34,211,238,0.06); padding: 3px 10px; border-radius: 20px; letter-spacing: 0.04em; }
+
+/* ── PREVIEW DROPDOWN ── */
+.nav-dropdown { position: relative; }
+.nav-dropdown-toggle { display: flex !important; align-items: center; gap: 5px; cursor: pointer; }
+.nav-dropdown-toggle svg { transition: transform 0.2s; flex-shrink: 0; }
+.nav-dropdown:hover .nav-dropdown-toggle svg { transform: rotate(180deg); }
+.nav-dropdown-menu {
+  display: none;
+  position: absolute; top: 100%; right: 0;
+  padding-top: 10px;
+  background: rgba(5,8,15,0.97);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-bright);
+  border-radius: 10px;
+  padding: 6px;
+  min-width: 190px;
+  z-index: 200;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+.nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; gap: 2px; }
+.nav-dropdown-menu ul { display: flex; flex-direction: column; gap: 2px; }
+.nav-dropdown-menu a {
+  display: block;
+  padding: 9px 14px;
+  border-radius: 7px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.nav-dropdown-menu a:hover { background: rgba(59,130,246,0.1); color: var(--blue-400); }
+.nav-dropdown-menu a.active { color: var(--aqua-400); background: rgba(34,211,238,0.06); }
+.nav-dropdown-divider { height: 1px; background: var(--border); margin: 4px 6px; }
+
+/* ── MOBILE NAV ── */
+.nav-back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 600; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; white-space: nowrap; padding: 5px 12px; border: 1px solid var(--border); border-radius: 20px; background: rgba(59,130,246,0.06); transition: all 0.2s; }
+.nav-back:hover { color: var(--blue-400); border-color: var(--border-bright); background: rgba(59,130,246,0.12); }
+.nav-back svg { flex-shrink: 0; }
+.nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; padding: 7px 8px; border: 1px solid var(--border); border-radius: 8px; background: transparent; }
+.nav-hamburger span { display: block; width: 20px; height: 2px; background: var(--text-muted); border-radius: 2px; transition: all 0.3s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 150; backdrop-filter: blur(4px); }
+.mobile-overlay.open { display: block; }
+.mobile-drawer { position: fixed; top: 0; right: -320px; width: min(300px, 90vw); height: 100%; background: #080e1c; border-left: 1px solid var(--border-bright); z-index: 160; transition: right 0.3s ease; overflow-y: auto; }
+.mobile-drawer.open { right: 0; }
+.mobile-drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+.mobile-drawer-title { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; color: var(--text-primary); }
+.mobile-close { background: transparent; border: 1px solid var(--border); border-radius: 6px; color: var(--text-muted); cursor: pointer; padding: 5px 9px; font-size: 0.85rem; line-height: 1; transition: all 0.15s; }
+.mobile-close:hover { color: var(--text-primary); border-color: var(--border-bright); }
+.mobile-nav-section { padding: 20px 20px 0; }
+.mobile-nav-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; padding: 0 2px; }
+.mobile-nav-link { display: block; padding: 10px 12px; border-radius: 8px; font-size: 0.88rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: all 0.15s; }
+.mobile-nav-link:hover { background: rgba(59,130,246,0.1); color: var(--blue-400); }
+.mobile-nav-link.active { background: rgba(34,211,238,0.06); color: var(--aqua-400); border: 1px solid rgba(34,211,238,0.15); }
+.mobile-nav-divider { height: 1px; background: var(--border); margin: 16px 20px; }
+
+.preview-banner { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 10px; background: rgba(34,211,238,0.04); border-bottom: 1px solid rgba(34,211,238,0.15); padding: 10px 24px; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.preview-banner::before { content: ''; width: 6px; height: 6px; background: var(--aqua-400); border-radius: 50%; animation: pulse 2s ease-in-out infinite; flex-shrink: 0; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)} }
+.preview-banner strong { color: var(--aqua-400); font-weight: 500; }
+
+/* ── BUTTONS ── */
+.btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.02em; padding: 11px 22px; border-radius: var(--rs); border: none; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+.btn-primary { background: var(--gb); color: #fff; box-shadow: 0 0 20px rgba(37,99,235,0.2); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 30px rgba(37,99,235,0.4); }
+.btn-primary:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
+.btn-primary.btn-lg { padding: 13px 26px; font-size: 0.9rem; }
+.btn-outline { background: rgba(59,130,246,0.06); color: var(--blue-300); border: 1px solid rgba(59,130,246,0.2); }
+.btn-outline:hover { background: rgba(59,130,246,0.12); border-color: rgba(59,130,246,0.4); }
+.btn-ghost { background: transparent; color: var(--text-muted); padding: 8px 0; }
+.btn-ghost:hover { color: var(--blue-400); }
+.btn-full { width: 100%; justify-content: center; }
+.btn-success { background: linear-gradient(135deg, #22C55E, #16A34A); color: #fff; }
+
+/* ── BADGES ── */
+.badge { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em; padding: 3px 9px; border-radius: 6px; text-transform: uppercase; white-space: nowrap; }
+.badge-token   { color: var(--text-secondary); background: rgba(59,130,246,0.06);   border: 1px solid rgba(59,130,246,0.12); text-transform: none; }
+.badge-success { color: var(--green-400);      background: rgba(74,222,128,0.08);   border: 1px solid rgba(74,222,128,0.2); }
+.badge-warning { color: var(--warn);           background: rgba(245,158,11,0.08);   border: 1px solid rgba(245,158,11,0.2); }
+.badge-priority{ color: var(--purple-400);     background: rgba(192,132,252,0.08);  border: 1px solid rgba(192,132,252,0.2); }
+
+/* ── CARD ── */
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; position: relative; transition: border-color 0.2s; }
+.card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(59,130,246,0.5), transparent); opacity: 0; transition: opacity 0.2s; }
+.card:hover::before { opacity: 1; }
+.card-head { padding: 22px 24px 0; }
+.card-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
+.card-desc { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+.card-body { padding: 22px 24px 24px; }
+
+/* ── CREATE LAYOUT ── */
+.create-layout { max-width: 680px; margin: 0 auto; padding-bottom: 80px; }
+.page-header-wrap { padding: 36px 0 28px; }
+.back-wrap { margin-bottom: 12px; }
+
+/* ── STEPPER ── */
+.stepper { display: flex; align-items: center; gap: 0; margin-bottom: 8px; }
+.step-circle { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; flex-shrink: 0; transition: all 0.3s; }
+.step-circle.active    { background: var(--gb); color: #fff; box-shadow: 0 0 16px rgba(59,130,246,0.4); }
+.step-circle.completed { background: var(--green-500); color: #fff; }
+.step-circle.inactive  { background: var(--bg-elevated); color: var(--text-muted); }
+.step-line { flex: 1; height: 2px; background: var(--bg-elevated); transition: background 0.3s; }
+.step-line.completed { background: var(--green-500); }
+.step-line.active { background: linear-gradient(90deg, var(--green-500), var(--blue-500)); }
+.step-labels { display: flex; justify-content: space-between; margin-top: 8px; }
+.step-label { font-size: 0.75rem; color: var(--text-muted); text-align: center; transition: color 0.3s; }
+.step-label.active { color: var(--blue-400); }
+.step-label.completed { color: var(--green-400); }
+
+/* ── FORM ELEMENTS ── */
+.form-group { margin-bottom: 22px; }
+.form-label { display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; font-weight: 500; margin-bottom: 8px; color: var(--text-secondary); }
+.form-label-hint { color: var(--text-muted); font-weight: 400; font-size: 0.8rem; }
+.form-input { width: 100%; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--rs); padding: 12px 16px; color: var(--text-primary); font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
+.form-input:focus { border-color: var(--border-bright); }
+.form-input::placeholder { color: var(--text-dim); }
+.form-input.mono { font-family: var(--font-mono); font-size: 0.82rem; }
+.form-input.error { border-color: var(--red-400); }
+.input-wrapper { position: relative; }
+.input-suffix { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 8px; }
+.input-suffix .unit { font-size: 0.78rem; color: var(--text-muted); }
+
+/* ── RADIO OPTIONS ── */
+.radio-group { display: flex; gap: 10px; }
+.radio-option { flex: 1; padding: 14px; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--rs); cursor: pointer; text-align: center; transition: all 0.2s; font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); }
+.radio-option:hover { border-color: var(--blue-400); color: var(--text-primary); }
+.radio-option.selected { border-color: var(--blue-500); background: rgba(59,130,246,0.08); color: var(--blue-300); box-shadow: 0 0 0 1px rgba(59,130,246,0.2); }
+
+/* ── SLIDER ── */
+.slider-container { margin: 8px 0 4px; }
+.slider-track { position: relative; width: 100%; height: 6px; background: var(--bg-elevated); border-radius: 999px; cursor: pointer; }
+.slider-fill { height: 100%; border-radius: 999px; background: var(--gb); pointer-events: none; }
+.slider-thumb { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; background: #fff; border-radius: 50%; box-shadow: 0 0 10px rgba(59,130,246,0.5), 0 2px 8px rgba(0,0,0,0.3); cursor: grab; transition: box-shadow 0.15s; }
+.slider-thumb:hover { box-shadow: 0 0 18px rgba(59,130,246,0.7), 0 2px 8px rgba(0,0,0,0.3); }
+.slider-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-top: 6px; }
+.slider-value { text-align: center; font-family: var(--font-display); font-size: 1.2rem; font-weight: 800; color: var(--text-primary); margin-top: 10px; letter-spacing: -0.02em; }
+.slider-value-sub { font-family: var(--font-body); font-size: 0.75rem; color: var(--text-muted); font-weight: 400; }
+
+/* ── ALERTS ── */
+.alert { display: flex; gap: 12px; padding: 14px; border-radius: var(--rs); margin-bottom: 16px; font-size: 0.82rem; }
+.alert svg { flex-shrink: 0; margin-top: 1px; }
+.alert-text { font-size: 0.82rem; line-height: 1.55; color: var(--text-muted); }
+.alert-success { background: rgba(74,222,128,0.06); border: 1px solid rgba(74,222,128,0.18); }
+.alert-success svg { color: var(--green-400); }
+.alert-success .alert-title { color: var(--green-400); font-weight: 600; font-size: 0.85rem; }
+.alert-warning { background: rgba(245,158,11,0.05); border: 1px solid rgba(245,158,11,0.18); }
+.alert-warning svg { color: var(--warn); }
+.alert-warning .alert-title { color: var(--warn); font-weight: 600; }
+.alert-info { background: rgba(59,130,246,0.05); border: 1px solid rgba(59,130,246,0.18); }
+.alert-info svg { color: var(--blue-400); }
+
+/* ── RELATED POOLS ── */
+.related-pool-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--rs); margin-bottom: 6px; font-size: 0.82rem; }
+.related-pool-id { font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; }
+.related-pool-meta { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+/* ── REVIEW GRID ── */
+.review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.review-item { padding: 14px; background: rgba(59,130,246,0.04); border-radius: var(--rs); border: 1px solid var(--border); }
+.review-label { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 4px; }
+.review-value { font-family: var(--font-display); font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; }
+.review-item.full { grid-column: 1 / -1; }
+
+/* ── CHECKBOX ── */
+.checkbox-row { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; cursor: pointer; }
+.checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border-bright); border-radius: 4px; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+.checkbox-box.checked { background: var(--blue-500); border-color: var(--blue-500); }
+.checkbox-box svg { display: none; }
+.checkbox-box.checked svg { display: block; }
+.checkbox-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
+
+.separator { height: 1px; background: var(--border); margin: 18px 0; }
+
+/* ── FOOTER ── */
+footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 32px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; max-width: 1200px; margin: 0 auto; width: 100%; }
+.footer-brand { display: flex; align-items: center; gap: 10px; }
+.footer-logo-mark { width: 24px; height: 24px; background: linear-gradient(135deg, #3B82F6, #06B6D4); border-radius: 5px; opacity: 0.7; }
+.footer-brand span { font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; color: var(--text-muted); }
+.footer-links { display: flex; gap: 20px; align-items: center; }
+.footer-link { font-size: 0.8rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+.footer-link:hover { color: var(--blue-400); }
+.footer-meta { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim); }
+
+@keyframes fadeInUp { from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)} }
+.animate-in { animation: fadeInUp 0.4s ease both; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 768px) { .nav-links { display: none; } .nav-hamburger { display: flex; } .review-grid { grid-template-columns: 1fr; } .radio-group { flex-direction: column; } }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="glow-orb glow-1"></div>
+<div class="glow-orb glow-2"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-back">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      AquaVaults.com
+    </a>
+    <a href="/preview" class="nav-logo">
+      <img src="../assets/logo-transparent.png" alt="AquaVaults" style="width:30px;height:30px;object-fit:contain;border-radius:6px;" />
+      <span class="nav-logo-name">AquaVaults</span>
+    </a>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="#" class="nav-dropdown-toggle">Preview Pages <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown-menu">
+          <li><a href="/preview">Landing / Docs</a></li>
+          <div class="nav-dropdown-divider"></div>
+          <li><a href="/preview/browse">Browse Pools</a></li>
+          <li><a href="/preview/details">Pool Detail</a></li>
+          <li><a href="/preview/create" class="active">Create Pool</a></li>
+          <li><a href="/preview/dashboard">Dashboard</a></li>
+        </ul>
+      </li>
+    </ul>
+    <button class="nav-hamburger" id="mobileHamburger" onclick="openMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="nav-badge">Preview v1.0</span>
+  </div>
+</nav>
+
+<div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileNav()"></div>
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="mobile-drawer-head">
+    <a href="/" class="mobile-nav-link" style="padding:6px 8px;display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-dim);">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      AquaVaults.com
+    </a>
+    <button class="mobile-close" onclick="closeMobileNav()">✕</button>
+  </div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-label">Docs</div>
+    <a href="/preview#overview" class="mobile-nav-link">Overview</a>
+    <a href="/preview#how-it-works" class="mobile-nav-link">How It Works</a>
+    <a href="/preview#scenarios" class="mobile-nav-link">Scenarios</a>
+    <a href="/preview#architecture" class="mobile-nav-link">Architecture</a>
+  </div>
+  <div class="mobile-nav-divider"></div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-label">Preview Pages</div>
+    <a href="/preview" class="mobile-nav-link">Landing / Docs</a>
+    <a href="/preview/browse" class="mobile-nav-link">Browse Pools</a>
+    <a href="/preview/details" class="mobile-nav-link">Pool Detail</a>
+    <a href="/preview/create" class="mobile-nav-link active">Create Pool</a>
+    <a href="/preview/dashboard" class="mobile-nav-link">Dashboard</a>
+  </div>
+</div>
+
+<div class="preview-banner">
+  <strong>Coming Soon</strong> &nbsp;—&nbsp; The AquaVaults Pooling System is in preview. No transactions can be made.
+</div>
+
+<div class="page">
+  <main>
+    <div class="container">
+      <div class="create-layout">
+        <div class="page-header-wrap">
+          <div class="back-wrap">
+            <a href="/preview/browse" class="btn btn-ghost">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Back to Pools
+            </a>
+          </div>
+          <h1 style="font-family:var(--font-display);font-size:1.9rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:8px;" class="animate-in">Create New Pool</h1>
+          <p style="color:var(--text-muted);font-size:0.9rem;" class="animate-in">Set up a PNDC token pool to participate in Dutch auction bidding on Pond0x.</p>
+        </div>
+
+        <div class="animate-in" style="margin-bottom:28px">
+          <div class="stepper">
+            <div class="step-circle active" id="step1">1</div>
+            <div class="step-line" id="line1"></div>
+            <div class="step-circle inactive" id="step2">2</div>
+            <div class="step-line" id="line2"></div>
+            <div class="step-circle inactive" id="step3">3</div>
+          </div>
+          <div class="step-labels">
+            <span class="step-label active" id="label1">Target Token</span>
+            <span class="step-label" id="label2">Configuration</span>
+            <span class="step-label" id="label3">Review &amp; Create</span>
+          </div>
+        </div>
+
+        <div id="stepContent"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-brand"><div class="footer-logo-mark"></div><span>AquaVaults</span></div>
+  <div class="footer-links">
+    <a href="#" class="footer-link">Terms of Service</a>
+    <a href="#" class="footer-link">Get Phantom Wallet</a>
+    <a href="#" class="footer-link">Powered by Jupiter</a>
+  </div>
+  <div class="footer-meta">Preview v1.0 · Not yet live</div>
+  <div class="footer-meta" style="margin-top:4px">© 2026 AquaVaults. All rights reserved.</div>
+</footer>
+
+<script>
+  var currentStep = 1;
+  var tokenStandard = 'ERC-20';
+  var tokenData = null;
+  var goalAmount = 250;
+  var timeframeWeeks = 8;
+  var initialContribution = '';
+  var ack1 = false;
+  var ack2 = false;
+
+  function updateStepper() {
+    for (var i = 1; i <= 3; i++) {
+      var circle = document.getElementById('step' + i);
+      var label  = document.getElementById('label' + i);
+      if (i < currentStep) { circle.className = 'step-circle completed'; label.className = 'step-label completed'; }
+      else if (i === currentStep) { circle.className = 'step-circle active'; label.className = 'step-label active'; }
+      else { circle.className = 'step-circle inactive'; label.className = 'step-label'; }
+    }
+    for (var j = 1; j <= 2; j++) {
+      var line = document.getElementById('line' + j);
+      if (j < currentStep) line.className = 'step-line completed';
+      else if (j === currentStep) line.className = 'step-line active';
+      else line.className = 'step-line';
+    }
+  }
+
+  function renderStep1() {
+    return '<div class="card animate-in">'
+      + '<div class="card-head"><div class="card-title">Mining Target Token</div><div class="card-desc">Select the token Pond0x will liquidity mine if your pool wins an auction. All contributions to this pool are made in PNDC.</div></div>'
+      + '<div class="card-body">'
+      + '<div class="form-group"><div class="form-label"><span>Token Standard</span></div>'
+      + '<div class="radio-group">'
+      + '<div class="radio-option' + (tokenStandard==='ERC-20'?' selected':'') + '" onclick="tokenStandard=\'ERC-20\';render()">ERC-20<div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px">Ethereum tokens</div></div>'
+      + '<div class="radio-option' + (tokenStandard==='SPL'?' selected':'') + '" onclick="tokenStandard=\'SPL\';render()">SPL<div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px">Solana tokens</div></div>'
+      + '<div class="radio-option' + (tokenStandard==='Token-2022'?' selected':'') + '" onclick="tokenStandard=\'Token-2022\';render()">Token-2022<div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px">Solana extension tokens</div></div>'
+      + '</div></div>'
+      + '<div class="form-group"><div class="form-label">Token Contract Address</div>'
+      + '<div class="input-wrapper"><input type="text" class="form-input mono" id="tokenAddress" placeholder="0x... or Solana address" value="' + (tokenData?tokenData.address:'') + '"></div>'
+      + '<div style="font-size:0.78rem;color:var(--text-muted);margin-top:6px">Enter the contract address of the token to be mined. Rewards will be distributed on the token\'s native chain.</div></div>'
+      + (tokenData ? '<div class="alert alert-success"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg><div><div class="alert-title">Token Validated</div><div class="alert-text">' + tokenData.name + ' (' + tokenData.symbol + ') · ' + tokenData.decimals + ' decimals</div></div></div>' : '')
+      + (tokenData ? '<div class="alert alert-warning"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div><div class="alert-title">Related Pools Alert</div><div class="alert-text" style="margin-top:4px">2 existing pools are already targeting WETH:</div></div></div><div style="margin:-8px 0 16px"><div class="related-pool-row"><div><div class="related-pool-id">POOL-34567</div><div class="related-pool-meta">1T PNDC · 89 contributors · 5d remaining</div></div><span class="badge badge-priority">Priority #1</span></div><div class="related-pool-row"><div><div class="related-pool-id">POOL-23456</div><div class="related-pool-meta">800B PNDC · 31 contributors · 12d remaining</div></div><span class="badge badge-priority">Priority #2</span></div></div><div class="alert alert-info" style="margin-bottom:16px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><div class="alert-text">Pools bid at exact price match during auctions. Consider contributing to an existing pool for earlier priority, or creating a larger pool to move ahead in the queue.</div></div><div style="display:flex;gap:8px"><button class="btn btn-outline" style="font-size:0.8rem;padding:9px 16px">View Existing WETH Pools</button><button class="btn btn-primary" style="font-size:0.8rem;padding:9px 16px" onclick="goToStep(2)">Continue with New Pool</button></div>' : '')
+      + (!tokenData ? '<button class="btn btn-primary btn-full" onclick="validateToken()" id="validateBtn">Validate Token</button>' : '')
+      + '</div></div>';
+  }
+
+  function validateToken() {
+    var btn = document.getElementById('validateBtn');
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Validating...';
+    btn.disabled = true;
+    setTimeout(function() {
+      tokenData = { symbol:'WETH', name:'Wrapped Ether', address:'0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619', decimals:18 };
+      render();
+    }, 1500);
+  }
+
+  function renderStep2() {
+    var expiryDate = new Date(Date.now() + timeframeWeeks * 7 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'});
+    var goalPct = ((goalAmount - 50) / (1000 - 50)) * 100;
+    var timePct = ((timeframeWeeks - 1) / (25 - 1)) * 100;
+
+    return '<div class="card animate-in">'
+      + '<div class="card-head"><div class="card-title">Pool Configuration</div><div class="card-desc">Set your pool size and timeframe for ' + (tokenData?tokenData.symbol:'WETH') + '</div></div>'
+      + '<div class="card-body">'
+      + '<div class="form-group"><div class="form-label"><span>Pool Goal</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--text-muted)"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>'
+      + '<div class="slider-container"><div class="slider-track" id="goalSlider" onmousedown="startDrag(event,\'goal\')" ontouchstart="startDrag(event,\'goal\')"><div class="slider-fill" style="width:' + goalPct + '%"></div><div class="slider-thumb" style="left:' + goalPct + '%"></div></div>'
+      + '<div class="slider-labels"><span>50B</span><span>1T</span></div></div>'
+      + '<div class="slider-value">' + goalAmount + 'B <span style="font-size:0.6em;color:var(--text-muted)">PNDC</span></div></div>'
+      + '<div class="form-group"><div class="form-label">Timeframe</div>'
+      + '<div class="slider-container"><div class="slider-track" id="timeSlider" onmousedown="startDrag(event,\'time\')" ontouchstart="startDrag(event,\'time\')"><div class="slider-fill" style="width:' + timePct + '%"></div><div class="slider-thumb" style="left:' + timePct + '%"></div></div>'
+      + '<div class="slider-labels"><span>1 week</span><span>25 weeks</span></div></div>'
+      + '<div class="slider-value">' + timeframeWeeks + ' weeks <div class="slider-value-sub">expires ' + expiryDate + '</div></div></div>'
+      + '<div class="form-group"><div class="form-label"><span>Your Initial Contribution</span><span class="badge badge-warning">Min 5B PNDC</span></div>'
+      + '<div class="input-wrapper"><input type="number" class="form-input" id="contribInput" placeholder="Enter amount in billions" value="' + initialContribution + '" oninput="initialContribution=this.value">'
+      + '<div class="input-suffix"><span class="unit">B PNDC</span></div></div>'
+      + '<div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-top:6px"><span style="color:var(--text-muted)">Balance: 2,500B PNDC</span><a href="#" style="color:var(--blue-400);text-decoration:none;font-weight:500" onclick="document.getElementById(\'contribInput\').value=\'500\';initialContribution=\'500\';return false">Use Max</a></div></div>'
+      + '<div class="alert alert-warning"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><div class="alert-text" style="color:var(--warn)">As pool creator, your initial ' + (initialContribution||'0') + 'B PNDC contribution is <strong>permanently locked</strong> until the pool wins or its ' + timeframeWeeks + '-week timeframe expires. If the pool loses an auction it stays in the queue and continues bidding.</div></div>'
+      + '<div style="display:flex;gap:10px"><button class="btn btn-outline" onclick="goToStep(1)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back</button>'
+      + '<button class="btn btn-primary btn-full" onclick="goToStep(3)">Continue to Review</button></div>'
+      + '</div></div>';
+  }
+
+  function renderStep3() {
+    var contrib = initialContribution || '0';
+    var expiryDate = new Date(Date.now() + timeframeWeeks * 7 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'});
+
+    return '<div class="card animate-in">'
+      + '<div class="card-head"><div class="card-title">Review &amp; Create</div><div class="card-desc">Review your pool details before submitting to the blockchain</div></div>'
+      + '<div class="card-body">'
+      + '<div class="review-grid" style="margin-bottom:20px">'
+      + '<div class="review-item"><div class="review-label">Mining Target</div><div class="review-value">' + (tokenData?tokenData.symbol:'WETH') + '</div><div style="font-size:0.75rem;color:var(--text-muted);margin-top:2px">' + (tokenData?tokenData.name:'Wrapped Ether') + '</div></div>'
+      + '<div class="review-item"><div class="review-label">Token Standard</div><div class="review-value">' + tokenStandard + '</div></div>'
+      + '<div class="review-item"><div class="review-label">Pool Goal</div><div class="review-value">' + goalAmount + 'B <span style="font-size:0.7em;color:var(--text-muted)">PNDC</span></div></div>'
+      + '<div class="review-item"><div class="review-label">Timeframe</div><div class="review-value">' + timeframeWeeks + ' weeks</div><div style="font-size:0.75rem;color:var(--text-muted);margin-top:2px">Expires ' + expiryDate + '</div></div>'
+      + '<div class="review-item"><div class="review-label">Your Initial Contribution</div><div class="review-value">' + contrib + 'B <span style="font-size:0.7em;color:var(--text-muted)">PNDC</span></div></div>'
+      + '<div class="review-item"><div class="review-label">Est. Bid Priority</div><div class="review-value" style="color:var(--purple-400)">#3</div><div style="font-size:0.75rem;color:var(--text-muted);margin-top:2px">2 larger pools ahead</div></div>'
+      + '<div class="review-item full"><div class="review-label">Contract Address</div><div style="font-family:var(--font-mono);font-size:0.78rem;color:var(--text-secondary);word-break:break-all;margin-top:4px">' + (tokenData?tokenData.address:'0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619') + '</div></div>'
+      + '</div>'
+      + '<div class="alert alert-info" style="margin-bottom:18px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><div class="alert-text">Creating a pool requires one blockchain transaction. Gas fees will be estimated before confirmation.</div></div>'
+      + '<div class="separator"></div>'
+      + '<div class="checkbox-row" onclick="toggleAck(1)"><div class="checkbox-box ' + (ack1?'checked':'') + '" id="ack1Box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div><div class="checkbox-text">I understand my initial <strong>' + contrib + 'B PNDC</strong> as pool creator is <strong>permanently locked</strong> and cannot be withdrawn. The pool will continue bidding in successive auctions until it wins or the ' + timeframeWeeks + '-week timeframe expires.</div></div>'
+      + '<div class="checkbox-row" onclick="toggleAck(2)"><div class="checkbox-box ' + (ack2?'checked':'') + '" id="ack2Box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div><div class="checkbox-text">I understand bidding happens automatically at <strong>exact price match</strong> during Dutch auctions. If the pool loses, it stays in the queue and bids again on the next auction — not just once.</div></div>'
+      + '<div style="display:flex;gap:10px;margin-top:22px"><button class="btn btn-outline" onclick="goToStep(2)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back</button>'
+      + '<button class="btn btn-primary btn-lg btn-full" id="createBtn" onclick="createPool()" ' + (ack1&&ack2?'':'disabled') + '>Create Pool</button></div>'
+      + '</div></div>';
+  }
+
+  function toggleAck(n) { if(n===1)ack1=!ack1;else ack2=!ack2; render(); }
+
+  function createPool() {
+    if (!ack1 || !ack2) return;
+    var btn = document.getElementById('createBtn');
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Creating Pool...';
+    btn.disabled = true; btn.style.opacity = '0.7';
+    setTimeout(function() {
+      btn.className = 'btn btn-success btn-lg btn-full';
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg> Pool Created Successfully!';
+      btn.style.opacity = '1'; btn.style.boxShadow = '0 0 24px rgba(34,197,94,0.3)';
+      setTimeout(function() { window.location.href = '/preview/dashboard'; }, 1500);
+    }, 2500);
+  }
+
+  function goToStep(n) { currentStep = n; updateStepper(); render(); window.scrollTo({top: 120, behavior: 'smooth'}); }
+
+  function render() {
+    var content = document.getElementById('stepContent');
+    if (currentStep === 1) content.innerHTML = renderStep1();
+    else if (currentStep === 2) content.innerHTML = renderStep2();
+    else content.innerHTML = renderStep3();
+  }
+
+  var dragging = null;
+  function startDrag(e, type) {
+    e.preventDefault(); dragging = type; handleDrag(e);
+    document.addEventListener('mousemove', handleDrag);
+    document.addEventListener('mouseup', stopDrag);
+    document.addEventListener('touchmove', handleDrag, {passive: false});
+    document.addEventListener('touchend', stopDrag);
+  }
+  function handleDrag(e) {
+    if (!dragging) return;
+    e.preventDefault && e.preventDefault();
+    var slider = document.getElementById(dragging === 'goal' ? 'goalSlider' : 'timeSlider');
+    var rect = slider.getBoundingClientRect();
+    var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    var pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    if (dragging === 'goal') { goalAmount = Math.round(50 + pct * (1000 - 50)); goalAmount = Math.round(goalAmount / 50) * 50; if(goalAmount<50)goalAmount=50; if(goalAmount>1000)goalAmount=1000; }
+    else { timeframeWeeks = Math.round(1 + pct * 24); if(timeframeWeeks<1)timeframeWeeks=1; if(timeframeWeeks>25)timeframeWeeks=25; }
+    render();
+  }
+  function stopDrag() { dragging = null; document.removeEventListener('mousemove', handleDrag); document.removeEventListener('mouseup', stopDrag); document.removeEventListener('touchmove', handleDrag); document.removeEventListener('touchend', stopDrag); }
+
+  updateStepper();
+  render();
+function openMobileNav() {
+  document.getElementById('mobileDrawer').classList.add('open');
+  document.getElementById('mobileOverlay').classList.add('open');
+  document.getElementById('mobileHamburger').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileNav() {
+  document.getElementById('mobileDrawer').classList.remove('open');
+  document.getElementById('mobileOverlay').classList.remove('open');
+  document.getElementById('mobileHamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+</script>
+</body>
+</html>

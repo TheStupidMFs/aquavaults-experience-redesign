@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+ <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>AquaVaults - AutoSwap</title> <link rel="icon" type="image/png" href="/assets/logo.png" /> <link rel="apple-touch-icon" href="/assets/logo.png" /> <meta property="og:image" content="/assets/logo.png" /> <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.8/lib/index.iife.min.js" integrity="sha384-ujeTtvHxhu2g5lnu14Roii2ajvVKJ74KQ6eo6GGfAi0IrKZ1YkF8N68Iw5VmIJO0" crossorigin="anonymous"></script> <link rel="stylesheet" href="/swapper/autoswap/autoswap-bundle.css" /> <link rel="stylesheet" href="/header/header.css" /> <link rel="stylesheet" href="/footer/footer.css" /> <script src="/header/header-loader.js" defer></script> <script src="/header/header.js" defer></script> <script src="/assets/wallet-widget.js"></script> <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+<div class="page-wrapper"> <div id="header-container" data-header-type="full"></div> <div class="page-content">
+<div class="trade-shell estimator-layout">
+<aside class="utility-rail">
+<div class="utility-rail-heading">Context</div> <div class="asw-block"> <div class="community-selector-container"> <div class="asw-hint-holder" id="communityTooltipContainer"> <div class="community-selector" id="communitySelector" onclick="toggleCommunityDropdown()"> <div class="community-selected" id="communitySelected"> <span class="select-prompt">Select a community to enable swaps</span> </div> <script>
+(function(){
+var id = localStorage.getItem('selectedCommunity');
+if (id) {
+var el = document.getElementById('communitySelected');
+if (el) el.innerHTML = '<span style="color:transparent;font-size:0.85rem;font-weight:600;">Loading\u2026</span>';
+}
+})();
+</script> <div class="community-dropdown-arrow">▼</div> </div> <span class="asw-help-icon" onclick="toggleTooltip(event, 'communityTooltipContainer')" style="position: absolute; right: 2.5rem; top: 50%; transform: translateY(-50%); z-index: 10;">ℹ</span> <div class="asw-hint-bubble">
+Select which community receives swap fees. Each community may support different tokens through their fee vaults. Fees are routed to the selected community's token vaults or treasury wallet depending on the token.
+</div> </div> <div class="community-dropdown" id="communityDropdown"> </div> </div> <div class="active-vault-pill rail-hidden-vault-pill" id="vaultPill" aria-hidden="true"> <div class="vault-pill-header"><img src="/assets/logo-transparent.png" alt="AquaVaults" class="vault-logo" /><span>SOL Vault (AquaVaults):</span></div><div class="vault-pill-address">Loading...</div> </div>
+</div> <div class="asw-block">
+<div class="asw-params-wrap" id="constraintsContainer">
+<div class="asw-params-head" onclick="toggleConstraints()">
+<div style="font-size: 0.8rem; font-weight: 700; color: #eaeaea;">
+⚙️ Swap Settings
+</div>
+<div style="font-size: 0.7rem; color: #94a3b8;">
+<span id="feePreview">1.00%</span> • <span id="slippagePreview">1.00%</span> • <span id="priorityPreview">Auto</span>
+</div>
+</div>
+<div class="asw-constraints-body"> <div class="asw-param-field"> <div class="asw-param-title asw-hint-holder" id="feeTooltipContainer">
+💰 Platform Fee (in %)
+<span class="asw-help-icon" onclick="toggleTooltip(event, 'feeTooltipContainer')">ℹ</span> <div class="asw-hint-bubble">
+Fee you choose for using AquaVaults (separate from network/DEX fees). Depending on token support, the fee may be routed via affiliate vaults or collected as a separate transfer in the input token. Review your wallet prompt before signing.
+</div> </div> <div class="asw-input-box"> <input class="asw-param-value" id="feeInput" max="10" min="0" onchange="updateFeeDisplay()" step="0.1" type="number" value="1.0"/> <div class="asw-arrows-stack"> <button class="asw-arrow-btn" onclick="adjustFee(0.5)">▴</button> <button class="asw-arrow-btn" onclick="adjustFee(-0.5)">▾</button> </div> </div> </div> <div class="asw-param-field"> <div class="asw-param-title asw-hint-holder" id="slippageTooltipContainer">
+📊 Slippage (in %)
+<span class="asw-help-icon" onclick="toggleTooltip(event, 'slippageTooltipContainer')">ℹ</span> <div class="asw-hint-bubble">
+Maximum price movement tolerance during swap. Higher slippage allows faster execution but may result in less favorable rates.
+</div> </div> <div class="asw-input-box"> <input class="asw-param-value" id="slippageInput" max="50" min="0" onchange="updateSlippageDisplay()" step="0.1" type="number" value="1.0"/> <div class="asw-arrows-stack"> <button class="asw-arrow-btn" onclick="adjustSlippage(0.5)">▴</button> <button class="asw-arrow-btn" onclick="adjustSlippage(-0.5)">▾</button> </div> </div> </div> <div class="asw-param-field" style="flex-direction: column; align-items: stretch;"> <div class="asw-param-title asw-hint-holder" id="priorityTooltipContainer" style="margin-bottom: 0.35rem;">
+⚡ Priority Fee
+<span class="asw-help-icon" onclick="toggleTooltip(event, 'priorityTooltipContainer')">ℹ</span> <div class="asw-hint-bubble">
+Extra fee to help your transaction confirm faster during network congestion. Higher fees may result in faster confirmation.
+</div> </div> <select class="asw-dropdown" id="prioritySelect" onchange="updatePriorityDisplay()" style="width: 100%;"> <option value="0">Auto (Default)</option> <option value="10000">Low congestion fee (0.00001 SOL)</option> <option value="100000">Moderate congestion fee (0.0001 SOL)</option> <option value="500000">Elevated congestion fee (0.0005 SOL)</option> <option value="custom">Custom</option> </select> <div id="customPriorityContainer" style="display: none; margin-top: 0.35rem;"> <label style="font-size: 0.7rem; color: #94a3b8; margin-bottom: 0.25rem; display: block;">Custom (SOL):</label> <input type="number" class="asw-param-value" id="customPriorityInput" value="0.0001" min="0" max="0.01" step="0.00001" oninput="updatePriorityDisplay()" style="width: 100%;" /> </div> </div>
+</div>
+</div>
+</div>
+<button class="asw-button asw-button-neutral" id="checkSettings" onclick="handleCheckSettings()">📋 Check Settings</button>
+<a href="/autoswap/how-to" class="asw-button-link">❓ How to Use AutoSwap</a>
+</aside>
+<div class="asw-wrapper">
+<div class="asw-header-tabs">
+<button class="asw-tab-button" id="tabSwap"> Swap</button>
+<button class="asw-tab-button active" id="tabAuto">Auto Swap</button>
+</div>
+<button aria-controls="autoswapEstimatorPanel" aria-expanded="false" class="estimator-launcher" id="estimatorDrawerOpen" type="button"> <span>
+🧮
+</span> <span> <strong>
+AutoSwap Math Estimator
+</strong> <small>
+Need help calculating the fields?
+</small> </span> <span aria-hidden="true">
+Open
+</span>
+</button> <div class="asw-content-box">
+<div id="panelAuto"> <div class="asw-pair-card">
+<div class="asw-pair-selectors">
+<div class="asw-pair-field">
+<div class="asw-pair-label">From</div>
+<select class="asw-dropdown asw-token-select" id="pair1From" onchange="handlePairTokenChange('pair1From')">
+<option value="So11111111111111111111111111111111111111112">SOL</option>
+<option value="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v">USDC</option>
+<option value="Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB">USDT</option>
+<option value="3JgFwoYV74f6LwWjQWnr3YDPFnmBdwQfNyubv99jqUoq">wPOND</option>
+<option value="he1iusmfkpAdwvxLNGV8Y1iSbj4rUy6yMhEA3fotn9A">hSOL</option>
+<option value="mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So">mSOL</option>
+<option value="B5WTLaRwaUQpKk7ir1wniNB6m5o8GgMrimhKMYan2R6B">PepeOnSOL</option>
+<option value="__custom__" style="border-top: 2px solid #4f46e5; margin-top: 0.25rem;">🔍 Search / Manage Custom Tokens</option>
+</select>
+<div class="asw-balance-display" id="pair1FromBalance">Balance: —</div>
+</div>
+<div class="asw-pair-arrow">→</div>
+<div class="asw-pair-field">
+<div class="asw-pair-label">To</div>
+<select class="asw-dropdown asw-token-select" id="pair1To" onchange="handlePairTokenChange('pair1To')">
+<option value="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v">USDC</option>
+<option value="Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB">USDT</option>
+<option value="So11111111111111111111111111111111111111112">SOL</option>
+<option value="3JgFwoYV74f6LwWjQWnr3YDPFnmBdwQfNyubv99jqUoq">wPOND</option>
+<option value="he1iusmfkpAdwvxLNGV8Y1iSbj4rUy6yMhEA3fotn9A">hSOL</option>
+<option value="mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So">mSOL</option>
+<option value="B5WTLaRwaUQpKk7ir1wniNB6m5o8GgMrimhKMYan2R6B">PepeOnSOL</option>
+<option value="__custom__" style="border-top: 2px solid #4f46e5; margin-top: 0.25rem;">🔍 Search / Manage Custom Tokens</option>
+</select>
+<div class="asw-balance-display" id="pair1ToBalance">Balance: —</div>
+</div>
+</div>
+<div class="asw-pair-amounts">
+<div class="asw-pair-field">
+<div class="asw-pair-label">Amount</div>
+<input class="asw-text-field" id="pair1Amount" min="0" step="0.01" type="number" value="0.5"/>
+</div>
+</div>
+</div> <div class="asw-control-zone">
+<div class="asw-row-2col">
+<div class="asw-setting-row">
+<label for="swapCount">Number of Swaps:</label>
+<div class="input-wrapper">
+<input class="constraint-input" id="swapCount" max="1000" min="1" type="number" value="10"/>
+<div class="arrows-overlay">
+<button class="arrow-overlay" data-step="up" data-target="swapCount" type="button">▲</button>
+<button class="arrow-overlay" data-step="down" data-target="swapCount" type="button">▼</button>
+</div>
+</div>
+</div>
+<div class="asw-setting-row">
+<label for="waitTime">Wait After Swap (sec):</label>
+<div class="input-wrapper">
+<input class="constraint-input" id="waitTime" max="300" min="0" step="1" type="number" value="5"/>
+<div class="arrows-overlay">
+<button class="arrow-overlay" data-step="up" data-target="waitTime" type="button">▲</button>
+<button class="arrow-overlay" data-step="down" data-target="waitTime" type="button">▼</button>
+</div>
+</div>
+</div>
+</div>
+<div class="asw-setting-row asw-flipflop-row">
+<label for="flipFlopToggle">Flip-Flop</label>
+<label class="asw-mini-switch-wrap">
+<input id="flipFlopToggle" type="checkbox"/>
+<span class="asw-mini-switch"></span>
+</label>
+</div>
+</div>
+</div> <div class="asw-block">
+<div class="asw-feature-toggle" id="randomWaitToggle">
+<div class="asw-toggle-header" onclick="toggleFeature('randomWaitToggle')">
+<div class="asw-toggle-text">⏱️ Random Wait Time</div>
+<div class="asw-toggle-switch"></div>
+</div>
+<div class="asw-feature-details">
+<div class="asw-row-2col">
+<div class="asw-setting-row">
+<label for="minWaitTime">Min Wait (sec):</label>
+<div class="input-wrapper">
+<input class="constraint-input" id="minWaitTime" max="300" min="0" step="1" type="number" value="3"/>
+<div class="arrows-overlay">
+<button class="arrow-overlay" data-step="up" data-target="minWaitTime" type="button">▲</button>
+<button class="arrow-overlay" data-step="down" data-target="minWaitTime" type="button">▼</button>
+</div>
+</div>
+</div>
+<div class="asw-setting-row">
+<label for="maxWaitTime">Max Wait (sec):</label>
+<div class="input-wrapper">
+<input class="constraint-input" id="maxWaitTime" max="300" min="0" step="1" type="number" value="10"/>
+<div class="arrows-overlay">
+<button class="arrow-overlay" data-step="up" data-target="maxWaitTime" type="button">▲</button>
+<button class="arrow-overlay" data-step="down" data-target="maxWaitTime" type="button">▼</button>
+</div>
+</div>
+</div>
+</div>
+<div class="asw-feature-hint">
+Randomly waits between min and max seconds after each swap
+</div>
+</div>
+</div>
+</div> <div class="asw-block">
+<div class="asw-feature-toggle" id="randomAmountToggle">
+<div class="asw-toggle-header" onclick="toggleFeature('randomAmountToggle')">
+<div class="asw-toggle-text">🎲 Random Amount</div>
+<div class="asw-toggle-switch"></div>
+</div>
+<div class="asw-feature-details">
+<div class="asw-row-2col">
+<div class="asw-setting-row">
+<label for="minAmount">Min Amount:</label>
+<div class="input-wrapper">
+<input class="asw-param-value" id="minRandomAmount" min="0" step="0.01" type="number" value="0.05"/>
+</div>
+</div>
+<div class="asw-setting-row">
+<label for="maxAmount">Max Amount:</label>
+<div class="input-wrapper">
+<input class="asw-param-value" id="maxRandomAmount" min="0" step="0.01" type="number" value="0.25"/>
+</div>
+</div>
+</div>
+<div class="asw-feature-hint">
+Each swap uses a random amount between min and max
+</div>
+</div>
+</div>
+</div> <div class="asw-block">
+<div class="asw-feature-toggle" id="randomPairsToggle">
+<div class="asw-toggle-header" onclick="toggleFeature('randomPairsToggle')">
+<div class="asw-toggle-text">🔀 Random Swap Pairs</div>
+<div class="asw-toggle-switch"></div>
+</div>
+<div class="asw-feature-details">
+<div class="asw-feature-hint" style="margin-bottom: 0.55rem;">
+Configure up to 3 swap pairs, . Auto Swap will randomly pick from enabled pairs.
+</div>
+<div class="asw-pairs-grid"> <div class="asw-pair-card">
+<div class="asw-pair-selectors">
+<div class="asw-pair-field">
+<div class="asw-pair-label">From</div>
+<select class="asw-dropdown asw-token-select" id="pair2From" onchange="handlePairTokenChange('pair2From')">
+<option value="">-- None --</option>
+<option value="So11111111111111111111111111111111111111112">SOL</option>
+<option value="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v">USDC</option>
+<option value="Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB">USDT</option>
+<option value="3JgFwoYV74f6LwWjQWnr3YDPFnmBdwQfNyubv99jqUoq">wPOND</option>
+<option value="he1iusmfkpAdwvxLNGV8Y1iSbj4rUy6yMhEA3fotn9A">hSOL</option>
+<option value="mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So">mSOL</option>
+<option value="B5WTLaRwaUQpKk7ir1wniNB6m5o8GgMrimhKMYan2R6B">PepeOnSOL</option>
+<option value="__custom__" style="border-top: 2px solid #4f46e5; margin-top: 0.25rem;">🔍 Search / Manage Custom Tokens</option>
+</select>
+<div class="asw-balance-display" id="pair2FromBalance">Balance: —</div>
+</div>
+<div class="asw-pair-arrow">→</div>
+<div class="asw-pair-field">
+<div class="asw-pair-label">To</div>
+<select class="asw-dropdown asw-token-select" id="pair2To" onchange="handlePairTokenChange('pair2To')">
+<option value="">-- None --</option>
+<option value="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v">USDC</option>
+<option value="Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB">USDT</option>
+<option value="So11111111111111111111111111111111111111112">SOL</option>
+<option value="3JgFwoYV74f6LwWjQWnr3YDPFnmBdwQfNyubv99jqUoq">wPOND</option>
+<option value="he1iusmfkpAdwvxLNGV8Y1iSbj4rUy6yMhEA3fotn9A">hSOL</option>
+<option value="mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So">mSOL</option>
+<option value="B5WTLaRwaUQpKk7ir1wniNB6m5o8GgMrimhKMYan2R6B">PepeOnSOL</option>
+<option value="__custom__" style="border-top: 2px solid #4f46e5; margin-top: 0.25rem;">🔍 Search / Manage Custom Tokens</option>
+</select>
+<div class="asw-balance-display" id="pair2ToBalance">Balance: —</div>
+</div>
+</div>
+<div class="asw-pair-amounts">
+<div class="asw-pair-field">
+<div class="asw-pair-label">Amount</div>
+<input class="asw-text-field" id="pair2Amount" min="0" step="0.01" type="number" value="100"/>
+</div>
+<div class="asw-pair-field">
+<label class="asw-random-toggle">
+<input id="pair2Random" type="checkbox"/>
+Random
+</label>
+<div class="asw-random-inputs">
+<input class="asw-text-field" disabled="" id="pair2Min" min="0" placeholder="Min" step="0.01" type="number" value="0"/>
+<input class="asw-text-field" disabled="" id="pair2Max" min="0" placeholder="Max" step="0.01" type="number" value="0"/>
+</div>
+</div>
+</div>
+</div> <div class="asw-pair-card">
+<div class="asw-pair-selectors">
+<div class="asw-pair-field">
+<div class="asw-pair-label">From</div>
+<select class="asw-dropdown asw-token-select" id="pair3From" onchange="handlePairTokenChange('pair3From')">
+<option value="">-- None --</option>
+<option value="So11111111111111111111111111111111111111112">SOL</option>
+<option value="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v">USDC</option>
+<option value="Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB">USDT</option>
+<option value="3JgFwoYV74f6LwWjQWnr3YDPFnmBdwQfNyubv99jqUoq">wPOND</option>
+<option value="he1iusmfkpAdwvxLNGV8Y1iSbj4rUy6yMhEA3fotn9A">hSOL</option>
+<option value="mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So">mSOL</option>
+<option value="B5WTLaRwaUQpKk7ir1wniNB6m5o8GgMrimhKMYan2R6B">PepeOnSOL</option>
+<option value="__custom__" style="border-top: 2px solid #4f46e5; margin-top: 0.25rem;">🔍 Search / Manage Custom Tokens</option>
+</select>
+<div class="asw-balance-display" id="pair3FromBalance">Balance: —</div>
+</div>
+<div class="asw-pair-arrow">→</div>
+<div class="asw-pair-field">
+<div class="asw-pair-label">To</div>
+<select class="asw-dropdown asw-token-select" id="pair3To" onchange="handlePairTokenChange('pair3To')">
+<option value="">-- None --</option>
+<option value="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v">USDC</option>
+<option value="Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB">USDT</option>
+<option value="So11111111111111111111111111111111111111112">SOL</option>
+<option value="3JgFwoYV74f6LwWjQWnr3YDPFnmBdwQfNyubv99jqUoq">wPOND</option>
+<option value="he1iusmfkpAdwvxLNGV8Y1iSbj4rUy6yMhEA3fotn9A">hSOL</option>
+<option value="mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So">mSOL</option>
+<option value="B5WTLaRwaUQpKk7ir1wniNB6m5o8GgMrimhKMYan2R6B">PepeOnSOL</option>
+<option value="__custom__" style="border-top: 2px solid #4f46e5; margin-top: 0.25rem;">🔍 Search / Manage Custom Tokens</option>
+</select>
+<div class="asw-balance-display" id="pair3ToBalance">Balance: —</div>
+</div>
+</div>
+<div class="asw-pair-amounts">
+<div class="asw-pair-field">
+<div class="asw-pair-label">Amount</div>
+<input class="asw-text-field" id="pair3Amount" min="0" step="0.01" type="number" value="1000"/>
+</div>
+<div class="asw-pair-field">
+<label class="asw-random-toggle">
+<input id="pair3Random" type="checkbox"/>
+Random
+</label>
+<div class="asw-random-inputs">
+<input class="asw-text-field" disabled="" id="pair3Min" min="0" placeholder="Min" step="0.01" type="number" value="0"/>
+<input class="asw-text-field" disabled="" id="pair3Max" min="0" placeholder="Max" step="0.01" type="number" value="0"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div> <div class="asw-block asw-status-zone">
+<div class="asw-status-line">Status: <strong id="autoProgress">Ready</strong></div>
+<div class="asw-status-line">Countdown: <strong id="autoCountdown">—</strong></div>
+<div class="asw-action-buttons" style="display: flex; gap: 0.5rem; flex-direction: row; height: auto; position: relative; transform: none; left: auto; top: auto; width: 100%; max-width: none; min-width: auto;">
+<button class="asw-button asw-button-action" disabled="" id="autoStart" onclick="handleAutoStart()" style="flex: 1; border-radius: 8px; padding: 0.65rem 1rem; position: static; transform: none; width: auto; max-width: none; min-width: auto;">Start Auto Swap</button>
+<button class="asw-button asw-button-action" disabled="" id="autoStop" onclick="handleAutoStop()" style="display:none; flex: 1; border-radius: 8px; padding: 0.65rem 1rem; position: static; transform: none; width: auto; max-width: none; min-width: auto;">Stop</button>
+</div> </div>
+<div class="asw-debug-panel" id="debug" style="display:none;"></div>
+</div>
+</div>
+<aside aria-hidden="false" aria-label="AutoSwap Math Estimator" class="estimator-rail" id="autoswapEstimatorPanel"> <div class="est-rail-header"> <div class="est-rail-heading-copy"> <span class="est-eyebrow">
+Planning tool
+</span> <strong>
+AutoSwap Math Estimator
+</strong> </div> <div class="est-rail-header-actions"> <button aria-label="Collapse estimator" class="est-rail-icon-button est-desktop-collapse" id="estimatorPanelToggle" title="Collapse estimator" type="button">
+−
+</button> <button aria-label="Close estimator" class="est-rail-icon-button est-drawer-close" id="estimatorDrawerClose" title="Close estimator" type="button">
+×
+</button> </div> </div> <div aria-hidden="true" class="est-rail-collapsed-label"> <span>
+🧮
+</span> <strong>
+Estimator
+</strong> </div> <div class="est-rail-scroll"> <p class="est-rail-intro">
+Enter the funds and either the swap count or time window you have. The calculator works backward into AutoSwap fields to consider entering.
+</p> <div class="estimator-root estimator-root-sidebar" data-estimator-context="sidebar"> <div class="est-warning est-warning-strong" role="note"> <strong>
+Estimator only — outcomes are not guaranteed.
+</strong> <span>
+This calculator only helps with the math. It does not connect to a wallet, quote or execute swaps, change AutoSwap settings, or guarantee timing, balances, volume, transaction success, chart activity, or community-listing activity.
+</span> </div> <form id="est-estimatorForm" novalidate=""> <section aria-labelledby="est-fundsHeading" class="est-section"> <div class="est-section-heading"> <span class="est-step">
+1
+</span> <div> <h2 id="est-fundsHeading">
+Funds and token pair
+</h2> <p>
+Enter the values you are using for planning. Wallet balances are not read.
+</p> </div> </div> <div class="est-grid est-grid-2"> <label class="est-field est-field-wide"> <span>
+Total amount to use
+</span> <input id="est-startingAmount" inputmode="decimal" min="0" placeholder="10.00" required="" step="any" type="number"/> </label> <div class="est-field"> <label for="est-fromToken">
+From token
+</label> <select class="est-select est-token-select" data-default-symbol="USDC" id="est-fromToken"> <option value="">
+Loading tokens…
+</option> </select> <small>
+Choose a preset or use Search / Manage Custom Tokens.
+</small> </div> <div class="est-field"> <label for="est-toToken">
+Swap into
+</label> <select class="est-select est-token-select" data-default-symbol="wPOND" id="est-toToken"> <option value="">
+Loading tokens…
+</option> </select> <small>
+Choose a preset or use Search / Manage Custom Tokens.
+</small> </div> </div> </section> <section aria-labelledby="est-planHeading" class="est-section"> <div class="est-section-heading"> <span class="est-step">
+2
+</span> <div> <h2 id="est-planHeading">
+How should the amount be spread out?
+</h2> <p>
+Choose the part you already know. The estimator calculates the other values.
+</p> </div> </div> <div aria-label="Planning basis" class="est-segmented" role="radiogroup"> <label> <input checked="" name="estPlanMode" type="radio" value="swaps"/> <span>
+Number of swaps
+</span> </label> <label> <input name="estPlanMode" type="radio" value="time"/> <span>
+Time available
+</span> </label> </div> <div class="est-mode-panel" id="est-swapModeFields"> <label class="est-field est-field-wide"> <span>
+Split the amount across
+</span> <div class="est-input-unit"> <input id="est-swapCount" max="1000" min="1" step="1" type="number" value="20"/> <span>
+swaps
+</span> </div> </label> <details class="est-mini-details"> <summary>
+Optional: choose a fixed wait
+</summary> <label class="est-field"> <span>
+Wait After Swap
+</span> <div class="est-input-unit"> <input id="est-manualFixedWait" max="300" min="0" step="1" type="number" value="5"/> <span>
+seconds
+</span> </div> </label> </details> </div> <div class="est-mode-panel" hidden="" id="est-timeModeFields"> <div class="est-grid est-grid-duration"> <div class="est-field est-help-host"> <div class="est-label-row"> <label for="est-durationValue">
+Time available
+</label> <button aria-controls="est-help-time" aria-expanded="false" aria-label="Explain time available" class="est-help-button" type="button">
+?
+</button> </div> <input id="est-durationValue" inputmode="decimal" min="0" step="any" type="number" value="1.5"/> <div class="est-help-panel" hidden="" id="est-help-time" role="note">
+Uses the time entered to estimate the swap count, wait setting, and amount per swap. The calculator leaves part of the window for transaction processing, but cannot guarantee the run will finish on time.
+</div> </div> <label class="est-field"> <span>
+Unit
+</span> <select class="est-select" id="est-durationUnit"> <option value="minutes">
+Minutes
+</option> <option selected="" value="hours">
+Hours
+</option> <option value="days">
+Days
+</option> </select> </label> </div> <div class="est-info-line">
+The estimator reserves part of the entered window for transaction processing, then works backward into a swap count, wait setting, and amount.
+</div> </div> </section> <section aria-labelledby="est-optionsHeading" class="est-section"> <div class="est-section-heading"> <span class="est-step">
+3
+</span> <div> <h2 id="est-optionsHeading">
+Options I plan to use
+</h2> <p>
+Only selected options reveal another question.
+</p> </div> </div> <div class="est-option-grid"> <div class="est-option-shell est-help-host"> <label class="est-option-tile"> <input id="est-randomAmountEnabled" type="checkbox"/> <span class="est-option-check"> </span> <span> <strong>
+Random amounts
+</strong> <small>
+Estimate minimum and maximum amount fields.
+</small> </span> </label> <button aria-controls="est-help-random-amount" aria-expanded="false" aria-label="Explain random amounts" class="est-help-button" type="button">
+?
+</button> <div class="est-help-panel" hidden="" id="est-help-random-amount" role="note">
+AutoSwap chooses a new amount between the minimum and maximum for each applicable swap. Because each choice is independent, the total used may be lower than the total amount entered.
+</div> </div> <div class="est-option-shell est-help-host"> <label class="est-option-tile"> <input id="est-randomWaitEnabled" type="checkbox"/> <span class="est-option-check"> </span> <span> <strong>
+Random wait times
+</strong> <small>
+Estimate minimum and maximum wait fields.
+</small> </span> </label> <button aria-controls="est-help-random-wait" aria-expanded="false" aria-label="Explain random wait times" class="est-help-button" type="button">
+?
+</button> <div class="est-help-panel" hidden="" id="est-help-random-wait" role="note">
+AutoSwap chooses a new delay between the minimum and maximum after each swap. There is no wait after the final transaction, so 20 swaps contain 19 waits.
+</div> </div> <div class="est-option-shell est-help-host"> <label class="est-option-tile"> <input id="est-flipFlopEnabled" type="checkbox"/> <span class="est-option-check"> </span> <span> <strong>
+Flip-Flop
+</strong> <small>
+Show forward, reverse, and round-trip slots.
+</small> </span> </label> <button aria-controls="est-help-flip-flop" aria-expanded="false" aria-label="Explain Flip-Flop" class="est-help-button" type="button">
+?
+</button> <div class="est-help-panel" hidden="" id="est-help-flip-flop" role="note">
+Alternates forward and reverse swaps. Reverse swaps count toward the total and use the tokens actually received from the preceding forward swap.
+</div> </div> <div class="est-option-shell est-help-host"> <label class="est-option-tile"> <input id="est-randomPairsEnabled" type="checkbox"/> <span class="est-option-check"> </span> <span> <strong>
+Add more swap pairs
+</strong> <small>
+Include Pair 2 and optionally Pair 3.
+</small> </span> </label> <button aria-controls="est-help-random-pairs" aria-expanded="false" aria-label="Explain random swap pairs" class="est-help-button" type="button">
+?
+</button> <div class="est-help-panel" hidden="" id="est-help-random-pairs" role="note">
+AutoSwap randomly chooses from the valid pairs you configure. There are no weighting controls, so the calculator cannot predict how many times each pair will be selected.
+</div> </div> </div> <div class="est-reveal" hidden="" id="est-randomAmountOptions"> <div class="est-reveal-title">
+Random Amount
+</div> <div class="est-grid est-grid-2"> <label class="est-field est-field-wide"> <span>
+How different should each swap amount be?
+</span> <select class="est-select" id="est-amountVariation"> <option selected="" value="0.10">
+Almost the same
+</option> <option value="0.25">
+A noticeable mix
+</option> <option value="0.40">
+A wide mix
+</option> <option value="custom">
+Choose exact amounts
+</option> </select> <small id="est-amountDifferenceHelp">
+Keeps each random amount close to the calculated amount.
+</small> </label> <div class="est-grid est-grid-2 est-field-wide" hidden="" id="est-customAmountFields"> <label class="est-field"> <span>
+Minimum amount
+</span> <input id="est-customMinAmount" min="0" placeholder="0.50" step="any" type="number"/> </label> <label class="est-field"> <span>
+Maximum amount
+</span> <input id="est-customMaxAmount" min="0" placeholder="1.00" step="any" type="number"/> </label> </div> <label class="est-field est-field-wide" hidden=""> <span>
+Range style
+</span> <select class="est-select" id="est-amountRangeStyle"> <option selected="" value="protect">
+Keep the mathematical maximum within my total amount
+</option> <option value="center">
+Center the range on the target average
+</option> </select> <small>
+Centered ranges may mathematically require more than the amount included in the plan.
+</small> </label> </div> </div> <div class="est-reveal" hidden="" id="est-randomWaitOptions"> <div class="est-reveal-title">
+Random Wait Time
+</div> <div class="est-info-line" id="est-randomWaitTimeMessage">
+Time-based plans calculate the range automatically.
+</div> <div class="est-grid est-grid-2" id="est-randomWaitManualFields"> <label class="est-field"> <span>
+Minimum wait
+</span> <div class="est-input-unit"> <input id="est-manualMinWait" max="300" min="0" step="1" type="number" value="3"/> <span>
+seconds
+</span> </div> </label> <label class="est-field"> <span>
+Maximum wait
+</span> <div class="est-input-unit"> <input id="est-manualMaxWait" max="300" min="0" step="1" type="number" value="10"/> <span>
+seconds
+</span> </div> </label> </div> </div> <div class="est-reveal" hidden="" id="est-flipFlopOptions"> <div class="est-reveal-title">
+Flip-Flop
+</div> <div class="est-info-line">
+Flip-Flop alternates forward and reverse transactions. Reverse transactions count toward Number of Swaps and use the tokens actually received from the preceding forward transaction.
+</div> </div> <div class="est-reveal" hidden="" id="est-randomPairsOptions"> <div class="est-reveal-title">
+Random Swap Pairs
+</div> <p class="est-reveal-copy">
+AutoSwap randomly selects among valid configured pairs. There are no percentage-weight controls, so actual pair counts cannot be predicted.
+</p> <div class="est-pair-card" id="est-pair2Card"> <div class="est-pair-card-head"> <strong>
+Pair 2
+</strong> </div> <div class="est-grid est-grid-2"> <label class="est-field"> <span>
+From
+</span> <select class="est-select pair-token-select est-token-select" data-default-symbol="SOL" id="est-pair2From"> <option value="">
+Loading tokens…
+</option> </select> </label> <label class="est-field"> <span>
+To
+</span> <select class="est-select pair-token-select est-token-select" data-default-symbol="wPOND" id="est-pair2To"> <option value="">
+Loading tokens…
+</option> </select> </label> <label class="est-field"> <span>
+Amount being considered
+</span> <input id="est-pair2Amount" min="0" step="any" type="number" value="1"/> </label> <label class="est-checkbox-line"> <input id="est-pair2Random" type="checkbox"/> <span>
+Randomize Pair 2 amount
+</span> </label> </div> <div class="est-grid est-grid-2" hidden="" id="est-pair2RandomFields"> <label class="est-field"> <span>
+Minimum
+</span> <input id="est-pair2Min" min="0" step="any" type="number" value="0.5"/> </label> <label class="est-field"> <span>
+Maximum
+</span> <input id="est-pair2Max" min="0" step="any" type="number" value="1.5"/> </label> </div> </div> <button class="est-secondary-button" id="est-addPair3" type="button">
++ Add Pair 3
+</button> <div class="est-pair-card" hidden="" id="est-pair3Card"> <div class="est-pair-card-head"> <strong>
+Pair 3
+</strong> <button class="est-text-button" id="est-removePair3" type="button">
+Remove
+</button> </div> <div class="est-grid est-grid-2"> <label class="est-field"> <span>
+From
+</span> <select class="est-select pair-token-select est-token-select" data-default-symbol="USDT" id="est-pair3From"> <option value="">
+Loading tokens…
+</option> </select> </label> <label class="est-field"> <span>
+To
+</span> <select class="est-select pair-token-select est-token-select" data-default-symbol="wPOND" id="est-pair3To"> <option value="">
+Loading tokens…
+</option> </select> </label> <label class="est-field"> <span>
+Amount being considered
+</span> <input id="est-pair3Amount" min="0" step="any" type="number" value="1"/> </label> <label class="est-checkbox-line"> <input id="est-pair3Random" type="checkbox"/> <span>
+Randomize Pair 3 amount
+</span> </label> </div> <div class="est-grid est-grid-2" hidden="" id="est-pair3RandomFields"> <label class="est-field"> <span>
+Minimum
+</span> <input id="est-pair3Min" min="0" step="any" type="number" value="0.5"/> </label> <label class="est-field"> <span>
+Maximum
+</span> <input id="est-pair3Max" min="0" step="any" type="number" value="1.5"/> </label> </div> </div> </div> </section> <div class="est-errors" hidden="" id="est-formErrors" role="alert"> </div> <button class="est-primary-button" type="submit">
+Estimate AutoSwap values
+</button> </form> <section aria-live="polite" class="est-results" hidden="" id="est-results"> <div class="est-results-heading"> <div> <div class="est-eyebrow">
+Calculator output
+</div> <h2>
+Estimated values to consider entering
+</h2> </div> <button class="est-secondary-button" id="est-copyResults" type="button">
+Copy summary
+</button> </div> <div id="est-resultWarnings"> </div> <div class="est-result-card est-result-primary"> <div class="est-settings-list" id="est-settingsResult"> </div> </div> <div class="est-result-card"> <h3>
+Calculator math
+</h3> <div class="est-math-list" id="est-mathResult"> </div> </div> <details class="est-result-details"> <summary>
+Show detailed estimates
+</summary> <div class="est-detail-content" id="est-detailResult"> </div> </details> <details class="est-result-details"> <summary>
+Multiply this example
+</summary> <div class="est-group-box"> <label class="est-field"> <span>
+Participants using a similar plan
+</span> <input id="est-participantCount" max="100000" min="1" step="1" type="number" value="10"/> </label> <div class="est-math-list" id="est-groupResult"> </div> <p class="est-small-warning">
+See what the same mathematical example would look like across a selected number of participants. This does not coordinate users, verify settings, monitor transactions, or predict actual activity.
+</p> </div> </details> <div class="est-warning est-warning-strong est-result-warning"> <strong>
+These results are not guaranteed.
+</strong> <span>
+The values above are mathematical estimates based only on what you entered. Review every AutoSwap field independently before starting. Actual timing, transaction count, volume, fees, chart activity, token balances, and remaining funds may be materially different.
+</span> </div> </section> </div> <a class="est-full-page-link" href="/autoswap/estimator">
+Open estimator as a full page ↗
+</a> </div>
+</aside> <div class="rail-actions-mobile">
+<button class="asw-button asw-button-neutral" onclick="handleCheckSettings()">📋 Check Settings</button>
+<a href="/autoswap/how-to" class="asw-button-link">❓ How to Use AutoSwap</a>
+</div>
+</div> <div class="estimator-drawer-backdrop" hidden="" id="estimatorDrawerBackdrop">
+</div> <div class="debug-console-shell"> <div class="debug-console-header"> <div class="debug-console-title">🖥️ Activity Log</div> <div class="debug-console-status" id="debugStatusIndicator">Initializing...</div> </div> <div class="debug-console-content"> <div class="debug-console-controls"> <button class="debug-control-btn danger" onclick="clearDebugLog()">🗑️ Clear</button> <button class="debug-control-btn primary" onclick="exportDebugLogs()">💾 Export</button> </div> <div class="debug-log-display" id="debugLogDisplay"> <div class="debug-log-entry info"> <span class="debug-log-time">[System]</span> <span class="debug-log-message">Initializing vault activity logging</span> </div> </div> <div class="debug-stats-section"> <div class="debug-stats-grid"> <div class="debug-stat-item"> <div class="debug-stat-label">Total</div> <div class="debug-stat-value" id="debugStatTotal">1</div> </div> <div class="debug-stat-item"> <div class="debug-stat-label">Errors</div> <div class="debug-stat-value" id="debugStatErrors">0</div> </div> <div class="debug-stat-item"> <div class="debug-stat-label">Warnings</div> <div class="debug-stat-value" id="debugStatWarnings">0</div> </div> <div class="debug-stat-item"> <div class="debug-stat-label">Success</div> <div class="debug-stat-value" id="debugStatSuccess">0</div> </div> </div> </div> </div>
+</div> </div> <div id="footer-container"></div> </div> <div class="token-picker-overlay" id="tokenPickerOverlay" style="display: none;"> <div class="token-picker-modal"> <div class="token-picker-header"> <h3 class="token-picker-title">Select Token</h3> <button class="token-picker-close" id="tokenPickerClose">×</button> </div> <div class="token-picker-search"> <input 
+type="text" 
+class="token-picker-input" 
+id="tokenPickerSearch" 
+placeholder="Search name, symbol, or paste mint address..."
+autocomplete="off"
+/> <button class="token-picker-search-btn" id="tokenPickerSearchBtn">🔍</button> </div> <div class="token-picker-wallet-section" id="tokenPickerWalletSection" style="display: none;"> <div class="token-picker-wallet-header"> <span class="token-picker-wallet-title">💼 In Your Wallet</span> <button class="token-picker-wallet-toggle" id="tokenPickerWalletToggle">▼</button> </div> <div class="token-picker-wallet-results" id="tokenPickerWalletResults"></div> </div> <div class="token-picker-results" id="tokenPickerResults"> <div class="token-picker-empty">
+Type to search, or paste a Solana token mint address
+</div> </div> <div class="token-picker-footer"> <small class="token-picker-disclaimer">
+⚠️ Token info provided by third parties (Jupiter). Verification indicators are informational only. Always verify the mint address.
+</small> </div> </div>
+</div> <script src="/swapper/autoswap/autoswap-bundle.js" defer></script> </body>
+</html>

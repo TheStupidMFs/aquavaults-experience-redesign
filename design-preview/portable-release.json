@@ -1,0 +1,23 @@
+{
+  "release": "aquavaults-redesign-stage5-visual-v1-portable-v1",
+  "origin_release": "aquavaults-redesign-stage5-visual-v1",
+  "origin_project": "nothing-design",
+  "environment": "synthetic-design-only",
+  "runtime_hosts": "non-AquaVaults production hostnames, including localhost",
+  "safe_wallet": true,
+  "source_staging_unmodified": true,
+  "clean_route_aliases_already_in_stage": true,
+  "file_count_excluding_manifest": 283,
+  "critical_assets_sha256": {
+    "design-preview/mock-runtime.js": "96703bd14f7ed43ef7df30001c83318bd391effc25faf49f1a4652985aac1cac",
+    "design-preview/mock-extension.js": "fd70fd4063f6cf361f27ae654c9a99b1f263d3d04ac020eca1716fcaa75aea96",
+    "design-preview/mock-wallet-widget.js": "e7342bae20b040d018b3651bdafb51b2eef39e926c4c00405638b901f9958c9a",
+    "assets/wallet-widget.js": "e7342bae20b040d018b3651bdafb51b2eef39e926c4c00405638b901f9958c9a",
+    "_redirects": "44b1b87e53f748ae2857f0a9351f6f8475448ac0583cf7bba9929e0cb838d746",
+    "communities.html": "33447b7b638217d7f334e2a52316b79f28f7bda0805fccd4ac835fe6ab070039",
+    "autoswap/estimator.html": "1af89562eee8752dd01eebb55a5f2f43bd12af434b95e978c131f21ccf2de90e",
+    "autoswap/how-to.html": "03db9bc3d63ed1e36ef17a321b632cebce12dd801c0bd45410895a7c216c3d2f"
+  },
+  "site_root": ".",
+  "notes": "No backend, keys, onchain execution, or real API writes."
+}

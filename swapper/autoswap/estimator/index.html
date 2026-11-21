@@ -1,0 +1,350 @@
+<!DOCTYPE html> <html lang="en"><head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>AquaVaults - AutoSwap Math Estimator</title><link href="/assets/logo.png" rel="icon" type="image/png"/><link href="/header/header.css" rel="stylesheet"/><link href="/footer/footer.css" rel="stylesheet"/><link href="/swapper/autoswap/autoswap-estimator-bundle.css" rel="stylesheet"/><script defer="" src="/header/header-loader.js"></script><script defer="" src="/header/header.js"></script><script defer="" src="/footer/footer-loader.js"></script><script defer="" src="/swapper/autoswap/autoswap-estimator-bundle.js"></script></head><body class="estimator-page-body"><div class="page-wrapper"><div data-header-type="full" id="header-container"></div><main class="est-page"><section aria-labelledby="estimatorTitle" class="est-shell"><header class="est-header"><div class="est-eyebrow">Planning tool</div><h1 id="estimatorTitle">AutoSwap Math Estimator</h1><p>Work backward from the funds and time you have into values to consider entering in AutoSwap.</p><a class="est-back-link" href="/autoswap">← Back to AutoSwap</a></header><div class="estimator-root" data-estimator-context="standalone"><div class="est-warning est-warning-strong" role="note">
+<strong>Estimator only — outcomes are not guaranteed.</strong>
+<span>This calculator only helps with the math. It does not connect to a wallet, quote or execute swaps, change AutoSwap settings, or guarantee timing, balances, volume, transaction success, chart activity, or community-listing activity.</span>
+</div><form id="est-estimatorForm" novalidate="">
+<section aria-labelledby="est-fundsHeading" class="est-section">
+<div class="est-section-heading">
+<span class="est-step">1</span>
+<div>
+<h2 id="est-fundsHeading">Funds and token pair</h2>
+<p>Enter the values you are using for planning. Wallet balances are not read.</p>
+</div>
+</div>
+<div class="est-grid est-grid-2">
+<label class="est-field est-field-wide">
+<span>Total amount to use</span>
+<input id="est-startingAmount" inputmode="decimal" min="0" placeholder="10.00" required="" step="any" type="number"/>
+</label>
+<div class="est-field">
+<label for="est-fromToken">From token</label>
+<select class="est-select est-token-select" data-default-symbol="USDC" id="est-fromToken"><option value="">Loading tokens…</option></select><small>Choose a preset or use Search / Manage Custom Tokens.</small>
+</div>
+<div class="est-field">
+<label for="est-toToken">Swap into</label>
+<select class="est-select est-token-select" data-default-symbol="wPOND" id="est-toToken"><option value="">Loading tokens…</option></select><small>Choose a preset or use Search / Manage Custom Tokens.</small>
+</div>
+</div> </section>
+<section aria-labelledby="est-planHeading" class="est-section">
+<div class="est-section-heading">
+<span class="est-step">2</span>
+<div>
+<h2 id="est-planHeading">How should the amount be spread out?</h2>
+<p>Choose the part you already know. The estimator calculates the other values.</p>
+</div>
+</div>
+<div aria-label="Planning basis" class="est-segmented" role="radiogroup">
+<label>
+<input checked="" name="estPlanMode" type="radio" value="swaps"/>
+<span>Number of swaps</span>
+</label>
+<label>
+<input name="estPlanMode" type="radio" value="time"/>
+<span>Time available</span>
+</label>
+</div>
+<div class="est-mode-panel" id="est-swapModeFields">
+<label class="est-field est-field-wide">
+<span>Split the amount across</span>
+<div class="est-input-unit">
+<input id="est-swapCount" max="1000" min="1" step="1" type="number" value="20"/>
+<span>swaps</span>
+</div>
+</label>
+<details class="est-mini-details">
+<summary>Optional: choose a fixed wait</summary>
+<label class="est-field">
+<span>Wait After Swap</span>
+<div class="est-input-unit">
+<input id="est-manualFixedWait" max="300" min="0" step="1" type="number" value="5"/>
+<span>seconds</span>
+</div>
+</label>
+</details>
+</div>
+<div class="est-mode-panel" hidden="" id="est-timeModeFields">
+<div class="est-grid est-grid-duration">
+<div class="est-field est-help-host">
+<div class="est-label-row">
+<label for="est-durationValue">Time available</label>
+<button aria-controls="est-help-time" aria-expanded="false" aria-label="Explain time available" class="est-help-button" type="button">?</button>
+</div>
+<input id="est-durationValue" inputmode="decimal" min="0" step="any" type="number" value="1.5"/>
+<div class="est-help-panel" hidden="" id="est-help-time" role="note">Uses the time entered to estimate the swap count, wait setting, and amount per swap. The calculator leaves part of the window for transaction processing, but cannot guarantee the run will finish on time.</div>
+</div>
+<label class="est-field">
+<span>Unit</span>
+<select class="est-select" id="est-durationUnit">
+<option value="minutes">Minutes</option>
+<option selected="" value="hours">Hours</option>
+<option value="days">Days</option>
+</select>
+</label>
+</div>
+<div class="est-info-line">
+The estimator reserves part of the entered window for transaction processing, then works backward into a swap count, wait setting, and amount.
+</div>
+</div>
+</section>
+<section aria-labelledby="est-optionsHeading" class="est-section">
+<div class="est-section-heading">
+<span class="est-step">3</span>
+<div>
+<h2 id="est-optionsHeading">Options I plan to use</h2>
+<p>Only selected options reveal another question.</p>
+</div>
+</div>
+<div class="est-option-grid">
+<div class="est-option-shell est-help-host">
+<label class="est-option-tile">
+<input id="est-randomAmountEnabled" type="checkbox"/>
+<span class="est-option-check"></span>
+<span>
+<strong>Random amounts</strong>
+<small>Estimate minimum and maximum amount fields.</small>
+</span>
+</label>
+<button aria-controls="est-help-random-amount" aria-expanded="false" aria-label="Explain random amounts" class="est-help-button" type="button">?</button>
+<div class="est-help-panel" hidden="" id="est-help-random-amount" role="note">AutoSwap chooses a new amount between the minimum and maximum for each applicable swap. Because each choice is independent, the total used may be lower than the total amount entered.</div>
+</div>
+<div class="est-option-shell est-help-host">
+<label class="est-option-tile">
+<input id="est-randomWaitEnabled" type="checkbox"/>
+<span class="est-option-check"></span>
+<span>
+<strong>Random wait times</strong>
+<small>Estimate minimum and maximum wait fields.</small>
+</span>
+</label>
+<button aria-controls="est-help-random-wait" aria-expanded="false" aria-label="Explain random wait times" class="est-help-button" type="button">?</button>
+<div class="est-help-panel" hidden="" id="est-help-random-wait" role="note">AutoSwap chooses a new delay between the minimum and maximum after each swap. There is no wait after the final transaction, so 20 swaps contain 19 waits.</div>
+</div>
+<div class="est-option-shell est-help-host">
+<label class="est-option-tile">
+<input id="est-flipFlopEnabled" type="checkbox"/>
+<span class="est-option-check"></span>
+<span>
+<strong>Flip-Flop</strong>
+<small>Show forward, reverse, and round-trip slots.</small>
+</span>
+</label>
+<button aria-controls="est-help-flip-flop" aria-expanded="false" aria-label="Explain Flip-Flop" class="est-help-button" type="button">?</button>
+<div class="est-help-panel" hidden="" id="est-help-flip-flop" role="note">Alternates forward and reverse swaps. Reverse swaps count toward the total and use the tokens actually received from the preceding forward swap.</div>
+</div>
+<div class="est-option-shell est-help-host">
+<label class="est-option-tile">
+<input id="est-randomPairsEnabled" type="checkbox"/>
+<span class="est-option-check"></span>
+<span>
+<strong>Add more swap pairs</strong>
+<small>Include Pair 2 and optionally Pair 3.</small>
+</span>
+</label>
+<button aria-controls="est-help-random-pairs" aria-expanded="false" aria-label="Explain random swap pairs" class="est-help-button" type="button">?</button>
+<div class="est-help-panel" hidden="" id="est-help-random-pairs" role="note">AutoSwap randomly chooses from the valid pairs you configure. There are no weighting controls, so the calculator cannot predict how many times each pair will be selected.</div>
+</div>
+</div>
+<div class="est-reveal" hidden="" id="est-randomAmountOptions">
+<div class="est-reveal-title">Random Amount</div>
+<div class="est-grid est-grid-2">
+<label class="est-field est-field-wide">
+<span>How different should each swap amount be?</span>
+<select class="est-select" id="est-amountVariation">
+<option selected="" value="0.10">Almost the same</option>
+<option value="0.25">A noticeable mix</option>
+<option value="0.40">A wide mix</option>
+<option value="custom">Choose exact amounts</option>
+</select>
+<small id="est-amountDifferenceHelp">Keeps each random amount close to the calculated amount.</small>
+</label>
+<div class="est-grid est-grid-2 est-field-wide" hidden="" id="est-customAmountFields">
+<label class="est-field">
+<span>Minimum amount</span>
+<input id="est-customMinAmount" min="0" placeholder="0.50" step="any" type="number"/>
+</label>
+<label class="est-field">
+<span>Maximum amount</span>
+<input id="est-customMaxAmount" min="0" placeholder="1.00" step="any" type="number"/>
+</label>
+</div>
+<label class="est-field est-field-wide" hidden="">
+<span>Range style</span>
+<select class="est-select" id="est-amountRangeStyle">
+<option selected="" value="protect">Keep the mathematical maximum within my total amount</option>
+<option value="center">Center the range on the target average</option>
+</select>
+<small>Centered ranges may mathematically require more than the amount included in the plan.</small>
+</label>
+</div>
+</div>
+<div class="est-reveal" hidden="" id="est-randomWaitOptions">
+<div class="est-reveal-title">Random Wait Time</div>
+<div class="est-info-line" id="est-randomWaitTimeMessage">
+Time-based plans calculate the range automatically.
+</div>
+<div class="est-grid est-grid-2" id="est-randomWaitManualFields">
+<label class="est-field">
+<span>Minimum wait</span>
+<div class="est-input-unit">
+<input id="est-manualMinWait" max="300" min="0" step="1" type="number" value="3"/>
+<span>seconds</span>
+</div>
+</label>
+<label class="est-field">
+<span>Maximum wait</span>
+<div class="est-input-unit">
+<input id="est-manualMaxWait" max="300" min="0" step="1" type="number" value="10"/>
+<span>seconds</span>
+</div>
+</label>
+</div>
+</div>
+<div class="est-reveal" hidden="" id="est-flipFlopOptions">
+<div class="est-reveal-title">Flip-Flop</div>
+<div class="est-info-line">
+Flip-Flop alternates forward and reverse transactions. Reverse transactions count toward Number of Swaps and use the tokens actually received from the preceding forward transaction.
+</div>
+</div>
+<div class="est-reveal" hidden="" id="est-randomPairsOptions">
+<div class="est-reveal-title">Random Swap Pairs</div>
+<p class="est-reveal-copy">AutoSwap randomly selects among valid configured pairs. There are no percentage-weight controls, so actual pair counts cannot be predicted.</p>
+<div class="est-pair-card" id="est-pair2Card">
+<div class="est-pair-card-head">
+<strong>Pair 2</strong>
+</div>
+<div class="est-grid est-grid-2">
+<label class="est-field">
+<span>From</span>
+<select class="est-select pair-token-select est-token-select" data-default-symbol="SOL" id="est-pair2From"><option value="">Loading tokens…</option></select>
+</label>
+<label class="est-field">
+<span>To</span>
+<select class="est-select pair-token-select est-token-select" data-default-symbol="wPOND" id="est-pair2To"><option value="">Loading tokens…</option></select>
+</label>
+<label class="est-field">
+<span>Amount being considered</span>
+<input id="est-pair2Amount" min="0" step="any" type="number" value="1"/>
+</label>
+<label class="est-checkbox-line">
+<input id="est-pair2Random" type="checkbox"/>
+<span>Randomize Pair 2 amount</span>
+</label>
+</div>
+<div class="est-grid est-grid-2" hidden="" id="est-pair2RandomFields">
+<label class="est-field">
+<span>Minimum</span>
+<input id="est-pair2Min" min="0" step="any" type="number" value="0.5"/>
+</label>
+<label class="est-field">
+<span>Maximum</span>
+<input id="est-pair2Max" min="0" step="any" type="number" value="1.5"/>
+</label>
+</div>
+</div>
+<button class="est-secondary-button" id="est-addPair3" type="button">+ Add Pair 3</button>
+<div class="est-pair-card" hidden="" id="est-pair3Card">
+<div class="est-pair-card-head">
+<strong>Pair 3</strong>
+<button class="est-text-button" id="est-removePair3" type="button">Remove</button>
+</div>
+<div class="est-grid est-grid-2">
+<label class="est-field">
+<span>From</span>
+<select class="est-select pair-token-select est-token-select" data-default-symbol="USDT" id="est-pair3From"><option value="">Loading tokens…</option></select>
+</label>
+<label class="est-field">
+<span>To</span>
+<select class="est-select pair-token-select est-token-select" data-default-symbol="wPOND" id="est-pair3To"><option value="">Loading tokens…</option></select>
+</label>
+<label class="est-field">
+<span>Amount being considered</span>
+<input id="est-pair3Amount" min="0" step="any" type="number" value="1"/>
+</label>
+<label class="est-checkbox-line">
+<input id="est-pair3Random" type="checkbox"/>
+<span>Randomize Pair 3 amount</span>
+</label>
+</div>
+<div class="est-grid est-grid-2" hidden="" id="est-pair3RandomFields">
+<label class="est-field">
+<span>Minimum</span>
+<input id="est-pair3Min" min="0" step="any" type="number" value="0.5"/>
+</label>
+<label class="est-field">
+<span>Maximum</span>
+<input id="est-pair3Max" min="0" step="any" type="number" value="1.5"/>
+</label>
+</div>
+</div>
+</div>
+</section>
+<div class="est-errors" hidden="" id="est-formErrors" role="alert"></div>
+<button class="est-primary-button" type="submit">Estimate AutoSwap values</button>
+</form><section aria-live="polite" class="est-results" hidden="" id="est-results">
+<div class="est-results-heading">
+<div>
+<div class="est-eyebrow">Calculator output</div>
+<h2>Estimated values to consider entering</h2>
+</div>
+<button class="est-secondary-button" id="est-copyResults" type="button">Copy summary</button>
+</div>
+<div id="est-resultWarnings"></div>
+<div class="est-result-card est-result-primary">
+<div class="est-settings-list" id="est-settingsResult"></div>
+</div>
+<div class="est-result-card">
+<h3>Calculator math</h3>
+<div class="est-math-list" id="est-mathResult"></div>
+</div>
+<details class="est-result-details">
+<summary>Show detailed estimates</summary>
+<div class="est-detail-content" id="est-detailResult"></div>
+</details>
+<details class="est-result-details">
+<summary>Multiply this example</summary>
+<div class="est-group-box">
+<label class="est-field">
+<span>Participants using a similar plan</span>
+<input id="est-participantCount" max="100000" min="1" step="1" type="number" value="10"/>
+</label>
+<div class="est-math-list" id="est-groupResult"></div>
+<p class="est-small-warning">See what the same mathematical example would look like across a selected number of participants. This does not coordinate users, verify settings, monitor transactions, or predict actual activity.</p>
+</div>
+</details>
+<div class="est-warning est-warning-strong est-result-warning">
+<strong>These results are not guaranteed.</strong>
+<span>The values above are mathematical estimates based only on what you entered. Review every AutoSwap field independently before starting. Actual timing, transaction count, volume, fees, chart activity, token balances, and remaining funds may be materially different.</span>
+</div>
+</section></div></section></main><div id="footer-container"></div></div><div class="token-picker-overlay" id="tokenPickerOverlay" style="display: none;">
+<div class="token-picker-modal">
+<div class="token-picker-header">
+<h3 class="token-picker-title">Select Token</h3>
+<button class="token-picker-close" id="tokenPickerClose">×</button>
+</div>
+<div class="token-picker-search">
+<input autocomplete="off" class="token-picker-input" id="tokenPickerSearch" placeholder="Search name, symbol, or paste mint address..." type="text"/>
+<button class="token-picker-search-btn" id="tokenPickerSearchBtn">🔍</button>
+</div> <div class="token-picker-wallet-section" id="tokenPickerWalletSection" style="display: none;">
+<div class="token-picker-wallet-header">
+<span class="token-picker-wallet-title">💼 In Your Wallet</span>
+<button class="token-picker-wallet-toggle" id="tokenPickerWalletToggle">▼</button>
+</div>
+<div class="token-picker-wallet-results" id="tokenPickerWalletResults"></div>
+</div>
+<div class="token-picker-results" id="tokenPickerResults">
+<div class="token-picker-empty">
+Type to search, or paste a Solana token mint address
+</div>
+</div>
+<div class="token-picker-footer">
+<small class="token-picker-disclaimer">
+⚠️ Token info provided by third parties (Jupiter). Verification indicators are informational only. Always verify the mint address.
+</small>
+</div>
+</div>
+</div></body></html>

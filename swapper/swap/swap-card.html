@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+ <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>AquaVaults - Swapper</title> <link rel="icon" type="image/png" href="/assets/logo.png" /> <link rel="apple-touch-icon" href="/assets/logo.png" /> <meta property="og:image" content="/assets/logo.png" /> <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.8/lib/index.iife.min.js" integrity="sha384-ujeTtvHxhu2g5lnu14Roii2ajvVKJ74KQ6eo6GGfAi0IrKZ1YkF8N68Iw5VmIJO0" crossorigin="anonymous"></script> <link rel="stylesheet" href="/swapper/swap/swap-bundle.css" /> <link rel="stylesheet" href="/header/header.css" /> <link rel="stylesheet" href="/footer/footer.css" /> <script src="/header/header-loader.js" defer></script> <script src="/header/header.js" defer></script> <script src="/assets/wallet-widget.js"></script> <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+<div class="page-wrapper"> <div id="header-container" data-header-type="full"></div> <div class="page-content"> <div class="trade-shell"> <aside class="utility-rail"> <div class="utility-rail-heading">Context</div> <div class="community-selector-container"> <div class="tooltip-container" id="communityTooltipContainer"> <div class="community-selector" id="communitySelector" onclick="toggleCommunityDropdown()"> <div class="community-selected" id="communitySelected"> <span class="select-prompt">Select a community to enable swaps</span> </div> <script>
+(function(){
+var id = localStorage.getItem('selectedCommunity');
+if (id) {
+var el = document.getElementById('communitySelected');
+if (el) el.innerHTML = '<span style="color:transparent;font-size:0.85rem;font-weight:600;">Loading\u2026</span>';
+}
+})();
+</script> <div class="community-dropdown-arrow">▼</div> </div> <span class="info-icon" onclick="toggleTooltip(event, 'communityTooltipContainer')" style="position: absolute; right: 2.5rem; top: 50%; transform: translateY(-50%); z-index: 10;">ⓘ</span> <div class="tooltip">
+Select which community receives swap fees. Each community may support different tokens through their fee vaults. Fees are routed to the selected community's token vaults or treasury wallet depending on the token.
+</div> </div> <div class="community-dropdown" id="communityDropdown"> </div> </div> <div class="active-vault-pill rail-hidden-vault-pill" id="vaultPill" aria-hidden="true"> <div class="vault-pill-header"><img src="/assets/logo-transparent.png" alt="AquaVaults" class="vault-logo" /><span>SOL Vault (AquaVaults):</span></div><div class="vault-pill-address">Loading...</div> </div> <div class="section"> <div class="constraints-container" id="constraintsContainer"> <div class="constraints-header" onclick="toggleConstraints()"> <div class="constraints-title">⚙️ Swap Settings</div> <div class="constraints-preview-inline"> <span id="feePreview">1.00%</span> • <span id="slippagePreview">1.00%</span> • <span id="priorityPreview">Auto</span> </div> </div> <div class="constraints-body"> <div class="constraint-field"> <div class="constraint-field-label tooltip-container" id="feeTooltipContainer">
+💰 Platform Fee (in %)
+<span class="info-icon" onclick="toggleTooltip(event, 'feeTooltipContainer')">ℹ</span> <div class="tooltip">
+Fee you choose for using AquaVaults (separate from network/DEX fees). Depending on token support, the fee may be routed via affiliate vaults or collected as a separate transfer in the input token. Review your wallet prompt before signing.
+</div> </div> <div class="constraint-field-input"> <div class="input-wrapper"> <input type="number" class="constraint-input" id="feeInput" value="1.0" min="0" max="10" step="0.1" onchange="updateFeeDisplay()" /> <div class="arrows-overlay"> <button class="arrow-overlay" onclick="adjustFee(0.5)">▴</button> <button class="arrow-overlay" onclick="adjustFee(-0.5)">▾</button> </div> </div> </div> </div> <div class="constraint-field"> <div class="constraint-field-label tooltip-container" id="slippageTooltipContainer">
+📊 Slippage (in %)
+<span class="info-icon" onclick="toggleTooltip(event, 'slippageTooltipContainer')">ℹ</span> <div class="tooltip">
+Maximum price movement tolerance during swap. Higher slippage allows faster execution but may result in less favorable rates.
+</div> </div> <div class="constraint-field-input"> <div class="input-wrapper"> <input type="number" class="constraint-input" id="slippageInput" value="1.0" min="0" max="50" step="0.1" onchange="updateSlippageDisplay()" /> <div class="arrows-overlay"> <button class="arrow-overlay" onclick="adjustSlippage(0.5)">▴</button> <button class="arrow-overlay" onclick="adjustSlippage(-0.5)">▾</button> </div> </div> </div> </div> <div class="constraint-field"> <div class="constraint-field-label tooltip-container" id="priorityTooltipContainer">
+⚡ Priority Fee
+<span class="info-icon" onclick="toggleTooltip(event, 'priorityTooltipContainer')">ℹ</span> <div class="tooltip">
+Extra fee to help your transaction confirm faster during network congestion. Higher fees may result in faster confirmation.
+</div> </div> <div class="constraint-field-input"> <select class="constraint-select" id="prioritySelect" onchange="updatePriorityDisplay()"> <option value="0">Auto (Default)</option> <option value="10000">Low congestion fee (0.00001 SOL)</option> <option value="100000">Standard congestion fee (0.0001 SOL)</option> <option value="500000">Elevated congestion fee (0.0005 SOL)</option> <option value="custom">Custom</option> </select> </div> </div> <div class="constraint-field" id="customPriorityContainer" style="display: none;"> <div class="constraint-field-label">
+Custom (SOL)
+</div> <div class="constraint-field-input"> <input type="number" class="constraint-input" id="customPriorityInput" value="0.0001" min="0" max="0.01" step="0.00001" oninput="updatePriorityDisplay()" /> </div> </div> </div> </div> </div> <button class="btn btn-secondary" onclick="checkSettings()" type="button">📋 Check Settings</button> <button class="btn btn-secondary" onclick="openShareModal()" type="button">🔗 Generate Share Link</button> </aside> <div class="card-shell"> <div class="mode-tabs" role="tablist" aria-label="Swapper mode"> <button class="mode-tab active" id="tabSwap" type="button" role="tab" aria-selected="true"> Swap</button> <button class="mode-tab" id="tabAuto" type="button" role="tab" aria-selected="false">Auto Swap</button> </div> <div class="swap-card"> <div id="panelSwap"> <div class="section swap-form"> <div class="form-row"> <label class="form-label">From</label> <select class="form-select" id="fromSelect" onchange="handleTokenChange()"> <option value="So11111111111111111111111111111111111111112">SOL</option> <option value="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v">USDC</option> <option value="Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB">USDT</option> <option value="3JgFwoYV74f6LwWjQWnr3YDPFnmBdwQfNyubv99jqUoq">wPOND</option> <option value="he1iusmfkpAdwvxLNGV8Y1iSbj4rUy6yMhEA3fotn9A">hSOL</option> <option value="mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So">mSOL</option> <option value="B5WTLaRwaUQpKk7ir1wniNB6m5o8GgMrimhKMYan2R6B">PepeOnSOL</option> <option value="__custom__" style="border-top: 2px solid #4f46e5; margin-top: 0.25rem;">🔍 Search / Manage Custom Tokens</option> </select> <div class="selected-mint-row"> <span class="selected-mint-label">Mint</span> <code
+class="selected-mint-value"
+id="fromMintDisplay"
+title="So11111111111111111111111111111111111111112"
+>So11111111111111111111111111111111111111112</code> <button
+class="selected-mint-copy"
+id="fromMintCopy"
+type="button"
+title="Copy From mint"
+aria-label="Copy From token mint"
+>📋</button> </div> </div> <div class="tooltip-container flip-tooltip"> <button class="flip-button" id="flipBtn" type="button" aria-label="Flip From / To">
+⇅
+</button> <div class="tooltip">Flip From / To</div> </div> <div class="form-row"> <label class="form-label">To</label> <select class="form-select" id="toSelect" onchange="handleTokenChange()"> <option value="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v">USDC</option> <option value="Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB">USDT</option> <option value="So11111111111111111111111111111111111111112">SOL</option> <option value="3JgFwoYV74f6LwWjQWnr3YDPFnmBdwQfNyubv99jqUoq">wPOND</option> <option value="he1iusmfkpAdwvxLNGV8Y1iSbj4rUy6yMhEA3fotn9A">hSOL</option> <option value="mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So">mSOL</option> <option value="B5WTLaRwaUQpKk7ir1wniNB6m5o8GgMrimhKMYan2R6B">PepeOnSOL</option> <option value="__custom__" style="border-top: 2px solid #4f46e5; margin-top: 0.25rem;">🔍 Search / Manage Custom Tokens</option> </select> <div class="selected-mint-row"> <span class="selected-mint-label">Mint</span> <code
+class="selected-mint-value"
+id="toMintDisplay"
+title="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+>EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v</code> <button
+class="selected-mint-copy"
+id="toMintCopy"
+type="button"
+title="Copy To mint"
+aria-label="Copy To token mint"
+>📋</button> </div> </div> <div class="form-row"> <div class="amount-label-row"> <label class="form-label">Amount</label> <div class="info-row balance-inline" id="balanceDisplay">Balance: —</div> </div> <div style="position: relative; display: flex; align-items: center; gap: 0.5rem;"> <input type="text" class="form-input" id="amountInput" placeholder="0.00" oninput="handleAmountChange()" style="flex: 1;" /> <button class="btn-max" onclick="handleMaxClick()" type="button">MAX</button> </div> </div> </div> <div class="section outcome-section"> <div class="info-row" id="estimateDisplay">Estimated output: —</div> <button class="btn btn-primary" id="swapBtn" onclick="handleSwap()" disabled style="width: 100%;">Swap</button> <div id="statusDisplay" style="margin-top: 0.4rem; font-size: 0.85rem;"></div> </div> </div> </div>
+</div> <div class="rail-actions-mobile"> <button class="btn btn-secondary" onclick="checkSettings()" type="button">📋 Check Settings</button> <button class="btn btn-secondary" onclick="openShareModal()" type="button">🔗 Generate Share Link</button> </div> </div> <div class="debug-console-shell"> <div class="debug-console-header"> <div class="debug-console-title">🖥️ Activity Log</div> <div class="debug-console-status" id="debugStatusIndicator">Initializing...</div> </div> <div class="debug-console-content"> <div class="debug-console-controls"> <button class="debug-control-btn danger" onclick="clearDebugLog()">🗑️ Clear</button> <button class="debug-control-btn primary" onclick="exportDebugLogs()">💾 Export</button> </div> <div class="debug-log-display" id="debugLogDisplay"> <div class="debug-log-entry info"> <span class="debug-log-time">[System]</span> <span class="debug-log-message">Initializing vault activity logging</span> </div> </div> <div class="debug-stats-section"> <div class="debug-stats-grid"> <div class="debug-stat-item"> <div class="debug-stat-label">Total</div> <div class="debug-stat-value" id="debugStatTotal">1</div> </div> <div class="debug-stat-item"> <div class="debug-stat-label">Errors</div> <div class="debug-stat-value" id="debugStatErrors">0</div> </div> <div class="debug-stat-item"> <div class="debug-stat-label">Warnings</div> <div class="debug-stat-value" id="debugStatWarnings">0</div> </div> <div class="debug-stat-item"> <div class="debug-stat-label">Success</div> <div class="debug-stat-value" id="debugStatSuccess">0</div> </div> </div> </div> </div>
+</div> </div> <div id="footer-container"></div> </div> <div class="token-picker-overlay" id="tokenPickerOverlay" style="display: none;"> <div class="token-picker-modal"> <div class="token-picker-header"> <h3 class="token-picker-title">Select Token</h3> <button class="token-picker-close" id="tokenPickerClose">×</button> </div> <div class="token-picker-search"> <input 
+type="text" 
+class="token-picker-input" 
+id="tokenPickerSearch" 
+placeholder="Search name, symbol, or paste mint address..."
+autocomplete="off"
+/> <button class="token-picker-search-btn" id="tokenPickerSearchBtn">🔍</button> </div> <div class="token-picker-wallet-section" id="tokenPickerWalletSection" style="display: none;"> <div class="token-picker-wallet-header"> <span class="token-picker-wallet-title">💼 In Your Wallet</span> <button class="token-picker-wallet-toggle" id="tokenPickerWalletToggle">▼</button> </div> <div class="token-picker-wallet-results" id="tokenPickerWalletResults"></div> </div> <div class="token-picker-results" id="tokenPickerResults"> <div class="token-picker-empty">
+Type to search, or paste a Solana token mint address
+</div> </div> <div class="token-picker-footer"> <small class="token-picker-disclaimer">
+⚠️ Token info provided by third parties (Jupiter). Verification indicators are informational only. Always verify the mint address.
+</small> </div> </div>
+</div> <div class="token-picker-overlay" id="shareLinkOverlay" style="display: none;"> <div class="token-picker-modal"> <div class="token-picker-header"> <h3 class="token-picker-title">Share Link</h3> <button class="token-picker-close" onclick="closeShareModal()" type="button">×</button> </div> <div style="padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.75rem;"> <div class="mode-tabs" id="sharePreviewTabs" role="tablist" aria-label="Preview style"> <button class="mode-tab active" id="sharePreviewCommunity" type="button" role="tab" aria-selected="true" onclick="setSharePreviewMode('community')">Community Brand</button> <button class="mode-tab" id="sharePreviewToken" type="button" role="tab" aria-selected="false" onclick="setSharePreviewMode('token')">Output Token</button> </div> <div class="token-picker-result" id="sharePreviewCard"> <div class="token-picker-result-icon"> <img id="sharePreviewImg" alt="" /> </div> <div class="token-picker-result-info"> <div class="token-picker-result-header"> <span class="token-picker-result-symbol" id="sharePreviewTitle"></span> </div> <div class="token-picker-result-name" id="sharePreviewSubtitle"></div> </div> </div> <div id="shareSummary"></div> <textarea class="token-picker-input" id="shareLinkInput" readonly rows="3" style="width: 100%; resize: vertical; font-family: monospace; word-break: break-all;"></textarea> </div> <div style="padding: 0.75rem 1.25rem; display: flex; gap: 0.5rem;"> <button class="btn btn-primary" id="shareCopyBtn" onclick="copyShareLink()" type="button" style="flex: 1;">Copy</button> <button class="btn btn-secondary" onclick="shareShareLinkX()" type="button" style="flex: 1;">Share on X</button> <button class="btn btn-secondary" onclick="closeShareModal()" type="button" style="flex: 1;">Close</button> </div> <div class="token-picker-footer"> <small class="token-picker-disclaimer">
+This link opens AquaVaults with your selected community and tokens preloaded.
+</small> </div> </div>
+</div> <script src="/swapper/swap/swap-bundle.js" defer></script>
+</body>
+</html>

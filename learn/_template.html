@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Page Title] — AquaVaults Learn</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <meta property="og:image" content="/assets/logo.png" />
+    <meta name="description" content="[Page description — 1 sentence]" />
+    <link rel="stylesheet" href="/about.css">
+    <link rel="stylesheet" href="/learn/docs.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/header/header-loader.js" defer></script>
+    <script src="/header/header.js" defer></script>
+    <script src="/learn/docs.js" defer></script>
+    <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+    <div id="header-container" data-header-type="simple"></div>
+
+    <div class="docs-layout">
+
+        <aside id="docs-sidebar" class="docs-sidebar">
+            <!-- injected by docs.js -->
+        </aside>
+
+        <main class="docs-main">
+
+            <nav class="docs-breadcrumbs">
+                <a href="/learn" class="docs-breadcrumb-link">Learn</a>
+                <span class="docs-breadcrumb-sep">›</span>
+                <span>[Section Name]</span>
+            </nav>
+
+            <header class="docs-hero">
+                <div class="docs-hero-badge">[Category — e.g. Tools / For Communities / Join]</div>
+                <h1>[Page Title]</h1>
+                <p class="docs-hero-sub">[One-sentence summary of what this page covers.]</p>
+            </header>
+
+            <div class="docs-content">
+
+                <div class="docs-section">
+                    <h2 id="section-one">[Section Title]</h2>
+                    <p>[Content]</p>
+                </div>
+
+                <!-- Continue Exploring — update links per page -->
+                <div class="docs-explore">
+                    <p class="docs-explore-title">Continue Exploring</p>
+                    <div class="docs-explore-links">
+                        <a href="/learn/[page]" class="docs-explore-link">[Related Page] →</a>
+                        <a href="/learn/[page]" class="docs-explore-link">[Related Page] →</a>
+                        <a href="/learn/[page]" class="docs-explore-link">[Related Page] →</a>
+                    </div>
+                </div>
+
+                <!-- Pagination — update per page -->
+                <nav class="docs-pagination">
+                    <a href="/learn/[prev-page]" class="docs-pag-link">
+                        <span class="docs-pag-direction">← Previous</span>
+                        <span class="docs-pag-title">[Prev Page Title]</span>
+                    </a>
+                    <a href="/learn/[next-page]" class="docs-pag-link docs-pag-next">
+                        <span class="docs-pag-direction">Next →</span>
+                        <span class="docs-pag-title">[Next Page Title]</span>
+                    </a>
+                </nav>
+
+            </div>
+        </main>
+
+    </div>
+
+    <div id="footer-container"></div>
+</body>
+</html>

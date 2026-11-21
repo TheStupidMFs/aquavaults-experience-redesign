@@ -1,0 +1,692 @@
+{
+  "source_commit": "b766360a6078f63f2dbccc34c562415363b88b02",
+  "html_count": 69,
+  "routes": [
+    {
+      "section": "General",
+      "url": "/404",
+      "source": "404.html",
+      "fragment": false
+    },
+    {
+      "section": "General",
+      "url": "/about",
+      "source": "about.html",
+      "fragment": false
+    },
+    {
+      "section": "Account",
+      "url": "/account/",
+      "source": "account/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Admin",
+      "url": "/admin/connector-review/",
+      "source": "admin/connector-review/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Admin",
+      "url": "/admin/",
+      "source": "admin/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Applications",
+      "url": "/apply/artwork",
+      "source": "apply/artwork/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Applications",
+      "url": "/apply",
+      "source": "apply/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Campaigns",
+      "url": "/campaigns",
+      "source": "campaigns/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Communities",
+      "url": "/communities",
+      "source": "community-affiliates/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Connectors",
+      "url": "/connect",
+      "source": "connect/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Connectors",
+      "url": "/connector",
+      "source": "connector/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Co-Op Mining Rig",
+      "url": "/coop-rig",
+      "source": "coop-rig/index.html",
+      "fragment": false
+    },
+    {
+      "section": "General",
+      "url": "/footer/footer",
+      "source": "footer/footer.html",
+      "fragment": true
+    },
+    {
+      "section": "General",
+      "url": "/header/header-full",
+      "source": "header/header-full.html",
+      "fragment": true
+    },
+    {
+      "section": "General",
+      "url": "/header/header-simple",
+      "source": "header/header-simple.html",
+      "fragment": true
+    },
+    {
+      "section": "Home",
+      "url": "/",
+      "source": "index.html",
+      "fragment": false
+    },
+    {
+      "section": "Trading",
+      "url": "/launch/swap/",
+      "source": "launch/swap/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/_template",
+      "source": "learn/_template.html",
+      "fragment": true
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/account",
+      "source": "learn/account.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/autoswap",
+      "source": "learn/autoswap.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/campaign-ideas",
+      "source": "learn/campaign-ideas.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/community-campaigns",
+      "source": "learn/community-campaigns.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/community-driven-liquidity",
+      "source": "learn/community-driven-liquidity.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/community-wheel",
+      "source": "learn/community-wheel.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/connectors",
+      "source": "learn/connectors.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/coop-rig",
+      "source": "learn/coop-rig.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/docs-sidebar",
+      "source": "learn/docs-sidebar.html",
+      "fragment": true
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/evm-swapper",
+      "source": "learn/evm-swapper.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/for-nft-projects",
+      "source": "learn/for-nft-projects.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/for-token-communities",
+      "source": "learn/for-token-communities.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/get-listed",
+      "source": "learn/get-listed.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/growth-program",
+      "source": "learn/growth-program.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/holder-intelligence",
+      "source": "learn/holder-intelligence.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn",
+      "source": "learn/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/intro",
+      "source": "learn/intro.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/limit-orders",
+      "source": "learn/limit-orders.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/lp",
+      "source": "learn/lp.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/revenue-allocation",
+      "source": "learn/revenue-allocation.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/solana-swapper",
+      "source": "learn/solana-swapper.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/swap-widget",
+      "source": "learn/swap-widget.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/user-rewards",
+      "source": "learn/user-rewards.html",
+      "fragment": false
+    },
+    {
+      "section": "Learn",
+      "url": "/learn/wheel-spinner",
+      "source": "learn/wheel-spinner.html",
+      "fragment": false
+    },
+    {
+      "section": "Liquidity",
+      "url": "/lp/",
+      "source": "lp/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Pond",
+      "url": "/pond/",
+      "source": "pond/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Pond",
+      "url": "/pond/swapper",
+      "source": "pond/swapper.html",
+      "fragment": false
+    },
+    {
+      "section": "Liquidity",
+      "url": "/preview/create",
+      "source": "pool-preview/pools-create.html",
+      "fragment": false
+    },
+    {
+      "section": "Liquidity",
+      "url": "/preview/dashboard",
+      "source": "pool-preview/pools-dashboard.html",
+      "fragment": false
+    },
+    {
+      "section": "Liquidity",
+      "url": "/preview/details",
+      "source": "pool-preview/pools-detail.html",
+      "fragment": false
+    },
+    {
+      "section": "Liquidity",
+      "url": "/preview/browse",
+      "source": "pool-preview/pools-index.html",
+      "fragment": false
+    },
+    {
+      "section": "Liquidity",
+      "url": "/preview",
+      "source": "pool-preview/pools-landing.html",
+      "fragment": false
+    },
+    {
+      "section": "Command Center",
+      "url": "/portal/claim/",
+      "source": "portal/claim/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Command Center",
+      "url": "/portal/dashboard/",
+      "source": "portal/dashboard/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Command Center",
+      "url": "/portal/",
+      "source": "portal/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Command Center",
+      "url": "/portal/invite/",
+      "source": "portal/invite/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Command Center",
+      "url": "/portal/onboarding/",
+      "source": "portal/onboarding/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Command Center",
+      "url": "/portal/team/",
+      "source": "portal/team/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Rewards",
+      "url": "/rewards",
+      "source": "rewards/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Rewards",
+      "url": "/rewards/rules/",
+      "source": "rewards/rules/index.html",
+      "fragment": false
+    },
+    {
+      "section": "SDK",
+      "url": "/sdk/test",
+      "source": "sdk/test.html",
+      "fragment": false
+    },
+    {
+      "section": "Trading",
+      "url": "/autoswap",
+      "source": "swapper/autoswap/autoswap-card.html",
+      "fragment": false
+    },
+    {
+      "section": "Trading",
+      "url": "/autoswap/estimator",
+      "source": "swapper/autoswap/estimator/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Trading",
+      "url": "/autoswap/how-to",
+      "source": "swapper/autoswap/how-to/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Trading",
+      "url": "/evm-swap",
+      "source": "swapper/evm/swap-card.html",
+      "fragment": false
+    },
+    {
+      "section": "Trading",
+      "url": "/limit-order",
+      "source": "swapper/limit-order/limit-order.html",
+      "fragment": false
+    },
+    {
+      "section": "Trading",
+      "url": "/swap",
+      "source": "swapper/swap/swap-card.html",
+      "fragment": false
+    },
+    {
+      "section": "Trading",
+      "url": "/swapper/token-picker/token-picker",
+      "source": "swapper/token-picker/token-picker.html",
+      "fragment": true
+    },
+    {
+      "section": "General",
+      "url": "/tos",
+      "source": "tos.html",
+      "fragment": false
+    },
+    {
+      "section": "Community Wheel",
+      "url": "/wheel/",
+      "source": "wheel/index.html",
+      "fragment": false
+    },
+    {
+      "section": "Community Wheel",
+      "url": "/wheel/results/",
+      "source": "wheel/results/index.html",
+      "fragment": false
+    }
+  ],
+  "proxy_200_redirects": {
+    "/swap": "swapper/swap/swap-card.html",
+    "/evm-swap": "swapper/evm/swap-card.html",
+    "/autoswap/how-to": "swapper/autoswap/how-to/index.html",
+    "/autoswap/estimator": "swapper/autoswap/estimator/index.html",
+    "/autoswap": "swapper/autoswap/autoswap-card.html",
+    "/limit-order": "swapper/limit-order/limit-order.html",
+    "/communities": "community-affiliates/index.html",
+    "/coop-rig": "coop-rig/index.html",
+    "/rewards": "rewards/index.html",
+    "/connector": "connector/index.html",
+    "/apply/artwork": "apply/artwork/index.html",
+    "/apply": "apply/index.html",
+    "/connect": "connect/index.html",
+    "/campaigns": "campaigns/index.html",
+    "/preview": "pool-preview/pools-landing.html",
+    "/preview/browse": "pool-preview/pools-index.html",
+    "/preview/details": "pool-preview/pools-detail.html",
+    "/preview/create": "pool-preview/pools-create.html",
+    "/preview/dashboard": "pool-preview/pools-dashboard.html",
+    "/learn": "learn/index.html"
+  },
+  "function_page_paths_not_copied": [
+    "functions/evm/[[path]].js",
+    "functions/lib/account-activity.js",
+    "functions/lib/account-api.js",
+    "functions/lib/account-auth.js",
+    "functions/lib/account-coop-bridge.js",
+    "functions/lib/account-create.js",
+    "functions/lib/account-onboarding.js",
+    "functions/lib/account-origin.js",
+    "functions/lib/account-rate-limit.js",
+    "functions/lib/account-rewards-consent.js",
+    "functions/lib/account-rewards-existing.js",
+    "functions/lib/account-rewards-new.js",
+    "functions/lib/account-rewards-reconcile.js",
+    "functions/lib/account-rewards-sso.js",
+    "functions/lib/account-sign-in.js",
+    "functions/lib/account-unified-logout.js",
+    "functions/lib/account-unified-policies.js",
+    "functions/lib/admin-audit.js",
+    "functions/lib/admin-auth.js",
+    "functions/lib/alchemy-urls.js",
+    "functions/lib/av-allocation-approval.js",
+    "functions/lib/av-allocation-assets.js",
+    "functions/lib/av-allocation-baseline.js",
+    "functions/lib/av-allocation-broadcast-authorization.js",
+    "functions/lib/av-allocation-broadcast-submission.js",
+    "functions/lib/av-allocation-cancellation.js",
+    "functions/lib/av-allocation-evaluator.js",
+    "functions/lib/av-allocation-inspector.js",
+    "functions/lib/av-allocation-policy.js",
+    "functions/lib/av-allocation-preflight.js",
+    "functions/lib/av-allocation-reporting.js",
+    "functions/lib/av-allocation-settlement-finalizer.js",
+    "functions/lib/av-allocation-signed-verifier.js",
+    "functions/lib/av-allocation-token-accounts.js",
+    "functions/lib/av-allocation-transaction-builder.js",
+    "functions/lib/av-jupiter-referral-local.js",
+    "functions/lib/av-revenue-claim-broadcast-authorization.js",
+    "functions/lib/av-revenue-claim-broadcast-submission.js",
+    "functions/lib/av-revenue-claim-foundation.js",
+    "functions/lib/av-revenue-claim-settlement-finalizer.js",
+    "functions/lib/av-revenue-claim-signed-verifier.js",
+    "functions/lib/av-revenue-claim-vaults.js",
+    "functions/lib/av-treasury-conversion-execution.js",
+    "functions/lib/av-treasury-manual-conversion.js",
+    "functions/lib/campaign-admin.js",
+    "functions/lib/campaign-build-attribution-v2.js",
+    "functions/lib/campaign-build-fee-plan-evidence-v2.js",
+    "functions/lib/campaign-build-value-evidence-v2.js",
+    "functions/lib/campaign-competition-runtime.js",
+    "functions/lib/campaign-current-draft-v2.js",
+    "functions/lib/campaign-engine.js",
+    "functions/lib/campaign-lifecycle-v2.js",
+    "functions/lib/campaign-metric-source-v2.js",
+    "functions/lib/campaign-newcomer-provisional-review-v2.js",
+    "functions/lib/campaign-newcomer-provisional-v1.js",
+    "functions/lib/campaign-orchestration-v2.js",
+    "functions/lib/campaign-placement-preparer-v2.js",
+    "functions/lib/campaign-placement-strength-v1.js",
+    "functions/lib/campaign-public-presentation-v2.js",
+    "functions/lib/campaign-public-presentation-v3.js",
+    "functions/lib/campaign-public-visibility-v1.js",
+    "functions/lib/campaign-publication.js",
+    "functions/lib/campaign-reconciliation-v2.js",
+    "functions/lib/campaign-reward-application-v2.js",
+    "functions/lib/campaign-reward-lifecycle-reconciler-v2.js",
+    "functions/lib/campaign-reward-routing-v2.js",
+    "functions/lib/campaign-snapshot.js",
+    "functions/lib/campaign-standings-writer-v2.js",
+    "functions/lib/campaign-template-runtime.js",
+    "functions/lib/campaign-templates.js",
+    "functions/lib/campaign-unified-placement-v1.js",
+    "functions/lib/campaign-widget-origin-owner-v2.js",
+    "functions/lib/canonical-fee-freeze-v1.js",
+    "functions/lib/collection-intelligence-access.js",
+    "functions/lib/collection-intelligence-exclusions.js",
+    "functions/lib/collection-intelligence-expired-receipts.js",
+    "functions/lib/collection-intelligence-native-dispatch.js",
+    "functions/lib/collection-intelligence-presets.js",
+    "functions/lib/collection-intelligence-results.js",
+    "functions/lib/collection-intelligence-token-jobs.js",
+    "functions/lib/collection-intelligence-token-odds.js",
+    "functions/lib/collection-intelligence-token-recovery.js",
+    "functions/lib/collection-intelligence-token-rules.js",
+    "functions/lib/collection-intelligence-wheel-entries.js",
+    "functions/lib/command-center-preview.js",
+    "functions/lib/community-connect.js",
+    "functions/lib/community-reward-grants.js",
+    "functions/lib/connector-applications.js",
+    "functions/lib/connector-artwork.js",
+    "functions/lib/connector-community-progress.js",
+    "functions/lib/connector-disassociation.js",
+    "functions/lib/connector-enrollment.js",
+    "functions/lib/connector-first-listing.js",
+    "functions/lib/connector-listing-setup.js",
+    "functions/lib/connector-manual-rewards.js",
+    "functions/lib/connector-notifications.js",
+    "functions/lib/connector-overview.js",
+    "functions/lib/connector-owner-claim-guard.js",
+    "functions/lib/connector-participants.js",
+    "functions/lib/connector-production-evidence.js",
+    "functions/lib/connector-reward-ledger.js",
+    "functions/lib/connector-reward-settlement-proof.js",
+    "functions/lib/connector-rewards-review.js",
+    "functions/lib/connector-treasury-authorization.js",
+    "functions/lib/connector-upgrade-floor.js",
+    "functions/lib/connector-upgrade-foundation.js",
+    "functions/lib/connector-upgrade-payment-state.js",
+    "functions/lib/connector-upgrade-payment.js",
+    "functions/lib/connector-upgrade-window.js",
+    "functions/lib/coop-auth.js",
+    "functions/lib/coop-contribution-fingerprint.js",
+    "functions/lib/coop-hashboost-window.js",
+    "functions/lib/coop-onchain-config.js",
+    "functions/lib/coop-rate-limit.js",
+    "functions/lib/coop-rewards.js",
+    "functions/lib/dashboard-auth.js",
+    "functions/lib/dashboard-entitlements.js",
+    "functions/lib/dashboard-rate-limit.js",
+    "functions/lib/evm-exact-volume-writer.js",
+    "functions/lib/evm-fee-plan.js",
+    "functions/lib/evm-finalized-quote-proof.js",
+    "functions/lib/evm-firm-quote-evidence.js",
+    "functions/lib/evm-recipients.js",
+    "functions/lib/evm-token-normalize.js",
+    "functions/lib/evm-trusted-settlement-rpc.js",
+    "functions/lib/evm-verified-volume.js",
+    "functions/lib/evm-volume-meta.js",
+    "functions/lib/first-party-build-value-evidence.js",
+    "functions/lib/first-party-share-attribution.js",
+    "functions/lib/first-party-swap-fee-plan-evidence.js",
+    "functions/lib/first-party-verified-volume.js",
+    "functions/lib/giveaway-collection-scan.js",
+    "functions/lib/giveaway-dashboard.js",
+    "functions/lib/giveaway-eligibility.js",
+    "functions/lib/giveaway-nft-history.js",
+    "functions/lib/giveaway-token-audit.js",
+    "functions/lib/grants.js",
+    "functions/lib/holder-audit-credit.js",
+    "functions/lib/holder-audit-payment.js",
+    "functions/lib/holder-intelligence-chain-evidence.js",
+    "functions/lib/holder-intelligence-core-history.js",
+    "functions/lib/lp/claim-fund-build-binding.js",
+    "functions/lib/lp/claim-fund-public-execution.js",
+    "functions/lib/lp/claim-only-build-binding.js",
+    "functions/lib/lp/claim-only-verification.js",
+    "functions/lib/lp/community-pools.js",
+    "functions/lib/lp/cors.js",
+    "functions/lib/lp/damm.js",
+    "functions/lib/lp/dfs-claims-history.js",
+    "functions/lib/lp/dfs-verification.js",
+    "functions/lib/lp/dfs.js",
+    "functions/lib/lp/entry-public-execution.js",
+    "functions/lib/lp/json.js",
+    "functions/lib/lp/liquidity-build.js",
+    "functions/lib/lp/liquidity-entry.js",
+    "functions/lib/lp/liquidity-tfc-create-public.js",
+    "functions/lib/lp/liquidity-verify.js",
+    "functions/lib/lp/liquidity-wallet-augmentation.js",
+    "functions/lib/lp/mainnet-execution.js",
+    "functions/lib/lp/meteora-api.js",
+    "functions/lib/lp/pool-directory.js",
+    "functions/lib/lp/read-rate-limit.js",
+    "functions/lib/lp/registry.js",
+    "functions/lib/lp/remove-public-execution.js",
+    "functions/lib/lp/shareholder-claim-build-binding.js",
+    "functions/lib/lp/shareholder-claim-verification.js",
+    "functions/lib/lp/token-policy.js",
+    "functions/lib/lp/token-program.js",
+    "functions/lib/lp/validation.js",
+    "functions/lib/lp/wallet-proof.js",
+    "functions/lib/lp/write-rate-limit.js",
+    "functions/lib/observability-counter.js",
+    "functions/lib/partner-config.js",
+    "functions/lib/partner-quote-token.js",
+    "functions/lib/program-badges.js",
+    "functions/lib/program-resolver.js",
+    "functions/lib/program-routing-gate.js",
+    "functions/lib/proxy-rate-limit.js",
+    "functions/lib/public-sdk-execution.js",
+    "functions/lib/public-sdk-gateway.js",
+    "functions/lib/reward-application-lock-v2.js",
+    "functions/lib/reward-application-validator-v2.js",
+    "functions/lib/rewards-admin-controls.js",
+    "functions/lib/rewards-admin-review.js",
+    "functions/lib/rewards-audit.js",
+    "functions/lib/rewards-auth.js",
+    "functions/lib/rewards-community-loyalty.js",
+    "functions/lib/rewards-coop-adapter.js",
+    "functions/lib/rewards-cycle-bonuses.js",
+    "functions/lib/rewards-cycle-finalization.js",
+    "functions/lib/rewards-cycle-store.js",
+    "functions/lib/rewards-cycle.js",
+    "functions/lib/rewards-distribution-closeout.js",
+    "functions/lib/rewards-distribution-payment.js",
+    "functions/lib/rewards-distribution.js",
+    "functions/lib/rewards-event-store.js",
+    "functions/lib/rewards-events.js",
+    "functions/lib/rewards-launch-readiness.js",
+    "functions/lib/rewards-lp-adapter.js",
+    "functions/lib/rewards-origin.js",
+    "functions/lib/rewards-participant-read.js",
+    "functions/lib/rewards-pending-activity.js",
+    "functions/lib/rewards-policy.js",
+    "functions/lib/rewards-product-explorer.js",
+    "functions/lib/rewards-public-rules.js",
+    "functions/lib/rewards-quest.js",
+    "functions/lib/rewards-rate-limit.js",
+    "functions/lib/rewards-sequential-quest.js",
+    "functions/lib/rewards-session-close-adapter.js",
+    "functions/lib/rewards-swap-adapter.js",
+    "functions/lib/rewards-swap-shadow-verifier.js",
+    "functions/lib/rewards-swap-valuation.js",
+    "functions/lib/rewards-task-catalog.js",
+    "functions/lib/solana-finalized-transaction-evidence.js",
+    "functions/lib/swap-surface-authority.js",
+    "functions/lib/swap-surface-finalized-verifier.js",
+    "functions/lib/swap-surface-wallet-hash.js",
+    "functions/lib/telegram-bot.js",
+    "functions/lib/telegram-market.js",
+    "functions/lib/telegram-navigation.js",
+    "functions/lib/telegram-wallet.js",
+    "functions/lib/volume-commit-writer.js",
+    "functions/lib/webhook-dispatch.js",
+    "functions/lib/webhook-embeds.js",
+    "functions/lib/wheel-access.js",
+    "functions/lib/wheel-community-counts-v2.js",
+    "functions/lib/wheel-community-drafts.js",
+    "functions/lib/wheel-community-entry-model.js",
+    "functions/lib/wheel-community-entry-storage.js",
+    "functions/lib/wheel-community-lifecycle.js",
+    "functions/lib/wheel-dashboard-access.js",
+    "functions/lib/wheel-lifecycle.js",
+    "functions/lib/wheel-payment-recovery.js",
+    "functions/lib/wheel-payment.js",
+    "functions/lib/wheel-pricing.js",
+    "functions/lib/wheel-public-results.js",
+    "functions/lib/wheel-theme-assets.js",
+    "functions/og/evm-token-image.js",
+    "functions/og/token-image.js",
+    "functions/rig/[[path]].js",
+    "functions/sol/[[path]].js"
+  ],
+  "warnings": [
+    "NOT CLEARED FOR SHARING OR DEPLOYMENT.",
+    "No API functions, Workers, migrations, tests or operator files were copied.",
+    "Some pages require synthetic data and mock endpoints to become interactive.",
+    "Frontend code may still contain embedded production origins or transaction behavior.",
+    "A local-only copy does not guarantee all gated/dynamic user states are accessible."
+  ]
+}

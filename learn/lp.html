@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LP System — AquaVaults Learn</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <meta property="og:image" content="/assets/logo.png" />
+    <meta name="description" content="The AquaVaults LP System lets eligible Meteora liquidity providers claim earned trading fees and voluntarily route part of those earnings toward a listed community through user-authorized, non-custodial transactions." />
+    <link rel="stylesheet" href="/about.css">
+    <link rel="stylesheet" href="/learn/docs.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/header/header-loader.js" defer></script>
+    <script src="/header/header.js" defer></script>
+    <script src="/learn/docs.js" defer></script>
+    <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+    <div id="header-container" data-header-type="simple"></div>
+
+    <div class="docs-layout">
+
+        <aside id="docs-sidebar" class="docs-sidebar">
+            <!-- injected by docs.js -->
+        </aside>
+
+        <main class="docs-main">
+
+            <nav class="docs-breadcrumbs">
+                <a href="/learn" class="docs-breadcrumb-link">Learn</a>
+                <span class="docs-breadcrumb-sep">›</span>
+                <span>Tools</span>
+            </nav>
+
+            <header class="docs-hero">
+                <div class="docs-hero-badge">Core Tool</div>
+                <h1>LP System</h1>
+                <p class="docs-hero-sub">The AquaVaults LP System lets owners of eligible Meteora liquidity positions claim the trading fees those positions earn, decide how much to keep, and voluntarily route part of the rest toward a listed community — without giving up control of the position.</p>
+            </header>
+
+            <div class="docs-content">
+
+                <!-- ── 1. Part of Community Driven Liquidity ── -->
+                <div class="docs-section">
+                    <h2 id="part-of-cdl">Part of Community Driven Liquidity</h2>
+                    <p>The LP System is one part of the broader <a href="/learn/community-driven-liquidity" class="coop-callout-link">Community Driven Liquidity</a> ecosystem — the AquaVaults thesis that Web3 projects can use practical tools such as swaps, automation, Co-Op Mining, campaigns, integrations, and liquidity-provider participation to create stronger and more diverse revenue opportunities for their communities.</p>
+                    <p>The LP System extends that model to liquidity providers. Owners of eligible Meteora positions can use AquaVaults to view earned trading fees, decide how much to keep, and voluntarily route part of those earnings toward a listed community.</p>
+                    <p>The liquidity provider remains in control of the position and wallet throughout the process. AquaVaults does not take custody of the position NFT, hold private keys, or approve transactions on the user's behalf.</p>
+                    <div class="docs-callout docs-callout-note">
+                        <div class="docs-callout-label">Non-Custodial</div>
+                        <p>AquaVaults builds a transaction and presents it to your wallet. You review it and decide whether to sign. No tokens move without your explicit approval, and AquaVaults never signs on your behalf.</p>
+                    </div>
+                </div>
+
+                <!-- ── 2. What Is Live in Phase 1 ── -->
+                <div class="docs-section">
+                    <h2 id="what-is-live">What Is Live in Phase 1</h2>
+                    <p>The first public phase focuses on position discovery, fee claiming, and community routing. AquaVaults currently supports three Meteora DAMM v2 fee-handling modes: <strong>Token B only</strong> (Meteora calls this <strong>OnlyB</strong>), <strong>Both tokens</strong> (Meteora calls this <strong>BothToken</strong>), and <strong>Compounding</strong>. These names describe how the pool makes LP fees available; they do not change who controls the position.</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Discover</h3>
+                            <p>Explore supported Meteora DAMM v2 pools, connect a Solana wallet, discover eligible positions controlled by that wallet, and view available fee-token amounts.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Configure</h3>
+                            <p>Choose how much of a claim to keep, choose how much to route as community support, select a listed community with a compatible route, and save a signed routing preference.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Execute</h3>
+                            <p>Review the complete allocation before signing, claim fees and route support in one transaction, review recent claim-and-route activity, and request an additional community route.</p>
+                        </div>
+                    </div>
+                    <p>Founders with the required dashboard access can also view their community's Dynamic Fee Sharing routes and initiate treasury claims when funds are available.</p>
+                    <p>Phase 1 does not yet include pool creation, new position creation, adding or removing liquidity, or direct AquaVaults swap execution through a selected pool.</p>
+                </div>
+
+                <!-- ── 3. How Claim-and-Route Works ── -->
+                <div class="docs-section">
+                    <h2 id="how-claim-and-route-works">How Claim-and-Route Works</h2>
+                    <p>An eligible liquidity provider begins by connecting the wallet that controls the position. AquaVaults reads the supported position and displays the claimable fee token or tokens for that pool's fee-handling mode. <strong>Token B only</strong> exposes the claimable token-B fee. <strong>Both tokens</strong> can expose independent token-A and token-B fee legs. <strong>Compounding</strong> exposes only the remaining claimable token-B fee; the portion Meteora already reinvested into pool liquidity stays in the pool. The user then selects the percentage they want to keep, the percentage they want to route, and the listed community they want to support.</p>
+                    <p>AquaVaults builds one wallet-approved transaction containing the supported fee claim and the selected community support routing. For Both tokens, the saved support percentage is applied independently to each claimable fee leg and AquaVaults does not swap one fee token into the other. For Compounding, only the remaining claimable token-B fee enters the keep/share calculation; the auto-compounded portion is not claimed or routed by AquaVaults.</p>
+                    <p>The wallet displays the transaction for review and approval. If the required on-chain state changes before execution, the transaction may fail and need to be rebuilt using current values. The routed amount is fixed when the transaction is built — if additional fees accumulate afterward, they remain with the liquidity provider rather than being added to the transfer.</p>
+                    <p>After confirmation, AquaVaults checks the resulting on-chain balance changes against the amounts recorded when the transaction was built. A verified receipt may then appear in the user's LP activity history.</p>
+                </div>
+
+                <!-- ── 4. Choosing What to Keep and Route ── -->
+                <div class="docs-section">
+                    <h2 id="keep-and-route">Choosing What to Keep and Route</h2>
+                    <p>The liquidity provider decides what portion of an eligible fee claim becomes community support. Suppose a position has earned <strong>100 USDC</strong>, and the provider chooses to route <strong>40%</strong>.</p>
+                    <p>The first division is 60 USDC kept by the liquidity provider and 40 USDC routed as community support:</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>60 USDC — Kept</h3>
+                            <p>Stays with the liquidity provider. Community support routing never touches this portion.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>40 USDC — Shared</h3>
+                            <p>Enters the selected community's Dynamic Fee Sharing (DFS) support route for USDC.</p>
+                        </div>
+                    </div>
+                    <p>The DFS route then distributes the shared amount according to that route's configured on-chain shareholder split. AquaVaults shows the selected route before signing and verifies the funded amount after confirmation. Do not assume every route or community uses the same shareholder percentages.</p>
+                </div>
+
+                <!-- ── 5. LP Trading Fees vs Platform Fees ── -->
+                <div class="docs-section">
+                    <h2 id="lp-fees-vs-platform-fees">LP Trading Fees and AquaVaults Platform Fees</h2>
+                    <p>AquaVaults uses more than one type of fee, and they serve different purposes.</p>
+                    <p><strong>LP trading fees</strong> are generated by trading activity inside a third-party liquidity pool. They are earned by liquidity positions according to the pool's rules, available liquidity, market activity, and position configuration. AquaVaults does not create or guarantee those earnings.</p>
+                    <p><strong>AquaVaults Platform Fees</strong> may be applied through AquaVaults swap products and routed according to the applicable community fee plan, Growth Program status, or integration rules. They are separate from LP trading fees.</p>
+                    <p>The LP System allows a position owner to voluntarily route part of their earned pool fees. It does not convert those earnings into an AquaVaults swap Platform Fee.</p>
+                </div>
+
+                <!-- ── 6. Community Routes and Saved Preferences ── -->
+                <div class="docs-section">
+                    <h2 id="routes-and-preferences">Community Routes and Saved Preferences</h2>
+                    <p>A <strong>Dynamic Fee Sharing (DFS) route</strong> is the on-chain support route that receives the amount a liquidity provider chose to share and distributes it according to the route's configured shareholders. Routes are associated with a community and a supported fee token. Once a community has an active route for a token such as USDC, that route may be reused by compatible positions across multiple supported pools using the same fee token.</p>
+                    <p>The selected community does not have to match the project associated with the underlying pool. A position owner may choose any listed community with an active compatible route.</p>
+                    <h3>Saved preferences</h3>
+                    <p>A user may save a preferred community and support percentage for an eligible position. Saving a preference requires a signed wallet message, but it does not move funds or approve future transactions. The user must still review and sign every claim-and-route transaction.</p>
+                    <h3>Additional route requests</h3>
+                    <p>When a listed community does not yet have a compatible route, an eligible user may submit a signed route request. The request records demand for a particular community and fee token. It does not transfer tokens, create a vault, or guarantee that a route will be added. Because one fee-token route can serve multiple compatible pools, requests from different pools may be grouped into one reusable route target.</p>
+                </div>
+
+                <!-- ── 7. Community LP Fee Routes ── -->
+                <div class="docs-section">
+                    <h2 id="founder-dfs-card">Community LP Fee Routes</h2>
+                    <p>Founders with the required dashboard access have a dedicated <strong>Community LP Fee Routes</strong> panel inside the AquaVaults portal. Depending on available route and token data, the panel may display the fee token, support-route address, community claim wallet, total support routed, funds still in the route, the amount currently available to the community, and previous community LP fee claim activity.</p>
+                    <p>When funds are available, a founder can initiate a claim from the dashboard. The connected wallet must have the authority required to complete the claim, and the wallet should review the recipient, token, and route details before signing. AquaVaults does not hold the community treasury wallet or make an off-chain payment to the founder.</p>
+                    <p>The community route panel focuses on the community's claimable allocation. AquaVaults' separate allocation is not included in the community-facing claim balance. Displayed totals may differ because of previous claims, current on-chain balances, route allocations, or indexing delays.</p>
+                </div>
+
+                <!-- ── 8. Supported Pools and Current Limitations ── -->
+                <div class="docs-section">
+                    <h2 id="supported-and-limitations">Supported Pools and Current Limitations</h2>
+                    <p>AquaVaults supports three enabled Meteora DAMM v2 fee-handling modes across the amount-preserving token policies: <strong>Token B only (OnlyB)</strong>, <strong>Both tokens (BothToken)</strong>, and <strong>Compounding</strong>. Both tokens requires active compatible DFS routes for token A and token B; the saved support percentage is applied independently to each claimed fee token without swapping one into the other. Compounding routes only the remaining claimable token-B LP fee; the portion Meteora auto-compounds into pool liquidity is not claimed, included in the routing calculation, or sent to DFS.</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Standard SPL</h3>
+                            <p>Supported when the live mint, token program, decimals, pool metadata, and Dynamic Fee Sharing route all match the approved AquaVaults records.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Wrapped SOL</h3>
+                            <p>The canonical wSOL mint is supported on the enabled Token B only and Both tokens claim-and-route paths and as the claimable token-B fee on the Compounding path. When a routed fee leg is wSOL, AquaVaults keeps the claimed wSOL wrapped long enough for the selected support amount to fund DFS. Both tokens supports wSOL on token A or token B; Compounding routes only its claimable token-B leg.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Token-2022</h3>
+                            <p>Amount-preserving Token-2022 mints are supported when their live extension set passes policy checks. Current enabled extensions are MetadataPointer and TokenMetadata, including mints with either, both, or neither of those extensions.</p>
+                        </div>
+                    </div>
+                    <div class="docs-callout docs-callout-note">
+                        <div class="docs-callout-label">Still Not Supported</div>
+                        <p>Token-2022 mints requiring transfer-fee-aware accounting, including TransferFeeConfig. Unknown, unreadable, or unsupported Token-2022 extension configurations. Fee modes other than the enabled Token B only (OnlyB), Both tokens (BothToken), and Compounding paths. Positions not controlled by the connected wallet. Communities without all routes required by the pool's fee mode. Pool creation or new position creation through AquaVaults. Adding or removing liquidity through AquaVaults. Automatic fee claims or routing without a wallet signature. Guaranteed swaps through a selected community pool.</p>
+                    </div>
+                    <p>Token-2022 support does not mean every Token-2022 mint is accepted. AquaVaults reads the live mint program, decimals, and extension policy and fails closed when the supported amount-preserving identity cannot be established. Unsupported pools or positions may still appear for discovery, but their claim-and-route controls remain unavailable.</p>
+                </div>
+
+                <!-- ── 9. Risks and User Responsibilities ── -->
+                <div class="docs-section">
+                    <h2 id="risks">Risks and User Responsibilities</h2>
+                    <p>Liquidity provision carries financial and technical risk. The LP System provides an interface for supported actions — it does not remove the economic or technical risks of liquidity pools, tokens, wallets, smart contracts, or blockchain transactions.</p>
+                    <p><strong>Position performance.</strong> A liquidity position may perform worse than simply holding the deposited assets. Earnings depend on trading volume, price movement, liquidity distribution, position range, competing liquidity, and pool configuration. A position may earn little or no fees.</p>
+                    <p><strong>Token and pool risk.</strong> Either token in a pool may lose value, become illiquid, experience extreme volatility, or be affected by technical or project-specific problems. AquaVaults displaying a pool does not guarantee the quality or future value of its tokens.</p>
+                    <p><strong>Smart-contract and infrastructure risk.</strong> The LP System depends on third-party programs and infrastructure, including Meteora, Solana token programs, wallets, and RPC providers. These systems may experience defects, outages, configuration errors, or unexpected behavior.</p>
+                    <p><strong>Transaction-state risk.</strong> Claimable amounts and pool state can change between the initial preview, transaction build, wallet approval, and confirmation. This may cause a transaction to fail or require a new preview.</p>
+                    <p><strong>Wallet responsibility.</strong> Users should verify the connected wallet, network, position, token mint, selected community, support percentage, route, and transaction details before signing. Completed blockchain transactions cannot be reversed by AquaVaults.</p>
+                    <p><strong>Community treasury risk.</strong> After a community claims its allocation, AquaVaults does not control how those funds are stored or used. Community support does not guarantee that a project will remain active or use funds in a particular way.</p>
+                </div>
+
+                <!-- ── 10. Where the LP System Is Going ── -->
+                <div class="docs-section">
+                    <h2 id="roadmap">Where the LP System Is Going</h2>
+                    <p>Phase 1 establishes the fee-claiming, community-selection, Dynamic Fee Sharing, route-request, and founder treasury foundation. The longer-term goal is to build a more complete community liquidity system around it. Planned areas of expansion may include founder-created AquaVaults-compatible pools, highlighted primary pools for listed communities, public position creation, easier liquidity contributions from community members, additional position-management tools, more supported tokens and pool configurations, direct swaps through selected community pools, comparison between community-pool execution and broader market routing, preferred community-pool routing when execution remains competitive, and pool depth, volume, fee, and position analytics.</p>
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">The Intended Community Pool Cycle</div>
+                        <p>A listed project creates or designates a compatible pool → AquaVaults highlights the pool → users open wallet-controlled positions and add liquidity → the pool becomes deeper and more useful → eligible swaps may be directed through the pool → liquidity providers earn trading fees → providers may route part of those earnings toward the community → founders claim the community allocation through the DFS vault.</p>
+                    </div>
+                    <p>Founder-created pools, public position creation, and exact-pool swap routing are not live in Phase 1. AquaVaults also does not intend to force users through a community pool when doing so would create unreasonable price impact or materially worse execution. The intended future model is to use a highlighted community pool when its execution remains competitive, or clearly present the user with a choice between the community-pool route and the best available market route.</p>
+                </div>
+
+                <!-- ── 11. FAQ ── -->
+                <div class="docs-section">
+                    <h2 id="faq">Frequently Asked Questions</h2>
+                    <p><strong>Does AquaVaults own my liquidity position?</strong> No. The position remains controlled by the wallet that owns the position NFT.</p>
+                    <p><strong>Does connecting my wallet allow AquaVaults to move funds?</strong> No. Token-moving transactions still require review and approval through the connected wallet.</p>
+                    <p><strong>Does AquaVaults automatically claim or route my fees?</strong> No. Phase 1 requires the user to initiate and sign each claim-and-route transaction.</p>
+                    <p><strong>Can AquaVaults claim Token-2022 or wSOL LP fees?</strong> Yes, on enabled Token B only, Both tokens, and Compounding paths when each routed live fee-token policy passes AquaVaults validation and the required compatible DFS route exists. Compounding routes only the remaining claimable token-B fee. Token-2022 mints that require transfer-fee-aware accounting or contain unsupported extension configurations remain unavailable.</p>
+                    <p><strong>How does Both tokens (BothToken) support work?</strong> AquaVaults requires compatible DFS routes for both fee mints and validates each fee token independently. One wallet-approved claim transaction can claim both fee legs, apply the same saved support percentage independently to token A and token B, and verify each routed amount separately. Standard SPL, canonical wSOL, and amount-preserving Token-2022 fee legs are eligible when their live identities pass policy checks.</p>
+                    <p><strong>How does Compounding support work?</strong> Meteora Compounding pools can add a configured share of LP fees back into pool liquidity while leaving the remainder claimable in token B. AquaVaults applies the saved support percentage only to that remaining claimable token-B amount. The auto-compounded share stays in the pool and is not routed through AquaVaults.</p>
+                    <p><strong>Do I have to support the community associated with the pool?</strong> No. You may select any listed community with an active route compatible with the position's fee token.</p>
+                    <p><strong>Does saving a preference transfer funds?</strong> No. It records a preferred configuration using a signed message. A separate transaction signature is still required to move tokens.</p>
+                    <p><strong>Does submitting a route request create a support route?</strong> No. It records demand for a route that AquaVaults may review and create separately.</p>
+                    <p><strong>Are LP trading fees guaranteed?</strong> No. Earnings depend on pool activity, position configuration, market conditions, and other factors.</p>
+                    <p><strong>Can I create a pool or open a new position through AquaVaults?</strong> Not in Phase 1. Those capabilities belong to the planned LP roadmap.</p>
+                </div>
+
+                <!-- ── Explore the LP System (CTA) ── -->
+                <div class="docs-section">
+                    <h2 id="explore">Explore the LP System</h2>
+                    <p>Use the live LP page to explore supported pools, connect a wallet, and review eligible positions. Before signing, review the complete position, token, amount, community, and routing details shown by AquaVaults and your wallet.</p>
+                    <p><a href="/lp" class="coop-callout-link">Open the AquaVaults LP System →</a> &nbsp;·&nbsp; <a href="/learn/community-driven-liquidity" class="coop-callout-link">Explore the Community Driven Liquidity thesis →</a></p>
+                </div>
+
+                <!-- ── Continue Exploring ── -->
+                <div class="docs-explore">
+                    <p class="docs-explore-title">Continue Exploring</p>
+                    <div class="docs-explore-links">
+                        <a href="/learn/community-driven-liquidity" class="docs-explore-link">Community Driven Liquidity →</a>
+                        <a href="/learn/solana-swapper" class="docs-explore-link">Solana Swapper →</a>
+                        <a href="/learn/growth-program" class="docs-explore-link">Growth Program →</a>
+                        <a href="/learn/for-token-communities" class="docs-explore-link">Why Communities List →</a>
+                    </div>
+                </div>
+
+                <!-- ── Pagination ── -->
+                <nav class="docs-pagination">
+                    <a href="/learn/user-rewards" class="docs-pag-link">
+                        <span class="docs-pag-direction">← Previous</span>
+                        <span class="docs-pag-title">User Rewards</span>
+                    </a>
+                    <a href="/learn/growth-program" class="docs-pag-link docs-pag-next">
+                        <span class="docs-pag-direction">Next →</span>
+                        <span class="docs-pag-title">Growth Program</span>
+                    </a>
+                </nav>
+
+            </div>
+        </main>
+
+    </div>
+
+    <div id="footer-container"></div>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana Swapper — AquaVaults Learn</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <meta property="og:image" content="/assets/logo.png" />
+    <meta name="description" content="The AquaVaults Solana Swapper helps communities turn normal swap activity into community-directed value through fee routing and recurring participation." />
+    <link rel="stylesheet" href="/about.css">
+    <link rel="stylesheet" href="/learn/docs.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/header/header-loader.js" defer></script>
+    <script src="/header/header.js" defer></script>
+    <script src="/learn/docs.js" defer></script>
+    <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+    <div id="header-container" data-header-type="simple"></div>
+
+    <div class="docs-layout">
+
+        <aside id="docs-sidebar" class="docs-sidebar">
+            <!-- injected by docs.js -->
+        </aside>
+
+        <main class="docs-main">
+
+            <nav class="docs-breadcrumbs">
+                <a href="/learn" class="docs-breadcrumb-link">Learn</a>
+                <span class="docs-breadcrumb-sep">›</span>
+                <span>Tools</span>
+            </nav>
+
+            <header class="docs-hero">
+                <div class="docs-hero-badge">Core Tool</div>
+                <h1>Solana Swapper</h1>
+                <p class="docs-hero-sub">The AquaVaults Solana Swapper turns ordinary trading activity into community-directed support by letting users select the communities they want their activity to benefit.</p>
+            </header>
+
+            <div class="docs-content">
+
+                <!-- ── 1. The Core Trading Layer ── -->
+                <div class="docs-section">
+                    <h2 id="core-trading-layer">The Core Trading Layer</h2>
+                    <p>The Solana Swapper is the primary entry point into AquaVaults. It is where the platform's core idea becomes tangible: a user connects their wallet, selects a community, chooses the tokens they want to swap, and executes the trade. The swap itself works the same way any Solana swap does. What changes is where the value of that activity points.</p>
+                    <p>With a community selected, an ordinary swap becomes a deliberate action — one that can help direct support toward the community the user chose to back.</p>
+                    <p>Same users. Same swaps. Better direction.</p>
+                    <p>That is the entire premise. The swapper does not ask users to change how they trade. It gives their existing trading behavior somewhere meaningful to go.</p>
+                </div>
+
+                <!-- ── 2. How Community Routing Works ── -->
+                <div class="docs-section">
+                    <h2 id="how-community-routing-works">How Community Routing Works</h2>
+                    <p>Users select a community before swapping on AquaVaults. When a community other than AquaVaults is selected and the platform fee is above 0%, community routing applies automatically. The community's share of the fee depends on its listing and current Growth Program tier — Standard communities start at a 50% floor and Founding communities at a permanent 60% floor, rising to 65% at Silver or 75% at Gold, with Partner status adding +10% — and the remainder routes to AquaVaults.</p>
+                    <p>The community's share routes to their registered treasury wallet. This is the core routing destination — every listed community that provides a treasury wallet receives their portion of the platform fee through it. For communities that have also configured Jupiter referral accounts, fees for supported tokens route through those accounts as well, giving those communities additional token-specific routing paths. Both are intentional parts of the routing architecture.</p>
+                    <p>If a user selects AquaVaults as their community, the platform fee routes entirely to AquaVaults. If the platform fee is set to 0%, no fee is routed.</p>
+                    <div class="docs-callout docs-callout-note">
+                        <div class="docs-callout-label">User Choice</div>
+                        <p>The platform fee is fully user-controlled. It can be set anywhere from 0% up to a maximum of 10%. Users can reduce it to 0% at any time — community selection and fee level are always the user's own decisions. AquaVaults does not mandate a minimum fee or enforce participation.</p>
+                    </div>
+                </div>
+
+                <!-- ── 3. Why Communities Care ── -->
+                <div class="docs-section">
+                    <h2 id="why-communities-care">Why Communities Care</h2>
+                    <p>Active communities have a resource that most platforms spend considerable effort trying to acquire: people who show up, pay attention, and take action. Token holders, NFT communities, active online groups — these communities already have users who trade regularly on Solana.</p>
+                    <p>Almost none of that trading activity comes back to the community. It flows to swap platforms, AMMs, and aggregators that have no particular relationship with the communities those users belong to.</p>
+                    <p>AquaVaults creates a support loop. When a community is listed and its members consistently select it before swapping, that ordinary trading behavior becomes a recurring source of community-directed activity. The community does not need to create new behavior. It directs the behavior that already exists.</p>
+                    <p>For founders, this matters because it gives communities something actionable to ask of their members. Not just "hold" or "post" or "show up for the next announcement" — but a concrete, repeatable action that generates tangible support every time it happens.</p>
+                </div>
+
+                <!-- ── 4. Built Around Recurring Activity ── -->
+                <div class="docs-section">
+                    <h2 id="built-around-recurring-activity">Built Around Recurring Activity</h2>
+                    <p>Most swap interfaces are built around one-time trades. A user wants to buy or sell a token, they execute the swap, and the interaction ends. AquaVaults is designed with a different assumption: that sustained, recurring activity is more valuable to communities than any single trade.</p>
+                    <p>A community that can encourage its members to swap through AquaVaults consistently — even occasionally — creates a durable activity flow. Not a single spike. A pattern.</p>
+                    <p>That design philosophy extends beyond the swapper itself. AutoSwap lets users run repeated swap sessions automatically, turning a single decision into a sustained sequence of activity. Communities can organize campaigns around AutoSwap sessions, creating coordinated pushes that generate more consistent volume than individual trades alone.</p>
+                    <p>The swapper is where community-directed activity begins. AutoSwap helps turn that activity into recurring participation over time. If sustained community activity is the goal, <a href="/learn/autoswap" class="coop-callout-link">AutoSwap is where to go next →</a></p>
+                </div>
+
+                <!-- ── 5. User Control and Non-Custodial Design ── -->
+                <div class="docs-section">
+                    <h2 id="user-control">User Control and Non-Custodial Design</h2>
+                    <p>The AquaVaults Solana Swapper is a non-custodial interface. Users retain full control of their funds throughout every interaction.</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Users Sign Their Own Transactions</h3>
+                            <p>AquaVaults prepares a transaction and presents it to the user's wallet. The user reviews it and decides whether to sign. Nothing executes without explicit approval.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>No Deposits, No Lockups</h3>
+                            <p>Standard swap usage does not require sending funds to AquaVaults. There are no AquaVaults-controlled wallets or contracts holding user assets between trades.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Jupiter-Powered Routing</h3>
+                            <p>AquaVaults is built on top of established Solana infrastructure while adding its own community selection, participation, and fee-routing systems around the user experience.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── 6. More Than a Swap Interface ── -->
+                <div class="docs-section">
+                    <h2 id="more-than-a-swap-interface">More Than a Swap Interface</h2>
+                    <p>The swapper is the entry point. It is not the whole system.</p>
+                    <p>Every trade executed through the Solana Swapper connects into a larger ecosystem. Swaps feed into campaign activity that communities organize around their members. They connect into AutoSwap sessions where users run repeated sequences instead of individual trades. They connect into the Swap Widget, which lets communities embed the swapper directly on their own sites so activity can happen within their own context. And they connect into the broader AquaVaults participation layer — including the Co-op Mining Rig — where community support is tracked and recognized beyond trading alone.</p>
+                    <p>Taken together, the swapper is not a destination. It is the foundation that the rest of the ecosystem builds on. A user's first swap through AquaVaults is the beginning of a relationship between their activity and the communities they choose to support.</p>
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">For Communities</div>
+                        <p>The simplest thing a listed community can do is share one message with its members: select us before you swap. That single action, repeated consistently across an active community, is the foundation of everything AquaVaults makes possible.</p>
+                    </div>
+                </div>
+
+                <!-- ── Continue Exploring ── -->
+                <div class="docs-explore">
+                    <p class="docs-explore-title">Continue Exploring</p>
+                    <div class="docs-explore-links">
+                        <a href="/learn/autoswap" class="docs-explore-link">AutoSwap →</a>
+                        <a href="/learn/swap-widget" class="docs-explore-link">Swap Widget →</a>
+                        <a href="/learn/coop-rig" class="docs-explore-link">Co-op Mining Rig →</a>
+                        <a href="/learn/for-token-communities" class="docs-explore-link">Why Communities List →</a>
+                    </div>
+                </div>
+
+                <!-- ── Pagination ── -->
+                <nav class="docs-pagination">
+                    <a href="/learn/account" class="docs-pag-link">
+                        <span class="docs-pag-direction">← Previous</span>
+                        <span class="docs-pag-title">AquaVaults Account</span>
+                    </a>
+                    <a href="/learn/autoswap" class="docs-pag-link docs-pag-next">
+                        <span class="docs-pag-direction">Next →</span>
+                        <span class="docs-pag-title">AutoSwap</span>
+                    </a>
+                </nav>
+
+            </div>
+        </main>
+
+    </div>
+
+    <div id="footer-container"></div>
+</body>
+</html>

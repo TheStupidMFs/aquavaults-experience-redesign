@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn AquaVaults — Community Revenue Ecosystem</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <meta property="og:image" content="/assets/logo.png" />
+    <meta name="description" content="AquaVaults turns community activity into revenue. Learn how swap routing, AutoSwap, the Co-op Mining Rig, and more work together." />
+    <link rel="stylesheet" href="/about.css">
+    <link rel="stylesheet" href="/learn/docs.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/header/header-loader.js" defer></script>
+    <script src="/header/header.js" defer></script>
+    <script src="/learn/docs.js" defer></script>
+    <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+    <div id="header-container" data-header-type="simple"></div>
+
+    <div class="docs-landing-content">
+
+        <!-- ── HERO ── -->
+        <div class="docs-landing-hero">
+            <div class="docs-landing-eyebrow">Ecosystem Overview</div>
+            <h1>A Community Revenue Layer<br>for On-Chain Activity</h1>
+            <p class="docs-landing-sub">AquaVaults gives communities a way to earn from the swap activity that already exists. Users select a community, trade like normal, and their activity generates fees and participation tied to that community.</p>
+            <div class="docs-landing-actions">
+                <a href="/learn/intro" class="docs-btn-primary">Get Started →</a>
+                <a href="/learn/get-listed" class="docs-btn-secondary">Get Listed</a>
+            </div>
+            <button id="docs-mobile-browse" class="docs-landing-browse-btn">≡ Browse Topics</button>
+        </div>
+
+        <!-- ── STATS BAR ── -->
+        <div class="about-stats-bar">
+            <div class="about-stat">
+                <span class="about-stat-value">Non-Custodial</span>
+                <span class="about-stat-label">Users Stay in Control</span>
+            </div>
+            <div class="about-stat-divider"></div>
+            <div class="about-stat">
+                <span class="about-stat-value">Built on Jupiter</span>
+                <span class="about-stat-label">Solana-Native Routing</span>
+            </div>
+            <div class="about-stat-divider"></div>
+            <div class="about-stat">
+                <span class="about-stat-value">Solana + EVM</span>
+                <span class="about-stat-label">Multi-Chain Activity</span>
+            </div>
+            <div class="about-stat-divider"></div>
+            <div class="about-stat">
+                <span class="about-stat-value">No Dev Required</span>
+                <span class="about-stat-label">For Communities</span>
+            </div>
+        </div>
+
+        <!-- ── THE CORE IDEA ── -->
+        <div class="feature-section">
+            <h2>The Core Idea</h2>
+            <p class="about-body">Communities already have what matters most: attention, users, and coordination. The problem is that most of that activity leaks out to generic swap platforms and creates value somewhere else.</p>
+            <p class="about-body">AquaVaults closes that loop. When a community is listed, its members can select that community before they swap. Their activity — trades they were going to make anyway — becomes community-directed revenue.</p>
+            <p class="about-body">Same users. Same swaps. Better direction.</p>
+        </div>
+
+        <!-- ── HOW IT WORKS ── -->
+        <div class="feature-section">
+            <h2>How It Works</h2>
+            <div class="docs-steps">
+                <div class="docs-step">
+                    <div class="docs-step-number">1</div>
+                    <div class="docs-step-body">
+                        <p class="docs-step-title">Connect Your Wallet</p>
+                        <p class="docs-step-desc">Use any supported Solana wallet. AquaVaults is non-custodial — you always stay in control of your keys and funds.</p>
+                    </div>
+                </div>
+                <div class="docs-step">
+                    <div class="docs-step-number">2</div>
+                    <div class="docs-step-body">
+                        <p class="docs-step-title">Select a Community</p>
+                        <p class="docs-step-desc">Choose a listed community you want to support. That selection stays active across swaps and platform activity.</p>
+                    </div>
+                </div>
+                <div class="docs-step">
+                    <div class="docs-step-number">3</div>
+                    <div class="docs-step-body">
+                        <p class="docs-step-title">Use AquaVaults Tools</p>
+                        <p class="docs-step-desc">Swap, run AutoSwap sessions, set limit orders, or participate in the Co-op Mining Rig — all while your community selection stays active.</p>
+                    </div>
+                </div>
+                <div class="docs-step">
+                    <div class="docs-step-number">4</div>
+                    <div class="docs-step-body">
+                        <p class="docs-step-title">Activity Generates Value</p>
+                        <p class="docs-step-desc">When a community other than AquaVaults is selected and the platform fee is above 0%, a share of the platform fee routes to that community based on its active Growth Program share, with the remainder routing to AquaVaults. Regular trades become community-directed support.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── THE ECOSYSTEM ── -->
+        <div class="feature-section">
+            <h2>The Ecosystem</h2>
+            <p class="about-body">Every AquaVaults tool connects back to the same idea: community-directed activity. Here is how each system fits in.</p>
+            <div class="docs-pillar-grid">
+                <a href="/learn/solana-swapper" class="docs-pillar">
+                    <p class="docs-pillar-title">Solana Swapper</p>
+                    <p class="docs-pillar-desc">The core trading tool. Select a community and swap Solana tokens while directing platform fees toward the community you support.</p>
+                    <span class="docs-pillar-cta">Learn more →</span>
+                </a>
+                <a href="/learn/autoswap" class="docs-pillar">
+                    <p class="docs-pillar-title">AutoSwap</p>
+                    <p class="docs-pillar-desc">Run repeated swap sessions automatically. Turn scattered user attention into coordinated, repeatable activity for communities.</p>
+                    <span class="docs-pillar-cta">Learn more →</span>
+                </a>
+                <a href="/learn/limit-orders" class="docs-pillar">
+                    <p class="docs-pillar-title">Limit Orders</p>
+                    <p class="docs-pillar-desc">Set price-based swap orders that execute when your target is reached. More control for traders who want strategy, not just instant execution.</p>
+                    <span class="docs-pillar-cta">Learn more →</span>
+                </a>
+                <a href="/learn/evm-swapper" class="docs-pillar">
+                    <p class="docs-pillar-title">EVM Swapper</p>
+                    <p class="docs-pillar-desc">Swap on Ethereum, Base, and Polygon through AquaVaults. The community revenue model expanding across chains.</p>
+                    <span class="docs-pillar-cta">Learn more →</span>
+                </a>
+                <a href="/learn/swap-widget" class="docs-pillar">
+                    <p class="docs-pillar-title">Swap Widget</p>
+                    <p class="docs-pillar-desc">Embed AquaVaults swaps on your website. Listed projects use the approved widget for eligible community campaign and Rewards activity; anyone can use the Public Swap Widget.</p>
+                    <span class="docs-pillar-cta">Learn more →</span>
+                </a>
+                <a href="/learn/coop-rig" class="docs-pillar">
+                    <p class="docs-pillar-title">Co-op Mining Rig</p>
+                    <p class="docs-pillar-desc">A shared participation layer beyond swaps. Daily Droplets, community leaderboards, and shared upside tied to platform engagement.</p>
+                    <span class="docs-pillar-cta">Learn more →</span>
+                </a>
+                <a href="/learn/wheel-spinner" class="docs-pillar">
+                    <p class="docs-pillar-title">Wheel Spinner</p>
+                    <p class="docs-pillar-desc">Create a Free public drawing for up to 25 names, or purchase one-time Paid tools for more entries, customization and result downloads.</p>
+                    <span class="docs-pillar-cta">Learn more →</span>
+                </a>
+                <a href="/learn/holder-intelligence" class="docs-pillar">
+                    <p class="docs-pillar-title">Holder Intelligence</p>
+                    <p class="docs-pillar-desc">Listed community owners can scan Solana NFT collections or token holders, apply filters, export reports, and optionally create Community Wheel drafts.</p>
+                    <span class="docs-pillar-cta">Learn more →</span>
+                </a>
+                <a href="/learn/community-campaigns" class="docs-pillar">
+                    <p class="docs-pillar-title">Community Campaigns</p>
+                    <p class="docs-pillar-desc">Time-boxed community competitions with frozen rules, public standings when enabled, and temporary Growth Program rewards earned from final placement.</p>
+                    <span class="docs-pillar-cta">Learn more →</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- ── WHY COMMUNITIES CARE ── -->
+        <div class="feature-section">
+            <h2>Why Communities Care</h2>
+            <p class="about-body">Communities already have people who trade. The question is whether those trades point back to the community or disappear into a generic platform.</p>
+            <p class="about-body">AquaVaults gives communities a revenue layer around normal swap behavior — no custom development, no infrastructure, no maintenance required. The call to action is simple: <em>select us before you swap.</em></p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Tiered Fee Routing</h3>
+                    <p>When a user selects a listed community and swaps, its share of the platform fee follows its Growth Program floor and tier: Standard communities start at 50%, Founding communities have a permanent 60% floor, and qualifying communities may earn 65% Silver or 75% Gold. Partner and reward benefits may apply separately. No pools, no deposits.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>No Setup Needed</h3>
+                    <p>Get listed, share it with your members, and let normal swap activity become a support mechanism. No dev team. No integration work.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Community Campaigns</h3>
+                    <p>Compete through published scoring windows where qualifying AquaVaults activity becomes community points and top finalized placements may earn temporary Growth Program rewards.</p>
+                    <a href="/learn/community-campaigns" class="coop-callout-link">How Campaigns work →</a>
+                </div>
+            </div>
+            <a href="/learn/community-driven-liquidity" class="coop-callout-link">Read: Community Driven Liquidity Engine →</a>
+        </div>
+
+        <!-- ── TRUST AND SAFETY ── -->
+        <div class="feature-section">
+            <div class="coop-callout">
+                <div class="coop-callout-badge">Non-Custodial by Design</div>
+                <h2>Users Stay in Control</h2>
+                <p class="about-body">AquaVaults never holds assets, stores private keys, or executes transactions on your behalf. Every swap is user-signed and confirmed on-chain directly from your wallet.</p>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>User-Signed Transactions</h3>
+                        <p>Every action requires your approval in your own wallet. AquaVaults provides the interface. You control execution.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Jupiter-Powered Routing</h3>
+                        <p>Swap routing and quotes come through Jupiter's infrastructure — one of Solana's most trusted aggregators.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>No Deposits Required</h3>
+                        <p>Swaps don't require depositing funds into AquaVaults. No AquaVaults smart contracts hold user assets.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── WHO IT'S FOR ── -->
+        <div class="feature-section">
+            <h2>Who It's For</h2>
+            <p class="about-body">AquaVaults is built for communities that already have people, attention, and activity. If you have users who trade, you can generate value.</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Token Communities</h3>
+                    <p>Holders already trade. Give them a way to point that activity back toward the project instead of a generic platform.</p>
+                    <a href="/learn/for-token-communities" class="coop-callout-link">Read more →</a>
+                </div>
+                <div class="feature-card">
+                    <h3>NFT Projects</h3>
+                    <p>Turn your holder base into an active support layer. Campaigns, collaborations, and Co-op Rig leaderboard competition — all through AquaVaults.</p>
+                    <a href="/learn/for-nft-projects" class="coop-callout-link">Read more →</a>
+                </div>
+                <div class="feature-card">
+                    <h3>Community Wheel for Listed Founders</h3>
+                    <p>Run server-backed, community-branded giveaways with weighted entries, official winner reviews, exports and Partner benefits through your own community dashboard.</p>
+                    <a href="/learn/community-wheel" class="coop-callout-link">Explore Community Wheel →</a>
+                </div>
+                <div class="feature-card">
+                    <h3>Web3 Communities</h3>
+                    <p>Any active online community with users who trade on Solana can benefit from listing on AquaVaults.</p>
+                    <a href="/learn/get-listed" class="coop-callout-link">Get listed →</a>
+                </div>
+                <div class="feature-card">
+                    <h3>Founder-Led Ecosystems</h3>
+                    <p>Give your community tools to generate value from normal on-chain activity — no backend, no maintenance, no guesswork.</p>
+                    <a href="/learn/for-token-communities" class="coop-callout-link">Read more →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── BOTTOM CTAs ── -->
+        <div class="feature-section">
+            <h2>Ready to Start?</h2>
+            <p class="about-body">Whether you want to list your community, become a Connector, or go deeper into how the ecosystem works — here is where to go next.</p>
+            <p class="about-body">Ready to submit? <a href="/apply">Open the public community application</a>. A Connector code is optional; you do not need to connect a wallet to apply.</p>
+            <div class="docs-cta-grid">
+                <a href="/learn/account" class="docs-cta-card">
+                    <p class="docs-cta-title">AquaVaults Account</p>
+                    <p class="docs-cta-desc">Sign in with your Solana wallet to review Rewards, Co-Op participation, and your optional Connector identity.</p>
+                    <span class="docs-cta-action">Learn about Account →</span>
+                </a>
+                <a href="/learn/get-listed" class="docs-cta-card">
+                    <p class="docs-cta-title">Get Listed</p>
+                    <p class="docs-cta-desc">Bring your community to AquaVaults and start turning activity into revenue. Simple requirements, no dev work needed.</p>
+                    <span class="docs-cta-action">View requirements →</span>
+                </a>
+                <a href="/learn/connectors" class="docs-cta-card">
+                    <p class="docs-cta-title">Become a Connector</p>
+                    <p class="docs-cta-desc">Introduce strong communities through verified referrals. Qualifying paid upgrades may support a separate AquaVaults-approved reward; listing alone does not pay a commission.</p>
+                    <span class="docs-cta-action">Learn how →</span>
+                </a>
+                <a href="/learn/intro" class="docs-cta-card">
+                    <p class="docs-cta-title">Read the Docs</p>
+                    <p class="docs-cta-desc">Go deeper into how AquaVaults works — every tool, system, and strategy explained in one place.</p>
+                    <span class="docs-cta-action">Start reading →</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="docs-sidebar" class="docs-sidebar docs-sidebar-overlay"><!-- injected by docs.js --></div>
+
+    <div id="footer-container"></div>
+</body>
+</html>

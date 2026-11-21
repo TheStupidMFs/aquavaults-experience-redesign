@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swap Widget — AquaVaults Learn</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <meta property="og:image" content="/assets/logo.png" />
+    <meta name="description" content="Learn the two AquaVaults Swap Widget integration paths: the approved widget for listed projects and the public Solana swap widget anyone can embed." />
+    <link rel="stylesheet" href="/about.css">
+    <link rel="stylesheet" href="/learn/docs.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/header/header-loader.js" defer></script>
+    <script src="/header/header.js" defer></script>
+    <script src="/learn/docs.js" defer></script>
+    <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+    <div id="header-container" data-header-type="simple"></div>
+
+    <div class="docs-layout">
+
+        <aside id="docs-sidebar" class="docs-sidebar">
+            <!-- injected by docs.js -->
+        </aside>
+
+        <main class="docs-main">
+
+            <nav class="docs-breadcrumbs">
+                <a href="/learn" class="docs-breadcrumb-link">Learn</a>
+                <span class="docs-breadcrumb-sep">›</span>
+                <span>Tools</span>
+            </nav>
+
+            <header class="docs-hero">
+                <div class="docs-hero-badge">Embedded Solana Swaps</div>
+                <h1>Swap Widget</h1>
+                <p class="docs-hero-sub">Bring AquaVaults manual Solana swaps directly onto your website. Listed projects use the approved integration when campaign and Rewards eligibility matters. Anyone can use the Public Swap Widget without listing first.</p>
+            </header>
+
+            <div class="docs-content">
+
+                <!-- ── 1. Two Integration Paths ── -->
+                <div class="docs-section">
+                    <h2 id="two-integration-paths">Two Integration Paths</h2>
+                    <p>AquaVaults provides two ways to embed its Solana swap interface. They look similar to users, but they serve different purposes and are not interchangeable.</p>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Listed Project: Approved Widget</h3>
+                            <p>For projects already listed on AquaVaults. Use the private integration documentation supplied during onboarding and have the production website origin approved. This is the integration path intended for eligible community campaign activity and AquaVaults Rewards participation.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Any Website: Public Swap Widget</h3>
+                            <p>For any website that wants to add AquaVaults manual Solana swaps. No listing, AquaVaults API key, or per-domain approval is required to get started. Public-widget swaps are not eligible for AquaVaults Rewards or approved community campaign credit.</p>
+                        </div>
+                    </div>
+
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">Choose the Integration Before You Launch</div>
+                        <p>If your project is already listed, do not use the public integration as a substitute for the approved widget. Use the approved integration documentation so your site is recognized through the approved SDK path. Normal campaign rules and Rewards qualification requirements still apply.</p>
+                    </div>
+                </div>
+
+                <!-- ── 2. Listed Projects ── -->
+                <div class="docs-section">
+                    <h2 id="listed-projects">Listed Projects: Use the Approved Widget</h2>
+                    <p>After a project is listed on AquaVaults, its embedded widget can become part of the same participation system as the rest of the platform. The important step is using the approved widget integration rather than the unrestricted public version.</p>
+                    <p>The approved integration is provided through AquaVaults' private widget documentation. The project's production website origin is approved, the widget is configured for the listed community, and qualifying activity can be recognized as approved widget activity.</p>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Community Campaign Activity</h3>
+                            <p>Use the approved integration when embedded swaps need to count as eligible widget activity in AquaVaults community campaigns. Campaign-specific rules still determine which swaps and actions qualify for each campaign.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>User Rewards</h3>
+                            <p>Qualifying swaps made through the approved widget can earn AquaVaults Rewards points for enrolled users. The normal Rewards requirements still apply, including the qualifying-swap rules; embedding the widget does not bypass them.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Approved Site Recognition</h3>
+                            <p>The approved production origin identifies the project website as an authorized widget integration. This is part of keeping approved widget activity separate from unrestricted public-widget activity.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Community Configuration</h3>
+                            <p>The approved integration documentation covers the configuration available to listed projects, including community-specific setup and the controls supported by that integration.</p>
+                        </div>
+                    </div>
+
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">Already Listed?</div>
+                        <p>Use the private approved-widget documentation supplied by AquaVaults and make sure the exact production website origin has been approved before relying on embedded activity for campaign or Rewards eligibility.</p>
+                    </div>
+                </div>
+
+                <!-- ── 3. Public Widget ── -->
+                <div class="docs-section">
+                    <h2 id="public-widget">Public Swap Widget: Public Website Integration</h2>
+                    <p>The AquaVaults Public Swap Widget removes the listing requirement for basic website integration. A project, community, developer, token site, or other website can embed a working AquaVaults manual Solana swap interface without first becoming an AquaVaults-listed project.</p>
+                    <p>The public integration is designed to be straightforward: load the hosted widget, place a container where the swapper should appear, and mount it. The public bundle is standalone and does not require the host site to supply AquaVaults, Jupiter, or RPC-provider credentials.</p>
+
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">Public Repository</div>
+                        <p>The complete public integration guide, working examples, configuration reference, wallet-adapter examples, deep-link documentation, styling options, runtime API, callbacks, security guidance, and troubleshooting guide are available in the AquaVaults Public Swap Widget repository. The repository contains integration documentation and example code; the hosted AquaVaults widget itself is served by AquaVaults.</p>
+                        <p><a href="https://github.com/RaptorCapture247/AquaVaults-Public-Swap-Widget" target="_blank" rel="noopener noreferrer">Open the Public Swap Widget repository →</a></p>
+                        <p><a href="https://raptorcapture247.github.io/AquaVaults-Public-Swap-Widget/" target="_blank" rel="noopener noreferrer">View the live examples →</a></p>
+                    </div>
+                </div>
+
+                <!-- ── 4. What Public Widget Can Do ── -->
+                <div class="docs-section">
+                    <h2 id="public-widget-capabilities">What the Public Widget Can Do</h2>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Manual Solana Swaps</h3>
+                            <p>Users can connect a Solana wallet, select tokens, review a swap, sign it, and complete the transaction without leaving the host website.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Built-In or Existing Wallet Flow</h3>
+                            <p>A site can use the widget's built-in wallet connection or integrate the widget with an existing Solana wallet connection using the documented wallet adapter interface.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Community Selection</h3>
+                            <p>The host can configure an AquaVaults-listed community and may lock that selection. When applicable, community fee routing follows AquaVaults' current routing rules. Embedding the public widget does not create a community listing.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Deep Links</h3>
+                            <p>Buy or sell token mints can be preloaded through supported deep-link parameters, making it possible to build direct token and campaign landing-page flows.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Website Styling</h3>
+                            <p>Documented CSS variables allow the widget to better match the surrounding site's visual design without modifying the hosted widget source.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Runtime Controls and Callbacks</h3>
+                            <p>The public documentation includes supported runtime methods and callbacks for sites that need deeper integration with their own interface.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── 5. What Public Widget Cannot Do ── -->
+                <div class="docs-section">
+                    <h2 id="public-widget-limitations">What the Public Widget Cannot Do</h2>
+                    <p>The Public Swap Widget is intentionally separate from the approved integration used by listed projects. Public availability does not grant the campaign and Rewards status associated with an approved website integration.</p>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>No AquaVaults Rewards Eligibility</h3>
+                            <p>Swaps made through the Public Swap Widget are not eligible for AquaVaults Rewards points. A listed project must move its site to the approved integration path if it wants qualifying embedded activity to participate in Rewards.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>No Approved Campaign Credit</h3>
+                            <p>The public integration is not the approved community-campaign path. Projects that need embedded activity recognized for eligible AquaVaults community campaigns should use the approved widget integration after listing.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>No Listing Benefits Just for Embedding</h3>
+                            <p>Installing the Public Swap Widget does not list the host project on AquaVaults and does not create a community fee share. A project must be listed separately to receive the benefits attached to an AquaVaults community listing.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>No Host-Locked Public Fee</h3>
+                            <p>The public widget opens with its public fee setting and the user can adjust it. The host website cannot use the public configuration to lock or replace that opening fee.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>No AutoSwap, Limit Orders, or EVM Swaps</h3>
+                            <p>The Public Swap Widget is a manual Solana single-swap interface. AutoSwap, Trigger/limit orders, EVM swaps, and administrative tools are separate AquaVaults products and are not exposed through this public widget.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── 6. Public Widget Quick Start ── -->
+                <div class="docs-section">
+                    <h2 id="public-quick-start">Public Widget Quick Start</h2>
+                    <p>The public integration requires three basic pieces. The GitHub repository contains the full documentation and complete working examples.</p>
+
+                    <h3>1. Load the Public Swap Widget</h3>
+                    <p>Add the hosted script inside the page <code>&lt;head&gt;</code>:</p>
+                    <pre><code>&lt;script src="https://aquavaults.com/sdk/aquavaults-sdk-open.js"&gt;&lt;/script&gt;</code></pre>
+
+                    <h3>2. Add the Widget Container</h3>
+                    <p>Place this element wherever the swap widget should appear:</p>
+                    <pre><code>&lt;div id="swap-widget"&gt;&lt;/div&gt;</code></pre>
+
+                    <h3>3. Mount the Widget</h3>
+                    <p>After the container exists on the page, mount the widget:</p>
+                    <pre><code>&lt;script&gt;
+  AquaVaultsSDK.mount('#swap-widget', {
+    apiBase: 'https://aquavaults.com'
+  });
+&lt;/script&gt;</code></pre>
+
+                    <p>That is the minimum integration. Community configuration, token defaults, deep links, styling, existing-wallet integration, callbacks, and runtime controls are documented in the public repository.</p>
+                </div>
+
+                <!-- ── 7. Fees and Community Routing ── -->
+                <div class="docs-section">
+                    <h2 id="fees-and-community-routing">Fees and Community Routing</h2>
+                    <p>The public widget opens with a 1% platform fee. The user can adjust the fee from the widget; the embedding website cannot lock or override the public widget's opening fee.</p>
+                    <p>A host may configure or lock the selected AquaVaults-listed community. When an eligible listed community is selected and a platform fee is generated, fee routing follows AquaVaults' current community routing rules. A project must be listed to receive a community share; embedding the Public Swap Widget does not itself create a listing or make the host website an approved integration.</p>
+                    <p>AquaVaults' Community Growth Program applies to platform fees that swaps actually generate. It does not guarantee swap volume, revenue, rewards, rankings, campaign access, or token performance.</p>
+                </div>
+
+                <!-- ── 8. Deep Links ── -->
+                <div class="docs-section">
+                    <h2 id="deep-links">Deep Links and Prepared Swap Flows</h2>
+                    <p>The Public Swap Widget supports URL parameters that can preload the token a user is buying or selling. This allows a site to create dedicated token pages, announcement links, or other prepared swap flows without removing the user's control over execution.</p>
+                    <p>A deep link prepares the interface. It does not execute a transaction. The user still connects their own wallet, reviews the swap, and signs the transaction themselves.</p>
+
+                    <pre><code>https://your-site.example/swap?av_buy=TOKEN_MINT
+https://your-site.example/swap?av_sell=TOKEN_MINT</code></pre>
+
+                    <p>See the repository's deep-link guide for the supported behavior and complete examples.</p>
+                </div>
+
+                <!-- ── 9. Public to Approved ── -->
+                <div class="docs-section">
+                    <h2 id="public-to-approved">Starting Public, Then Listing Later</h2>
+                    <p>A site can start with the Public Swap Widget before it is listed on AquaVaults. If the project later becomes listed and wants its embedded activity to participate in the approved campaign and Rewards paths, the existing public widget does not change status automatically.</p>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>1. Get Listed</h3>
+                            <p>Complete the AquaVaults listing process and receive the project's listed community configuration.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>2. Approve the Production Origin</h3>
+                            <p>Provide the exact production website origin that will host the approved widget so AquaVaults can onboard it to the approved integration path.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>3. Use the Private Integration Docs</h3>
+                            <p>Replace the public-widget integration with the approved widget setup supplied by AquaVaults. Do not assume that changing only the community setting makes the public widget approved.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>4. Validate Before Campaigning</h3>
+                            <p>Confirm the approved widget is running from the intended production origin before relying on it for eligible campaign activity or telling users that qualifying swaps can participate in AquaVaults Rewards.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── 10. User Control ── -->
+                <div class="docs-section">
+                    <h2 id="user-control">User Control and Non-Custodial Design</h2>
+                    <p>AquaVaults is non-custodial. You connect your own wallet, you control your own funds at all times, you choose your own fee level on each swap, and you decide whether to participate. AquaVaults never takes custody of user funds.</p>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Users Connect Their Own Wallet</h3>
+                            <p>The widget does not give the host website custody of user funds or signing authority over the user's wallet.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Every Swap Is User-Approved</h3>
+                            <p>Preloaded tokens, community settings, and deep links do not bypass wallet approval. Users still review and sign their own transactions.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Third-Party Infrastructure</h3>
+                            <p>AquaVaults relies on third-party services and networks it does not control, including swap routing, wallets, RPC/data providers, and the Solana network. Their availability, pricing, and behavior can change.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── 11. Developer Resources ── -->
+                <div class="docs-section">
+                    <h2 id="developer-resources">Public Widget Developer Resources</h2>
+                    <p>The public repository is the starting point for websites using the unrestricted Public Swap Widget.</p>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Integration Repository</h3>
+                            <p>Implementation instructions, configuration, styling, wallet integration, callbacks, runtime controls, security guidance, troubleshooting, and copy/paste examples.</p>
+                            <p><a href="https://github.com/RaptorCapture247/AquaVaults-Public-Swap-Widget" target="_blank" rel="noopener noreferrer">Open GitHub repository →</a></p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Live Examples</h3>
+                            <p>Working public-widget examples covering built-in wallets, existing wallet connections, custom themes, deep links, and runtime controls.</p>
+                            <p><a href="https://raptorcapture247.github.io/AquaVaults-Public-Swap-Widget/" target="_blank" rel="noopener noreferrer">Open live examples →</a></p>
+                        </div>
+                    </div>
+
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">Live Mainnet Examples</div>
+                        <p>The repository's live widget examples connect to Solana mainnet and can perform real swaps with real assets. Review all transaction details in your wallet before signing.</p>
+                    </div>
+                </div>
+
+                <!-- ── Continue Exploring ── -->
+                <div class="docs-explore">
+                    <p class="docs-explore-title">Continue Exploring</p>
+                    <div class="docs-explore-links">
+                        <a href="/learn/get-listed" class="docs-explore-link">Get Listed →</a>
+                        <a href="/learn/user-rewards" class="docs-explore-link">User Rewards →</a>
+                        <a href="/learn/community-campaigns" class="docs-explore-link">Community Campaigns →</a>
+                        <a href="/learn/solana-swapper" class="docs-explore-link">Solana Swapper →</a>
+                    </div>
+                </div>
+
+                <!-- ── Pagination ── -->
+                <nav class="docs-pagination">
+                    <a href="/learn/evm-swapper" class="docs-pag-link">
+                        <span class="docs-pag-direction">← Previous</span>
+                        <span class="docs-pag-title">EVM Swapper</span>
+                    </a>
+                    <a href="/learn/coop-rig" class="docs-pag-link docs-pag-next">
+                        <span class="docs-pag-direction">Next →</span>
+                        <span class="docs-pag-title">Co-op Mining Rig</span>
+                    </a>
+                </nav>
+
+            </div>
+        </main>
+
+    </div>
+
+    <div id="footer-container"></div>
+</body>
+</html>

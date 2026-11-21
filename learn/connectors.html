@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connector Program — AquaVaults Learn</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <meta property="og:image" content="/assets/logo.png" />
+    <meta name="description" content="Learn how AquaVaults privately records verified community introductions and independently administers optional Connector rewards without creating community partnerships or commissions." />
+    <link rel="stylesheet" href="/about.css">
+    <link rel="stylesheet" href="/learn/docs.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/header/header-loader.js" defer></script>
+    <script src="/header/header.js" defer></script>
+    <script src="/learn/docs.js" defer></script>
+    <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+    <div id="header-container" data-header-type="simple"></div>
+
+    <div class="docs-layout">
+
+        <aside id="docs-sidebar" class="docs-sidebar">
+            <!-- injected by docs.js -->
+        </aside>
+
+        <main class="docs-main">
+
+            <nav class="docs-breadcrumbs">
+                <a href="/learn" class="docs-breadcrumb-link">Learn</a>
+                <span class="docs-breadcrumb-sep">›</span>
+                <span>Join</span>
+            </nav>
+
+            <header class="docs-hero">
+                <div class="docs-hero-badge">Connector Program</div>
+                <h1>Connector Program</h1>
+                <p class="docs-hero-sub">The Connector Program is built around one idea: strong communities matter more than large numbers of communities. AquaVaults grows through quality relationships, not mass outreach.</p>
+            </header>
+
+            <div class="docs-content">
+
+                <div class="docs-callout docs-callout-info">
+                    <div class="docs-callout-label">Community Applications</div>
+                    <p>Founders can <a href="/apply">apply directly to list a community</a> without a wallet or application fee. A Connector's referral link pre-fills the code, or a Founder can enter an optional Connector code on the application form and verify it. Attribution remains a private candidate until AquaVaults independently approves the application and verifies the listing. Submitting a code does not earn a payout or change community fees.</p>
+                </div>
+
+                <div class="docs-callout docs-callout-info">
+                    <div class="docs-callout-label">Related</div>
+                    <p>A verified referral alone does not change a community's fee-share floor. Learn about eligible paid Community Floor Upgrades and Growth Program benefits: <a href="/learn/growth-program">fee share, monthly tiers, Partner status, and dashboards</a>.</p>
+                </div>
+
+                <!-- ── 1. The Goal Is Quality, Not Quantity ── -->
+                <div class="docs-section">
+                    <h2 id="quality-not-quantity">The Goal Is Quality, Not Quantity</h2>
+                    <p>The Connector Program is not designed to produce a long list of communities. It is designed to surface the right ones.</p>
+                    <p>AquaVaults works best when its listed communities are genuinely active — when holders actually show up, when coordination happens, when campaigns create real participation rather than surface-level numbers. A list of a thousand inactive communities does not serve the ecosystem. A smaller set of communities that genuinely engage does.</p>
+                    <p>That distinction shapes how the Connector Program works. Connectors are not expected to pitch AquaVaults to as many communities as possible. They are expected to identify communities that would be a natural fit — communities that already have what AquaVaults needs most: active members, recurring engagement, and a foundation of real coordination.</p>
+                    <p>The goal is not recruitment volume. The goal is ecosystem fit.</p>
+                </div>
+
+                <!-- ── 2. How The Connector Program Works ── -->
+                <div class="docs-section">
+                    <h2 id="how-it-works">How the Connector Program Works</h2>
+                    <p>Connectors introduce communities to AquaVaults through verified referrals. After approval and production verification, AquaVaults may permanently record which Connector made the introduction. This is private referral attribution, not an affiliation, endorsement, or authorization to represent the community. Listing alone earns no cash reward. An eligible new external Connector may receive a $20 USDC Direct Connector Reward only if an eligible Community #21+ completes a qualifying verified paid Community Floor Upgrade under the applicable rules.</p>
+                    <p>Historical referral attribution remains recorded even if the Connector and Founder later stop communicating or working together. It does not transfer any community fee share or control to the Connector. AquaVaults may separately consider discretionary Volume Drops based on referred-community activity. Neither a listing nor community activity alone creates a payment obligation.</p>
+                    <div class="docs-callout docs-callout-note">
+                        <div class="docs-callout-label">On Volume Drops</div>
+                        <p>Volume Drops are discretionary, considered separately for each linked community, and never guaranteed. AquaVaults has not established fixed payout amounts, thresholds, or cadence. A Volume Drop becomes a payable reward only after AquaVaults explicitly finalizes an award for that Connector-community relationship. Combined portfolio activity is not the basis for an automatic payout.</p>
+                    </div>
+                    <p>Thoughtful introductions strengthen the AquaVaults ecosystem. The program recognizes verified introductions without requiring Founders to maintain an ongoing personal or business relationship with the referring Connector.</p>
+                </div>
+
+                <!-- Practical Connector onboarding: identity and attribution remain separate from rewards -->
+                <div class="docs-section">
+                    <h2 id="connector-get-started">Get Started as a Connector</h2>
+                    <p>Connector registration is optional. Start at <a href="/account/#connector">AquaVaults Account → Connector</a> with the Solana wallet you intend to keep as your permanent reward wallet.</p>
+                    <ol>
+                        <li><strong>Open your Account.</strong> Connect the wallet, sign in to your existing AquaVaults Account or review the Account creation acknowledgments if this is your first visit. Account creation is a message signature, not a token transfer.</li>
+                        <li><strong>Review Connector consent.</strong> Open the Connector tab, read the current Connector-specific terms and disclosures, then explicitly opt in using a separate wallet-message signature. Registration may be unavailable while the program is paused.</li>
+                        <li><strong>Keep your permanent code and wallet.</strong> A successful registration assigns a public referral code and permanently binds your existing Account wallet as the reward recipient. Neither the code nor reward wallet can be rotated or transferred.</li>
+                        <li><strong>Introduce a community.</strong> Copy your Connector code. When the application route is available, the Account also enables a referral link to the community application. A Founder still submits and controls their own application; sharing a code does not create a listing or endorsement.</li>
+                        <li><strong>Follow the evidence.</strong> Your Account shows referred applications and production-verified linked communities when available, alongside informational volume and verified Floor Upgrade purchase indicators. These are not an earnings balance or automatic reward approval.</li>
+                    </ol>
+                    <p><a href="/account/#connector">Open your Connector Account →</a></p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="connector-upgrade-and-rewards">Floor Upgrades and Direct Rewards Are Separate</h2>
+                    <p>An eligible newly listed <strong>Standard</strong> community can purchase a one-time <strong>$20 USDC Community Floor Upgrade</strong> during the first 30 days after its verified listing. A valid purchase increases its permanent minimum community share from 50% to 60%, effective at the beginning of the next UTC calendar month. The purchase is paid to AquaVaults, not to the Connector. Once verified, its history stays recorded after the purchase window closes.</p>
+                    <p>A separate <strong>$20 USDC Direct Connector Reward</strong> may become due to an external Connector for an independently verified qualifying Community #21+ paid Upgrade. An attribution, listing, or paid Upgrade does <strong>not</strong> automatically approve a reward. AquaVaults reviews the actual listing order, referral evidence, eligibility, and possible self-referral or Founder conflicts before approving any reward.</p>
+                    <p>Approved Direct Connector Rewards are distributed <strong>manually by AquaVaults</strong> to the registered permanent reward wallet. AquaVaults records and verifies the finalized payout transaction. The Connector does not need to approve a transfer from their wallet to receive it.</p>
+                    <p>Volume Drops are different: they remain discretionary and have no automatic threshold, amount, cadence, or payable balance. Connectors receive no part of their referred community’s routed swap fees.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="connector-privacy-and-security">Privacy and Security</h2>
+                    <p>A verified referral creates a private, auditable historical attribution record. It does not make the Connector an agent, partner, spokesperson, Founder, or treasury operator for the community. Founders can report disputed attribution or misconduct for independent review without automatically erasing the original historical evidence.</p>
+                    <p>The Account includes a separately signed <strong>Permanent Reward Payout Halt</strong>. It irreversibly blocks future Connector payouts to the registered wallet, cannot be used to change the recipient, and does not erase existing verified liabilities. Use it only after reading the specific warning in Account.</p>
+                    <p>Never send funds to register as a Connector, and never sign a swap or token-transfer transaction as a substitute for an Account or Connector consent signature. Consult the <a href="/tos">Terms of Service</a> for the program rules.</p>
+                </div>
+
+                <!-- ── 3. What Makes A Strong Community ── -->
+                <div class="docs-section">
+                    <h2 id="what-makes-strong-community">What Makes A Strong Community</h2>
+                    <p>Strong introductions help AquaVaults grow; inactive communities rarely develop the lasting participation the program is designed to support. A successful introduction or a community's activity level does not, by itself, guarantee a Connector payment.</p>
+                    <p>The signals that indicate a genuinely strong community are consistent across types. They are not about follower counts or listed market caps.</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Active Participation</h3>
+                            <p>Members who actually show up — in Discord, in spaces, in campaigns, on-chain. A community where conversations are happening and people are responding is more valuable than a large audience that is not paying attention.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Visible Leadership</h3>
+                            <p>A founder, team, or core group that is genuinely present and engaged with their community. Communities without visible, active leadership rarely sustain coordination over time.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Coordinated Behavior</h3>
+                            <p>Evidence that the community has rallied around campaigns, organized activity together, or pushed participation in some coordinated way — even once. That history indicates the community can do it again.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>On-Chain Activity</h3>
+                            <p>A community whose members already trade, participate in token ecosystems, or interact with Solana-based platforms is already doing the behaviors AquaVaults is designed to extend. The infrastructure fits what they are already doing.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── 4. Connectors Are Relationship Builders ── -->
+                <div class="docs-section">
+                    <h2 id="relationship-builders">Connectors Are Relationship Builders</h2>
+                    <p>The best connector outreach does not feel like outreach at all. It feels like one person who understands both sides of a potential fit bringing that awareness to the right people at the right time.</p>
+                    <p>That happens naturally when a connector genuinely understands the community they are approaching, understands what AquaVaults offers, and can have a real conversation about whether and how the fit makes sense. It does not happen when a connector is working through a list, mass messaging communities they know nothing about, and treating introductions as a numbers exercise.</p>
+                    <p>The program is not designed for the latter. There is no incentive structure that rewards volume of outreach over quality of fit. A connector who approaches five communities thoughtfully and brings in two strong ones has done more for the ecosystem than a connector who approaches five hundred communities carelessly and brings in ten that immediately go inactive.</p>
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">The Right Approach</div>
+                        <p>Connectors should approach communities they already know, have genuine relationships with, or have studied carefully enough to speak credibly about the fit. The introduction should be useful to the community whether or not they ultimately list. That is what relationship-driven outreach looks like — and it is the standard the Connector Program is built around.</p>
+                    </div>
+                </div>
+
+                <!-- ── 5. Why The Permanent Connection Matters ── -->
+                <div class="docs-section">
+                    <h2 id="permanent-connection">Why Permanent Referral Attribution Matters</h2>
+                    <p>AquaVaults retains verified referral attribution as an auditable record of an introduction. A permanent record does not mean a permanent partnership or personal relationship between a Connector and a community.</p>
+                    <p>Attribution does not depend on a Community Floor Upgrade purchase and does not create a commission on community platform fees. AquaVaults alone administers Connector reward decisions under the applicable rules; no volume milestone automatically creates a payout.</p>
+                    <p>Founders remain independent: the referring Connector does not acquire permission to speak for a community, use its name as an endorsement, manage its listing, or access its treasury or private dashboard. Connector attribution is not displayed as a public identity-to-community relationship by AquaVaults.</p>
+                    <p>Founders may privately report inaccurate attribution, misrepresentation, or suspected misconduct. AquaVaults reviews reports independently and may impose appropriate program restrictions. A personal disagreement alone does not automatically erase verified historical attribution, and evidence or allegations submitted for review are not published as Connector endorsements or findings.</p>
+                </div>
+
+                <!-- ── 6. AquaVaults Grows Through Strong Communities ── -->
+                <div class="docs-section">
+                    <h2 id="grows-through-strong-communities">AquaVaults Grows Through Strong Communities</h2>
+                    <p>The AquaVaults ecosystem is only as strong as the communities that participate in it. Listed communities that are genuinely active — that run campaigns, drive AutoSwap sessions, embed the Swap Widget, coordinate Rig participation, and bring their members into recurring engagement — are what make the platform more valuable for every other community and user on it.</p>
+                    <p>Each strong community that joins creates a stronger ecosystem for the ones already there. Their users become part of the platform's recurring activity. Their campaigns create visible participation that other communities can see and benchmark against. Their collaboration opportunities expand what is possible for communities looking for partners within the platform.</p>
+                    <p>Connectors who introduce those communities are doing more than pursuing a possible one-time upgrade reward. They are actively shaping what AquaVaults becomes. The communities they identify and introduce help determine whether AquaVaults becomes known for genuine participation or for a list of communities that never meaningfully engage.</p>
+                    <p>That is a meaningful role. The Connector Program is designed to make it feel that way.</p>
+                </div>
+
+                <!-- ── 7. More Than Outreach ── -->
+                <div class="docs-section">
+                    <h2 id="more-than-outreach">More Than Outreach</h2>
+                    <p>Seen narrowly, the Connector Program is a way to find communities and bring them onto a platform. That framing undersells what the program actually is.</p>
+                    <p>Connectors who approach it well are doing something closer to ecosystem curation. They are identifying cultures, reading communities, understanding which founders are genuinely building something versus which ones are cycling through whatever the current trend is. They are making judgments about fit, readiness, and long-term potential — and those judgments shape what AquaVaults becomes.</p>
+                    <p>A connector who consistently surfaces strong communities with genuine leaders and active participation is contributing infrastructure to the ecosystem: a flow of new communities that strengthens everything already there. That is different in kind from an outreach campaign. It is a function that requires real knowledge, real relationships, and real judgment.</p>
+                    <p>The long-term strength of AquaVaults depends more on the quality of its communities than the size of its list. Connectors play an important role in helping the ecosystem grow through thoughtful introductions, strong relationship-building, and careful community selection.</p>
+                </div>
+
+                <!-- ── Continue Exploring ── -->
+                <div class="docs-explore">
+                    <p class="docs-explore-title">Continue Exploring</p>
+                    <div class="docs-explore-links">
+                        <a href="/learn/for-token-communities" class="docs-explore-link">Why Token Communities List →</a>
+                        <a href="/learn/for-nft-projects" class="docs-explore-link">Why NFT Projects List →</a>
+                        <a href="/learn/swap-widget" class="docs-explore-link">Swap Widget →</a>
+                        <a href="/learn/coop-rig" class="docs-explore-link">Co-op Mining Rig →</a>
+                    </div>
+                </div>
+
+                <!-- ── Pagination ── -->
+                <nav class="docs-pagination">
+                    <a href="/learn/get-listed" class="docs-pag-link">
+                        <span class="docs-pag-direction">← Previous</span>
+                        <span class="docs-pag-title">Community Listing Requirements</span>
+                    </a>
+                </nav>
+
+            </div>
+        </main>
+
+    </div>
+
+    <div id="footer-container"></div>
+</body>
+</html>

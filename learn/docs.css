@@ -1,0 +1,1046 @@
+/* ============================================================
+   DOCS / LEARN SECTION
+   AquaVaults design system — docs-specific additions only.
+   Loads alongside about.css which provides: feature-card,
+   feature-grid, coop-callout, about-stats-bar, about-body,
+   coop-callout-link, feature-section, body reset.
+   ============================================================ */
+
+/* ── Landing page content wrapper ──────────────────────── */
+
+.docs-landing-content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 5rem;
+}
+
+/* ── Inner-page layout (sidebar + main) ─────────────────── */
+
+.docs-layout {
+    display: block;
+    min-height: calc(100vh - 120px);
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ── Sidebar ────────────────────────────────────────────── */
+
+.docs-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 280px;
+    z-index: 300;
+    background: #010A0F;
+    border-right: 1px solid rgba(99, 102, 241, 0.2);
+    padding: 0 0 2rem 1.25rem;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.22s ease;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(99, 102, 241, 0.2) transparent;
+}
+
+.docs-sidebar.open { transform: translateX(0); }
+
+.docs-sidebar::-webkit-scrollbar { width: 4px; }
+.docs-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.2);
+    border-radius: 4px;
+}
+
+/* ── Sidebar backdrop ────────────────────────────────── */
+.docs-sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 299;
+}
+.docs-sidebar-backdrop.open { display: block; }
+
+/* ── Sidebar close button ────────────────────────────── */
+.docs-sidebar-close {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.75rem 1rem 0.5rem;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+    margin-bottom: 0.5rem;
+    margin-left: -1.25rem;
+    width: calc(100% + 1.25rem);
+}
+.docs-sidebar-close button {
+    background: none;
+    border: none;
+    color: #475569;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    line-height: 1;
+    transition: color 0.15s;
+}
+.docs-sidebar-close button:hover { color: #94a3b8; }
+
+.docs-sidebar-logo {
+    margin-bottom: 1.75rem;
+    padding-right: 1rem;
+}
+
+.docs-sidebar-logo-text {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #475569;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.docs-sidebar-logo-text:hover { color: #818cf8; }
+
+.docs-sidebar-section { margin-bottom: 1.5rem; }
+
+.docs-sidebar-section-label {
+    font-size: 0.67rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #334155;
+    margin-bottom: 0.35rem;
+    padding-right: 1rem;
+}
+
+.docs-sidebar-link {
+    display: block;
+    padding: 0.32rem 1rem 0.32rem 0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #475569;
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color 0.15s;
+}
+
+.docs-sidebar-link:hover { color: #94a3b8; }
+
+.docs-sidebar-link.active {
+    color: #818cf8;
+    font-weight: 600;
+}
+
+/* ── Main content area ──────────────────────────────────── */
+
+.docs-main {
+    min-width: 0;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 2rem 2rem 5rem;
+}
+
+.docs-content { max-width: 700px; }
+
+/* ── Breadcrumbs ────────────────────────────────────────── */
+
+.docs-breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: #334155;
+    margin-bottom: 1.75rem;
+}
+
+.docs-breadcrumb-link {
+    color: #475569;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.docs-breadcrumb-link:hover { color: #94a3b8; }
+
+.docs-breadcrumb-sep {
+    color: #334155;
+    font-size: 0.7rem;
+}
+
+/* ── Inner-page hero (no shimmer) ───────────────────────── */
+
+.docs-hero {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.18);
+}
+
+.docs-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #818cf8;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.28);
+    border-radius: 999px;
+    padding: 0.22rem 0.7rem;
+    margin-bottom: 0.7rem;
+}
+
+.docs-hero h1 {
+    font-size: 1.85rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: #eaeaea;
+    margin: 0 0 0.55rem 0;
+    line-height: 1.2;
+}
+
+.docs-hero-sub {
+    font-size: 0.95rem;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.65;
+    max-width: 580px;
+}
+
+/* ── Docs sections (inner pages) ───────────────────────── */
+
+.docs-section { margin-bottom: 2.5rem; }
+
+.docs-section h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #eaeaea;
+    margin: 0 0 0.85rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.18);
+    line-height: 1.3;
+    position: relative;
+}
+
+.docs-section h3 {
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: #cbd5e1;
+    margin: 1.5rem 0 0.5rem 0;
+    position: relative;
+}
+
+.docs-section p {
+    color: #94a3b8;
+    line-height: 1.8;
+    font-size: 0.9rem;
+    margin: 0 0 0.85rem 0;
+}
+
+/* ── Section anchor links ───────────────────────────────── */
+
+.docs-anchor {
+    position: absolute;
+    left: -1.2rem;
+    color: transparent;
+    font-size: 0.85rem;
+    font-weight: 400;
+    text-decoration: none;
+    transition: color 0.15s;
+    top: 0.1rem;
+}
+
+.docs-section h2:hover .docs-anchor,
+.docs-section h3:hover .docs-anchor { color: #334155; }
+
+/* ── Callout blocks ─────────────────────────────────────── */
+
+.docs-callout {
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    line-height: 1.7;
+}
+
+.docs-callout-label {
+    font-size: 0.67rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+}
+
+.docs-callout p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: #94a3b8;
+    line-height: 1.7;
+}
+
+.docs-callout-info {
+    background: rgba(99, 102, 241, 0.06);
+    border: 1px solid rgba(99, 102, 241, 0.28);
+}
+.docs-callout-info .docs-callout-label { color: #818cf8; }
+
+.docs-callout-note {
+    background: rgba(148, 163, 184, 0.05);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+}
+.docs-callout-note .docs-callout-label { color: #64748b; }
+
+.docs-callout-warn {
+    background: rgba(251, 191, 36, 0.05);
+    border: 1px solid rgba(251, 191, 36, 0.22);
+}
+.docs-callout-warn .docs-callout-label { color: #fbbf24; }
+
+/* ── Numbered steps ─────────────────────────────────────── */
+
+.docs-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.25rem 0;
+}
+
+.docs-step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.docs-step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    min-width: 2rem;
+    border-radius: 999px;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.32);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #818cf8;
+}
+
+.docs-step-body { flex: 1; padding-top: 0.15rem; }
+
+.docs-step-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #eaeaea;
+    margin: 0 0 0.2rem 0;
+}
+
+.docs-step-desc {
+    font-size: 0.85rem;
+    color: #64748b;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ── TOC (right aside — optional) ───────────────────────── */
+
+.docs-toc-aside {
+    position: sticky;
+    top: 2rem;
+    padding: 2rem 1.25rem 2rem 0;
+    align-self: start;
+}
+
+.docs-toc-label {
+    font-size: 0.67rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #334155;
+    margin-bottom: 0.6rem;
+}
+
+.docs-toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.docs-toc-link {
+    display: block;
+    padding: 0.28rem 0 0.28rem 0.75rem;
+    font-size: 0.8rem;
+    color: #334155;
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+    transition: color 0.15s;
+}
+
+.docs-toc-link:hover { color: #64748b; }
+
+.docs-toc-link.active {
+    color: #818cf8;
+    border-left-color: #818cf8;
+}
+
+.docs-toc-link-sub {
+    padding-left: 1.4rem;
+    font-size: 0.75rem;
+}
+
+/* ── Pagination ─────────────────────────────────────────── */
+
+.docs-pagination {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(99, 102, 241, 0.18);
+}
+
+.docs-pag-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    text-decoration: none;
+    max-width: 240px;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(99, 102, 241, 0.18);
+    border-radius: 10px;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.docs-pag-link:hover {
+    border-color: rgba(99, 102, 241, 0.4);
+    background: rgba(99, 102, 241, 0.04);
+}
+
+.docs-pag-direction {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #334155;
+}
+
+.docs-pag-title {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #818cf8;
+}
+
+.docs-pag-next {
+    text-align: right;
+    margin-left: auto;
+}
+
+/* ── Continue Exploring ─────────────────────────────────── */
+
+.docs-explore {
+    background: rgba(99, 102, 241, 0.04);
+    border: 1px solid rgba(99, 102, 241, 0.18);
+    border-radius: 12px;
+    padding: 1.4rem;
+    margin-top: 2.5rem;
+}
+
+.docs-explore-title {
+    font-size: 0.67rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #475569;
+    margin: 0 0 0.85rem 0;
+}
+
+.docs-explore-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+}
+
+.docs-explore-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.38rem 0.9rem;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.22);
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #818cf8;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.docs-explore-link:hover {
+    background: rgba(99, 102, 241, 0.14);
+    border-color: rgba(99, 102, 241, 0.42);
+    color: #a78bfa;
+}
+
+/* ── Landing-page hero (shimmer) ────────────────────────── */
+
+.docs-landing-hero {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 2.5rem;
+}
+
+.docs-landing-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #818cf8;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.28);
+    border-radius: 999px;
+    padding: 0.28rem 0.9rem;
+}
+
+.docs-landing-hero h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin: 0;
+    background: linear-gradient(120deg, #a78bfa 0%, #818cf8 40%, #4f46e5 70%, #6366f1 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: docs-shimmer 4s linear infinite;
+}
+
+@keyframes docs-shimmer {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+.docs-landing-sub {
+    font-size: 1rem;
+    color: #64748b;
+    margin: 0;
+    max-width: 540px;
+    line-height: 1.65;
+}
+
+.docs-landing-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.25rem;
+}
+
+.docs-btn-primary {
+    display: inline-block;
+    padding: 0.72rem 1.5rem;
+    background: #6366f1;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.88rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+}
+.docs-btn-primary:hover {
+    background: #4f46e5;
+    transform: translateY(-1px);
+}
+
+.docs-btn-secondary {
+    display: inline-block;
+    padding: 0.72rem 1.5rem;
+    background: rgba(99, 102, 241, 0.1);
+    color: #818cf8;
+    font-weight: 700;
+    font-size: 0.88rem;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    transition: background 0.2s, border-color 0.2s;
+}
+.docs-btn-secondary:hover {
+    background: rgba(99, 102, 241, 0.17);
+    border-color: rgba(99, 102, 241, 0.5);
+}
+
+/* ── Ecosystem pillar grid ──────────────────────────────── */
+
+.docs-pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.docs-pillar {
+    background: #1e293b;
+    border: 1px solid rgba(99, 102, 241, 0.18);
+    border-radius: 14px;
+    padding: 1.4rem;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.docs-pillar:hover {
+    transform: translateY(-3px);
+    border-color: rgba(99, 102, 241, 0.42);
+    box-shadow: 0 8px 28px rgba(99, 102, 241, 0.1);
+}
+
+.docs-pillar-icon {
+    font-size: 1.35rem;
+    line-height: 1;
+}
+
+.docs-pillar-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #eaeaea;
+    margin: 0;
+}
+
+.docs-pillar-desc {
+    font-size: 0.82rem;
+    color: #64748b;
+    line-height: 1.55;
+    margin: 0;
+    flex: 1;
+}
+
+.docs-pillar-cta {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #818cf8;
+    margin-top: 0.25rem;
+}
+
+/* ── CTA grid (landing bottom) ──────────────────────────── */
+
+.docs-cta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.docs-cta-card {
+    background: rgba(99, 102, 241, 0.04);
+    border: 1px solid rgba(99, 102, 241, 0.22);
+    border-radius: 14px;
+    padding: 1.4rem;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.docs-cta-card:hover {
+    background: rgba(99, 102, 241, 0.09);
+    border-color: rgba(99, 102, 241, 0.42);
+}
+
+.docs-cta-title {
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: #eaeaea;
+    margin: 0;
+}
+
+.docs-cta-desc {
+    font-size: 0.82rem;
+    color: #64748b;
+    line-height: 1.55;
+    margin: 0;
+    flex: 1;
+}
+
+.docs-cta-action {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #818cf8;
+    margin-top: 0.2rem;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+    /* Landing page browse button — mobile only */
+    .docs-landing-browse-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: none;
+        border: 1px solid rgba(99, 102, 241, 0.22);
+        color: #64748b;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        padding: 0.4rem 0.8rem;
+        border-radius: 0.35rem;
+        cursor: pointer;
+        margin-top: 0.75rem;
+        transition: border-color 0.15s, color 0.15s;
+    }
+    .docs-landing-browse-btn:hover {
+        border-color: rgba(99, 102, 241, 0.45);
+        color: #818cf8;
+    }
+
+    .docs-main { max-width: 100%; margin: 0; padding: 1.5rem 1.25rem 3rem; }
+    .docs-content { max-width: 100%; }
+}
+
+@media (min-width: 901px) {
+    .docs-sidebar-overlay { display: none !important; }
+    .docs-landing-browse-btn { display: none; }
+}
+
+@media (max-width: 640px) {
+    .docs-landing-hero h1 { font-size: 1.9rem; }
+    .docs-landing-sub { font-size: 0.9rem; }
+    .docs-pillar-grid { grid-template-columns: 1fr; }
+    .docs-cta-grid { grid-template-columns: 1fr; }
+    .docs-pagination { flex-direction: column; }
+    .docs-pag-next { margin-left: 0; text-align: left; }
+    .docs-landing-content { padding: 2rem 1rem 4rem; }
+}
+
+/* ── Documentation tables ─────────────────────────────── */
+.docs-table-wrap {
+    overflow-x: auto;
+    margin: 1.25rem 0;
+    -webkit-overflow-scrolling: touch;
+}
+.docs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    min-width: 30rem;
+}
+.docs-table caption {
+    text-align: left;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    padding-bottom: 0.5rem;
+}
+.docs-table th,
+.docs-table td {
+    text-align: left;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid rgba(99, 102, 241, 0.18);
+    vertical-align: top;
+}
+.docs-table thead th {
+    background: rgba(99, 102, 241, 0.1);
+    color: #c7d2fe;
+    font-weight: 600;
+}
+.docs-table tbody th {
+    background: rgba(99, 102, 241, 0.04);
+    font-weight: 600;
+    color: #e2e8f0;
+}
+.docs-table tbody tr:nth-child(even) td,
+.docs-table tbody tr:nth-child(even) th {
+    background: rgba(148, 163, 184, 0.04);
+}
+
+/* ── Revenue allocation summary grid ─────────────────── */
+
+.docs-alloc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.85rem;
+    margin: 1.25rem 0;
+}
+
+.docs-alloc-item {
+    background: #1e293b;
+    border: 1px solid rgba(99, 102, 241, 0.18);
+    border-radius: 14px;
+    padding: 1.1rem 1rem;
+    text-align: center;
+}
+
+.docs-alloc-pct {
+    display: block;
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #818cf8;
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+}
+
+.docs-alloc-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #eaeaea;
+    margin-bottom: 0.3rem;
+}
+
+.docs-alloc-desc {
+    display: block;
+    font-size: 0.78rem;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+/* ── Wallet cards ─────────────────────────────────────── */
+
+.docs-wallet-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1.25rem 0;
+}
+
+.docs-wallet-card {
+    background: #1e293b;
+    border: 1px solid rgba(99, 102, 241, 0.18);
+    border-radius: 14px;
+    padding: 1.1rem 1.4rem;
+}
+
+.docs-wallet-card-featured {
+    margin: 1.25rem 0;
+    border-color: rgba(99, 102, 241, 0.35);
+    background: rgba(99, 102, 241, 0.05);
+}
+
+.docs-wallet-head {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.docs-wallet-head > .docs-wallet-badge {
+    margin-left: auto;
+}
+
+.docs-wallet-name {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #eaeaea;
+    margin: 0;
+}
+
+.docs-wallet-pct {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #818cf8;
+    margin: 0;
+}
+
+.docs-wallet-badge {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 0.22rem 0.65rem;
+    border: 1px solid;
+}
+
+.docs-wallet-badge-custody       { color: #818cf8; border-color: rgba(129, 140, 248, 0.5); background: rgba(129, 140, 248, 0.1); }
+.docs-wallet-badge-recipient     { color: #86efac; border-color: rgba(134, 239, 172, 0.5); background: rgba(134, 239, 172, 0.1); }
+.docs-wallet-badge-operational   { color: #cbd5e1; border-color: rgba(203, 213, 225, 0.5); background: rgba(203, 213, 225, 0.08); }
+.docs-wallet-badge-payout        { color: #67e8f9; border-color: rgba(103, 232, 249, 0.5); background: rgba(103, 232, 249, 0.08); }
+.docs-wallet-badge-intake        { color: #fbbf24; border-color: rgba(251, 191, 36, 0.5); background: rgba(251, 191, 36, 0.1); }
+.docs-wallet-badge-participation { color: #f0abfc; border-color: rgba(240, 171, 252, 0.5); background: rgba(240, 171, 252, 0.1); }
+
+.docs-wallet-address-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(99, 102, 241, 0.14);
+    border-radius: 8px;
+    padding: 0.55rem 0.75rem;
+    margin: 0.6rem 0;
+}
+
+.docs-wallet-address {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.78rem;
+    color: #c7d2fe;
+    word-break: break-all;
+    flex: 1;
+    min-width: 180px;
+}
+
+.docs-wallet-actions {
+    display: flex;
+    gap: 0.4rem;
+    flex-shrink: 0;
+}
+
+.docs-wallet-copy-btn {
+    font-family: inherit;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #818cf8;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.docs-wallet-copy-btn:hover {
+    background: rgba(99, 102, 241, 0.18);
+    border-color: rgba(99, 102, 241, 0.5);
+}
+
+.docs-wallet-explorer-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #818cf8;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.docs-wallet-explorer-link:hover {
+    background: rgba(99, 102, 241, 0.18);
+    border-color: rgba(99, 102, 241, 0.5);
+}
+
+.docs-wallet-purpose {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    line-height: 1.65;
+    margin: 0 0 0.6rem 0;
+}
+
+.docs-wallet-mint-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #475569;
+    margin: 0.85rem 0 0.35rem;
+}
+
+/* ── Classification legend ────────────────────────────── */
+
+.docs-legend {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.6rem 1rem;
+    align-items: start;
+    margin: 1.25rem 0;
+}
+
+.docs-legend-item {
+    display: flex;
+    align-items: flex-start;
+}
+
+.docs-legend-item p {
+    margin: 0;
+    font-size: 0.82rem;
+    color: #64748b;
+    line-height: 1.55;
+}
+
+/* ── Bullet lists inside doc sections ─────────────────── */
+
+.docs-section ul {
+    margin: 0 0 0.85rem 0;
+    padding-left: 1.25rem;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.docs-section ul li { margin-bottom: 0.35rem; }
+.docs-section ul li::marker { color: #818cf8; }
+
+@media (max-width: 640px) {
+    .docs-wallet-address-row { flex-direction: column; align-items: stretch; }
+    .docs-wallet-actions { justify-content: flex-end; }
+    .docs-legend { grid-template-columns: 1fr; }
+}
+
+/* ── Multi-role badge groups ──────────────────────────── */
+
+.docs-wallet-head > .docs-wallet-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-left: auto;
+}
+
+/* ── Nested wallet split (e.g. Pond0x claim distribution) ── */
+
+.docs-wallet-split {
+    margin-top: 0.85rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid rgba(99, 102, 241, 0.14);
+}
+
+.docs-wallet-split-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #475569;
+    margin: 0 0 0.35rem;
+}
+
+.docs-wallet-split-note {
+    font-size: 0.8rem;
+    color: #64748b;
+    line-height: 1.55;
+    margin: 0 0 0.6rem;
+}
+
+.docs-wallet-split-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.08);
+}
+
+.docs-wallet-split-row:last-child { border-bottom: none; }
+
+.docs-wallet-split-pct {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #818cf8;
+    min-width: 2.6rem;
+}
+
+.docs-wallet-split-name {
+    font-size: 0.82rem;
+    color: #cbd5e1;
+}

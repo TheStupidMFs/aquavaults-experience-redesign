@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "source": "assets/campaigns",
+  "recommended": {
+    "aspect_ratio": "5:1",
+    "width": 2000,
+    "height": 400
+  },
+  "images": [
+    {
+      "name": "2026-09-community-fee-race.png",
+      "path": "/assets/campaigns/2026-09-community-fee-race.png",
+      "bytes": 1974979
+    },
+    {
+      "name": "autoswap-challenge-01.png",
+      "path": "/assets/campaigns/autoswap-challenge-01.png",
+      "bytes": 1133701
+    },
+    {
+      "name": "autoswap-challenge-02.png",
+      "path": "/assets/campaigns/autoswap-challenge-02.png",
+      "bytes": 1487947
+    },
+    {
+      "name": "autoswap-challenge-03.png",
+      "path": "/assets/campaigns/autoswap-challenge-03.png",
+      "bytes": 1611440
+    },
+    {
+      "name": "autoswap-challenge-04.png",
+      "path": "/assets/campaigns/autoswap-challenge-04.png",
+      "bytes": 1771784
+    },
+    {
+      "name": "autoswap-challenge-05.png",
+      "path": "/assets/campaigns/autoswap-challenge-05.png",
+      "bytes": 1515700
+    },
+    {
+      "name": "community-fee-race-01.png",
+      "path": "/assets/campaigns/community-fee-race-01.png",
+      "bytes": 1322788
+    },
+    {
+      "name": "community-fee-race-02.png",
+      "path": "/assets/campaigns/community-fee-race-02.png",
+      "bytes": 1409851
+    },
+    {
+      "name": "community-fee-race-03.png",
+      "path": "/assets/campaigns/community-fee-race-03.png",
+      "bytes": 1498138
+    },
+    {
+      "name": "community-fee-race-04.png",
+      "path": "/assets/campaigns/community-fee-race-04.png",
+      "bytes": 1546087
+    },
+    {
+      "name": "community-fee-race-05.png",
+      "path": "/assets/campaigns/community-fee-race-05.png",
+      "bytes": 1489750
+    },
+    {
+      "name": "community-swap-race-01.png",
+      "path": "/assets/campaigns/community-swap-race-01.png",
+      "bytes": 1468960
+    },
+    {
+      "name": "community-swap-race-02.png",
+      "path": "/assets/campaigns/community-swap-race-02.png",
+      "bytes": 1691152
+    },
+    {
+      "name": "community-swap-race-03.png",
+      "path": "/assets/campaigns/community-swap-race-03.png",
+      "bytes": 1461604
+    },
+    {
+      "name": "community-swap-race-04.png",
+      "path": "/assets/campaigns/community-swap-race-04.png",
+      "bytes": 1580099
+    },
+    {
+      "name": "community-swap-race-05.png",
+      "path": "/assets/campaigns/community-swap-race-05.png",
+      "bytes": 1462759
+    },
+    {
+      "name": "community-volume-race-01.png",
+      "path": "/assets/campaigns/community-volume-race-01.png",
+      "bytes": 1286359
+    },
+    {
+      "name": "community-volume-race-02.png",
+      "path": "/assets/campaigns/community-volume-race-02.png",
+      "bytes": 1403544
+    },
+    {
+      "name": "community-volume-race-03.png",
+      "path": "/assets/campaigns/community-volume-race-03.png",
+      "bytes": 1595177
+    },
+    {
+      "name": "community-volume-race-04.png",
+      "path": "/assets/campaigns/community-volume-race-04.png",
+      "bytes": 1770868
+    },
+    {
+      "name": "community-volume-race-05.png",
+      "path": "/assets/campaigns/community-volume-race-05.png",
+      "bytes": 1711314
+    },
+    {
+      "name": "coop-mining-race-01.png",
+      "path": "/assets/campaigns/coop-mining-race-01.png",
+      "bytes": 1617856
+    },
+    {
+      "name": "coop-mining-race-02.png",
+      "path": "/assets/campaigns/coop-mining-race-02.png",
+      "bytes": 1786296
+    },
+    {
+      "name": "coop-mining-race-03.png",
+      "path": "/assets/campaigns/coop-mining-race-03.png",
+      "bytes": 1495098
+    },
+    {
+      "name": "coop-mining-race-04.png",
+      "path": "/assets/campaigns/coop-mining-race-04.png",
+      "bytes": 1574504
+    },
+    {
+      "name": "coop-mining-race-05.png",
+      "path": "/assets/campaigns/coop-mining-race-05.png",
+      "bytes": 1707025
+    },
+    {
+      "name": "coop-participation-race-01.png",
+      "path": "/assets/campaigns/coop-participation-race-01.png",
+      "bytes": 1640005
+    },
+    {
+      "name": "coop-participation-race-02.png",
+      "path": "/assets/campaigns/coop-participation-race-02.png",
+      "bytes": 1728535
+    },
+    {
+      "name": "coop-participation-race-03.png",
+      "path": "/assets/campaigns/coop-participation-race-03.png",
+      "bytes": 1574980
+    },
+    {
+      "name": "coop-participation-race-04.png",
+      "path": "/assets/campaigns/coop-participation-race-04.png",
+      "bytes": 1557164
+    },
+    {
+      "name": "coop-participation-race-05.png",
+      "path": "/assets/campaigns/coop-participation-race-05.png",
+      "bytes": 1605485
+    },
+    {
+      "name": "flip-flop-challenge-01.png",
+      "path": "/assets/campaigns/flip-flop-challenge-01.png",
+      "bytes": 1459609
+    },
+    {
+      "name": "flip-flop-challenge-02.png",
+      "path": "/assets/campaigns/flip-flop-challenge-02.png",
+      "bytes": 1907591
+    },
+    {
+      "name": "flip-flop-challenge-03.png",
+      "path": "/assets/campaigns/flip-flop-challenge-03.png",
+      "bytes": 1604489
+    },
+    {
+      "name": "flip-flop-challenge-04.png",
+      "path": "/assets/campaigns/flip-flop-challenge-04.png",
+      "bytes": 1711570
+    },
+    {
+      "name": "flip-flop-challenge-05.png",
+      "path": "/assets/campaigns/flip-flop-challenge-05.png",
+      "bytes": 1764952
+    },
+    {
+      "name": "sponsored-token-buy-race-01.png",
+      "path": "/assets/campaigns/sponsored-token-buy-race-01.png",
+      "bytes": 1423425
+    },
+    {
+      "name": "sponsored-token-buy-race-02.png",
+      "path": "/assets/campaigns/sponsored-token-buy-race-02.png",
+      "bytes": 1646416
+    },
+    {
+      "name": "sponsored-token-buy-race-03.png",
+      "path": "/assets/campaigns/sponsored-token-buy-race-03.png",
+      "bytes": 1579843
+    },
+    {
+      "name": "sponsored-token-buy-race-04.png",
+      "path": "/assets/campaigns/sponsored-token-buy-race-04.png",
+      "bytes": 1629984
+    },
+    {
+      "name": "sponsored-token-buy-race-05.png",
+      "path": "/assets/campaigns/sponsored-token-buy-race-05.png",
+      "bytes": 1505789
+    },
+    {
+      "name": "widget-adoption-race-01.png",
+      "path": "/assets/campaigns/widget-adoption-race-01.png",
+      "bytes": 1527963
+    },
+    {
+      "name": "widget-adoption-race-02.png",
+      "path": "/assets/campaigns/widget-adoption-race-02.png",
+      "bytes": 1756767
+    },
+    {
+      "name": "widget-adoption-race-03.png",
+      "path": "/assets/campaigns/widget-adoption-race-03.png",
+      "bytes": 1447304
+    },
+    {
+      "name": "widget-adoption-race-04.png",
+      "path": "/assets/campaigns/widget-adoption-race-04.png",
+      "bytes": 1531676
+    },
+    {
+      "name": "widget-adoption-race-05.png",
+      "path": "/assets/campaigns/widget-adoption-race-05.png",
+      "bytes": 1734080
+    }
+  ]
+}

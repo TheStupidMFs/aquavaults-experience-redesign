@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Co-op Mining Rig — AquaVaults Learn</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <meta property="og:image" content="/assets/logo.png" />
+    <meta name="description" content="Learn how AquaVaults Co-op Mining Rig participation works: verify a wallet, use 6 daily Droplets across Mine, Burn, and Hashboost, watch manifest-counted swap routes, build reward weight, and support communities." />
+    <link rel="stylesheet" href="/about.css">
+    <link rel="stylesheet" href="/learn/docs.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/header/header-loader.js" defer></script>
+    <script src="/header/header.js" defer></script>
+    <script src="/learn/docs.js" defer></script>
+    <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+    <div id="header-container" data-header-type="simple"></div>
+
+    <div class="docs-layout">
+
+        <aside id="docs-sidebar" class="docs-sidebar">
+            <!-- injected by docs.js -->
+        </aside>
+
+        <main class="docs-main">
+
+            <nav class="docs-breadcrumbs">
+                <a href="/learn" class="docs-breadcrumb-link">Learn</a>
+                <span class="docs-breadcrumb-sep">›</span>
+                <span>Tools</span>
+            </nav>
+
+            <header class="docs-hero">
+                <div class="docs-hero-badge">Participation Layer</div>
+                <h1>Co-op Mining Rig</h1>
+                <p class="docs-hero-sub">Use daily Droplets to choose rig-funded swap routes, extend the next session, fill shared Hashboost buckets, build reward weight, and support a community.</p>
+            </header>
+
+            <div class="docs-content">
+
+                <!-- ── 1. What the Co-op Rig Is ── -->
+                <div class="docs-section">
+                    <h2 id="shared-participation-system">What the Co-op Rig Is</h2>
+                    <p>The Co-op Mining Rig is AquaVaults' participation layer around an AquaVaults-operated rig in the Pond0x ecosystem. It gives users a daily set of participation choices and gives communities a shared competition and coordination layer around that activity.</p>
+                    <p>AquaVaults manages the participation interface, wallet verification, Droplet accounting, community attribution, the queued-swap executor, route reporting, reward-weight accounting, and the connection to the rig. Pond0x is a separate ecosystem. Pond0x determines which rig swaps count in its reporting and whether mining claims occur.</p>
+                    <div class="docs-callout docs-callout-note">
+                        <div class="docs-callout-label">Important</div>
+                        <p>Co-op participation does not guarantee that a swap will count, that a mining session will produce a claim, or that a distribution will occur. The system records participation and reports observed rig results; it does not control Pond0x outcomes.</p>
+                    </div>
+                </div>
+
+                <!-- ── 2. Start With a Verified Wallet ── -->
+                <div class="docs-section">
+                    <h2 id="start-participating">Start With a Verified Wallet</h2>
+                    <p>Connect a Solana wallet and verify it inside the Co-op Rig. Verification uses a signed message to identify the wallet for participation tracking; it does not create a blockchain transaction.</p>
+                    <p>Each verified wallet has a shared budget of <strong>6 Droplets per UTC day</strong>. Mine, Burn, and Hashboost all consume from that same six-Droplet budget. The budget resets with the UTC day, so unused Droplets do not roll into the next day.</p>
+                    <p>Before contributing, choose the community you want to support. Each accepted action is recorded under the community selected for that contribution, and the same participation weight contributes to that community's cycle standing.</p>
+                </div>
+
+                <!-- ── 3. Three Ways To Participate ── -->
+                <div class="docs-section">
+                    <h2 id="ways-to-participate">Three Ways To Participate</h2>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Mine</h3>
+                            <p>Choose a swap route and apply one or more Droplets. Each Mine Droplet queues one swap attempt for the AquaVaults rig to execute with rig resources. Mine earns <strong>1 point per accepted Droplet</strong>.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Burn</h3>
+                            <p>Each Burn Droplet adds <strong>+2 minutes</strong> to the next mining session. Sessions have a 5-minute base duration before pending Burn time is added. Burn earns <strong>0.5 points per accepted Droplet</strong>.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Hashboost</h3>
+                            <p>Hashboost is a shared bucket. The bucket fills at <strong>6 Droplets</strong>; when filled, it queues a <strong>0.01 SOL</strong> boost for the next eligible session. Hashboost earns <strong>1.5 points per accepted Droplet</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">Hashboost Limits</div>
+                        <p>A user can contribute at most 2 Droplets to one Hashboost bucket and at most 3 Hashboost Droplets in a UTC day. Those Droplets still count against the same overall six-Droplet daily budget. The system also caps completed Hashboost bucket triggers at 10 per UTC day. Hashboost contributions are locked while the rig is actively mining or cooling down and reopen when the rig returns to idle.</p>
+                    </div>
+                </div>
+
+                <!-- ── 4. Mine: Attempts vs. Counted Swaps ── -->
+                <div class="docs-section">
+                    <h2 id="mine-route-strategy">Mine: Attempts vs. Counted Swaps</h2>
+                    <p>Mine is intentionally a planning layer, not a promise that every Droplet becomes a counted swap. A Mine Droplet first becomes a queued swap attempt. The executor later runs that attempt on the selected route. After the batch executes, AquaVaults waits for the Pond0x manifest reporting window and records how many of those attempts were actually counted.</p>
+                    <p>An attempt can execute successfully onchain and still produce no manifest-counted swap. That is normal Pond0x behavior, not a failed AquaVaults contribution. Your participation weight is based on the accepted Mine contribution; whether the resulting rig swap counts is a separate rig-progress result.</p>
+
+                    <div class="docs-callout docs-callout-note">
+                        <div class="docs-callout-label">Base Requirement vs. Boost-Recovery Target</div>
+                        <p>The rig's base requirement is <strong>18 manifest-counted swaps</strong> per mining session. That is the counted swap activity needed to replace what a normal session consumes. While AquaVaults is rebuilding the rig's Pond0x mining boost capacity, the operating target is raised to <strong>21 manifest-counted swaps</strong>.</p>
+                        <p>The additional 3 counted swaps create activity above the 18-swap base requirement. Instead of using all counted activity simply to replace the next session, that surplus is intended to help rebuild the Pond0x boost bank toward its available capacity. Once the boost bank is full, the operating target can return to 18. If the bank begins to decline again, the target can be raised back to 21.</p>
+                        <p>This Pond0x boost-recovery target is separate from the participant-facing <strong>Hashboost</strong> bucket. Mine Droplets create swap attempts, and only attempts later counted by Pond0x advance the current session target shown on the Co-op Rig page.</p>
+                    </div>
+
+                    <h3 id="swap-route-activity">Using Swap Route Activity</h3>
+                    <p>The Swap Route Activity table is the planning board for Mine contributions. It shows each supported route alongside its current queue, completed attempts, manifest-counted results, and observed count rate over selectable time windows.</p>
+                    <p>Use that history to decide where you want to apply your next Mine Droplets. A route that has been counting may stop counting; a route that has not been counting may begin counting. AquaVaults reports what has happened but cannot predict or guarantee what Pond0x will count next.</p>
+                    <p>Completed route results are finalized after the executor's manifest-check window, which is approximately ten minutes after a batch executes. Queue totals are current while attempted and counted totals reflect completed checks.</p>
+                </div>
+
+                <!-- ── 5. How Sessions Come Together ── -->
+                <div class="docs-section">
+                    <h2 id="how-the-rig-works">How Sessions Come Together</h2>
+                    <p>Counted swaps are banked until the rig reaches its current operating target. The base target is 18 manifest-counted swaps. During boost recovery, the target is 21 so the rig requires 3 additional counted swaps before the next session can authorize. Once the live target is reached and the rig is out of cooldown, the session can begin. The session starts with a 5-minute base duration plus any Burn minutes waiting for that session.</p>
+                    <p>A filled Hashboost bucket queues its configured 0.01 SOL boost for the next eligible session. Once a bucket is filled, it stops accepting more contributions until it is consumed. If a bucket is still open and not full when the rig enters a session or cooldown, Hashboost contributions are temporarily locked and can continue after the rig returns to idle.</p>
+                    <p>After a session ends, the rig enters a <strong>22-minute cooldown</strong>. Counted-swap progress can continue to exist in the bank, but another session does not authorize until the cooldown requirement is satisfied.</p>
+                </div>
+
+                <!-- ── 6. Reward Weight and Community Standing ── -->
+                <div class="docs-section">
+                    <h2 id="reward-weight">Reward Weight and Community Standing</h2>
+                    <p>Reward weight tracks accepted participation effort. It is separate from the rig's counted-swap trigger:</p>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Mine Weight</h3>
+                            <p><strong>1.0×</strong> — 1 Mine Droplet creates 1 point of reward weight.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Burn Weight</h3>
+                            <p><strong>0.5×</strong> — 1 Burn Droplet creates 0.5 points of reward weight.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Hashboost Weight</h3>
+                            <p><strong>1.5×</strong> — 1 Hashboost Droplet creates 1.5 points of reward weight.</p>
+                        </div>
+                    </div>
+
+                    <p>A Mine contribution does not lose its participation weight simply because its later rig swap was not counted by the Pond0x manifest. Community standings use the participation assigned to each selected community, while rig authorization uses manifest-counted swaps.</p>
+                    <p>Participation is organized into reward cycles. Legacy 30-day cycles end August 23, 2026. There is no active reward cycle from August 24 through August 31, and activity during that transition window is not included in a cycle's leaderboard or reward weight. UTC calendar-month cycles begin September 1, 2026. The current claim-allocation structure, when claims are received, is 10% for AquaVaults operations, 50% to the rewards pool, and 40% to rig support. Within the rewards pool, 10% goes to the top community for the cycle and 90% is allocated to participating users based on reward weight. This structure is subject to change.</p>
+
+                    <div class="docs-callout docs-callout-note">
+                        <div class="docs-callout-label">Claims Are Not Guaranteed</div>
+                        <p>The Co-op Rig may receive claims from participation in the Pond0x ecosystem, but timing, frequency, and amount are not guaranteed. If no claim is received for a cycle, there is nothing to distribute for that cycle.</p>
+                    </div>
+
+                    <div class="docs-callout docs-callout-note">
+                        <div class="docs-callout-label">Reward Integrity and Network Data</div>
+                        <p>To protect reward integrity, AquaVaults may process limited network information associated with successful reward-bearing contributions together with participation data and available public blockchain activity.</p>
+                        <p>During an active reward cycle, the contribution-integrity record stores a cycle-scoped cryptographic network identifier rather than the raw IP address. No cycle-scoped network identifier is created when no reward cycle is active. Network matches are investigation signals only: they do not by themselves establish common wallet ownership or automatically disqualify a participant.</p>
+                        <p>Reviews may consider multiple signals when evaluating systematic multi-wallet reward farming, circumvention of participation limits, or other reward-system abuse. Community organization and ordinary participation between independent users are not prohibited.</p>
+                    </div>
+                </div>
+
+                <!-- ── 7. Optional Onchain Contribution Mode ── -->
+                <div class="docs-section">
+                    <h2 id="onchain-participation">Optional Onchain Contribution Mode</h2>
+                    <p>Standard Droplet participation is offchain from the user's perspective. Mine swaps are funded and executed by the AquaVaults rig; contributing a Mine Droplet does not require the participant to trade their own tokens or fund that rig swap.</p>
+                    <p>Onchain Contribution Mode is a separate optional layer. When enabled, each contribution also creates a small wallet-approved SOL transaction with a participation memo. That transaction records the user's participation onchain; it does not replace or fund the rig's queued Mine swap.</p>
+
+                    <div class="docs-callout docs-callout-note">
+                        <div class="docs-callout-label">User's Choice</div>
+                        <p>Onchain Contribution Mode costs a small amount of SOL and requires wallet approval. AquaVaults does not guarantee that the transaction will be recognized by any external platform, satisfy any outside eligibility rule, increase the chance of a Pond0x count, or produce any reward or claim outcome.</p>
+                    </div>
+                </div>
+
+                <!-- ── 8. The Planning and Community Game ── -->
+                <div class="docs-section">
+                    <h2 id="planning-and-community">The Planning and Community Game</h2>
+                    <p>The Co-op Rig is designed around tradeoffs. Six daily Droplets can be directed toward Mine attempts, future session time, or the shared Hashboost bucket. Mine route results change over time. Hashboost requires coordination with other users. Burn can make the next session longer. Every accepted action also contributes reward weight and community standing.</p>
+                    <p>That means there is no single permanent "best" way to use Droplets. Participants can watch which routes are counting, look at the current session and Hashboost state, coordinate with their community, and decide where their limited daily participation is most useful.</p>
+                    <p>The strategy is intentionally visible. AquaVaults provides the queue status, route activity, rig state, Hashboost bucket, personal daily usage, cycle leaderboard, and contribution history so participants can make those decisions with the same public information.</p>
+                </div>
+
+                <!-- ── 9. AquaVaults and Pond0x ── -->
+                <div class="docs-section">
+                    <h2 id="aquavaults-and-pond0x">AquaVaults and Pond0x</h2>
+                    <p>AquaVaults and Pond0x are separate. AquaVaults is not affiliated with Pond0x. AquaVaults uses parts of the Pond0x ecosystem around its own rig and provides the participation, routing, accounting, and reporting layer described on this page.</p>
+                    <p>Pond0x ultimately determines which rig swaps count and what mining outcomes occur. AquaVaults can observe and report those results, but it cannot guarantee future counting behavior, claims, token performance, or any external outcome.</p>
+                </div>
+
+                <!-- ── Continue Exploring ── -->
+                <div class="docs-explore">
+                    <p class="docs-explore-title">Continue Exploring</p>
+                    <div class="docs-explore-links">
+                        <a href="/learn/autoswap" class="docs-explore-link">AutoSwap →</a>
+                        <a href="/learn/swap-widget" class="docs-explore-link">Swap Widget →</a>
+                        <a href="/learn/for-token-communities" class="docs-explore-link">Why Communities List →</a>
+                        <a href="/learn/intro" class="docs-explore-link">What Is AquaVaults →</a>
+                    </div>
+                </div>
+
+                <!-- ── Pagination ── -->
+                <nav class="docs-pagination">
+                    <a href="/learn/swap-widget" class="docs-pag-link">
+                        <span class="docs-pag-direction">← Previous</span>
+                        <span class="docs-pag-title">Swap Widget</span>
+                    </a>
+                    <a href="/learn/wheel-spinner" class="docs-pag-link docs-pag-next">
+                        <span class="docs-pag-direction">Next →</span>
+                        <span class="docs-pag-title">Wheel Spinner</span>
+                    </a>
+                </nav>
+
+            </div>
+        </main>
+
+    </div>
+
+    <div id="footer-container"></div>
+</body>
+</html>

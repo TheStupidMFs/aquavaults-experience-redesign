@@ -1,0 +1,74 @@
+<!DOCTYPE html> <html lang="en"> <head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+ <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>AquaVaults - Home</title> <link rel="icon" type="image/png" href="/assets/logo.png" /> <link rel="apple-touch-icon" href="/assets/logo.png" /> <meta property="og:image" content="/assets/logo.png" /> <meta name="description" content="AquaVaults - Solana infrastructure for swaps, automation, and community-driven activity." /> <link rel="stylesheet" href="home.css" /> <link rel="stylesheet" href="/header/header.css" /> <link rel="stylesheet" href="/footer/footer.css" /> <script src="/header/header-loader.js" defer></script> <script src="/header/header.js" defer></script> <script src="/footer/footer-loader.js" defer></script> </head> <body> <div class="page-wrapper"> <div id="header-container" data-header-type="simple"></div> <main class="page-content"> <div class="home-content"> <section class="hero-shell"> <div class="hero-glow"></div> <div class="logo hero-logo"> <img class="logo-img logo-img-large" src="/assets/fancy-logo-with-name.png" alt="AquaVaults" /> </div> <p class="eyebrow">Solana-native infrastructure</p> <p class="tagline">
+Swaps, structured activity, and community-driven participation on Solana.
+</p> <p class="hero-copy">
+AquaVaults gives users a direct way to move on-chain, configure structured activity,
+and support communities through transparent fee routing inside the transaction they sign.
+</p> <div class="hero-actions"> <a href="/swap" class="cta-button">Launch Swapper →</a> <a href="/about" class="cta-button cta-button-secondary">Learn More</a> </div> <div class="hero-points"> <span>Non-Custodial</span> <span>Solana Native</span> <span>Community Aware</span> </div> </section> <section id="av-global-solvol" class="av-volume-panel"> <div class="av-volume-label">Total Volume Routed</div> <div id="av-global-solvol-value" class="av-volume-value">—</div> <div class="av-volume-sub">SOL-equivalent across all swaps</div> </section> <section class="section-intro"> <h2>Built for More Than Basic Swaps</h2> <p>
+AquaVaults is designed for users and communities that want more control over how they stay active on-chain.
+Make direct swaps, configure repeatable behavior, support communities through platform fee routing,
+and participate in emerging community-driven liquidity systems without giving up wallet control.
+</p> </section> <section class="learn-ecosystem-card"> <div class="learn-ecosystem-glow" aria-hidden="true"></div> <div class="learn-ecosystem-inner"> <span class="learn-ecosystem-badge">Learn the Ecosystem</span> <h2 class="learn-ecosystem-title">More Than Swap Tools</h2> <p class="learn-ecosystem-body">
+Explore how AquaVaults connects community participation, recurring activity,
+community-driven liquidity, widgets, AutoSwap, the Co-op Mining Rig,
+and multichain ecosystem activity.
+</p> <div class="learn-ecosystem-actions"> <a href="/learn" class="learn-ecosystem-cta">Explore Learn →</a> </div> <div class="learn-ecosystem-secondary"> <a href="/learn/campaign-ideas">Campaign Ideas</a> <span class="learn-ecosystem-sep">·</span> <a href="/learn/community-driven-liquidity">Community-Driven Liquidity</a> <span class="learn-ecosystem-sep">·</span> <a href="/learn/for-token-communities">For Token Communities</a> </div> </div> </section> <section class="features"> <div class="feature"> <div class="feature-icon">💧</div> <h3>Support Communities</h3> <p>
+Select a listed community and route part of platform fees on-chain as part of your signed transaction.
+</p> </div> <div class="feature"> <div class="feature-icon">⚙️</div> <h3>Structured Automation</h3> <p>
+Configure timing and behavior around swaps so activity can be more intentional, repeatable, and hands-on.
+</p> </div> <div class="feature"> <div class="feature-icon">🔍</div> <h3>Transparent Execution</h3> <p>
+Review swap details, fee behavior, and execution settings before approving anything with your wallet.
+</p> </div> <div class="feature"> <div class="feature-icon">🌊</div> <h3>Beyond Trading</h3> <p>
+AquaVaults connects swaps, structured activity, participation systems, and community coordination into a broader Solana-native ecosystem layer.
+</p> </div> </section> <section class="highlight-grid"> <div class="highlight-card"> <h3>Direct Control</h3> <p>
+Connect your own wallet, review the transaction, and sign on your terms.
+AquaVaults does not take custody of user assets.
+</p> </div> <div class="highlight-card"> <h3>Jupiter-Powered Routing</h3> <p>
+Swap routing and quotes are sourced through Jupiter's routing infrastructure to access available Solana liquidity.
+</p> </div> <div class="highlight-card"> <h3>Community Utility</h3> <p>
+Give communities a direct on-chain participation layer where user activity can help support ecosystem growth, visibility, and treasury funding.
+</p> </div> </section> </div> <script>
+(function() {
+function formatLamportsToSol(lamportsStr) {
+try {
+var lamports = BigInt(lamportsStr || "0");
+if (lamports === 0n) return "0 SOL";
+var div = 1000000000n;
+var whole = lamports / div;
+var frac = lamports % div;
+var fracStr = frac.toString().padStart(9, '0').slice(0, 4);
+var wholeStr = whole.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+return fracStr && Number(fracStr) > 0
+? wholeStr + '.' + fracStr.replace(/0+$/, '') + ' SOL'
+: wholeStr + ' SOL';
+} catch (e) {
+return '— SOL';
+}
+}
+async function loadGlobalVolume() {
+var el = document.getElementById('av-global-solvol-value');
+if (!el) return;
+try {
+var res = await fetch('/api/volume/stats/global-sol');
+if (!res.ok) {
+el.textContent = '—';
+return;
+}
+var data = await res.json();
+el.textContent = formatLamportsToSol(data.solLamportsTotal);
+} catch (e) {
+el.textContent = '—';
+}
+}
+if (document.readyState === 'loading') {
+document.addEventListener('DOMContentLoaded', loadGlobalVolume);
+} else {
+loadGlobalVolume();
+}
+})();
+</script> </main> <div id="footer-container"></div> </div> </body> </html>

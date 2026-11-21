@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Allocation & Official Wallets — AquaVaults Learn</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <meta property="og:image" content="/assets/logo.png" />
+    <meta name="description" content="Review the AquaVaults revenue allocation plan, official Solana wallet registry, protected reserves, and the purpose assigned to each published address." />
+    <link rel="stylesheet" href="/about.css">
+    <link rel="stylesheet" href="/learn/docs.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/header/header-loader.js" defer></script>
+    <script src="/header/header.js" defer></script>
+    <script src="/learn/docs.js" defer></script>
+    <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+    <div id="header-container" data-header-type="simple"></div>
+
+    <div class="docs-layout">
+
+        <aside id="docs-sidebar" class="docs-sidebar">
+            <!-- injected by docs.js -->
+        </aside>
+
+        <main class="docs-main">
+
+            <nav class="docs-breadcrumbs">
+                <a href="/learn" class="docs-breadcrumb-link">Learn</a>
+                <span class="docs-breadcrumb-sep">›</span>
+                <span>Get Started</span>
+            </nav>
+
+            <header class="docs-hero">
+                <div class="docs-hero-badge">AquaVaults Transparency</div>
+                <h1>Revenue Allocation & Official Wallets</h1>
+                <p class="docs-hero-sub">Learn how AquaVaults plans to allocate verified platform revenue and review the official Solana wallets used for revenue custody, allocation recipients, operations, payouts, subscriptions, and program participation.</p>
+            </header>
+
+            <div class="docs-content">
+
+                <div class="docs-callout docs-callout-warn">
+                    <div class="docs-callout-label">Important</div>
+                    <p>Not every wallet listed on this page receives a percentage of platform revenue. Each wallet is labeled according to its specific role so its purpose can be independently reviewed on-chain. A wallet balance is not automatically allocatable revenue.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="allocation-plan">How AquaVaults Revenue Is Allocated</h2>
+                    <p>Verified allocatable AquaVaults revenue is assigned according to the following plan.</p>
+
+                    <div class="docs-alloc-grid">
+                        <div class="docs-alloc-item">
+                            <span class="docs-alloc-pct">50%</span>
+                            <span class="docs-alloc-label">User Growth</span>
+                            <span class="docs-alloc-desc">Participation rewards, adoption campaigns, and ecosystem growth.</span>
+                        </div>
+                        <div class="docs-alloc-item">
+                            <span class="docs-alloc-pct">30%</span>
+                            <span class="docs-alloc-label">Operations</span>
+                            <span class="docs-alloc-desc">Infrastructure, development, and platform maintenance.</span>
+                        </div>
+                        <div class="docs-alloc-item">
+                            <span class="docs-alloc-pct">10%</span>
+                            <span class="docs-alloc-label">Strategic Reserve</span>
+                            <span class="docs-alloc-desc">Long-term flexibility, stability, and future strategic needs.</span>
+                        </div>
+                        <div class="docs-alloc-item">
+                            <span class="docs-alloc-pct">5%</span>
+                            <span class="docs-alloc-label">Community Support</span>
+                            <span class="docs-alloc-desc">Approved community initiatives and listed-community participation.</span>
+                        </div>
+                        <div class="docs-alloc-item">
+                            <span class="docs-alloc-pct">5%</span>
+                            <span class="docs-alloc-label">Co-Op</span>
+                            <span class="docs-alloc-desc">The AquaVaults Co-Op ecosystem and related participation systems.</span>
+                        </div>
+                    </div>
+
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">Note</div>
+                        <p>Allocation percentages apply only to revenue that has been verified and classified as allocatable. Opening balances, protected reserves, externally controlled funds, purpose-restricted holdings, and unrelated wallet assets are excluded. When an amount cannot be divided perfectly at the asset's smallest raw-unit level, the indivisible remainder is assigned to Operations.</p>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="revenue-treasury">Revenue Treasury</h2>
+                    <p>The addresses below are official AquaVaults Solana wallets. Each wallet is classified according to its specific role — reviewed by its stated purpose rather than by its visible balance alone.</p>
+
+                    <div class="docs-wallet-card docs-wallet-card-featured">
+                        <div class="docs-wallet-head">
+                            <p class="docs-wallet-name">Revenue Treasury</p>
+                            <span class="docs-wallet-badge docs-wallet-badge-custody">Revenue Custody</span>
+                        </div>
+                        <div class="docs-wallet-address-row">
+                            <code class="docs-wallet-address">9PAPuQ12ZPR5vWfrZQE1qEpNDXMWVb45Yyi2EgfGB7Us</code>
+                            <div class="docs-wallet-actions">
+                                <button type="button" class="docs-wallet-copy-btn" data-copy="9PAPuQ12ZPR5vWfrZQE1qEpNDXMWVb45Yyi2EgfGB7Us">Copy</button>
+                                <a class="docs-wallet-explorer-link" href="https://solscan.io/account/9PAPuQ12ZPR5vWfrZQE1qEpNDXMWVb45Yyi2EgfGB7Us" target="_blank" rel="noopener noreferrer">Explorer</a>
+                            </div>
+                        </div>
+                        <p class="docs-wallet-purpose">Receives and holds verified AquaVaults revenue before approved conversion, allocation, or distribution. It also maintains a protected native-SOL balance for transaction execution and token-account creation — this reserve is not allocatable revenue. The Revenue Treasury is a custody and clearing wallet, not an additional allocation category.</p>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="allocation-recipients">Revenue Allocation Recipients</h2>
+                    <p>Each recipient below receives its defined percentage under the published allocation plan.</p>
+
+                    <div class="docs-wallet-grid">
+                        <div class="docs-wallet-card">
+                            <div class="docs-wallet-head">
+                                <p class="docs-wallet-name">User Growth Wallet</p>
+                                <p class="docs-wallet-pct">50% Allocation</p>
+                                <span class="docs-wallet-badge docs-wallet-badge-recipient">Allocation Recipient</span>
+                            </div>
+                            <div class="docs-wallet-address-row">
+                                <code class="docs-wallet-address">9kspLyvynRb7WqLsdsWghBkv3UqviXVcK4AwX7BK3qi8</code>
+                                <div class="docs-wallet-actions">
+                                    <button type="button" class="docs-wallet-copy-btn" data-copy="9kspLyvynRb7WqLsdsWghBkv3UqviXVcK4AwX7BK3qi8">Copy</button>
+                                    <a class="docs-wallet-explorer-link" href="https://solscan.io/account/9kspLyvynRb7WqLsdsWghBkv3UqviXVcK4AwX7BK3qi8" target="_blank" rel="noopener noreferrer">Explorer</a>
+                                </div>
+                            </div>
+                            <p class="docs-wallet-purpose">Receives the User Growth allocation used for participation rewards, campaigns, adoption efforts, incentives, and ecosystem growth.</p>
+                        </div>
+
+                        <div class="docs-wallet-card">
+                            <div class="docs-wallet-head">
+                                <p class="docs-wallet-name">Operations Wallet</p>
+                                <p class="docs-wallet-pct">30% Allocation</p>
+                                <span class="docs-wallet-badge docs-wallet-badge-recipient">Allocation Recipient</span>
+                            </div>
+                            <div class="docs-wallet-address-row">
+                                <code class="docs-wallet-address">PhRXmCNydmp8e9QXTikpfEWhjHo7aCbyLYPa2ewFTPR</code>
+                                <div class="docs-wallet-actions">
+                                    <button type="button" class="docs-wallet-copy-btn" data-copy="PhRXmCNydmp8e9QXTikpfEWhjHo7aCbyLYPa2ewFTPR">Copy</button>
+                                    <a class="docs-wallet-explorer-link" href="https://solscan.io/account/PhRXmCNydmp8e9QXTikpfEWhjHo7aCbyLYPa2ewFTPR" target="_blank" rel="noopener noreferrer">Explorer</a>
+                                </div>
+                            </div>
+                            <p class="docs-wallet-purpose">Receives the Operations allocation used for infrastructure, development, maintenance, execution costs, and other approved operating expenses. Operations-controlled funds may also maintain designated operational and payout wallets, which do not receive separate percentages.</p>
+                        </div>
+
+                        <div class="docs-wallet-card">
+                            <div class="docs-wallet-head">
+                                <p class="docs-wallet-name">Strategic Reserve Wallet</p>
+                                <p class="docs-wallet-pct">10% Allocation</p>
+                                <span class="docs-wallet-badge docs-wallet-badge-recipient">Allocation Recipient</span>
+                            </div>
+                            <div class="docs-wallet-address-row">
+                                <code class="docs-wallet-address">FeazUDNxq3zxnTdsj4mMPF7K4svgzrpfPgrRAJZGHN4R</code>
+                                <div class="docs-wallet-actions">
+                                    <button type="button" class="docs-wallet-copy-btn" data-copy="FeazUDNxq3zxnTdsj4mMPF7K4svgzrpfPgrRAJZGHN4R">Copy</button>
+                                    <a class="docs-wallet-explorer-link" href="https://solscan.io/account/FeazUDNxq3zxnTdsj4mMPF7K4svgzrpfPgrRAJZGHN4R" target="_blank" rel="noopener noreferrer">Explorer</a>
+                                </div>
+                            </div>
+                            <p class="docs-wallet-purpose">Receives the Strategic Reserve allocation intended to preserve long-term flexibility, stability, and future strategic capacity.</p>
+                        </div>
+
+                        <div class="docs-wallet-card">
+                            <div class="docs-wallet-head">
+                                <p class="docs-wallet-name">Community Support Wallet</p>
+                                <p class="docs-wallet-pct">5% Allocation</p>
+                                <span class="docs-wallet-badge docs-wallet-badge-recipient">Allocation Recipient</span>
+                            </div>
+                            <div class="docs-wallet-address-row">
+                                <code class="docs-wallet-address">5dSneiWbgKaHKR1QSiwzhJf7MB7GkbGJdLm7CWc6V6N1</code>
+                                <div class="docs-wallet-actions">
+                                    <button type="button" class="docs-wallet-copy-btn" data-copy="5dSneiWbgKaHKR1QSiwzhJf7MB7GkbGJdLm7CWc6V6N1">Copy</button>
+                                    <a class="docs-wallet-explorer-link" href="https://solscan.io/account/5dSneiWbgKaHKR1QSiwzhJf7MB7GkbGJdLm7CWc6V6N1" target="_blank" rel="noopener noreferrer">Explorer</a>
+                                </div>
+                            </div>
+                            <p class="docs-wallet-purpose">Receives the Community Support allocation used for approved community initiatives, listed-community participation, and direct support efforts.</p>
+                        </div>
+
+                        <div class="docs-wallet-card">
+                            <div class="docs-wallet-head">
+                                <p class="docs-wallet-name">Co-Op Wallet</p>
+                                <p class="docs-wallet-pct">5% Allocation</p>
+                                <div class="docs-wallet-badges">
+                                    <span class="docs-wallet-badge docs-wallet-badge-recipient">Allocation Recipient</span>
+                                    <span class="docs-wallet-badge docs-wallet-badge-participation">Program Participation</span>
+                                </div>
+                            </div>
+                            <div class="docs-wallet-address-row">
+                                <code class="docs-wallet-address">AZ7F5ZfzdTG2bBCtkVaYZLsSWWyYBTb9wmAFnsaFtS7o</code>
+                                <div class="docs-wallet-actions">
+                                    <button type="button" class="docs-wallet-copy-btn" data-copy="AZ7F5ZfzdTG2bBCtkVaYZLsSWWyYBTb9wmAFnsaFtS7o">Copy</button>
+                                    <a class="docs-wallet-explorer-link" href="https://solscan.io/account/AZ7F5ZfzdTG2bBCtkVaYZLsSWWyYBTb9wmAFnsaFtS7o" target="_blank" rel="noopener noreferrer">Explorer</a>
+                                </div>
+                            </div>
+                            <p class="docs-wallet-purpose">Receives the Co-Op allocation used to support AquaVaults Co-Op participation systems and related ecosystem activity. This wallet is also the AquaVaults Co-Op Mining Rig's participation wallet — see Program Participation Wallets below for Pond0x claim distribution details.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="operational-payout-wallets">Operational & Payout Wallets</h2>
+                    <p>These wallets serve specific operating or payment functions. They are not additional revenue-allocation categories.</p>
+
+                    <div class="docs-wallet-grid">
+                        <div class="docs-wallet-card">
+                            <div class="docs-wallet-head">
+                                <p class="docs-wallet-name">Vault Creation Wallet</p>
+                                <span class="docs-wallet-badge docs-wallet-badge-operational">Operational</span>
+                            </div>
+                            <div class="docs-wallet-address-row">
+                                <code class="docs-wallet-address">GkqQQnLExgVpQ88TBzzSkiGN7qsQLy2K7E9aphNVDb4</code>
+                                <div class="docs-wallet-actions">
+                                    <button type="button" class="docs-wallet-copy-btn" data-copy="GkqQQnLExgVpQ88TBzzSkiGN7qsQLy2K7E9aphNVDb4">Copy</button>
+                                    <a class="docs-wallet-explorer-link" href="https://solscan.io/account/GkqQQnLExgVpQ88TBzzSkiGN7qsQLy2K7E9aphNVDb4" target="_blank" rel="noopener noreferrer">Explorer</a>
+                                </div>
+                            </div>
+                            <p class="docs-wallet-purpose">Used for transaction fees, token-account creation, and other execution costs associated with AquaVaults vault creation. Maintained using Operations-controlled funds — does not receive a separate percentage of platform revenue.</p>
+                        </div>
+
+                        <div class="docs-wallet-card">
+                            <div class="docs-wallet-head">
+                                <p class="docs-wallet-name">DFS Creation Wallet</p>
+                                <span class="docs-wallet-badge docs-wallet-badge-operational">Operational</span>
+                            </div>
+                            <div class="docs-wallet-address-row">
+                                <code class="docs-wallet-address">Cz9BV59mq8udr78DqkoWyQtWrZ76i9h55aN6GSeStXjr</code>
+                                <div class="docs-wallet-actions">
+                                    <button type="button" class="docs-wallet-copy-btn" data-copy="Cz9BV59mq8udr78DqkoWyQtWrZ76i9h55aN6GSeStXjr">Copy</button>
+                                    <a class="docs-wallet-explorer-link" href="https://solscan.io/account/Cz9BV59mq8udr78DqkoWyQtWrZ76i9h55aN6GSeStXjr" target="_blank" rel="noopener noreferrer">Explorer</a>
+                                </div>
+                            </div>
+                            <p class="docs-wallet-purpose">Used for transaction fees, account creation, and other execution costs associated with DFS creation. Maintained using Operations-controlled funds — does not receive a separate percentage of platform revenue.</p>
+                        </div>
+
+                        <div class="docs-wallet-card">
+                            <div class="docs-wallet-head">
+                                <p class="docs-wallet-name">Connector Program Wallet</p>
+                                <div class="docs-wallet-badges">
+                                    <span class="docs-wallet-badge docs-wallet-badge-payout">Payout Wallet</span>
+                                    <span class="docs-wallet-badge docs-wallet-badge-intake">Revenue Intake</span>
+                                </div>
+                            </div>
+                            <div class="docs-wallet-address-row">
+                                <code class="docs-wallet-address">BKNaA5JW6HjXj958xa1WRWqtqLYXqSgwa6SddKV34g3f</code>
+                                <div class="docs-wallet-actions">
+                                    <button type="button" class="docs-wallet-copy-btn" data-copy="BKNaA5JW6HjXj958xa1WRWqtqLYXqSgwa6SddKV34g3f">Copy</button>
+                                    <a class="docs-wallet-explorer-link" href="https://solscan.io/account/BKNaA5JW6HjXj958xa1WRWqtqLYXqSgwa6SddKV34g3f" target="_blank" rel="noopener noreferrer">Explorer</a>
+                                </div>
+                            </div>
+                            <p class="docs-wallet-purpose">AquaVaults-designated wallet for Connector Program receipts and approved payments. A Connector has no automatic claim over the wallet balance or a listed community's fee share. Each payment or reward requires its own verification and accounting. The authoritative payment destination for any live Community Floor Upgrade is the destination shown in its verified checkout quote.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="revenue-intake-wallets">Revenue Intake Wallets</h2>
+                    <p>Revenue intake wallets receive payments for a defined AquaVaults product or service. Receipt into an intake wallet does not automatically classify the wallet's entire balance as allocatable revenue — payments must first be verified and recorded through AquaVaults revenue accounting.</p>
+
+                    <div class="docs-wallet-grid">
+                        <div class="docs-wallet-card">
+                            <div class="docs-wallet-head">
+                                <p class="docs-wallet-name">Partner Subscription Wallet</p>
+                                <span class="docs-wallet-badge docs-wallet-badge-intake">Revenue Intake</span>
+                            </div>
+                            <div class="docs-wallet-address-row">
+                                <code class="docs-wallet-address">9xXvVnuLfMEfvy21PNtiZ25QpWKfFiZcsm9MQjsMKYYY</code>
+                                <div class="docs-wallet-actions">
+                                    <button type="button" class="docs-wallet-copy-btn" data-copy="9xXvVnuLfMEfvy21PNtiZ25QpWKfFiZcsm9MQjsMKYYY">Copy</button>
+                                    <a class="docs-wallet-explorer-link" href="https://solscan.io/account/9xXvVnuLfMEfvy21PNtiZ25QpWKfFiZcsm9MQjsMKYYY" target="_blank" rel="noopener noreferrer">Explorer</a>
+                                </div>
+                            </div>
+                            <p class="docs-wallet-purpose">Receives payments from listed communities purchasing an AquaVaults Partner subscription. Subject to revenue verification and accounting before being treated as allocatable AquaVaults revenue.</p>
+                        </div>
+
+                        <div class="docs-wallet-card">
+                            <div class="docs-wallet-head">
+                                <p class="docs-wallet-name">Connector Program Wallet</p>
+                                <span class="docs-wallet-badge docs-wallet-badge-intake">Revenue Intake</span>
+                            </div>
+                            <div class="docs-wallet-address-row">
+                                <code class="docs-wallet-address">BKNaA5JW6HjXj958xa1WRWqtqLYXqSgwa6SddKV34g3f</code>
+                                <div class="docs-wallet-actions">
+                                    <button type="button" class="docs-wallet-copy-btn" data-copy="BKNaA5JW6HjXj958xa1WRWqtqLYXqSgwa6SddKV34g3f">Copy</button>
+                                    <a class="docs-wallet-explorer-link" href="https://solscan.io/account/BKNaA5JW6HjXj958xa1WRWqtqLYXqSgwa6SddKV34g3f" target="_blank" rel="noopener noreferrer">Explorer</a>
+                                </div>
+                            </div>
+                            <p class="docs-wallet-purpose">Historically designated for eligible Community Floor Upgrade receipts. Verify the receiving wallet against the live AquaVaults checkout quote: the public wallet directory alone does not establish the configured payment destination. Upgrade purchases are AquaVaults revenue subject to verification and accounting; any separately approved Connector reward is not deducted from community-directed platform fees.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="program-participation">Program Participation Wallets</h2>
+                    <p>Program participation wallets hold assets or positions used to access an external network, service, testing environment, or strategic program. These holdings are not automatically part of the AquaVaults revenue-allocation pool.</p>
+
+                    <div class="docs-wallet-grid">
+                        <div class="docs-wallet-card">
+                            <div class="docs-wallet-head">
+                                <p class="docs-wallet-name">Co-Op Wallet</p>
+                                <span class="docs-wallet-badge docs-wallet-badge-participation">Program Participation</span>
+                            </div>
+                            <div class="docs-wallet-address-row">
+                                <code class="docs-wallet-address">AZ7F5ZfzdTG2bBCtkVaYZLsSWWyYBTb9wmAFnsaFtS7o</code>
+                                <div class="docs-wallet-actions">
+                                    <button type="button" class="docs-wallet-copy-btn" data-copy="AZ7F5ZfzdTG2bBCtkVaYZLsSWWyYBTb9wmAFnsaFtS7o">Copy</button>
+                                    <a class="docs-wallet-explorer-link" href="https://solscan.io/account/AZ7F5ZfzdTG2bBCtkVaYZLsSWWyYBTb9wmAFnsaFtS7o" target="_blank" rel="noopener noreferrer">Explorer</a>
+                                </div>
+                            </div>
+                            <p class="docs-wallet-purpose">The AquaVaults Co-Op Mining Rig's participation wallet. Also listed as an Allocation Recipient above — see Revenue Allocation Recipients for its 5% allocation.</p>
+
+                            <div class="docs-wallet-split">
+                                <p class="docs-wallet-split-label">Pond0x Claim Distribution</p>
+                                <p class="docs-wallet-split-note">Claims distributed by Pond0x to the AquaVaults Co-Op Mining Rig are currently split as follows, subject to change:</p>
+                                <div class="docs-wallet-split-row">
+                                    <span class="docs-wallet-split-pct">10%</span>
+                                    <span class="docs-wallet-split-name">AquaVaults Operations</span>
+                                </div>
+                                <div class="docs-wallet-split-row">
+                                    <span class="docs-wallet-split-pct">50%</span>
+                                    <span class="docs-wallet-split-name">Rewards Pool</span>
+                                </div>
+                                <div class="docs-wallet-split-row">
+                                    <span class="docs-wallet-split-pct">40%</span>
+                                    <span class="docs-wallet-split-name">Rig Support</span>
+                                </div>
+                                <p class="docs-wallet-split-note">Participation, points, or contributions in the Co-op Mining Rig do not create ownership of the Co-Op Wallet or an automatic right to its balance.</p>
+                                <a class="coop-callout-link" href="/coop-rig">View full Co-Op Rig details →</a>
+                            </div>
+                        </div>
+
+                        <div class="docs-wallet-card">
+                            <div class="docs-wallet-head">
+                                <p class="docs-wallet-name">OnlyMemes Node Wallet</p>
+                                <span class="docs-wallet-badge docs-wallet-badge-participation">Program Participation</span>
+                            </div>
+                            <div class="docs-wallet-address-row">
+                                <code class="docs-wallet-address">3vAZAQb8doPyEx1aNXeawyrxSNf6BBqDHDZK9Ki4VkUG</code>
+                                <div class="docs-wallet-actions">
+                                    <button type="button" class="docs-wallet-copy-btn" data-copy="3vAZAQb8doPyEx1aNXeawyrxSNf6BBqDHDZK9Ki4VkUG">Copy</button>
+                                    <a class="docs-wallet-explorer-link" href="https://solscan.io/account/3vAZAQb8doPyEx1aNXeawyrxSNf6BBqDHDZK9Ki4VkUG" target="_blank" rel="noopener noreferrer">Explorer</a>
+                                </div>
+                            </div>
+                            <p class="docs-wallet-purpose">Holds the designated position used to access the OnlyMemes Network and operate an AquaVaults testing node.</p>
+
+                            <a class="coop-callout-link" href="https://x.com/OnlyMemes_OS" target="_blank" rel="noopener noreferrer">View the OnlyMemes Network →</a>
+                        </div>
+                    </div>
+
+                    <div class="docs-callout docs-callout-note">
+                        <div class="docs-callout-label">Note</div>
+                        <p>Participation in the OnlyMemes Network may create future eligibility for incentives, airdrops, or revenue. No future reward, payment, or distribution is guaranteed. The $CHILLDEV position is a program participation asset and is not part of the normal AquaVaults revenue-allocation pool — any future value received through the node will be reviewed and classified separately.</p>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="protected-reserves">Protected Operational Reserves</h2>
+                    <p>Several AquaVaults wallets maintain native SOL for transaction execution, account creation, and uninterrupted platform operation. These balances are operating reserves, not separate allocation categories or distributable revenue.</p>
+
+                    <div class="docs-table-wrap">
+                        <table class="docs-table">
+                            <caption>Intended native-SOL floor by wallet.</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Wallet</th>
+                                    <th scope="col">Intended native-SOL floor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Revenue Treasury</th>
+                                    <td>0.25 SOL</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Vault Creation Wallet</th>
+                                    <td>0.25 SOL</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">DFS Creation Wallet</th>
+                                    <td>0.25 SOL</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>The Revenue Treasury reserve is funded through Operations and protected from normal allocation. Vault Creation and DFS Creation are also maintained using Operations-controlled funds. A shortfall in either operational wallet does not create a new allocation category or reduce another recipient's published percentage.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="onchain-balances">Understanding On-Chain Wallet Balances</h2>
+                    <p>Solana explorers provide an independent view of each wallet's current on-chain holdings. A visible balance should not be interpreted as fully allocatable AquaVaults revenue. A wallet may contain:</p>
+                    <ul>
+                        <li>Opening or historical balances</li>
+                        <li>Protected native-SOL reserves</li>
+                        <li>Revenue awaiting verification</li>
+                        <li>Small balances carried forward into a future period</li>
+                        <li>Assets that cannot yet be safely converted</li>
+                        <li>Program participation assets</li>
+                        <li>Funds reserved for a specific payment or operating purpose</li>
+                        <li>Previously allocated funds awaiting their intended use</li>
+                    </ul>
+                    <p>AquaVaults applies the published allocation percentages only to revenue that has been verified and classified as allocatable.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="wallet-classifications">Wallet Classifications</h2>
+                    <p>Every address on this page is classified by one or more of the six roles below. Some wallets serve more than one role and display multiple badges accordingly.</p>
+
+                    <div class="docs-legend">
+                        <div class="docs-legend-item">
+                            <span class="docs-wallet-badge docs-wallet-badge-custody">Revenue Custody</span>
+                        </div>
+                        <div class="docs-legend-item">
+                            <p>Holds verified revenue before approved processing, allocation, or distribution.</p>
+                        </div>
+                        <div class="docs-legend-item">
+                            <span class="docs-wallet-badge docs-wallet-badge-recipient">Allocation Recipient</span>
+                        </div>
+                        <div class="docs-legend-item">
+                            <p>Receives a defined percentage under the published revenue allocation plan.</p>
+                        </div>
+                        <div class="docs-legend-item">
+                            <span class="docs-wallet-badge docs-wallet-badge-operational">Operational</span>
+                        </div>
+                        <div class="docs-legend-item">
+                            <p>Supports a specific platform execution, maintenance, or account-creation function.</p>
+                        </div>
+                        <div class="docs-legend-item">
+                            <span class="docs-wallet-badge docs-wallet-badge-payout">Payout Wallet</span>
+                        </div>
+                        <div class="docs-legend-item">
+                            <p>Holds funds designated for approved program, connector, or partner payments.</p>
+                        </div>
+                        <div class="docs-legend-item">
+                            <span class="docs-wallet-badge docs-wallet-badge-intake">Revenue Intake</span>
+                        </div>
+                        <div class="docs-legend-item">
+                            <p>Receives payment for a defined AquaVaults product or service before revenue verification and accounting.</p>
+                        </div>
+                        <div class="docs-legend-item">
+                            <span class="docs-wallet-badge docs-wallet-badge-participation">Program Participation</span>
+                        </div>
+                        <div class="docs-legend-item">
+                            <p>Holds an asset or position used to access an external network, testing environment, or strategic program.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="verify-addresses">Verify Official AquaVaults Addresses</h2>
+                    <p>AquaVaults publishes full wallet addresses so they can be independently reviewed on-chain. Use the Copy and Explorer controls on this page whenever verifying an official AquaVaults wallet. Wallet roles may expand as new programs and services are introduced, and this page will remain the public reference for official wallet classifications and purposes.</p>
+                </div>
+
+                <!-- Continue Exploring -->
+                <div class="docs-explore">
+                    <p class="docs-explore-title">Continue Exploring</p>
+                    <div class="docs-explore-links">
+                        <a href="/learn/growth-program" class="docs-explore-link">Growth Program →</a>
+                        <a href="/learn/community-driven-liquidity" class="docs-explore-link">Community Driven Liquidity →</a>
+                        <a href="/about" class="docs-explore-link">About AquaVaults →</a>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <nav class="docs-pagination">
+                    <a href="/about" class="docs-pag-link">
+                        <span class="docs-pag-direction">← Previous</span>
+                        <span class="docs-pag-title">About</span>
+                    </a>
+                    <a href="/learn/community-driven-liquidity" class="docs-pag-link docs-pag-next">
+                        <span class="docs-pag-direction">Next →</span>
+                        <span class="docs-pag-title">Community Driven Liquidity</span>
+                    </a>
+                </nav>
+
+            </div>
+        </main>
+
+    </div>
+
+    <div id="footer-container"></div>
+</body>
+</html>

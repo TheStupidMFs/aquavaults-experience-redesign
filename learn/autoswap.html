@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoSwap — AquaVaults Learn</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <meta property="og:image" content="/assets/logo.png" />
+    <meta name="description" content="AutoSwap helps users and communities create recurring on-chain activity through repeatable swap sessions, coordinated participation, and sustained community engagement." />
+    <link rel="stylesheet" href="/about.css">
+    <link rel="stylesheet" href="/learn/docs.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/header/header-loader.js" defer></script>
+    <script src="/header/header.js" defer></script>
+    <script src="/learn/docs.js" defer></script>
+    <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+    <div id="header-container" data-header-type="simple"></div>
+
+    <div class="docs-layout">
+
+        <aside id="docs-sidebar" class="docs-sidebar">
+            <!-- injected by docs.js -->
+        </aside>
+
+        <main class="docs-main">
+
+            <nav class="docs-breadcrumbs">
+                <a href="/learn" class="docs-breadcrumb-link">Learn</a>
+                <span class="docs-breadcrumb-sep">›</span>
+                <span>Tools</span>
+            </nav>
+
+            <header class="docs-hero">
+                <div class="docs-hero-badge">Activity Engine</div>
+                <h1>AutoSwap</h1>
+                <p class="docs-hero-sub">AutoSwap transforms a single swap into recurring participation by allowing users to run repeatable swap sessions that support sustained community activity over time.</p>
+            </header>
+
+            <div class="docs-content">
+
+                <!-- ── 1. A Recurring Activity Engine ── -->
+                <div class="docs-section">
+                    <h2 id="recurring-activity-engine">A Recurring Activity Engine</h2>
+                    <p>A single swap is a moment. It happens, it settles, and the activity it represents disappears. For individual users that is often fine. For communities trying to build visible, sustained on-chain presence, a single moment is not enough.</p>
+                    <p>AutoSwap exists to solve that. It gives users a way to configure a swap session — a sequence of trades that unfolds over time — rather than executing one trade and stopping. The user defines the session structure up front, allowing participation to continue across a recurring sequence instead of a single isolated action.</p>
+                    <p>A single swap is temporary. Recurring participation creates sustained community activity.</p>
+                    <p>That is the foundation AutoSwap is built on.</p>
+                </div>
+
+                <!-- ── 2. How AutoSwap Works ── -->
+                <div class="docs-section">
+                    <h2 id="how-autoswap-works">How AutoSwap Works</h2>
+                    <p>Users configure a session before it starts. The session parameters are entirely up to them.</p>
+                    <div class="docs-steps">
+                        <div class="docs-step">
+                            <div class="docs-step-number">1</div>
+                            <div class="docs-step-body">
+                                <p class="docs-step-title">Choose a token pair</p>
+                                <p class="docs-step-desc">Select the tokens the session will swap between. Users can configure a single pair or set up multiple pairs for more varied sessions.</p>
+                            </div>
+                        </div>
+                        <div class="docs-step">
+                            <div class="docs-step-number">2</div>
+                            <div class="docs-step-body">
+                                <p class="docs-step-title">Set amounts and timing</p>
+                                <p class="docs-step-desc">Define how much to swap per transaction and how long to wait between each one. Both can be fixed or randomized depending on the session goal.</p>
+                            </div>
+                        </div>
+                        <div class="docs-step">
+                            <div class="docs-step-number">3</div>
+                            <div class="docs-step-body">
+                                <p class="docs-step-title">Set the number of swaps</p>
+                                <p class="docs-step-desc">Choose how many swaps the session will execute in total. The session runs through that sequence and completes when it reaches the configured count.</p>
+                            </div>
+                        </div>
+                        <div class="docs-step">
+                            <div class="docs-step-number">4</div>
+                            <div class="docs-step-body">
+                                <p class="docs-step-title">Run the session</p>
+                                <p class="docs-step-desc">Each swap in the session requires the user's approval. AutoSwap is not an unattended process — it guides users through a structured sequence, with each transaction signed from their own wallet.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Whichever community the user has selected carries through the entire session. Every swap in the sequence contributes toward that community through the same fee routing as an individual swap.</p>
+                </div>
+
+                <!-- ── 3. Why Recurring Activity Matters ── -->
+                <div class="docs-section">
+                    <h2 id="why-recurring-activity-matters">Why Recurring Activity Matters</h2>
+                    <p>Communities are not measured by what happened once. They are measured by what keeps happening.</p>
+                    <p>A single community announcement can drive a spike of activity. But spikes fade, and the attention that created them moves elsewhere. Communities that build durable on-chain presence do it through patterns — recurring participation, consistent activity, members who show up repeatedly rather than once.</p>
+                    <p>AutoSwap gives communities a tool that matches that reality. When members run AutoSwap sessions, they create activity that extends over time instead of concentrating in a single moment. A coordinated group of users running sessions together generates the kind of sustained, patterned activity that represents genuine community engagement.</p>
+                    <p>That matters for visibility. It matters for community confidence. It matters for the ongoing support loop between users and the communities they choose to back. A community can rally around a single push. A community that can sustain recurring participation over time has built something more durable.</p>
+                </div>
+
+                <!-- ── 4. AutoSwap and Community Campaigns ── -->
+                <div class="docs-section">
+                    <h2 id="community-campaigns">AutoSwap and Community Campaigns</h2>
+                    <p>One of the strongest uses of AutoSwap is organized community participation. Rather than asking members to show up once for a campaign, a community can build a call to action around a session — a defined window of time where members run AutoSwap together, all supporting the same community.</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Token Communities</h3>
+                            <p>Token projects can organize AutoSwap pushes that create consistent activity around their token pair. Members participate together over time, helping the community build recurring engagement patterns instead of isolated bursts of activity.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>NFT Projects</h3>
+                            <p>NFT communities can rally holders around AutoSwap sessions as part of broader campaigns. Partner tokens can be promoted through a shared session structure, giving collaborations a practical action layer instead of just visibility.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Recurring Support Loops</h3>
+                            <p>Any community can establish a recurring rhythm around AutoSwap — a weekly session, a monthly campaign push, or an ongoing call to action that members can pick up whenever they are active. Participation becomes a habit, not a one-time event.</p>
+                        </div>
+                    </div>
+                    <div class="docs-callout docs-callout-note">
+                        <div class="docs-callout-label">No Guaranteed Outcomes</div>
+                        <p>AutoSwap sessions create activity. They do not guarantee specific results, growth metrics, or community outcomes. The value of recurring participation is in the pattern it builds and the community coordination it supports — not in any implied financial or growth result.</p>
+                    </div>
+                </div>
+
+                <!-- ── 5. Flip-Flop Mode ── -->
+                <div class="docs-section">
+                    <h2 id="flip-flop-mode">Flip-Flop Mode and Participation Loops</h2>
+                    <p>Standard AutoSwap sessions move in one direction: the user swaps from Token A into Token B, repeatedly, until the session completes. Flip-Flop mode adds a return leg.</p>
+                    <p>With Flip-Flop enabled, the session alternates directions — swapping from A to B, then back again in the next step. This helps users sustain recurring activity across a token pair without needing to manually rebuild the session structure each time.</p>
+                    <p>The framing matters here: Flip-Flop is a participation structure, not a strategy tool. It is designed to support users who want sustained activity across a token pair — particularly in community campaign contexts where back-and-forth engagement around a specific token is the goal.</p>
+                </div>
+
+                <!-- ── 6. User Control and Non-Custodial Design ── -->
+                <div class="docs-section">
+                    <h2 id="user-control">User Control and Non-Custodial Design</h2>
+                    <p>AutoSwap does not run independently of the user. Sessions are user-configured, user-initiated, and user-approved at each step.</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Every Transaction Is User-Signed</h3>
+                            <p>Each swap in a session requires explicit wallet approval. AutoSwap structures the sequence, but the user controls whether each individual transaction proceeds.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Sessions Are Voluntary</h3>
+                            <p>Users configure the session, start it when ready, and can stop at any point. Participation is never automatic, passive, or managed by AquaVaults on the user's behalf.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>No Funds Held by AquaVaults</h3>
+                            <p>AutoSwap does not require depositing funds into a platform-controlled account. Swap activity originates from the user's own wallet throughout the entire session.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── 7. AutoSwap Math Estimator ── -->
+                <div class="docs-section">
+                    <h2 id="autoswap-estimator">Plan AutoSwap Settings with the Estimator</h2>
+                    <p>The AutoSwap Math Estimator helps users work backward from the amount and time they have into settings to consider entering in AutoSwap. A plan can begin with either a selected number of swaps or a time window.</p>
+
+                    <div class="docs-steps">
+                        <div class="docs-step">
+                            <div class="docs-step-number">1</div>
+                            <div class="docs-step-body">
+                                <p class="docs-step-title">Enter the planning amount and token pair</p>
+                                <p class="docs-step-desc">Choose the total amount for the base-pair calculation, the starting token, and the token to swap into.</p>
+                            </div>
+                        </div>
+                        <div class="docs-step">
+                            <div class="docs-step-number">2</div>
+                            <div class="docs-step-body">
+                                <p class="docs-step-title">Choose a swap count or time window</p>
+                                <p class="docs-step-desc">The estimator calculates values such as the amount per swap, number of swaps, Wait After Swap, and optional Random Amount or Random Wait ranges.</p>
+                            </div>
+                        </div>
+                        <div class="docs-step">
+                            <div class="docs-step-number">3</div>
+                            <div class="docs-step-body">
+                                <p class="docs-step-title">Review and enter the settings manually</p>
+                                <p class="docs-step-desc">The result is a mathematical planning aid. Users must review it and enter any chosen values into AutoSwap themselves.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>The estimator is available as a companion panel inside <a href="/autoswap">AutoSwap</a> and as a <a href="/autoswap/estimator">standalone full-page calculator</a>. The complete instructions, optional-feature behavior, and worked example are available in the <a href="/autoswap/how-to">AutoSwap How-To</a>.</p>
+
+                    <div class="docs-callout docs-callout-note">
+                        <div class="docs-callout-label">Planning Tool Only</div>
+                        <p>The estimator does not connect to a wallet, read balances, request quotes, execute swaps, or change AutoSwap settings. It does not guarantee completion time, transaction success, prices, fees, balances, volume, chart activity, or token performance.</p>
+                    </div>
+                </div>
+
+                <!-- ── 8. More Than Automation ── -->
+                <div class="docs-section">
+                    <h2 id="more-than-automation">More Than Automation</h2>
+                    <p>AutoSwap is more than simple automation tooling. It is infrastructure designed around recurring participation and sustained community activity.</p>
+                    <p>The difference matters. Automation software is built around removing the user from the process. AutoSwap is built around making the user's participation more sustainable — structured, repeatable, and connected to the communities they care about.</p>
+                    <p>Every AutoSwap session connects into the same ecosystem as the rest of AquaVaults. Sessions carry community selections forward, contributing to the same fee routing system as individual swaps. They connect into community campaigns that organizers can build around the platform. Communities can pair AutoSwap sessions alongside their Swap Widget pages — the widget is a standalone single-swap interface for individual trades, while AutoSwap runs separately as a session-based activity. Both exist alongside the Co-op Mining Rig, giving users multiple concurrent ways to participate in the ecosystem.</p>
+                    <p>Together, these tools are building something that goes beyond any single feature: a coordinated activity layer where communities and users can sustain meaningful on-chain engagement over time. AutoSwap is one of the clearest expressions of what that looks like in practice.</p>
+                </div>
+
+                <!-- ── Continue Exploring ── -->
+                <div class="docs-explore">
+                    <p class="docs-explore-title">Continue Exploring</p>
+                    <div class="docs-explore-links">
+                        <a href="/learn/solana-swapper" class="docs-explore-link">Solana Swapper →</a>
+                        <a href="/learn/swap-widget" class="docs-explore-link">Swap Widget →</a>
+                        <a href="/learn/coop-rig" class="docs-explore-link">Co-op Mining Rig →</a>
+                        <a href="/learn/for-token-communities" class="docs-explore-link">Why Communities List →</a>
+                    </div>
+                </div>
+
+                <!-- ── Pagination ── -->
+                <nav class="docs-pagination">
+                    <a href="/learn/solana-swapper" class="docs-pag-link">
+                        <span class="docs-pag-direction">← Previous</span>
+                        <span class="docs-pag-title">Solana Swapper</span>
+                    </a>
+                    <a href="/learn/limit-orders" class="docs-pag-link docs-pag-next">
+                        <span class="docs-pag-direction">Next →</span>
+                        <span class="docs-pag-title">Limit Orders</span>
+                    </a>
+                </nav>
+
+            </div>
+        </main>
+
+    </div>
+
+    <div id="footer-container"></div>
+</body>
+</html>

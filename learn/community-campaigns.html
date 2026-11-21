@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how AquaVaults Community Campaigns work — eligibility, scoring, divisions, handicaps, standings, finalization, and temporary Campaign rewards.">
+    <title>Community Campaigns — AquaVaults Learn</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <meta property="og:image" content="/assets/logo.png" />
+    <link rel="stylesheet" href="/about.css">
+    <link rel="stylesheet" href="/learn/docs.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/header/header-loader.js" defer></script>
+    <script src="/header/header.js" defer></script>
+    <script src="/learn/docs.js" defer></script>
+    <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+    <div id="header-container" data-header-type="simple"></div>
+
+    <div class="docs-layout">
+        <aside id="docs-sidebar" class="docs-sidebar"></aside>
+
+        <main class="docs-main">
+            <nav class="docs-breadcrumbs">
+                <a href="/learn" class="docs-breadcrumb-link">Learn</a>
+                <span class="docs-breadcrumb-sep">›</span>
+                <span>For Communities</span>
+            </nav>
+
+            <header class="docs-hero">
+                <div class="docs-hero-badge">For Communities</div>
+                <h1>Community Campaigns</h1>
+                <p class="docs-hero-sub">
+                    Time-boxed community competitions with frozen rules,
+                    server-authoritative scoring, transparent standings, and
+                    temporary Growth Program rewards for qualifying placements.
+                </p>
+            </header>
+
+            <div class="docs-content">
+                <div class="docs-section">
+                    <h2 id="what-is-a-campaign">What Is a Community Campaign?</h2>
+                    <p>AquaVaults Community Campaigns are competitions between listed communities. Campaign points belong to communities through AquaVaults' existing attribution systems; they are not individual-wallet competitions.</p>
+                    <p>Every Campaign has its own scoring window and an immutable template that defines the metric, point conversion, competition structure, and reward rules. Only qualifying activity inside that Campaign's scoring window earns Campaign points.</p>
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">Separate From User Rewards</div>
+                        <p>Community Campaigns and AquaVaults User Rewards are different programs. A community's Campaign score does not automatically create User Rewards points, and User Rewards participation does not automatically create Campaign eligibility.</p>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="templates">Current Campaign Templates</h2>
+                    <p>A Campaign template is the immutable scoring contract for a Campaign. It defines the authoritative activity source, what metric is measured, how that metric converts into points, whether historical placement mechanics apply, and what reward ladder can be used.</p>
+                    <p>Template versions are immutable. If AquaVaults changes a template's competitive meaning, the change is published as a new version rather than silently rewriting an already-announced Campaign.</p>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-card-icon">💧</div>
+                            <h3>Community Fee Race</h3>
+                            <p>Measures qualifying AquaVaults platform fees generated for community-attributed activity.</p>
+                            <p><strong>Points:</strong> $0.01 of qualifying platform fee = 1 Campaign point.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🌊</div>
+                            <h3>Community Volume Race</h3>
+                            <p>Measures qualifying Solana trading volume attributed to each competing community.</p>
+                            <p><strong>Points:</strong> 0.01 SOL of qualifying volume = 1 Campaign point.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🔁</div>
+                            <h3>Community Swap Race</h3>
+                            <p>Counts qualifying swaps rather than weighting communities by the size of each trade.</p>
+                            <p><strong>Points:</strong> 1 qualifying swap = 100 Campaign points. A counted swap must generate at least $0.05 in platform fee under the current template.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-card-icon">⚙️</div>
+                            <h3>AutoSwap Challenge</h3>
+                            <p>Measures qualifying fee activity produced through AquaVaults AutoSwap rather than general manual trading.</p>
+                            <p><strong>Points:</strong> $0.01 of qualifying AutoSwap fee = 1 Campaign point.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-card-icon">↔️</div>
+                            <h3>Flip-Flop Challenge</h3>
+                            <p>Measures qualifying fee activity attributed specifically to Flip-Flop behavior.</p>
+                            <p><strong>Points:</strong> $0.01 of qualifying Flip-Flop fee = 1 Campaign point.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🔗</div>
+                            <h3>Widget Adoption Race</h3>
+                            <p>Measures qualifying activity from approved AquaVaults Widget origins. Campaign credit follows the approved origin-owner community, while normal fee routing still follows the community selected for the swap.</p>
+                            <p><strong>Points:</strong> $0.01 of qualifying Widget fee = 1 Campaign point.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🎯</div>
+                            <h3>Sponsored Token Buy Race</h3>
+                            <p>A target token and sponsor community are frozen for the Campaign. Direct target-token buys receive full weight; direct target-token sells receive one-quarter weight. Merely passing through the token as an intermediate route does not qualify.</p>
+                            <p><strong>Points:</strong> 0.01 SOL of adjusted target-token volume = 1 Campaign point.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-card-icon">⛏️</div>
+                            <h3>Co-Op Mining Race</h3>
+                            <p>Measures authoritative Co-Op points credited to each competing community.</p>
+                            <p><strong>Points:</strong> 0.5 authoritative Co-Op point = 50 Campaign points.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🤝</div>
+                            <h3>Co-Op Participation Race</h3>
+                            <p>Counts qualifying unique Co-Op contributors credited to each competing community.</p>
+                            <p><strong>Points:</strong> 1 qualifying unique Co-Op contributor = 100 Campaign points.</p>
+                        </div>
+                    </div>
+
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">Public-Ready Formats</div>
+                        <p>The formats above are the Campaign templates AquaVaults currently presents as ready for public Campaign launches. Additional template definitions can remain in the engine for historical or validation purposes without being advertised as available for a new public Campaign.</p>
+                    </div>
+
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">Placement Depends on the Template</div>
+                        <p>Current trading, automation, Widget, and Sponsored Token formats use scale-sensitive placement balancing: historical activity can determine divisions and a 1.00×–1.50× handicap at T-7, but history never contributes points to the active Campaign. Current Co-Op formats instead use one frozen competition field with no historical-strength divisions or placement handicap. The exact frozen placement is shown separately from live scoring.</p>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="lifecycle">How a Campaign Moves From Announcement to Final Results</h2>
+                    <div class="docs-steps">
+                        <div class="docs-step">
+                            <div class="docs-step-number">1</div>
+                            <div class="docs-step-body">
+                                <p class="docs-step-title">Campaign Rules Are Announced</p>
+                                <p class="docs-step-desc">AquaVaults identifies the Campaign template, scoring dates, eligibility class, and reward mode. Competitive rules are locked at announcement.</p>
+                            </div>
+                        </div>
+                        <div class="docs-step">
+                            <div class="docs-step-number">2</div>
+                            <div class="docs-step-body">
+                                <p class="docs-step-title">The Eligible Roster Freezes Before Scoring</p>
+                                <p class="docs-step-desc">At the Campaign's T-7 placement cutoff, eligible communities are frozen. When the template uses divisions or handicaps, those values freeze at the same time.</p>
+                            </div>
+                        </div>
+                        <div class="docs-step">
+                            <div class="docs-step-number">3</div>
+                            <div class="docs-step-body">
+                                <p class="docs-step-title">The Scoring Window Opens</p>
+                                <p class="docs-step-desc">Only qualifying activity inside the published scoring window counts. Public standings, when enabled for that Campaign, refresh from server-owned Campaign data.</p>
+                            </div>
+                        </div>
+                        <div class="docs-step">
+                            <div class="docs-step-number">4</div>
+                            <div class="docs-step-body">
+                                <p class="docs-step-title">AquaVaults Reconciles and Finalizes</p>
+                                <p class="docs-step-desc">After scoring ends, AquaVaults rebuilds the full authoritative window, reviews required integrity issues, and explicitly finalizes the official result.</p>
+                            </div>
+                        </div>
+                        <div class="docs-step">
+                            <div class="docs-step-number">5</div>
+                            <div class="docs-step-body">
+                                <p class="docs-step-title">Earned Rewards Are Scheduled Separately</p>
+                                <p class="docs-step-desc">Finalization determines what was earned; it does not itself change fee routing. An earned Campaign reward is scheduled separately for its defined full UTC reward month.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="eligibility">Who Is Eligible?</h2>
+                    <p>The exact eligibility class is part of the Campaign rules. Current Campaign templates can be configured for all listed communities, active Partner communities, or Founding communities.</p>
+                    <p>Eligibility is evaluated at the T-7 cutoff. A community added after announcement but before T-7 can still participate when it satisfies the announced class. After T-7, the frozen roster does not rebalance because a community later withdraws or is disqualified.</p>
+                    <p>AquaVaults itself is never a Campaign participant.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="history-divisions">Historical Strength, Divisions, and Handicaps</h2>
+                    <p>Historical activity is used only to make certain Campaigns more competitively balanced. It never gives a community points in the current Campaign.</p>
+                    <p>For templates that use scale-sensitive placement, AquaVaults looks at full completed UTC calendar months of the relevant historical metric. The structural lookback is six completed months and the handicap lookback is three completed months.</p>
+                    <p>Depending on the frozen eligible roster and the template, a Campaign may run as one field or multiple divisions. Current divided templates use a gap-based handicap from 1.00× to a maximum of 1.50×, with stronger historical communities receiving less adjustment and weaker historical communities receiving more.</p>
+                    <div class="docs-callout docs-callout-info">
+                        <div class="docs-callout-label">New Communities</div>
+                        <p>A community without a full historical month is not forced into made-up history. The Campaign engine has a newcomer path, including a server-calculated safeguard that can require operator review before placement freezes.</p>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="points-ranking">Points and Ranking</h2>
+                    <p>Each Campaign template defines how its authoritative metric converts into Campaign points. Examples can include platform fees generated, qualifying SOL-equivalent volume, counted swaps, qualifying automated activity, widget activity, or another template-specific source.</p>
+                    <p>Displayed Campaign points are whole numbers, but the ranking engine preserves the exact pre-floor score. That means two communities can display the same whole-number point total while still being ordered correctly by the underlying exact calculation.</p>
+                    <p>When two communities have a true exact tie, the Campaign's published tie rules determine the occupied placements and any pooled reward treatment.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="public-standings">Public Standings and the Eligible Roster</h2>
+                    <p>When public standings are enabled for a Campaign, the public leaderboard shows only active communities that currently have a positive score. A legitimate zero remains part of the Campaign record but is not displayed as a public leaderboard result.</p>
+                    <p>The full frozen eligible roster is shown separately from positive-score standings. That roster records who was eligible when placement froze; a later withdrawal or integrity decision does not rewrite the original eligibility record.</p>
+                    <div class="docs-callout docs-callout-warn">
+                        <div class="docs-callout-label">Live Means Provisional</div>
+                        <p>Live points and ranks can change as activity is processed, participants continue scoring, integrity decisions are applied, and the final scoring window is reconciled. Only finalized results are official.</p>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="withdrawals-integrity">Withdrawals and Integrity</h2>
+                    <p>An eligible community may withdraw before scoring ends under the applicable Campaign rules. Withdrawal removes it from public standings and reward eligibility, but AquaVaults retains its Campaign activity and continues private shadow scoring for audit and possible approved reinstatement.</p>
+                    <p>Deliberate community-level manipulation can result in disqualification for the Campaign. AquaVaults retains the underlying activity and evidence rather than rewriting history. Objective source failures can block finalization until resolved; suspicious but non-conclusive anomalies require review rather than an arbitrary manual score edit.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="rewards">Campaign Rewards</h2>
+                    <p>Campaign rewards are temporary Growth Program fee-share effects earned from final Campaign placement. They do not permanently rewrite a community's Growth Program tier or guaranteed floor.</p>
+                    <p>Under the current Standard reward model, a single-field Campaign awards +10 percentage points to first place and +5 percentage points to second through fourth. When a Campaign uses two or more divisions, each standard division awards +10 percentage points to first and +5 percentage points to second.</p>
+                    <p>The exact reward rules announced for a Campaign control that Campaign. Reward application is separately validated so a community's effective fee share cannot exceed the applicable program maximum.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="what-is-public">Not Every Internal Campaign Is Public</h2>
+                    <p>AquaVaults may operate internal, private, test, or validation Campaigns without publishing their public standings. The public Campaign page only displays a Campaign when AquaVaults has enabled its public standings and the applicable public display conditions are met.</p>
+                    <p>A public Learn article, Campaign page, template capability, or dashboard field does not guarantee that a particular Campaign is open, that a community is eligible, or that any reward will be earned.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="campaign-key">Campaign-Key Analytics Are Different</h2>
+                    <p>Some AquaVaults analytics use a <code>campaign</code> or campaign-key attribution field to record where a deep-link interaction came from. That is source tracking only. It is not the Community Campaign system and does not create Campaign points, eligibility, placement, or rewards.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h2 id="next">Where to Go Next</h2>
+                    <div class="docs-cta-grid">
+                        <a href="/campaigns" class="docs-cta-card">
+                            <p class="docs-cta-title">Public Campaigns</p>
+                            <p class="docs-cta-desc">See the current public Campaign and live standings when one is active.</p>
+                            <span class="docs-cta-action">View Campaigns →</span>
+                        </a>
+                        <a href="/learn/growth-program" class="docs-cta-card">
+                            <p class="docs-cta-title">Growth Program</p>
+                            <p class="docs-cta-desc">Learn how community fee shares, tiers, Partner benefits, and temporary Campaign rewards fit together.</p>
+                            <span class="docs-cta-action">Read Growth Program →</span>
+                        </a>
+                        <a href="/tos" class="docs-cta-card">
+                            <p class="docs-cta-title">Terms of Service</p>
+                            <p class="docs-cta-desc">Review the terms that apply to Campaigns, dashboards, rewards, and use of AquaVaults.</p>
+                            <span class="docs-cta-action">Read Terms →</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <nav class="docs-pagination">
+                    <a href="/learn/growth-program" class="docs-pag-link">
+                        <span class="docs-pag-direction">← Previous</span>
+                        <span class="docs-pag-title">Growth Program</span>
+                    </a>
+                    <a href="/learn/community-wheel" class="docs-pag-link docs-pag-next">
+                        <span class="docs-pag-direction">Next →</span>
+                        <span class="docs-pag-title">Community Wheel</span>
+                    </a>
+                </nav>
+
+            </div>
+        </main>
+
+    </div>
+
+    <div id="footer-container"></div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+ <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Command Center — Sign In | AquaVaults</title> <meta name="robots" content="noindex"> <link rel="icon" type="image/png" href="/assets/logo.png" /> <link rel="apple-touch-icon" href="/assets/logo.png" /> <link rel="stylesheet" href="/about.css"> <link rel="stylesheet" href="/header/header.css"> <link rel="stylesheet" href="/footer/footer.css"> <link rel="stylesheet" href="/portal/portal.css"> <script src="/header/header-loader.js" defer></script> <script src="/header/header.js" defer></script> <script src="/footer/footer-loader.js" defer></script> <script src="/portal/login.js" defer></script>
+</head>
+<body> <div id="header-container" data-header-type="simple"></div> <main class="portal-auth"> <form id="portal-form" class="portal-card" autocomplete="on" novalidate> <h1>Command Center</h1> <p class="portal-sub">Sign in to view your community's performance.</p> <div id="portal-error" class="portal-error"></div> <div class="portal-field"> <label for="portal-community">Community</label> <input id="portal-community" class="portal-input" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="your-community-id"> </div> <div class="portal-field"> <label for="portal-username">Username</label> <input id="portal-username" class="portal-input" type="text" autocomplete="username" autocapitalize="none" spellcheck="false"> </div> <div class="portal-field"> <label for="portal-password">Password</label> <input id="portal-password" class="portal-input" type="password" autocomplete="current-password"> </div> <div class="portal-row"> <input id="portal-remember" type="checkbox"> <label for="portal-remember">Keep me signed in for 30 days</label> </div> <button id="portal-submit" class="portal-btn" type="submit">Sign in</button> </form> </main> <div id="footer-container"></div>
+</body>
+</html>

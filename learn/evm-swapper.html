@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVM Swapper — AquaVaults Learn</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <meta property="og:image" content="/assets/logo.png" />
+    <meta name="description" content="The AquaVaults EVM Swapper extends community-directed swap infrastructure into EVM ecosystems like Ethereum, Base, and Polygon while preserving user-controlled participation." />
+    <link rel="stylesheet" href="/about.css">
+    <link rel="stylesheet" href="/learn/docs.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/header/header-loader.js" defer></script>
+    <script src="/header/header.js" defer></script>
+    <script src="/learn/docs.js" defer></script>
+    <script src="/footer/footer-loader.js" defer></script>
+</head>
+<body>
+    <div id="header-container" data-header-type="simple"></div>
+
+    <div class="docs-layout">
+
+        <aside id="docs-sidebar" class="docs-sidebar">
+            <!-- injected by docs.js -->
+        </aside>
+
+        <main class="docs-main">
+
+            <nav class="docs-breadcrumbs">
+                <a href="/learn" class="docs-breadcrumb-link">Learn</a>
+                <span class="docs-breadcrumb-sep">›</span>
+                <span>Tools</span>
+            </nav>
+
+            <header class="docs-hero">
+                <div class="docs-hero-badge">Multichain Infrastructure</div>
+                <h1>EVM Swapper</h1>
+                <p class="docs-hero-sub">The AquaVaults EVM Swapper expands community-directed participation beyond Solana by bringing the same ecosystem philosophy into EVM networks like Ethereum, Base, and Polygon.</p>
+            </header>
+
+            <div class="docs-content">
+
+                <!-- ── 1. Extending The Ecosystem Beyond Solana ── -->
+                <div class="docs-section">
+                    <h2 id="extending-beyond-solana">Extending The Ecosystem Beyond Solana</h2>
+                    <p>AquaVaults is built on Solana. The Solana Swapper, AutoSwap, the Co-op Mining Rig, and the core community selection and fee routing infrastructure all live within the Solana ecosystem. That is where the platform began and where its deepest toolset currently sits.</p>
+                    <p>But the communities AquaVaults is designed to serve do not stop at Solana. Many communities operate across multiple chains — their members use Ethereum, Base, and Polygon as part of their regular on-chain activity. For those communities, participation that only accounts for one network captures only part of the picture.</p>
+                    <p>The EVM Swapper extends the AquaVaults ecosystem into those environments. Not by replacing where users already are, but by adding AquaVaults infrastructure to networks they already participate in — so that communities can coordinate activity and sustain participation across a broader range of ecosystems without asking members to change where they operate.</p>
+                </div>
+
+                <!-- ── 2. Community-Directed Activity On EVM Networks ── -->
+                <div class="docs-section">
+                    <h2 id="community-directed-evm">Community-Directed Activity On EVM Networks</h2>
+                    <p>EVM swaps on AquaVaults are routed through the 0x protocol — a widely used EVM swap aggregator that sources liquidity across supported networks. AquaVaults provides the community selection, fee routing, and interface layer on top of 0x-powered swap execution.</p>
+                    <p>Community fee routing applies on EVM swaps the same way it does on Solana. When a community other than AquaVaults is selected, the platform fee splits based on the community's listing and current Growth Program tier — Standard communities start at a 50% floor and Founding communities at a permanent 60% floor, rising to 65% at Silver or 75% at Gold, with Partner status adding +10% — and the remainder routes to AquaVaults. On EVM networks, the community's portion routes to their registered EVM treasury wallet — Jupiter referral accounts are Solana-specific infrastructure and are not used for EVM routing. Every listed community that provides an EVM treasury wallet is set up to receive their share from EVM swap activity.</p>
+                    <p>The intent is identical to Solana. A user who selects a community on the EVM Swapper is connecting their swap activity to that community through the same tier-based routing structure — executed across a different chain and through a different underlying aggregator, but with the same participation outcome for the community.</p>
+                    <div class="docs-callout docs-callout-note">
+                        <div class="docs-callout-label">EVM Platform Fee Bounds</div>
+                        <p>The EVM Swapper platform fee can be set between 0.3% and 3%. This differs from the Solana Swapper, where the fee ranges from 0% to 10%. The EVM minimum is non-zero because the current 0x-based routing implementation expects both the community and AquaVaults portions of the split to remain non-zero when constructing the fee-routing payload used for EVM swaps. The 3% cap is the upper bound applied across all EVM swaps.</p>
+                    </div>
+                </div>
+
+                <!-- ── 3. Supported Ecosystems ── -->
+                <div class="docs-section">
+                    <h2 id="supported-ecosystems">Supported Ecosystems</h2>
+                    <p>The EVM Swapper currently supports three networks — each one an environment where active communities already operate and where members are already transacting on-chain.</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Ethereum</h3>
+                            <p>The largest EVM ecosystem by established community presence. Many token communities and NFT projects with deep roots in Web3 began here and continue to have active users operating on mainnet.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Base</h3>
+                            <p>A growing EVM ecosystem with a strong community of newer projects and active users. A significant portion of communities with presence across both Solana and EVM networks have members active on Base.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>Polygon</h3>
+                            <p>A widely used EVM network with a broad user base and established on-chain activity. Communities with members who trade or participate across multiple chains often have a portion of that activity occurring on Polygon.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── 4. Why Communities Care ── -->
+                <div class="docs-section">
+                    <h2 id="why-communities-care">Why Communities Care</h2>
+                    <p>For communities whose members actively use EVM networks, the EVM Swapper means their members' swap activity on those chains generates the same tier-based platform fee split — with the community's share routing directly to their EVM treasury wallet. The participation logic is consistent with Solana: select a community, swap, and the fee routes accordingly.</p>
+                    <p>This matters for communities that have built presence across multiple ecosystems. A token community with active members on both Solana and Ethereum has users participating across multiple environments. Without the EVM Swapper, AquaVaults participation remains limited primarily to Solana activity. With it, communities can extend those participation loops across both ecosystems.</p>
+                    <p>For campaign coordination, the EVM Swapper creates additional surfaces. A community running a campaign around a token that trades heavily on Base can direct members to the EVM Swapper as part of that campaign, keeping participation connected to the community even when the activity happens on a different chain than the community's primary home.</p>
+                    <p>The goal is not to force communities into a particular chain configuration. It is to be useful in the configuration they already have.</p>
+                </div>
+
+                <!-- ── 5. Consistent User Control ── -->
+                <div class="docs-section">
+                    <h2 id="user-control">Consistent User Control</h2>
+                    <p>The non-custodial design of AquaVaults does not change with the network. On every supported EVM chain, the same principles apply: users connect their own wallet, approve their own transactions, and retain full custody of their funds throughout the interaction.</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Self-Custody Across Chains</h3>
+                            <p>AquaVaults does not hold user funds on Ethereum, Base, or Polygon any more than it does on Solana. The platform provides an interface and routing layer. The user's wallet retains custody from start to finish.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>User-Approved Transactions</h3>
+                            <p>Every EVM swap requires direct wallet approval. AquaVaults prepares the transaction and presents it to the user's connected wallet. The user controls whether it executes.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>No Cross-Chain Deposits</h3>
+                            <p>The EVM Swapper does not require depositing assets into a cross-chain bridge or an AquaVaults-controlled account. Swaps happen within each network using the user's own wallet on that network.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── 6. The Ecosystem Philosophy Stays The Same ── -->
+                <div class="docs-section">
+                    <h2 id="ecosystem-philosophy">The Ecosystem Philosophy Stays The Same</h2>
+                    <p>The most important thing to understand about the EVM Swapper is that it is not a separate product with different goals. It is the same idea operating on different infrastructure.</p>
+                    <p>The chain is different. The routing system is different. The network fees are different. The token standards are different. All of that is true, and all of it reflects the actual technical reality of operating across multiple ecosystems.</p>
+                    <p>None of it changes the philosophy. A user on Base selecting a community and executing a swap is participating in the same broader activity layer as a user on Solana doing the same. Their participation becomes connected to the community they chose to support rather than existing as a completely isolated transaction. The ecosystem changes, but the participation philosophy remains consistent.</p>
+                    <p>That consistency — across chains, across tools, and across campaign types — is what distinguishes AquaVaults from an aggregator that simply supports multiple networks. Aggregators focus on transaction routing. AquaVaults focuses on participation infrastructure. The EVM Swapper extends that participation framework into the EVM ecosystems communities already use.</p>
+                </div>
+
+                <!-- ── 7. More Than Multichain ── -->
+                <div class="docs-section">
+                    <h2 id="more-than-multichain">More Than Multichain</h2>
+                    <p>Multichain support is often framed as a feature — a list of logos on a website that signals coverage. The EVM Swapper is not trying to be that.</p>
+                    <p>Each network AquaVaults supports is a place where communities already have members and activity already happening. The EVM Swapper does not create new activity in those ecosystems. It connects existing activity to the participation framework communities have built through AquaVaults — giving members who are already on those chains a path to keep their swap behavior tied to the community they support.</p>
+                    <p>AquaVaults is not trying to replace where communities already exist. It is building infrastructure that helps connect those ecosystems together through recurring participation. A community with members on both Solana and Ethereum does not need to split its identity between two platforms. It can bring both populations into the same participation layer and coordinate across both through the same AquaVaults ecosystem.</p>
+                    <p>That is what multichain infrastructure looks like when it is built around community participation rather than around trading volume.</p>
+                </div>
+
+                <!-- ── Continue Exploring ── -->
+                <div class="docs-explore">
+                    <p class="docs-explore-title">Continue Exploring</p>
+                    <div class="docs-explore-links">
+                        <a href="/learn/solana-swapper" class="docs-explore-link">Solana Swapper →</a>
+                        <a href="/learn/swap-widget" class="docs-explore-link">Swap Widget →</a>
+                        <a href="/learn/autoswap" class="docs-explore-link">AutoSwap →</a>
+                        <a href="/learn/for-token-communities" class="docs-explore-link">Why Token Communities List →</a>
+                    </div>
+                </div>
+
+                <!-- ── Pagination ── -->
+                <nav class="docs-pagination">
+                    <a href="/learn/limit-orders" class="docs-pag-link">
+                        <span class="docs-pag-direction">← Previous</span>
+                        <span class="docs-pag-title">Limit Orders</span>
+                    </a>
+                    <a href="/learn/swap-widget" class="docs-pag-link docs-pag-next">
+                        <span class="docs-pag-direction">Next →</span>
+                        <span class="docs-pag-title">Swap Widget</span>
+                    </a>
+                </nav>
+
+            </div>
+        </main>
+
+    </div>
+
+    <div id="footer-container"></div>
+</body>
+</html>

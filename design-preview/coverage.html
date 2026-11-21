@@ -1,0 +1,70 @@
+<!doctype html><html lang="en"><head>
+<!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
+<script src="/design-preview/mock-runtime.js"></script>
+<script src="/design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="/design-preview/preview-controls.css">
+<script src="/design-preview/preview-controls.js" defer></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AquaVaults Design Preview · Route Check</title>
+<style>body{margin:0;background:#061521;color:#f1f7fb;font:14px/1.6 system-ui}main{max-width:1150px;margin:auto;padding:20px}a{color:#76d4ff}button{padding:9px 15px;border:1px solid #6bb3db;border-radius:8px;background:#124669;color:white;cursor:pointer}.muted{color:#b4cbd8}.summary{display:flex;gap:14px;flex-wrap:wrap;padding:15px;background:#0d2537;border-radius:10px}table{border-collapse:collapse;width:100%;margin:14px 0}th,td{text-align:left;border-bottom:1px solid #31475a;padding:9px;overflow-wrap:anywhere}th{background:#133249}td small{display:block;color:#91acbb}.ok{color:#85e9b1}.bad{color:#ffa4ac}.skip{color:#f5d48c}</style>
+</head><body><main><h1>Redesign · Route Coverage</h1><p class="muted">Checks same-origin GET responses and HTML presence, following normal redirects. A 200 response means HTML was served; it does <strong>not</strong> prove that the page rendered correctly or that every tab is accessible.</p>
+<p><a href="/design-preview/">All pages</a> · <a href="/account/">Account</a> · <a href="/portal/dashboard/">Command Center</a> · <a href="/admin/">Admin</a></p>
+<button id="scan">Check all HTML routes</button><button id="fail" type="button">Show failures only</button><div id="summary" class="summary">Not checked</div>
+<table><thead><tr><th>Status</th><th>Route</th><th>Source HTML</th><th>Category</th><th>Response detail</th></tr></thead><tbody id="rows"></tbody></table>
+<script>
+(async()=>{'use strict';const rows=document.getElementById('rows'),summary=document.getElementById('summary');let data=[];let hide=false;
+try{const req=await fetch('/design-preview/route-inventory.json',{cache:'no-store'});const json=await req.json();data=(json.routes||[]).map(v=>({...v,status:null}));}
+catch(e){summary.textContent='Inventory missing: '+e.message;return;}
+function paint(){const good=data.filter(x=>x.status===200).length,bad=data.filter(x=>x.status&&x.status!==200).length,
+skipped=data.filter(x=>x.fragment).length,unknown=data.filter(x=>!x.fragment&&!x.status).length;
+summary.textContent=`${data.length} source HTML · ${good} accessible · ${bad} failed · ${skipped} fragments (not pages) · ${unknown} untested`;
+rows.replaceChildren();for(const row of data){if(hide&&row.status===200)continue;
+const tr=document.createElement('tr');const td0=document.createElement('td');td0.textContent=row.fragment?'Fragment':row.status||'Untested';td0.className=row.fragment?'skip':row.status===200?'ok':row.status?'bad':'muted';
+const td1=document.createElement('td'),link=document.createElement('a');link.href=row.url;link.textContent=row.url;td1.appendChild(link);
+const td2=document.createElement('td');td2.textContent=row.source;const td3=document.createElement('td');td3.textContent=row.section;
+const td4=document.createElement('td');td4.textContent=row.detail||'';tr.append(td0,td1,td2,td3,td4);rows.appendChild(tr);}}
+document.getElementById('scan').addEventListener('click',async()=>{
+const btn=document.getElementById('scan');btn.disabled=true;
+const targets=data.filter(row=>!row.fragment);
+for(const row of targets){row.status=null;row.detail='';}
+paint();
+let next=0;
+function normalized(path){return path.replace(/\/+$/,'')||'/';}
+async function worker(){
+ while(next<targets.length){
+  const row=targets[next++];
+  try{
+   // Follow ordinary Pages directory-slash redirects; manual mode yielded opaque status 0.
+   // GET also checks there is HTML in the body. It does NOT execute page JS.
+   const res=await fetch(row.url,{method:'GET',cache:'no-store',redirect:'follow',
+    signal:AbortSignal.timeout(12000)});
+   const destination=new URL(res.url,location.href);
+   const requested=new URL(row.url,location.href);
+   const contentType=res.headers.get('content-type')||'';
+   if(destination.origin!==location.origin){
+    row.status=598;row.detail='Redirected off the design origin: '+destination.origin;
+   }else if(!res.ok){
+    row.status=res.status;row.detail='HTTP error at '+destination.pathname;
+   }else if(normalized(destination.pathname)!==normalized(requested.pathname)){
+    row.status=597;row.detail='Redirected to different route: '+destination.pathname;
+   }else if(!/text\/html/i.test(contentType)){
+    row.status=596;row.detail='Not HTML: '+contentType;
+   }else{
+    const markup=await res.text();
+    const title=markup.match(/<title[^>]*>([^<]*)<\/title>/i);
+    if(markup.trim().length<200 || !/<(?:html|body)\b/i.test(markup)){
+     row.status=595;row.detail='Missing/empty HTML ('+markup.length+' characters)';
+    }else{
+     row.status=200;
+     row.detail=(res.redirected?'Normalized to '+destination.pathname+' · ':'')+
+      (title?title[1].trim()+' · ':'')+markup.length+' HTML characters; JS not verified';
+    }
+   }
+  }catch(e){row.status=599;row.detail=String(e&&e.message||e);}
+  paint();
+ }
+}
+await Promise.all(Array.from({length:5},()=>worker()));
+btn.disabled=false;
+});
+document.getElementById('fail').addEventListener('click',()=>{hide=!hide;document.getElementById('fail').textContent=hide?'Show all':'Show failures only';paint()});paint();})();
+</script></main></body></html>
