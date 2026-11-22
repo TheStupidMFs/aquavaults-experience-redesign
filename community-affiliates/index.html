@@ -4,7 +4,7 @@
 <script src="/design-preview/mock-extension.js"></script>
 <link rel="stylesheet" href="/design-preview/preview-controls.css">
 <script src="/design-preview/preview-controls.js" defer></script>
- <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>AquaVaults - Community Affiliates</title> <link rel="icon" type="image/png" href="/assets/logo.png" /> <link rel="apple-touch-icon" href="/assets/logo.png" /> <meta property="og:image" content="/assets/logo.png" /> <meta name="description" content="Community Affiliates - Support your favorite Solana communities" /> <link rel="stylesheet" href="communiity-affiliates.css" /> <link rel="stylesheet" href="../header/header.css" /> <link rel="stylesheet" href="../footer/footer.css" /> <script src="../header/header-loader.js" defer></script> <script src="../header/header.js" defer></script> <script src="../footer/footer-loader.js" defer></script> <link rel="stylesheet" href="../experience.css"> <link rel="stylesheet" href="../blueprint.css?v=communities-final-1">
+ <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>AquaVaults - Community Affiliates</title> <link rel="icon" type="image/png" href="/assets/logo.png" /> <link rel="apple-touch-icon" href="/assets/logo.png" /> <meta property="og:image" content="/assets/logo.png" /> <meta name="description" content="Community Affiliates - Support your favorite Solana communities" /> <link rel="stylesheet" href="communiity-affiliates.css" /> <link rel="stylesheet" href="../header/header.css" /> <link rel="stylesheet" href="../footer/footer.css" /> <script src="../header/header-loader.js" defer></script> <script src="../header/header.js" defer></script> <script src="../footer/footer-loader.js" defer></script> <link rel="stylesheet" href="../experience.css"> <link rel="stylesheet" href="../blueprint.css?v=communities-final-2">
 </head> <body class="blueprint-active"> <div class="page-wrapper"> <div id="header-container" data-header-type="simple"></div><div class="blueprint-preview community-blueprint-v2">
 <section class="bp-shell community-experience">
   <div class="community-experience-head">
@@ -395,7 +395,7 @@ loadLeaderboard();
   var selectedId='pissin';
   var favorites=new Set();
   try{favorites=new Set(JSON.parse(localStorage.getItem('av-preview-community-favorites')||'[]'));}catch(e){}
-  function previewPath(path){if(!path)return ''; if(/^https?:\/\//i.test(path))return path; var base=window.location.pathname.indexOf('/aquavaults-experience-redesign/')===0?'/aquavaults-experience-redesign':''; return base+(path.charAt(0)==='/'?path:'/'+path);} function communities(){return window.CommunityRegistry?window.CommunityRegistry.getAll().filter(function(c){return c.id!=='aquavaults'&&!c.internalOnly;}):[];}
+  function previewPath(path){if(!path)return ''; if(/^https?:\/\//i.test(path))return path; return '../'+String(path).replace(/^\/+/, '');} function communities(){return window.CommunityRegistry?window.CommunityRegistry.getAll().filter(function(c){return c.id!=='aquavaults'&&!c.internalOnly;}):[];}
   function shareImage(c){return c&&c.share&&c.share.image?c.share.image:'';}
   function escapeText(v){return String(v||'');}
   function renderRows(){
