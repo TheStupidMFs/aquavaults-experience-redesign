@@ -16,3 +16,5 @@
 /* learn */
 .bp-learn{padding:0 18px 28px}.bp-learn-grid{grid-template-columns:repeat(3,1fr)}.bp-learn-card{min-height:130px;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;color:#eefaff}.bp-learn-card span{margin-bottom:auto;color:#55e1ee;font-size:28px}.bp-learn-card b{font-size:13px}.bp-learn-card small{margin-top:4px;color:#7895a4;font-size:9px}
 @media(max-width:800px){.bp-tool-layout,.bp-rewards,.bp-coop,.bp-account,.bp-community-layout{grid-template-columns:1fr}.bp-rail{display:none}.bp-home-copy{width:100%;padding:52px 26px 0}.bp-home-shortcuts{grid-template-columns:1fr 1fr}.bp-home{min-height:760px}.bp-home-metrics{grid-template-columns:1fr 1fr 1fr}.bp-learn-grid{grid-template-columns:1fr 1fr}.bp-form-grid{grid-template-columns:1fr}}
+
+body.blueprint-active>.rewards-page,body.blueprint-active>.account-page,body.blueprint-active>.docs-landing-content,body.blueprint-active .page-wrapper>.page-content{display:none!important}
