@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
   <!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
-  <script src="/design-preview/mock-runtime.js"></script>
-  <script src="/design-preview/mock-extension.js"></script>
-  <link rel="stylesheet" href="/design-preview/preview-controls.css">
-  <script src="/design-preview/preview-controls.js" defer></script>
+  <script src="design-preview/mock-runtime.js"></script>
+  <script src="design-preview/mock-extension.js"></script>
+  <link rel="stylesheet" href="design-preview/preview-controls.css">
+  <script src="design-preview/preview-controls.js" defer></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AquaVaults — Community-powered onchain participation</title>
-  <link rel="icon" type="image/png" href="/assets/logo.png" />
-  <link rel="apple-touch-icon" href="/assets/logo.png" />
-  <meta property="og:image" content="/assets/logo.png" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
+  <meta property="og:image" content="assets/logo.png" />
   <meta name="description" content="Discover communities, swap onchain, and direct your activity toward the communities you want to support." />
   <link rel="stylesheet" href="home.css" />
   <link rel="stylesheet" href="header/header.css" />
@@ -45,23 +45,38 @@
         </div>
       </section>
 
-      <section class="community-heart visual-panel">
-        <div class="community-heart-copy">
+      <section class="community-world">
+        <div class="community-world-backdrop" aria-hidden="true"></div>
+        <div class="community-world-heading">
           <p class="eyebrow"><span></span> THE HEART OF AQUAVAULTS</p>
-          <h2>Find the people you want your activity to stand behind.</h2>
-          <p>AquaVaults lists communities, not tokens. Explore the projects and founders building here, then choose who your swaps and participation support.</p>
-          <div class="community-heart-actions">
-            <a href="community-affiliates/" class="cta-button">Discover Communities <span>↗</span></a>
-            <a href="account/" class="text-link">View My Communities →</a>
-          </div>
+          <h2>Communities aren't a category.<br><strong>They're the reason AquaVaults exists.</strong></h2>
+          <p>Discover real projects and founders, follow the communities you care about, and direct your onchain activity toward them.</p>
         </div>
-        <div class="community-heart-visual" aria-hidden="true">
-          <div class="heart-orbit heart-orbit-one"></div>
-          <div class="heart-orbit heart-orbit-two"></div>
-          <div class="heart-core"><span>COMMUNITY</span><strong>Choose who<br>you support.</strong></div>
-          <div class="heart-node node-one">DISCOVER</div>
-          <div class="heart-node node-two">PARTICIPATE</div>
-          <div class="heart-node node-three">SUPPORT</div>
+        <div class="community-principles">
+          <a href="community-affiliates/" class="principle"><span>01</span><div><b>Discover</b><small>Find communities that fit you.</small></div></a>
+          <a href="account/" class="principle"><span>02</span><div><b>Participate</b><small>Build identity, loyalty and activity.</small></div></a>
+          <a href="swapper/swap/" class="principle"><span>03</span><div><b>Support</b><small>Direct eligible fees where you choose.</small></div></a>
+        </div>
+      </section>
+
+      <section class="featured-communities">
+        <div class="featured-heading">
+          <div><p class="eyebrow"><span></span> COMMUNITY DISCOVERY</p><h2>Meet the ecosystem.</h2></div>
+          <a href="community-affiliates/" class="text-link">View all communities →</a>
+        </div>
+        <div class="featured-community-grid">
+          <article class="featured-community-card" style="--community-art:url('assets/dnc-og2.png')">
+            <div class="featured-community-art"><img src="assets/dnc-logo.png" alt="$DNC"></div>
+            <div class="featured-community-body"><span class="community-type">COLLECTIBLES + COMMERCE</span><h3>$DNC</h3><p>Vendorium's community connects collectibles, marketplace activity and onchain participation.</p><div class="community-live-metrics"><span><b>—</b> Verified Supporters</span><span><b>—</b> Monthly Loyalty</span></div><a href="swapper/swap/?community=dnc">Support $DNC <span>→</span></a></div>
+          </article>
+          <article class="featured-community-card" style="--community-art:url('assets/touchgrass-og.png')">
+            <div class="featured-community-art"><img src="assets/touchgrass-logo.png" alt="Touch Grass"></div>
+            <div class="featured-community-body"><span class="community-type">COMMUNITY</span><h3>Touch Grass</h3><p>A listed AquaVaults community with its own identity, supporters and participation.</p><div class="community-live-metrics"><span><b>—</b> Verified Supporters</span><span><b>—</b> Monthly Loyalty</span></div><a href="swapper/swap/?community=touchgrass">Support Touch Grass <span>→</span></a></div>
+          </article>
+          <article class="featured-community-card" style="--community-art:url('assets/sirnasty-og.png')">
+            <div class="featured-community-art"><img src="assets/sirnasty-logo.png" alt="Sir Nasty"></div>
+            <div class="featured-community-body"><span class="community-type">COMMUNITY ECOSYSTEM</span><h3>Sir Nasty</h3><p>A community-driven Solana ecosystem blending meme culture, staking, governance and original worlds.</p><div class="community-live-metrics"><span><b>—</b> Verified Supporters</span><span><b>—</b> Monthly Loyalty</span></div><a href="swapper/swap/?community=sirnasty">Support Sir Nasty <span>→</span></a></div>
+          </article>
         </div>
       </section>
 
