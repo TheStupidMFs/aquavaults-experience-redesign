@@ -19,3 +19,6 @@
 
 /* Experience V5 wordmark */
 .header-center{min-width:210px}.header-wordmark{display:block;width:205px;max-height:48px;object-fit:contain;object-position:left center;filter:drop-shadow(0 0 14px rgba(68,210,255,.10))}@media(max-width:1080px){.header-center{min-width:170px}.header-wordmark{width:168px}}@media(max-width:860px){.header-center{min-width:auto}.header-wordmark{width:145px}}@media(max-width:640px){.header-wordmark{width:155px}}
+
+/* Experience V6: white brand mark */
+.header-wordmark{filter:brightness(0) invert(1) drop-shadow(0 0 12px rgba(83,216,255,.12))!important;opacity:.98}
