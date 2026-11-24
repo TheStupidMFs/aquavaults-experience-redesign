@@ -25,3 +25,23 @@ body.autoswap-redesign-active .estimator-launcher{background:transparent!importa
 /* Preserve dialogs, token picker, dropdowns, alerts and interactive state styling. */
 @media(max-width:850px){body.autoswap-redesign-active .trade-shell{flex-direction:column;gap:22px}body.autoswap-redesign-active .utility-rail{width:100%;flex:1 1 auto;border-right:0!important;border-bottom:1px solid rgba(117,177,202,.18)!important;padding:0 0 22px}body.autoswap-redesign-active .asw-wrapper{width:100%;padding:0}body.autoswap-redesign-active .page-content{width:calc(100% - 28px)}}
 @media(max-width:520px){body.autoswap-redesign-active .tool-experience-heading{margin-top:16px}body.autoswap-redesign-active .asw-header-tabs{overflow-x:auto}body.autoswap-redesign-active .asw-pair-selectors{gap:8px}}
+
+/* Estimator alignment: the old desktop positioning assumed a 480px centered form.
+   Place the estimator in the same workspace flow instead of floating at a fixed offset. */
+@media(min-width:1200px){
+ body.autoswap-redesign-active .trade-shell.estimator-layout{left:0!important;display:flex;align-items:flex-start;gap:0}
+ body.autoswap-redesign-active .utility-rail{flex:0 0 235px;width:235px;padding-right:20px}
+ body.autoswap-redesign-active .asw-wrapper{flex:1 1 0;min-width:0;padding:0 22px}
+ body.autoswap-redesign-active .estimator-rail{position:relative!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;flex:0 0 310px;width:310px;min-width:0;max-height:none;background:transparent!important;border:0!important;border-left:1px solid rgba(117,177,202,.18)!important;border-radius:0!important;box-shadow:none!important;backdrop-filter:none!important;padding-left:18px}
+ body.autoswap-redesign-active .estimator-rail .est-rail-scroll{max-height:none;overflow:visible;padding:8px 0 24px}
+ body.autoswap-redesign-active .estimator-rail .estimator-root #est-estimatorForm,
+ body.autoswap-redesign-active .estimator-rail .estimator-root .est-results{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important}
+ body.autoswap-redesign-active .estimator-rail .est-section{border-bottom:1px solid rgba(117,177,202,.12)}
+ body.autoswap-redesign-active .estimator-rail .est-option-tile,
+ body.autoswap-redesign-active .estimator-rail .est-result-card,
+ body.autoswap-redesign-active .estimator-rail .est-pair-card{box-shadow:none!important}
+ body.autoswap-redesign-active .estimator-rail.est-collapsed{flex:0 0 58px;width:58px;padding-left:9px}
+}
+@media(min-width:851px) and (max-width:1199px){
+ body.autoswap-redesign-active .estimator-launcher{display:flex}
+}
