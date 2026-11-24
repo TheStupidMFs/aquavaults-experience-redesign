@@ -44,7 +44,7 @@ function render(items,isPreview){
   card.append(top);
   if(info.description)card.append(el('p','av-my-community-description',info.description.slice(0,150)));
   const actions=el('div','av-my-community-actions');
-  const support=el('a','av-my-community-primary','Support in Swap ↗');support.href='../swapper/swap/swap-card.html';actions.append(support);
+  const support=el('a','av-my-community-primary','Support in Swap ↗');support.href='../swapper/swap/swap-card.html?community='+encodeURIComponent(id);actions.append(support);
   const view=el('a',null,'Explore ↗');view.href='../community-affiliates/';actions.append(view);
   const remove=el('button',null,'Remove');remove.type='button';remove.setAttribute('aria-label','Remove '+name+' from favorites');
   remove.addEventListener('click',async()=>{
