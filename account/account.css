@@ -71,3 +71,24 @@
 .account-redesign-active .account-profile-customize{margin-left:-20px!important;margin-right:-20px!important;padding-left:30px!important;padding-right:30px!important;border-left:0!important;border-right:0!important;border-radius:0!important;background:linear-gradient(90deg,transparent,rgba(7,40,58,.46) 10%,rgba(35,27,78,.42) 78%,transparent)!important}
 .account-redesign-active .account-hub-list{border-left:0!important;border-right:0!important;border-radius:0!important;background:rgba(3,16,29,.22)!important}
 @media(max-width:720px){.account-redesign-active .account-progression-hero,.account-redesign-active .account-next-actions,.account-redesign-active .account-profile-customize{margin-left:-14px!important;margin-right:-14px!important;padding-left:18px!important;padding-right:18px!important}.account-redesign-active .account-primary-stats .account-hub-stat+.account-hub-stat,.account-redesign-active .account-hub-stats .account-hub-stat+.account-hub-stat{border-left:0!important}}
+
+/* Cohesion V3: identity-first Account, wallet controls become utility */
+.account-redesign-active .account-page{max-width:1180px!important;padding-top:18px!important}
+.account-redesign-active .account-hero{padding:6px 0 14px!important;max-width:900px!important}
+.account-redesign-active .account-hero h1{font-size:clamp(2rem,4vw,3.3rem)!important;line-height:1.02!important;margin:6px 0 8px!important}
+.account-redesign-active .account-hero p{font-size:.82rem!important;max-width:640px!important}
+.account-redesign-active .account-status{font-size:.72rem!important;padding:8px 11px!important;margin-top:11px!important}
+.account-redesign-active .account-connection{display:grid!important;grid-template-columns:minmax(0,1fr) auto;gap:6px 20px;align-items:center;margin-bottom:14px!important;padding:12px 4px!important}
+.account-redesign-active .account-connection .account-section-heading{grid-column:1/-1;display:flex!important;justify-content:space-between;align-items:center}
+.account-redesign-active .account-connection .account-section-heading h2{font-size:.85rem!important;margin:3px 0!important}
+.account-redesign-active .account-connection .account-eyebrow{font-size:.62rem!important}
+.account-redesign-active .account-connection .account-help{font-size:.68rem!important;line-height:1.45!important}
+.account-redesign-active .account-connection .account-actions{gap:7px!important}
+.account-redesign-active .account-connection button{font-size:.72rem!important;padding:9px 13px!important}
+.account-redesign-active .account-social-cover{min-height:200px!important}
+.account-redesign-active .account-social-profile{padding-bottom:18px!important}
+.account-redesign-active .account-profile-tabs{border-top:1px solid rgba(81,193,226,.14)!important;border-bottom:1px solid rgba(81,193,226,.20)!important}
+.account-redesign-active .account-profile-tabs :is(button,a){font-size:.73rem!important}
+.account-redesign-active .account-progression-hero{margin-top:24px!important}
+.account-redesign-active .account-profile-customize{margin-top:24px!important}
+@media(max-width:760px){.account-redesign-active .account-connection{display:block!important}.account-redesign-active .account-connection .account-actions{display:flex;flex-wrap:wrap}.account-redesign-active .account-social-cover{min-height:165px!important}}
