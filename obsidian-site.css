@@ -1,0 +1,68 @@
+/* AquaVaults Obsidian Experience. Shared presentation layer, public app only.
+   Preserves original components, JS hooks, interactions, and cinematic artwork. */
+body.av-obsidian-site{
+ --av-obsidian:#08090b;--av-graphite:#111316;--av-graphite-2:#16191d;
+ --av-stroke:rgba(183,196,207,.17);--av-stroke-strong:rgba(183,196,207,.27);
+ --av-cyan:#45c8ec;--av-fg:#f1f5f7;--av-subtle:#a6b0ba;
+ color:#f1f5f7;
+}
+body.av-obsidian-site #header-container .app-header{
+ background:rgba(7,8,10,.93)!important;border:1px solid rgba(183,196,207,.2)!important;
+ box-shadow:0 10px 30px rgba(0,0,0,.22)!important;
+ backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+}
+body.av-obsidian-site #header-container :is(.nav-dropdown-menu,.nav-submenu){
+ background:rgba(10,11,13,.98)!important;border-color:var(--av-stroke)!important;
+ box-shadow:0 20px 45px rgba(0,0,0,.4)!important;
+}
+body.av-obsidian-site #header-container :is(.header-account-status,.header-connect-btn,.header-connect-btn.connected){
+ background:#14161a!important;border:1px solid var(--av-stroke-strong)!important;
+ color:#e9eff3!important;box-shadow:none!important;
+}
+body.av-obsidian-site #header-container .nav-tab.active:after{
+ background:var(--av-cyan)!important;box-shadow:none!important;
+}
+body.av-obsidian-site :is(.account-card,.account-hub-panel,.rewards-card,.rewards-cycle-card,.rewards-auth-card,.rewards-score-card,.rewards-task-catalog-card,.rewards-leaderboard-card,.rewards-rules-card,.coop-card,.coop-participate-panel,.coop-pending-credit-panel,.coop-onchain-mode-card,.coop-inline-card,.community-table-card,.community-profile-panel,.join-detail-card,.campaigns-panel,.campaigns-banner,.campaigns-board,.campaigns-rail,.campaigns-scoring,.campaigns-focus,.lp-card,.lp-community-pool-card,.lp-position-card,.lp-expandable-card,.wheel-panel,.wheel-plan-panel,.wheel-payment-panel,.wheel-test-panel,.wheel-review-panel,.docs-pillar,.docs-cta-card,.feature-card){
+ background:linear-gradient(145deg,rgba(7,8,10,.88),rgba(15,17,20,.82))!important;
+ border-color:var(--av-stroke)!important;box-shadow:none!important;
+}
+body.av-obsidian-site :is(.account-card,.account-hub-panel,.rewards-card,.coop-card,.community-table-card,.community-profile-panel,.campaigns-panel,.lp-card,.wheel-panel,.docs-pillar,.feature-card){
+ backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+body.av-obsidian-site :is(.account-hub-panel,.rewards-cycle-card,.coop-participate-panel,.campaigns-panel,.lp-card,.wheel-panel,.docs-pillar){
+ border-radius:0!important;
+}
+body.av-obsidian-site :is(.account-hub-panel,.rewards-cycle-card,.coop-participate-panel,.campaigns-panel,.lp-card,.wheel-panel){
+ border-left:0!important;border-right:0!important;
+}
+body.av-obsidian-site :is(.account-hub-panel,.rewards-cycle-card,.coop-participate-panel,.campaigns-panel,.lp-card,.wheel-panel)+:is(.account-hub-panel,.rewards-cycle-card,.coop-participate-panel,.campaigns-panel,.lp-card,.wheel-panel){
+ border-top:1px solid var(--av-stroke)!important;
+}
+body.av-obsidian-site :is(.rewards-card,.coop-card,.lp-community-pool-card,.lp-position-card,.docs-pillar,.feature-card):hover{
+ border-color:rgba(88,199,230,.38)!important;
+}
+body.av-obsidian-site :is(.account-hub-stats,.rewards-stats,.coop-stats,.lp-subnav,.account-hub-nav,.account-profile-tabs){
+ background:transparent!important;box-shadow:none!important;
+}
+body.av-obsidian-site :is(.account-social-cover,.account-progression-orb,.wheel-stage,.bp-hero-video,.bp-hero-video-overlay){
+ /* Keep purposeful imagery, progress visuals, and stage lighting intact. */
+}
+body.av-obsidian-site :is(.btn-primary,.primary-btn,.bp-btn,.wheel-paid-primary,.docs-btn-primary){
+ box-shadow:none!important;
+}
+body.av-obsidian-site :is(input,textarea,select){
+ box-shadow:none!important;
+}
+body.av-obsidian-site :is(a,button,input,select,textarea):focus-visible{
+ outline:2px solid #45c8ec;outline-offset:3px;
+}
+body.av-obsidian-site :is(.tool-experience-heading,.lp-hero,.wheel-heading,.docs-landing-hero){
+ border-color:var(--av-stroke)!important;
+}
+body.av-obsidian-site .footer-container,body.av-obsidian-site #footer-container{
+ --av-stroke:rgba(183,196,207,.14);
+}
+@media(prefers-reduced-transparency:reduce){
+ body.av-obsidian-site #header-container .app-header,
+ body.av-obsidian-site #header-container :is(.nav-dropdown-menu,.nav-submenu){background:#08090b!important;backdrop-filter:none;-webkit-backdrop-filter:none}
+}
