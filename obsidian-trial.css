@@ -41,3 +41,46 @@ body.av-obsidian-trial :is(.bp-btn,.cta-button,.header-connect-btn){box-shadow:n
 body.av-obsidian-trial .bp-btn{background:#45c8ec!important;color:#061015!important;border-color:#45c8ec!important}
 body.av-obsidian-trial .bp-btn.secondary{background:#15181b!important;color:#e5ebef!important;border-color:rgba(181,193,202,.2)!important}
 @media(max-width:640px){body.av-obsidian-trial #header-container .app-header{background:rgba(8,9,11,.96)!important}}
+
+/* Homepage composition v2: open canvas, editorial spotlight, no duplicate shortcuts. */
+body.av-obsidian-trial .bp-home.bp-home-community-v3{
+ border:0!important;border-radius:0!important;box-shadow:none!important;
+ background-color:transparent!important;overflow:hidden;
+ min-height:655px;
+}
+body.av-obsidian-trial .bp-home.bp-home-community-v3 .bp-hero-video{mask-image:linear-gradient(to bottom,transparent 0%,#000 7%,#000 78%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 7%,#000 78%,transparent 100%)}
+body.av-obsidian-trial .bp-home.bp-home-community-v3 .bp-hero-video-overlay{background:linear-gradient(90deg,rgba(0,0,0,.94),rgba(0,0,0,.75) 35%,rgba(0,0,0,.25) 73%,rgba(0,0,0,.5)),linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.18) 58%,rgba(0,0,0,.93))!important}
+body.av-obsidian-trial .bp-home.bp-home-community-v3:after{background:linear-gradient(180deg,transparent 62%,rgba(0,0,0,.65))!important}
+body.av-obsidian-trial .bp-home-community-v3 .bp-home-copy{padding-top:58px!important}
+body.av-obsidian-trial .bp-home-community-v3 .bp-home-copy h1{font-size:clamp(41px,4.8vw,61px)!important;line-height:.94!important;letter-spacing:-.055em!important}
+body.av-obsidian-trial .bp-home-community-v3 .bp-featured-community{
+ background:transparent!important;border:0!important;border-radius:0!important;
+ box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+ width:300px;right:38px;top:46px;overflow:visible;
+}
+body.av-obsidian-trial .bp-home-community-v3 .bp-featured-art{height:135px;border-radius:8px;overflow:hidden;background:rgba(0,0,0,.3)}
+body.av-obsidian-trial .bp-home-community-v3 .bp-featured-art img{opacity:.94}
+body.av-obsidian-trial .bp-home-community-v3 .bp-featured-body{padding:13px 0 0!important;background:transparent!important}
+body.av-obsidian-trial .bp-home-community-v3 .bp-featured-logo{left:4px;background:#08090b;border-color:#08090b}
+body.av-obsidian-trial .bp-home-community-v3 .bp-featured-title{padding-left:74px}
+body.av-obsidian-trial .bp-home-community-v3 .bp-featured-body p{margin:9px 0}
+body.av-obsidian-trial .bp-home-community-v3 .bp-featured-actions{gap:10px}
+body.av-obsidian-trial .bp-home-community-v3 .bp-featured-actions a{border:1px solid rgba(194,205,213,.24);background:rgba(8,9,11,.65)!important;border-radius:5px}
+body.av-obsidian-trial .bp-home-community-v3 .bp-featured-actions a:last-child{background:#45c8ec!important;color:#061015!important;border-color:#45c8ec!important}
+body.av-obsidian-trial .bp-home-community-v3 .bp-home-shortcuts{display:none!important}
+body.av-obsidian-trial .bp-home-community-v3 .bp-community-dock{
+ bottom:28px!important;left:24px!important;right:24px!important;
+ border:0!important;border-top:1px solid rgba(181,193,202,.25)!important;
+ border-bottom:1px solid rgba(181,193,202,.17)!important;
+ border-radius:0!important;background:rgba(3,5,8,.58)!important;
+ box-shadow:none!important;backdrop-filter:blur(12px)!important;
+}
+body.av-obsidian-trial .bp-home-community-v3 .bp-dock-title{border-right:1px solid rgba(181,193,202,.13)}
+body.av-obsidian-trial .bp-home-community-v3 .bp-community-dock>a{border-right-color:rgba(181,193,202,.09)}
+@media(max-width:760px){
+ body.av-obsidian-trial .bp-home.bp-home-community-v3{min-height:920px}
+ body.av-obsidian-trial .bp-home-community-v3 .bp-home-copy{padding-top:30px!important}
+ body.av-obsidian-trial .bp-home-community-v3 .bp-featured-community{top:345px;left:24px;right:24px;width:auto}
+ body.av-obsidian-trial .bp-home-community-v3 .bp-community-dock{bottom:20px!important;left:14px!important;right:14px!important}
+}
+@media(max-width:420px){body.av-obsidian-trial .bp-home.bp-home-community-v3{min-height:950px}body.av-obsidian-trial .bp-home-community-v3 .bp-featured-community{top:370px}}
