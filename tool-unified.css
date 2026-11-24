@@ -33,3 +33,38 @@ body.learn-redesign-active .docs-pillar-grid,body.learn-redesign-active .docs-ct
 body.learn-redesign-active .docs-pillar,body.learn-redesign-active .docs-cta-card{background:transparent!important;border:0!important;border-top:1px solid rgba(112,181,205,.18)!important;padding:24px!important}
 body.learn-redesign-active .docs-step{background:transparent!important;border:0!important;border-bottom:1px solid rgba(112,181,205,.15)!important}
 @media(max-width:850px){body.evm-redesign-active .trade-shell{grid-template-columns:minmax(0,1fr)}body.evm-redesign-active .utility-rail{border-right:0!important;border-bottom:1px solid rgba(112,181,205,.2)!important;padding:0 0 20px;margin-bottom:20px}body.evm-redesign-active .card-shell{padding:0}body.lp-redesign-active .lp-shell,body.wheel-redesign-active .wheel-page,body.learn-redesign-active .docs-landing-content,body.campaigns-redesign-active .page-content{padding-left:14px;padding-right:14px}}
+
+/* Experience v2: immersive, open-canvas interfaces rather than stacked cards. */
+:is(body.evm-redesign-active,body.lp-redesign-active,body.campaigns-redesign-active,body.wheel-redesign-active,body.learn-redesign-active){
+ --av-line:rgba(117,200,222,.16);--av-soft:#a0bac8;--av-bright:#eafaff;
+ background:radial-gradient(ellipse 75% 460px at 68% -120px,rgba(33,122,181,.19),transparent 80%),radial-gradient(ellipse 55% 600px at -20% 38%,rgba(71,44,153,.13),transparent 85%),#010c15;
+}
+:is(body.evm-redesign-active,body.lp-redesign-active,body.campaigns-redesign-active,body.wheel-redesign-active,body.learn-redesign-active) :is(.page-content,.wheel-page,.docs-landing-content,.lp-shell){position:relative;isolation:isolate}
+:is(body.evm-redesign-active,body.lp-redesign-active,body.campaigns-redesign-active,body.wheel-redesign-active,body.learn-redesign-active) :is(.page-content,.wheel-page,.docs-landing-content,.lp-shell):before{content:"";position:absolute;z-index:-1;pointer-events:none;inset:0 0 auto;height:430px;background:radial-gradient(ellipse 52% 70% at 85% 20%,rgba(39,176,223,.075),transparent 100%)}
+:is(body.evm-redesign-active,body.lp-redesign-active,body.campaigns-redesign-active,body.wheel-redesign-active,body.learn-redesign-active) :is(.tool-experience-heading,.lp-hero,.wheel-heading,.docs-landing-hero){text-align:left!important;padding:34px 0 32px!important;margin:0 0 32px!important;max-width:none!important;border:0!important;border-bottom:1px solid var(--av-line)!important;background:transparent!important;box-shadow:none!important}
+:is(body.evm-redesign-active,body.lp-redesign-active,body.campaigns-redesign-active,body.wheel-redesign-active,body.learn-redesign-active) :is(.tool-experience-heading h1,.lp-hero h1,.wheel-heading h1,.docs-landing-hero h1){font-size:clamp(2.7rem,6.5vw,5.5rem)!important;line-height:1.02!important;letter-spacing:-.065em!important;font-weight:800!important;margin:.1em 0 .22em!important;background:linear-gradient(110deg,#fff 20%,#bcecfb 62%,#83a4f7);-webkit-background-clip:text;background-clip:text;color:transparent!important}
+:is(body.evm-redesign-active,body.lp-redesign-active,body.campaigns-redesign-active,body.wheel-redesign-active,body.learn-redesign-active) :is(.tool-experience-heading p,.lp-hero p,.wheel-heading p,.docs-landing-sub){font-size:clamp(.96rem,1.5vw,1.14rem)!important;line-height:1.65!important;color:#9bb8c8!important;max-width:680px!important}
+:is(body.evm-redesign-active,body.lp-redesign-active,body.campaigns-redesign-active,body.wheel-redesign-active,body.learn-redesign-active) :is(.card-shell,.lp-card,.lp-community-pool-card,.lp-position-card,.lp-expandable-card,.wheel-panel,.wheel-plan-panel,.wheel-payment-panel,.wheel-test-panel,.wheel-review-panel,.wheel-editor,.wheel-paid-box,.wheel-results-pane,.docs-pillar,.docs-cta-card,.docs-step,.campaigns-panel,.campaigns-banner,.campaigns-board,.campaigns-rail,.campaigns-scoring,.campaigns-focus){background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;border-radius:0!important}
+body.lp-redesign-active :is(.lp-community-pool-card,.lp-position-card,.lp-expandable-card){border:0!important;border-bottom:1px solid var(--av-line)!important;padding:20px 4px!important}
+body.lp-redesign-active .lp-card{border:0!important;padding:18px 0!important}
+body.lp-redesign-active .lp-subnav{border:0!important;border-bottom:1px solid var(--av-line)!important}
+body.lp-redesign-active .lp-subnav-link.active{color:#e9fbff!important;border-bottom:2px solid #5cd8ec!important}
+body.wheel-redesign-active .wheel-layout{gap:30px!important}
+body.wheel-redesign-active :is(.wheel-panel,.wheel-plan-panel,.wheel-payment-panel,.wheel-test-panel,.wheel-review-panel){border:0!important;border-bottom:1px solid var(--av-line)!important;padding-left:0!important;padding-right:0!important}
+body.wheel-redesign-active .wheel-stage{background:radial-gradient(circle at 50% 45%,rgba(39,166,225,.09),transparent 64%)!important;border:0!important;box-shadow:none!important}
+body.wheel-redesign-active .wheel-disc{filter:drop-shadow(0 22px 45px rgba(0,0,0,.4))}
+body.learn-redesign-active .docs-pillar-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0!important}
+body.learn-redesign-active .docs-pillar{border:0!important;border-top:1px solid var(--av-line)!important;border-right:1px solid var(--av-line)!important;padding:30px 26px!important;min-height:210px;transition:background .2s ease}
+body.learn-redesign-active .docs-pillar:hover{background:rgba(42,152,204,.07)!important}
+body.learn-redesign-active .docs-cta-card{border:0!important;border-top:1px solid var(--av-line)!important;padding:30px 26px!important}
+body.learn-redesign-active .docs-step{padding:22px 0!important}
+body.campaigns-redesign-active :is(.campaigns-banner,.campaigns-board,.campaigns-rail,.campaigns-scoring,.campaigns-focus){border-color:var(--av-line)!important}
+body.evm-redesign-active .trade-shell{grid-template-columns:minmax(210px,270px) minmax(0,1fr);gap:34px}
+body.evm-redesign-active .card-shell{padding:0!important}
+body.evm-redesign-active .utility-rail{padding:16px 30px 16px 0!important}
+body.evm-redesign-active .card-shell :is(.form-row,.form-group){border-color:var(--av-line)}
+:is(body.evm-redesign-active,body.lp-redesign-active,body.campaigns-redesign-active,body.wheel-redesign-active,body.learn-redesign-active) :is(.btn-primary,.primary-btn,.docs-btn-primary,.wheel-paid-primary){background:linear-gradient(105deg,#36cbdc,#318ae8 65%,#6556d9)!important;border:1px solid rgba(112,223,248,.42)!important;color:#fff!important;box-shadow:none!important}
+:is(body.evm-redesign-active,body.lp-redesign-active,body.campaigns-redesign-active,body.wheel-redesign-active,body.learn-redesign-active) :is(.btn-primary,.primary-btn,.docs-btn-primary,.wheel-paid-primary):hover{filter:brightness(1.12)}
+@media(max-width:900px){body.learn-redesign-active .docs-pillar-grid{grid-template-columns:repeat(2,minmax(0,1fr))}body.evm-redesign-active .trade-shell{gap:20px}}
+@media(max-width:700px){body.learn-redesign-active .docs-pillar-grid{grid-template-columns:minmax(0,1fr)}body.evm-redesign-active .trade-shell{grid-template-columns:minmax(0,1fr)}:is(body.evm-redesign-active,body.lp-redesign-active,body.campaigns-redesign-active,body.wheel-redesign-active,body.learn-redesign-active) :is(.tool-experience-heading,.lp-hero,.wheel-heading,.docs-landing-hero){padding-top:20px!important}}
+@media(prefers-reduced-motion:reduce){body.learn-redesign-active .docs-pillar{transition:none}}
