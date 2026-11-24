@@ -13,6 +13,7 @@ function show(active){
  const dashboard=$('accountDashboard'),feed=$('avActivitySection');
  if(!dashboard||!feed)return;
  dashboard.classList.toggle('av-activity-active',active);
+ if(active){dashboard.classList.remove('av-communities-active');const c=$('avCommunitiesSection');if(c)c.hidden=true;document.querySelectorAll('[data-my-communities-open]').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false')});}
  feed.hidden=!active;
  document.querySelectorAll('[data-profile-section="overview"]').forEach(b=>b.classList.toggle('active',!active));
  document.querySelectorAll('[data-activity-open]').forEach(b=>{b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});
@@ -72,6 +73,6 @@ document.addEventListener('DOMContentLoaded',()=>{
   load();
  }));
  $('avActivityRefresh')?.addEventListener('click',load);
- document.querySelectorAll('[data-hub-jump], [data-hub-tab], .account-profile-tabs a').forEach(el=>el.addEventListener('click',()=>show(false)));
+ document.querySelectorAll('[data-hub-jump], [data-hub-tab], [data-my-communities-open], .account-profile-tabs a').forEach(el=>el.addEventListener('click',()=>show(false)));
 });
 })();
