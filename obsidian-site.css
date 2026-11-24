@@ -66,3 +66,16 @@ body.av-obsidian-site .footer-container,body.av-obsidian-site #footer-container{
  body.av-obsidian-site #header-container .app-header,
  body.av-obsidian-site #header-container :is(.nav-dropdown-menu,.nav-submenu){background:#08090b!important;backdrop-filter:none;-webkit-backdrop-filter:none}
 }
+
+/* Open-canvas exceptions: do not reintroduce containers on already flattened pages. */
+body.av-obsidian-site.account-redesign-active :is(.account-card,.account-hub-panel,.account-profile-customize,.account-progression-hero,.account-next-actions,.account-hub-stat,.account-identity-preview,.account-connection),
+body.av-obsidian-site:is(.evm-redesign-active,.lp-redesign-active,.campaigns-redesign-active,.wheel-redesign-active,.learn-redesign-active) :is(.lp-card,.lp-community-pool-card,.lp-position-card,.lp-expandable-card,.wheel-panel,.wheel-plan-panel,.wheel-payment-panel,.wheel-test-panel,.wheel-review-panel,.docs-pillar,.docs-cta-card,.campaigns-panel,.campaigns-banner,.campaigns-board,.campaigns-rail,.campaigns-scoring,.campaigns-focus){
+ background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;
+ -webkit-backdrop-filter:none!important;
+}
+body.av-obsidian-site.account-redesign-active section.account-connection.account-card{
+ border:0!important;padding:20px 0 28px!important;
+}
+body.av-obsidian-site.learn-redesign-active .feature-grid>.feature-card{
+ background:linear-gradient(145deg,rgba(2,9,18,.92),rgba(3,14,26,.84))!important;
+}
