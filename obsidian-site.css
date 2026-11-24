@@ -157,3 +157,179 @@ body.av-obsidian-site.campaigns-redesign-active .campaigns-footnote{
  font-size:16px!important;
  }
 }
+
+/* Cohesion pass V3 — Home/Account are the visual reference.
+   Near-black surfaces, cyan interaction states, and structure through spacing/dividers. */
+body.av-obsidian-site{
+ --av-canvas:#030609;
+ --av-surface:rgba(7,9,12,.76);
+ --av-surface-solid:#0b0e12;
+ --av-control:#0d1116;
+ --av-control-hover:#121820;
+ --av-line:rgba(160,183,196,.16);
+ --av-line-hot:rgba(69,200,236,.42);
+ --av-blue:#2d8bc5;
+ --av-violet:#2d8bc5;
+}
+body.av-obsidian-site :is(.header-connect-btn,.header-connect-btn.connected,.btn-primary,.primary-btn,.rewards-button,.coop-primary-button,.wheel-paid-primary){
+ background:linear-gradient(105deg,#30bfd7,#2688bf)!important;
+ border-color:rgba(99,214,239,.42)!important;
+ box-shadow:none!important;
+}
+body.av-obsidian-site :is(.header-connect-btn,.header-connect-btn.connected,.btn-primary,.primary-btn,.rewards-button,.coop-primary-button,.wheel-paid-primary):hover{
+ background:linear-gradient(105deg,#3cc9df,#2c96cc)!important;
+ filter:none!important;
+}
+body.av-obsidian-site :is(input,select,textarea,.form-input,.form-select,.amount-input){
+ background:var(--av-control)!important;
+ border-color:var(--av-line)!important;
+ color:var(--av-fg)!important;
+}
+body.av-obsidian-site :is(input,select,textarea,.form-input,.form-select,.amount-input):focus{
+ border-color:var(--av-line-hot)!important;
+ box-shadow:0 0 0 2px rgba(69,200,236,.07)!important;
+}
+
+/* Swap: one focused workspace instead of three navy dashboard cards. */
+body.av-obsidian-site.swap-redesign-active :is(.utility-rail,.swap-support-panel,.card-shell,.swap-card){
+ background:rgba(4,7,10,.70)!important;
+ border-color:var(--av-line)!important;
+ box-shadow:none!important;
+}
+body.av-obsidian-site.swap-redesign-active :is(.utility-rail,.swap-support-panel){
+ border-radius:2px!important;
+}
+body.av-obsidian-site.swap-redesign-active :is(.swap-support-intro,.swap-support-visual,.swap-support-stat,.form-row,.av-rewards-discovery){
+ background:rgba(9,12,16,.72)!important;
+ border-color:rgba(160,183,196,.13)!important;
+ box-shadow:none!important;
+}
+body.av-obsidian-site.swap-redesign-active :is(.mode-tabs,.mode-tab){
+ background:transparent!important;
+}
+body.av-obsidian-site.swap-redesign-active .mode-tab.active{
+ background:rgba(69,200,236,.10)!important;
+ color:#effcff!important;
+ box-shadow:inset 0 -2px #45c8ec!important;
+}
+body.av-obsidian-site.swap-redesign-active :is(.flip-button,.max-btn){
+ background:#10161c!important;
+ border-color:rgba(69,200,236,.28)!important;
+ color:#73d9ef!important;
+ box-shadow:none!important;
+}
+
+/* Rewards: remove the stacked-card rhythm and purple glow. */
+body.av-obsidian-site.rewards-redesign-active{
+ --rewards-panel:transparent;
+ --rewards-panel-raised:#0b0e12;
+ --rewards-border:var(--av-line);
+ --rewards-accent:#45c8ec;
+ --rewards-accent-strong:#2d8bc5;
+}
+body.av-obsidian-site.rewards-redesign-active :is(.rewards-card,.rewards-cycle-card,.rewards-score-card,.rewards-task-catalog-card,.rewards-leaderboard-card,.rewards-rules-card){
+ background:transparent!important;
+ border-color:var(--av-line)!important;
+}
+body.av-obsidian-site.rewards-redesign-active :is(.rewards-public-grid,.rewards-objective-grid,.rewards-quest-grid){
+ background:rgba(4,7,10,.28)!important;
+}
+body.av-obsidian-site.rewards-redesign-active :is(.rewards-public-grid>.rewards-card,.rewards-objective-grid>.rewards-card,.rewards-quest-step){
+ background:transparent!important;
+}
+body.av-obsidian-site.rewards-redesign-active :is(.rewards-progression-stage,.rewards-game-hud){
+ background:radial-gradient(circle at 12% 50%,rgba(69,200,236,.11),transparent 24%),linear-gradient(90deg,transparent,rgba(8,14,18,.76) 10%,rgba(8,14,18,.76) 90%,transparent)!important;
+}
+body.av-obsidian-site.rewards-redesign-active :is(.rewards-progress span,.rewards-mini-progress span,.rewards-game-bar i){
+ background:linear-gradient(90deg,#45c8ec,#2d8bc5)!important;
+ box-shadow:0 0 14px rgba(69,200,236,.22)!important;
+}
+body.av-obsidian-site.rewards-redesign-active .rewards-game-rank{
+ background:radial-gradient(circle at 35% 30%,rgba(69,200,236,.18),rgba(9,20,27,.58) 50%,rgba(4,7,10,.88) 76%)!important;
+ box-shadow:none!important;
+}
+body.av-obsidian-site.rewards-redesign-active .rewards-game-nav button.active:after{
+ background:#45c8ec!important;
+}
+body.av-obsidian-site.rewards-redesign-active :is(.rewards-task,.rewards-quest-step,.rewards-catalog-task,.rewards-catalog-group,.rewards-catalog-scenarios){
+ background:rgba(9,12,16,.54)!important;
+ border-color:rgba(160,183,196,.12)!important;
+ border-radius:2px!important;
+}
+
+/* Co-Op: dissolve the large navy slab; keep the contribution form readable. */
+body.av-obsidian-site.coop-redesign-active :is(.coop-participate-panel,.coop-card,.coop-pending-credit-panel,.coop-onchain-mode-card,.coop-inline-card){
+ background:transparent!important;
+ border-color:var(--av-line)!important;
+ box-shadow:none!important;
+}
+body.av-obsidian-site.coop-redesign-active :is(.coop-tabs,.coop-program-tabs,.coop-mode-tabs){
+ background:transparent!important;
+ border-color:var(--av-line)!important;
+}
+body.av-obsidian-site.coop-redesign-active :is(.coop-tabs button,.coop-program-tabs button,.coop-mode-tabs button){
+ background:transparent!important;
+ box-shadow:none!important;
+}
+body.av-obsidian-site.coop-redesign-active :is(.coop-tabs button.active,.coop-program-tabs button.active,.coop-mode-tabs button.active,[aria-selected="true"]){
+ background:rgba(69,200,236,.08)!important;
+ color:#f1fbfd!important;
+ border-color:rgba(69,200,236,.28)!important;
+}
+body.av-obsidian-site.coop-redesign-active :is(.coop-overview-strip,.coop-session-summary,.coop-community-selector,.coop-contribution-form,.coop-mode-row){
+ background:rgba(8,11,15,.58)!important;
+ border-color:rgba(160,183,196,.13)!important;
+ box-shadow:none!important;
+}
+
+/* LP and Wheel: replace remaining indigo controls and slate fields. */
+body.av-obsidian-site.lp-redesign-active,
+body.av-obsidian-site.wheel-redesign-active,
+body.av-obsidian-site.campaigns-redesign-active,
+body.av-obsidian-site.evm-redesign-active,
+body.av-obsidian-site.learn-redesign-active{
+ background-color:#03080c!important;
+ background-image:linear-gradient(180deg,rgba(1,7,13,.82),rgba(2,8,13,.93)),url('assets/redesign/site-background.png')!important;
+ background-size:cover!important;
+ background-position:center top!important;
+ background-attachment:fixed!important;
+}
+body.av-obsidian-site.lp-redesign-active :is(.lp-subnav-link,.lp-filter-button,.lp-card button),
+body.av-obsidian-site.wheel-redesign-active .wheel-page button{
+ background:#11161c!important;
+ border-color:rgba(160,183,196,.18)!important;
+ color:#dce9ee!important;
+ box-shadow:none!important;
+}
+body.av-obsidian-site.lp-redesign-active :is(.lp-subnav-link.active,.lp-filter-button.active,.lp-card button.active),
+body.av-obsidian-site.wheel-redesign-active .wheel-page :is(button.primary,.wheel-paid-primary,#wheel-spin){
+ background:rgba(69,200,236,.12)!important;
+ border-color:rgba(69,200,236,.40)!important;
+ color:#eafcff!important;
+}
+body.av-obsidian-site.lp-redesign-active :is(.lp-community-pool-card,.lp-position-card,.lp-expandable-card){
+ background:transparent!important;
+ border-color:var(--av-line)!important;
+}
+body.av-obsidian-site.lp-redesign-active :is(.lp-pool-status,.lp-support-status,.lp-phase-banner){
+ background:rgba(8,11,15,.52)!important;
+ border-color:rgba(160,183,196,.13)!important;
+}
+body.av-obsidian-site.wheel-redesign-active :is(textarea,input,select,.wheel-paid-settings,.wheel-winner,.wheel-results-pane){
+ background:#0b0f14!important;
+ border-color:rgba(160,183,196,.16)!important;
+ box-shadow:none!important;
+}
+body.av-obsidian-site.wheel-redesign-active .wheel-step{
+ background:#111820!important;
+ border-color:rgba(69,200,236,.30)!important;
+ color:#dff9fd!important;
+}
+
+@media(max-width:760px){
+ body.av-obsidian-site.lp-redesign-active,
+ body.av-obsidian-site.wheel-redesign-active,
+ body.av-obsidian-site.campaigns-redesign-active,
+ body.av-obsidian-site.evm-redesign-active,
+ body.av-obsidian-site.learn-redesign-active{background-attachment:scroll!important}
+}
