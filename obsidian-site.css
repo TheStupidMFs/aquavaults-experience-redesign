@@ -180,6 +180,12 @@ body.av-obsidian-site :is(.header-connect-btn,.header-connect-btn.connected,.btn
  background:linear-gradient(105deg,#3cc9df,#2c96cc)!important;
  filter:none!important;
 }
+body.av-obsidian-site #av-wallet button{
+ background:linear-gradient(105deg,#30bfd7,#2688bf)!important;
+ border-color:rgba(99,214,239,.42)!important;
+ color:#fff!important;
+ box-shadow:none!important;
+}
 body.av-obsidian-site :is(input,select,textarea,.form-input,.form-select,.amount-input){
  background:var(--av-control)!important;
  border-color:var(--av-line)!important;
@@ -251,6 +257,15 @@ body.av-obsidian-site.rewards-redesign-active .rewards-game-rank{
 body.av-obsidian-site.rewards-redesign-active .rewards-game-nav button.active:after{
  background:#45c8ec!important;
 }
+body.av-obsidian-site.rewards-redesign-active :is(.rewards-button-secondary,#refreshDashboardButton,#closeSessionButton){
+ background:#10151b!important;
+ border-color:rgba(160,183,196,.20)!important;
+ color:#c8d8df!important;
+ box-shadow:none!important;
+}
+body.av-obsidian-site.rewards-redesign-active #closeSessionButton{
+ color:#e1b5ba!important;
+}
 body.av-obsidian-site.rewards-redesign-active :is(.rewards-task,.rewards-quest-step,.rewards-catalog-task,.rewards-catalog-group,.rewards-catalog-scenarios){
  background:rgba(9,12,16,.54)!important;
  border-color:rgba(160,183,196,.12)!important;
@@ -280,6 +295,27 @@ body.av-obsidian-site.coop-redesign-active :is(.coop-overview-strip,.coop-sessio
  background:rgba(8,11,15,.58)!important;
  border-color:rgba(160,183,196,.13)!important;
  box-shadow:none!important;
+}
+body.av-obsidian-site.coop-redesign-active .coop-simple-nav button.active:after{
+ background:#45c8ec!important;
+}
+body.av-obsidian-site.coop-redesign-active :is(.action-type-btn,.btn-max,.coop-share-btn,.auth-logout-btn){
+ background:#10151b!important;
+ border-color:rgba(160,183,196,.18)!important;
+ color:#b8cbd4!important;
+ box-shadow:none!important;
+}
+body.av-obsidian-site.coop-redesign-active .action-type-btn.active{
+ background:rgba(69,200,236,.10)!important;
+ border-color:rgba(69,200,236,.34)!important;
+ color:#eafcff!important;
+}
+body.av-obsidian-site.coop-redesign-active .btn-max{
+ color:#6fd5eb!important;
+ border-color:rgba(69,200,236,.30)!important;
+}
+body.av-obsidian-site.coop-redesign-active :is(.coop-onchain-help,.coop-share-btn){
+ color:#71d4e8!important;
 }
 
 /* LP and Wheel: replace remaining indigo controls and slate fields. */
