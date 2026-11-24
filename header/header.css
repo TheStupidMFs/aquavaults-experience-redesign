@@ -60,3 +60,23 @@
 .app-header .av-brand-mark .av-glossy-logo{display:block;width:100%;height:100%;object-fit:contain;object-position:left center;filter:none}
 @media(max-width:1080px){.app-header .av-brand-mark{width:165px;height:40px}}
 @media(max-width:640px){.app-header .av-brand-mark{width:138px;height:36px}}
+
+/* AquaVaults dark-glass surfaces v1: shared across public-facing pages.
+   Keep artwork tiles, token icons, input fields and primary buttons untouched. */
+body:is(.blueprint-active,.swap-redesign-active,.account-redesign-active,.rewards-redesign-active,.coop-redesign-active,.evm-redesign-active,.lp-redesign-active,.campaigns-redesign-active,.wheel-redesign-active,.learn-redesign-active,.autoswap-redesign-active,.limit-redesign-active)
+:is(.feature-card,.journey-card,.flow-card,.ecosystem-card,.instant-panel,.activity-panel,.community-now-panel,.tools-now-panel,.visual-panel,.account-card,.account-hub-panel,.rewards-card,.rewards-cycle-card,.rewards-auth-card,.rewards-score-card,.rewards-task-catalog-card,.rewards-leaderboard-card,.rewards-rules-card,.coop-card,.coop-participate-panel,.coop-pending-credit-panel,.coop-onchain-mode-card,.coop-inline-card,.lb-panel,.reward-split-card,.swap-support-panel,.community-table-card,.community-profile-panel,.av-volume-panel,.join-detail-card,.campaigns-panel,.campaigns-banner,.campaigns-board,.campaigns-rail,.campaigns-scoring,.campaigns-focus){
+ background:linear-gradient(145deg,rgba(2,9,18,.94),rgba(3,14,26,.86))!important;
+ border-color:rgba(79,172,218,.22)!important;
+ box-shadow:inset 0 1px 0 rgba(131,214,245,.035)!important;
+ backdrop-filter:blur(9px);
+ -webkit-backdrop-filter:blur(9px);
+}
+body:is(.blueprint-active,.swap-redesign-active,.account-redesign-active,.rewards-redesign-active,.coop-redesign-active,.evm-redesign-active,.lp-redesign-active,.campaigns-redesign-active,.wheel-redesign-active,.learn-redesign-active,.autoswap-redesign-active,.limit-redesign-active)
+:is(.feature-card,.journey-card,.flow-card,.ecosystem-card,.account-card,.rewards-card,.coop-card,.community-table-card,.join-detail-card):hover{
+ border-color:rgba(85,207,246,.42)!important;
+ box-shadow:inset 0 1px 0 rgba(131,214,245,.05)!important;
+}
+@media(prefers-reduced-transparency:reduce){
+ body:is(.blueprint-active,.swap-redesign-active,.account-redesign-active,.rewards-redesign-active,.coop-redesign-active,.evm-redesign-active,.lp-redesign-active,.campaigns-redesign-active,.wheel-redesign-active,.learn-redesign-active,.autoswap-redesign-active,.limit-redesign-active)
+ :is(.feature-card,.journey-card,.flow-card,.ecosystem-card,.instant-panel,.activity-panel,.community-now-panel,.tools-now-panel,.account-card,.account-hub-panel,.rewards-card,.coop-card,.community-table-card){background:#030e1a!important;backdrop-filter:none;-webkit-backdrop-filter:none}
+}
