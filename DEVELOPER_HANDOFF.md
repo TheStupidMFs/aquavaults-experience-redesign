@@ -86,3 +86,23 @@ The frontend escapes record text through DOM textContent and only allows HTTPS t
 Files: `account/activity-feed.js`, `account/activity-feed.css`, and the Activity markup in `account/index.html`.
 
 **Acceptance tests:** Open Activity, switch every filter, refresh, return via Overview/Back, simulate loading/error/empty states, verify no fake records, confirm authenticated API returns only the current user's records, test narrow screens and keyboard navigation. Not yet browser-QA-certified.
+
+## My Communities: interactive personal collection
+The Account profile now includes **My Communities**, with collection cards, count, Refresh, Remove, Explore and Support in Swap navigation. The preview reads the **same** `av-preview-community-favorites` localStorage key as the Communities discovery page. Favorites are **browser-local only** without an adapter, not authenticated, not wallet-synced, and are explicitly labeled as such. The UI displays up to 10 saved communities, matching the intended account limit. Clicking Support navigates to the swap tool but does **not** silently preselect a community; the user must choose the beneficiary there.
+
+Backend integration contract:
+```js
+window.AquaVaultsFavoritesAdapter = {
+  async list({wallet}) {
+    // Return {items:[{id,name}, ...]} for the authenticated account, max 10.
+  },
+  async remove({wallet,id}) {
+    // Server verifies session and ownership; return success or throw.
+  }
+};
+```
+A production integration should also implement **add** from Communities, enforce the 10-item limit server-side, and return canonical community IDs. Browser wallet strings are not proof of ownership. Avoid treating localStorage as the source of truth for production. The account page uses the shared `swapper/community-registry.js` for preview display metadata.
+
+Files: `account/my-communities.js`, `account/my-communities.css`, `account/index.html`.
+
+**Not yet verified in a browser:** cross-page favorites synchronization, responsive cards, image URLs, all routes, wallet changes and adapter failure handling.
