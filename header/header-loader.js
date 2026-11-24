@@ -11,6 +11,25 @@
     el.innerHTML='<div class="header-loading-skeleton"><div class="header-skeleton-content"><div class="header-skeleton-logo"></div><div class="header-skeleton-title"></div></div></div>';
     fetch(headerPath(type)).then(r=>{if(!r.ok)throw new Error("Failed to load header: "+r.status);return r.text()}).then(html=>{
       el.innerHTML=html;
+      // Resolve navigation to actual GitHub Pages files before adding the project prefix.
+      const routeMap={
+        "/":"/", "/swap":"/swapper/swap/swap-card.html",
+        "/communities":"/community-affiliates/",
+        "/rewards":"/rewards/", "/coop-rig":"/coop-rig/",
+        "/account":"/account/", "/account/":"/account/",
+        "/autoswap":"/swapper/autoswap/autoswap-card.html",
+        "/limit-order":"/swapper/limit-order/limit-order.html",
+        "/evm-swap":"/swapper/evm/swap-card.html",
+        "/lp":"/lp/", "/campaigns":"/campaigns/",
+        "/wheel":"/wheel/", "/wheel/":"/wheel/",
+        "/learn":"/learn/", "/learn/":"/learn/"
+      };
+      el.querySelectorAll('a[href^="/"]').forEach(a=>{
+        const raw=a.getAttribute("href");
+        const match=raw.match(/^([^?#]*)(.*)$/);
+        const destination=routeMap[match[1]];
+        if(destination)a.setAttribute("href",destination+match[2]);
+      });
       const root=basePath();
       if(root){
         el.querySelectorAll('a[href^="/"]').forEach(a=>a.setAttribute("href",root+a.getAttribute("href")));
