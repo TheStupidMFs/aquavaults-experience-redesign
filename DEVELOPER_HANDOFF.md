@@ -134,3 +134,10 @@ Removed the obsolete `coop-rig-stage` (“Rig ready”) and `coop-simple-flow` s
 `coop-rig/coop-rig.js` now resolves registry logo paths via `avCoopLogoPath` for the community dropdown, selected community, and contribution breakdown. Leading `/assets/...` paths are mapped relative to the Co-Op page for GitHub Pages subpath hosting; absolute remote/data URLs are retained.
 
 **QA required:** visually verify the hero is gone, test all Co-Op tabs and contributions, confirm logos in dropdown/selected/breakdown on the GitHub Pages deployment, check missing-logo fallback and production root hosting. This commit was source-inspected but not browser-tested.
+
+## AutoSwap usability pass V1
+Removed the redundant, nonfunctional `blueprint-preview` mock from `swapper/autoswap/autoswap-card.html`, leaving the actual AutoSwap tool visible. Fixed HTML asset references for GitHub Pages subdirectory hosting and relative links to `how-to/` and `estimator/`. Homepage AutoSwap links now point to the actual `autoswap-card.html` (the directory has no index file).
+
+Added `autoswap-guide.js` / `autoswap-guide.css`: a compact four-stage explainer and optional live **Review my current setup** disclosure reading existing form fields (community, pair, amount, swap count, delay, fee and enabled options). This is **not** a quote, fee estimate, authorization, simulation, validation gate, or trade confirmation. It never changes input values, calls trading APIs or starts trades.
+
+**QA:** inspect desktop/mobile layout, verify all CSS/JS assets load under GitHub Pages and production hosting, ensure existing wallet/token/automation flow is unchanged, and test help/estimator routes. Source-level changes only; browser and wallet execution testing have not been performed. Existing bundle-level root-relative references may still need a broader audit.
