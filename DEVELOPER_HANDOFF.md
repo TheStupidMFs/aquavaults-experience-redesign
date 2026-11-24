@@ -65,3 +65,24 @@ Source files:
 
 ## Implementation note
 The current prototype includes inherited inline scripts and mock runtime behavior. A production developer should isolate presentation adapters from business logic, and run a full interaction regression suite before deployment. This handoff is an integration guide, **not** a claim of completed QA.
+
+## Account Activity Feed: frontend-ready, data integration pending
+The Account **Activity** tab now opens a working feed view. Filters: All, Swaps, Communities, Rewards, Co-Op. Refresh, Back to Overview, loading, empty and failure states are implemented. There are **no invented transactions**. In the absence of an adapter, the feed explicitly identifies the backend connection as pending.
+
+Set `window.AquaVaultsActivityAdapter` before the user opens Activity:
+```js
+window.AquaVaultsActivityAdapter = {
+  async list({wallet,type,limit}) {
+    // Read verified events for the authenticated user, newest first.
+    return {items: [
+      // {id, type:'swap'|'community'|'rewards'|'coop',
+      //  title, description, occurredAt, status, txUrl, community, amount}
+    ]};
+  }
+};
+```
+The frontend escapes record text through DOM textContent and only allows HTTPS transaction links. All records, ownership, timestamps, transaction verification and pagination must come from the backend. The `wallet` input is a UI hint, not authentication. Server must check the signed session and authorization. `type='all'` requests the combined feed; other types request their category. The frontend filters the response again as a guard.
+
+Files: `account/activity-feed.js`, `account/activity-feed.css`, and the Activity markup in `account/index.html`.
+
+**Acceptance tests:** Open Activity, switch every filter, refresh, return via Overview/Back, simulate loading/error/empty states, verify no fake records, confirm authenticated API returns only the current user's records, test narrow screens and keyboard navigation. Not yet browser-QA-certified.
