@@ -113,3 +113,21 @@ body.blueprint-active>.rewards-page,body.blueprint-active>.account-page,body.blu
 .community-blueprint-v2 .community-bottom-strip small{font-size:10px!important}
 @media(max-width:900px){.community-blueprint-v2 .community-workspace{grid-template-columns:1fr!important}.community-blueprint-v2 .community-profile-panel{position:static!important}}
 @media(max-width:650px){.community-blueprint-v2 .community-experience{padding:12px 0!important}.community-blueprint-v2 .community-table-head,.community-blueprint-v2 .community-table-row{grid-template-columns:30px minmax(120px,1fr) .6fr!important}.community-blueprint-v2 .community-cell-identity img{width:32px!important;height:32px!important}.community-blueprint-v2 .community-table-row.selected:after{display:none!important}}
+
+/* Mobile journey: keep community discovery legible without horizontal clipping */
+@media(max-width:760px){
+ .community-blueprint-v2 .community-experience-head{display:block!important}
+ .community-blueprint-v2 .community-workspace{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:16px!important}
+ .community-blueprint-v2 .community-search-shell{min-width:0!important;width:100%!important}
+ .community-blueprint-v2 .community-table-card{min-width:0!important;overflow:hidden!important}
+ .community-blueprint-v2 .community-table-head,.community-blueprint-v2 .community-table-row{grid-template-columns:26px minmax(0,1fr) 66px!important;gap:8px!important}
+ .community-blueprint-v2 .community-table-head>*:nth-child(n+4),.community-blueprint-v2 .community-table-row>*:nth-child(n+4){display:none!important}
+ .community-blueprint-v2 .community-cell-identity{min-width:0!important}
+ .community-blueprint-v2 .community-cell-identity b,.community-blueprint-v2 .community-cell-identity small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .community-blueprint-v2 .community-table-row{padding:10px 7px!important;min-height:58px!important}
+ .community-blueprint-v2 .community-profile-panel{min-width:0!important}
+ .community-blueprint-v2 .community-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}
+ .community-blueprint-v2 .community-tabs button{white-space:nowrap;min-height:42px}
+ .community-blueprint-v2 .community-bottom-strip{grid-template-columns:1fr!important;gap:0!important}
+ .community-blueprint-v2 .community-bottom-strip>div{padding:12px 0!important}
+}
