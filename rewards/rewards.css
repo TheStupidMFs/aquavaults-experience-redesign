@@ -50,3 +50,29 @@ body[data-rewards-view="play"] .rewards-section-intro{margin-top:24px}
 body[data-rewards-view="play"] .rewards-objective-grid{grid-template-columns:1fr 1fr}
 body[data-rewards-view="play"] .rewards-quest-stage{margin-bottom:8px!important}
 @media(max-width:720px){.rewards-game-hud{grid-template-columns:1fr;padding-left:0;padding-right:0}.rewards-game-rank{width:132px;height:132px;margin:auto}.rewards-game-top{display:block}.rewards-game-qualify{display:inline-block;margin-top:9px}.rewards-game-objective{grid-template-columns:1fr}.rewards-game-nav{overflow-x:auto}.rewards-game-nav button{white-space:nowrap}body[data-rewards-view="play"] .rewards-objective-grid{grid-template-columns:1fr}}
+
+/* Cohesion V3: game-first Rewards, remove dashboard overload */
+.rewards-redesign-active .rewards-page{max-width:1180px!important;padding-top:18px!important}
+.rewards-redesign-active .rewards-hero{max-width:920px!important;padding:8px 0 16px!important}
+.rewards-redesign-active .rewards-hero h1{font-size:clamp(2.1rem,4.2vw,3.4rem)!important;line-height:1.04!important;letter-spacing:-.055em!important;margin:6px 0 8px!important}
+.rewards-redesign-active .rewards-hero p{font-size:.82rem!important;max-width:680px!important}
+.rewards-redesign-active .rewards-status-line{font-size:.68rem!important;margin-top:10px!important}
+.rewards-redesign-active .rewards-public-grid{margin:4px 0 14px!important}
+.rewards-redesign-active .rewards-public-grid>.rewards-card{padding:13px 15px!important;margin:0!important}
+.rewards-redesign-active .rewards-public-grid .rewards-card-heading h2{font-size:1rem!important}
+.rewards-redesign-active .rewards-public-grid .rewards-eyebrow{font-size:.62rem!important}
+.rewards-redesign-active .rewards-public-grid .rewards-note{font-size:.66rem!important}
+.rewards-redesign-active .rewards-public-grid .rewards-metric{font-size:1rem!important}
+.rewards-redesign-active .rewards-dashboard-header{padding:0 0 8px!important}
+.rewards-redesign-active .rewards-dashboard-header h2{font-size:.78rem!important;font-weight:650!important;opacity:.7}
+.rewards-redesign-active .rewards-dashboard-header .rewards-eyebrow{font-size:.6rem!important}
+.rewards-redesign-active .rewards-dashboard-header .rewards-button{font-size:.67rem!important;padding:8px 12px!important}
+.rewards-redesign-active .rewards-game-hud{margin-top:10px!important;min-height:235px!important;grid-template-columns:180px minmax(0,1fr)!important}
+.rewards-redesign-active .rewards-game-rank{width:150px!important;height:150px!important}
+.rewards-redesign-active .rewards-game-top h2{font-size:1.6rem!important}
+.rewards-redesign-active .rewards-game-nav{margin-bottom:12px!important}
+.rewards-redesign-active .rewards-section-intro h2{font-size:1.25rem!important}
+.rewards-redesign-active .rewards-objective-grid .rewards-card{margin-bottom:0!important;padding:16px!important}
+.rewards-redesign-active .rewards-objective-grid .rewards-card-heading h3{font-size:1rem!important}
+.rewards-redesign-active .rewards-quest-stage{padding-top:8px!important}
+@media(max-width:760px){.rewards-redesign-active .rewards-game-hud{grid-template-columns:1fr!important;gap:12px!important}.rewards-redesign-active .rewards-game-rank{width:125px!important;height:125px!important}.rewards-redesign-active .rewards-public-grid>.rewards-card{padding:12px 5px!important}}
