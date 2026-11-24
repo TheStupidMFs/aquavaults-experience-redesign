@@ -1,0 +1,31 @@
+/* Account V4: editorial profile canvas. No card nesting, no behavioral changes. */
+body.account-redesign-active{--account-line:rgba(102,189,217,.17)}
+body.account-redesign-active :is(#accountDashboard.account-profile-shell,.account-card,.account-hub-panel,.account-home-banner,.account-next-actions,.account-profile-customize,.account-progression-hero,.account-hub-stat,.account-identity-preview,.account-social-profile,.account-connection){
+ background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-radius:0!important;
+}
+body.account-redesign-active #accountDashboard.account-profile-shell{border:0!important;padding:0!important;max-width:1180px;margin-inline:auto}
+body.account-redesign-active .account-social-cover{border:1px solid rgba(94,181,218,.18)!important;border-radius:12px!important;box-shadow:none!important;min-height:190px;background:radial-gradient(ellipse at 75% 0%,rgba(35,124,177,.20),transparent 65%),linear-gradient(120deg,#03101e,#061d31)!important}
+body.account-redesign-active .account-social-profile{border:0!important;border-bottom:1px solid var(--account-line)!important;padding:0 0 24px!important}
+body.account-redesign-active .account-profile-tabs{background:transparent!important;border:0!important;border-bottom:1px solid var(--account-line)!important;border-radius:0!important;box-shadow:none!important;padding:0!important;gap:20px}
+body.account-redesign-active .account-profile-tabs :is(button,a){background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+body.account-redesign-active .account-profile-tabs .active{color:#e8faff!important}
+body.account-redesign-active .account-hub-nav{background:transparent!important;border:0!important;border-bottom:1px solid var(--account-line)!important;border-radius:0!important;box-shadow:none!important;padding:0!important;gap:10px}
+body.account-redesign-active .account-hub-nav button{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:13px 16px!important}
+body.account-redesign-active .account-hub-nav button[aria-selected=true]{border-bottom:2px solid #64dcec!important;color:#eafaff!important}
+body.account-redesign-active .account-profile-shell>.account-hub-panel{padding:28px 0 42px!important;border:0!important;max-width:none!important}
+body.account-redesign-active .account-home-banner{border:0!important;border-bottom:1px solid var(--account-line)!important;padding:14px 0 26px!important;margin-bottom:30px!important}
+body.account-redesign-active .account-identity-preview{border:0!important;padding:0!important}
+body.account-redesign-active .account-progression-hero{border:0!important;border-bottom:1px solid var(--account-line)!important;padding:22px 0 34px!important;margin-bottom:24px!important;overflow:visible}
+body.account-redesign-active .account-progression-hero:after{opacity:.25}
+body.account-redesign-active .account-progression-orb{background:radial-gradient(circle,rgba(21,94,142,.2),rgba(2,11,22,.65))!important;border:1px solid rgba(85,195,226,.28)!important;box-shadow:none!important}
+body.account-redesign-active .account-hub-stats{background:transparent!important;border:0!important;border-top:1px solid var(--account-line)!important;border-bottom:1px solid var(--account-line)!important;border-radius:0!important;box-shadow:none!important;gap:0!important}
+body.account-redesign-active .account-hub-stat{border:0!important;border-right:1px solid var(--account-line)!important;padding:22px 20px!important;min-width:0}
+body.account-redesign-active .account-hub-stat:last-child{border-right:0!important}
+body.account-redesign-active .account-primary-stats .account-hub-stat:after{display:none!important}
+body.account-redesign-active .account-next-actions{border:0!important;border-bottom:1px solid var(--account-line)!important;padding:26px 0!important}
+body.account-redesign-active .account-next-links{background:transparent!important;border:0!important;box-shadow:none!important}
+body.account-redesign-active .account-hub-list{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
+body.account-redesign-active .account-hub-list li{border-bottom:1px solid var(--account-line)!important;border-radius:0!important}
+body.account-redesign-active .account-profile-customize{border:0!important;border-top:1px solid var(--account-line)!important;padding:24px 0!important}
+body.account-redesign-active :is(.account-dashboard-title h2,.account-social-name h2){letter-spacing:-.045em}
+@media(max-width:700px){body.account-redesign-active .account-hub-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}body.account-redesign-active .account-hub-stat:nth-child(2n){border-right:0!important}body.account-redesign-active .account-hub-stat{padding:18px 12px!important;border-bottom:1px solid var(--account-line)!important}body.account-redesign-active .account-social-cover{min-height:145px}body.account-redesign-active .account-profile-tabs,body.account-redesign-active .account-hub-nav{overflow-x:auto;scrollbar-width:thin}}
