@@ -120,3 +120,10 @@ The community ID must be resolved against the production registry and fee routin
 Supported navigation categories: Swap, AutoSwap, Co-Op, Communities and Account. If a task label does not unambiguously match one, the UI shows generic guidance and does not invent an action. **Before production handoff**, map shortcuts to canonical task IDs from the Rewards policy instead of label heuristics. Confirm the AutoSwap destination resolves in the deployed application; the existing homepage links to `swapper/autoswap/`, but a folder index was not verified through repository inspection.
 
 **QA:** verify guide sections appear after asynchronous task rendering, work for daily/bonus/quest/catalog entries, stay accessible on mobile and keyboard, preserve original requirements and never modify earned/pending points. Check every destination and ensure route-specific tasks do not imply guaranteed awards. This change has not been browser tested.
+
+## Co-Op participation guidance (frontend V1)
+Added `coop-rig/participation-guide.js` and `coop-rig/participation-guide.css`, loaded from `coop-rig/index.html`. The guide explains Droplets, cycle weight and verification/credit states through native expandable details. **View my contributions** activates the existing Activity view and scrolls to the existing `historyList` container. No contribution is sent and no wallet, mining, backend, credit retry, balance or eligibility logic is changed.
+
+All values remain sourced from existing Co-Op UI and backend. The guide explicitly distinguishes a confirmed on-chain contribution from a credited Droplet and avoids presenting weight as a payout guarantee.
+
+**QA needed:** verify the Activity tab and contribution history are visible after shortcut, test wallet disconnected/connected, pending credit retry, mobile and keyboard interaction, and ensure terminology aligns with current production program policy. No live transaction or browser QA was performed.
