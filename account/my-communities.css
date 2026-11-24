@@ -1,0 +1,31 @@
+/* My Communities: personal collection, not a token directory */
+.account-profile-shell.av-communities-active>.account-section-heading,
+.account-profile-shell.av-communities-active>.account-hub-nav,
+.account-profile-shell.av-communities-active>.account-hub-panel,
+.account-profile-shell.av-communities-active>#hubStatus,
+.account-profile-shell.av-communities-active>#hubRefresh,
+.account-profile-shell.av-communities-active>.account-profile-subhead{display:none!important}
+.av-my-communities-section[hidden]{display:none!important}
+.av-my-communities-section{padding:25px 18px 46px;scroll-margin-top:95px}
+.av-my-communities-head{display:flex;justify-content:space-between;gap:16px;align-items:start;padding-bottom:23px;border-bottom:1px solid rgba(88,196,229,.22)}
+.av-my-communities-head h2{font-size:clamp(1.9rem,3vw,2.8rem);letter-spacing:-.05em;margin:7px 0}
+.av-my-communities-head p{max-width:650px;font-size:13px;line-height:1.6;color:#9fbcc9}
+.av-my-communities-kicker{font-size:10px;letter-spacing:.14em;color:#5ad8f1;font-weight:850}
+.av-my-communities-back,.av-my-communities-refresh{background:transparent;border:1px solid rgba(94,203,234,.28);color:#bfeeff;border-radius:8px;padding:10px 14px;cursor:pointer}
+.av-my-communities-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:22px 0}
+.av-my-communities-count{font-size:12px;color:#a6c9d6}.av-my-communities-status{font-size:11px;color:#89b7c8;margin:0 0 18px}
+.av-my-communities-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.av-my-community{padding:20px;border:1px solid rgba(83,188,224,.2);background:linear-gradient(145deg,rgba(10,40,60,.65),rgba(3,17,30,.45));border-radius:12px;min-width:0}
+.av-my-community-top{display:flex;justify-content:space-between;align-items:start;gap:10px}
+.av-my-community-identity{display:flex;align-items:center;gap:12px;min-width:0}
+.av-my-community-identity img{width:47px;height:47px;object-fit:cover;border-radius:50%;border:1px solid #32627b}
+.av-my-community-name{font-size:17px;font-weight:850;color:#eaf9ff;overflow-wrap:anywhere}
+.av-my-community-saved{color:#69dbe9;font-size:9px;letter-spacing:.1em;white-space:nowrap}
+.av-my-community-description{color:#a3bfcb;font-size:12px;line-height:1.6;margin:13px 0}
+.av-my-community-actions{display:flex;flex-wrap:wrap;gap:13px;align-items:center;margin-top:21px}
+.av-my-community-actions a,.av-my-community-actions button{font:inherit;font-size:11px;color:#a4d9e8;background:none;border:0;padding:8px 0;cursor:pointer;text-decoration:none}
+.av-my-community-actions .av-my-community-primary,.av-my-communities-primary{background:linear-gradient(100deg,#126aa8,#4d45a7);border:1px solid rgba(115,207,247,.4);padding:10px 14px;border-radius:8px;color:#fff;text-decoration:none}
+.av-my-community-actions button{margin-left:auto;color:#a3b5c0}
+.av-my-communities-empty{grid-column:1/-1;text-align:center;padding:65px 20px;border-top:1px solid rgba(87,197,230,.2);border-bottom:1px solid rgba(87,197,230,.2)}
+.av-my-communities-empty h3{font-size:23px;color:#eaf9ff}.av-my-communities-empty p{color:#9ebcca;font-size:13px;margin-bottom:26px}
+@media(max-width:720px){.av-my-communities-grid{grid-template-columns:1fr}.av-my-communities-head{flex-direction:column}.av-my-communities-section{padding:18px 4px 35px}}

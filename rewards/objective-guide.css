@@ -1,0 +1,11 @@
+.av-reward-guidance{margin-top:13px;padding-top:11px;border-top:1px solid rgba(89,188,222,.18)}
+.av-reward-guidance summary{cursor:pointer;list-style:none;color:#8ce7f1;font-size:12px;font-weight:750;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.av-reward-guidance summary::-webkit-details-marker{display:none}
+.av-reward-guidance summary:after{content:'+';font-size:18px;font-weight:400}
+.av-reward-guidance[open] summary:after{content:'−'}
+.av-reward-guidance-body{padding:11px 0 4px}
+.av-reward-guidance-body p{font-size:12px;line-height:1.65;color:#a8c5d1;margin:0 0 13px}
+.av-reward-guidance-link{display:inline-block;border:1px solid rgba(96,211,235,.35);border-radius:8px;padding:10px 13px;color:#e4faff;background:rgba(25,118,155,.2);font-size:12px;font-weight:700;text-decoration:none;margin-bottom:12px}
+.av-reward-guidance-body small{display:block;font-size:10px;line-height:1.5;color:#819fac}
+.av-reward-guidance summary:focus-visible,.av-reward-guidance-link:focus-visible{outline:2px solid #81e6f4;outline-offset:3px}
+@media(max-width:650px){.av-reward-guidance summary{min-height:38px}.av-reward-guidance-link{min-height:42px}}

@@ -1,0 +1,16 @@
+.av-coop-guide{width:100%;max-width:1180px;padding:23px 0 18px;border-top:1px solid rgba(92,200,226,.16);border-bottom:1px solid rgba(92,200,226,.16)}
+.av-coop-guide-heading{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
+.av-coop-guide-eyebrow{color:#66d8ec;font-size:10px;letter-spacing:.14em;font-weight:800}
+.av-coop-guide h2{color:#f0faff;font-size:clamp(18px,2.4vw,24px);letter-spacing:-.03em;margin:7px 0}
+.av-coop-guide-heading p{color:#93b7c6;font-size:12px;margin:0}
+.av-coop-guide-activity{border:1px solid rgba(103,215,237,.3);border-radius:8px;padding:11px 14px;background:rgba(12,85,112,.17);color:#b8eff8;font-size:12px;cursor:pointer}
+.av-coop-guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.av-coop-guide-item{background:linear-gradient(145deg,rgba(11,45,67,.7),rgba(8,21,39,.4));border:1px solid rgba(83,185,218,.18);border-radius:11px;padding:16px;min-width:0}
+.av-coop-guide-item summary{list-style:none;display:flex;align-items:center;gap:10px;cursor:pointer;color:#e4f7ff;font-size:13px;line-height:1.4}
+.av-coop-guide-item summary::-webkit-details-marker{display:none}
+.av-coop-guide-item summary:after{content:'+';color:#80dfee;font-size:19px;margin-left:auto}
+.av-coop-guide-item[open] summary:after{content:'−'}
+.av-coop-guide-number{font-size:10px;font-weight:900;color:#64d9ed}
+.av-coop-guide-item p{font-size:12px;line-height:1.65;color:#a7c1cf;margin:14px 0 0}
+.av-coop-guide-item summary:focus-visible,.av-coop-guide-activity:focus-visible{outline:2px solid #8ce9f4;outline-offset:3px}
+@media(max-width:760px){.av-coop-guide-grid{grid-template-columns:1fr}.av-coop-guide-heading{align-items:start;flex-direction:column}.av-coop-guide-activity{min-height:44px}}

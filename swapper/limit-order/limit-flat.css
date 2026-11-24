@@ -1,0 +1,41 @@
+/* AquaVaults Limit Orders: one cohesive workspace, not stacked cards. */
+body.limit-redesign-active .page-content{width:min(1180px,calc(100% - 36px));max-width:1180px;margin:0 auto;padding:28px 0 54px;display:block}
+body.limit-redesign-active .tool-experience-heading{width:100%;max-width:none;margin:0 0 26px;padding:0 0 24px;border-bottom:1px solid rgba(119,180,204,.18)}
+body.limit-redesign-active .limit-order-grid{width:100%;max-width:none;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:0;align-items:start}
+body.limit-redesign-active .create-order-column{min-width:0;padding:0 34px 0 0}
+body.limit-redesign-active .orders-list-column{min-width:0;padding:0 0 0 34px;border-left:1px solid rgba(119,180,204,.2);align-self:stretch}
+body.limit-redesign-active .order-card,body.limit-redesign-active .orders-card{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;backdrop-filter:none!important;overflow:visible}
+body.limit-redesign-active .card-header{background:transparent!important;border:0!important;border-bottom:1px solid rgba(119,180,204,.16)!important;padding:0 0 18px;margin-bottom:20px}
+body.limit-redesign-active .card-title{font-size:1.15rem;letter-spacing:-.02em;color:#f0f9ff}
+body.limit-redesign-active .card-subtitle{line-height:1.6;max-width:560px}
+body.limit-redesign-active .card-body{padding:0}
+body.limit-redesign-active .order-section{margin-bottom:20px}
+body.limit-redesign-active .token-select,body.limit-redesign-active .amount-input,body.limit-redesign-active .advanced-select,body.limit-redesign-active .advanced-input{background-color:rgba(8,31,48,.55)!important;border:1px solid rgba(119,180,204,.28)!important;border-radius:7px!important;box-shadow:none!important}
+body.limit-redesign-active .preview-panel{background:transparent!important;border:0!important;border-top:1px solid rgba(119,180,204,.2)!important;border-bottom:1px solid rgba(119,180,204,.2)!important;border-radius:0!important;box-shadow:none!important;margin:20px 0;padding:18px 0}
+body.limit-redesign-active .preview-header{background:transparent!important;padding:0 0 12px;border:0!important;color:#d8f3ff}
+body.limit-redesign-active .preview-row{border-color:rgba(119,180,204,.1)!important}
+body.limit-redesign-active .advanced-section{background:transparent!important;border:0!important;border-bottom:1px solid rgba(119,180,204,.18)!important;border-radius:0!important;box-shadow:none!important}
+body.limit-redesign-active .advanced-header{background:transparent!important;padding:15px 0}
+body.limit-redesign-active .advanced-body{background:transparent!important;padding:14px 0 20px}
+body.limit-redesign-active .orders-tabs{display:flex;gap:20px;margin-top:14px}
+body.limit-redesign-active .order-tab{background:transparent!important;border:0!important;border-bottom:2px solid transparent!important;border-radius:0!important;box-shadow:none!important;padding:9px 2px}
+body.limit-redesign-active .order-tab.active{border-bottom-color:#64d8e9!important;color:#e8faff!important}
+body.limit-redesign-active .orders-empty{background:transparent!important;border:0!important;box-shadow:none!important;padding:46px 10px}
+body.limit-redesign-active .empty-icon:empty{display:none}
+body.limit-redesign-active .debug-console-shell{width:100%;max-width:none;margin:44px 0 0;background:transparent!important;border:0!important;border-top:1px solid rgba(119,180,204,.18)!important;border-radius:0!important;box-shadow:none!important;overflow:visible}
+body.limit-redesign-active .debug-console-header{background:transparent!important;padding:18px 0;border:0!important}
+body.limit-redesign-active .debug-console-content{background:transparent!important}
+body.limit-redesign-active .debug-stats-section{background:transparent!important}
+body.limit-redesign-active .live-price-ticker{box-shadow:none!important}
+@media(max-width:850px){body.limit-redesign-active .limit-order-grid{grid-template-columns:minmax(0,1fr)}body.limit-redesign-active .create-order-column{padding:0}body.limit-redesign-active .orders-list-column{padding:28px 0 0;margin-top:30px;border-left:0;border-top:1px solid rgba(119,180,204,.2)}body.limit-redesign-active .page-content{width:calc(100% - 28px)}}
+@media(max-width:480px){body.limit-redesign-active .token-input-group{grid-template-columns:minmax(0,1fr)}body.limit-redesign-active .card-header{margin-bottom:16px}}
+
+/* Diagnostics remain available without dominating the customer journey. */
+body.limit-redesign-active .limit-activity-details{width:100%;margin:40px 0 0;border-top:1px solid rgba(119,180,204,.18);padding:14px 0}
+body.limit-redesign-active .limit-activity-details>summary{display:flex;align-items:center;gap:12px;cursor:pointer;color:#9bb8c8;font-size:.8rem;font-weight:650;letter-spacing:.01em;list-style:none}
+body.limit-redesign-active .limit-activity-details>summary::-webkit-details-marker{display:none}
+body.limit-redesign-active .limit-activity-details>summary:before{content:"+";display:inline-block;font-size:1.1rem;color:#6bd4e9}
+body.limit-redesign-active .limit-activity-details[open]>summary:before{content:"−"}
+body.limit-redesign-active .limit-activity-details>summary span{font-size:.72rem;color:#7794a5;font-weight:400}
+body.limit-redesign-active .limit-activity-details .debug-console-shell{margin:16px 0 0;border-top:0!important}
+body.limit-redesign-active #advancedHeader:focus-visible,body.limit-redesign-active .limit-activity-details>summary:focus-visible{outline:2px solid #6bd4e9;outline-offset:4px}

@@ -1,23 +1,69 @@
 <!DOCTYPE html> <html lang="en"> <head>
 <!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
-<script src="/design-preview/mock-runtime.js"></script>
-<script src="/design-preview/mock-extension.js"></script>
-<link rel="stylesheet" href="/design-preview/preview-controls.css">
-<script src="/design-preview/preview-controls.js" defer></script>
- <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>AquaVaults - Community Affiliates</title> <link rel="icon" type="image/png" href="/assets/logo.png" /> <link rel="apple-touch-icon" href="/assets/logo.png" /> <meta property="og:image" content="/assets/logo.png" /> <meta name="description" content="Community Affiliates - Support your favorite Solana communities" /> <link rel="stylesheet" href="communiity-affiliates.css" /> <link rel="stylesheet" href="../header/header.css" /> <link rel="stylesheet" href="../footer/footer.css" /> <script src="../header/header-loader.js" defer></script> <script src="../header/header.js" defer></script> <script src="../footer/footer-loader.js" defer></script> <link rel="stylesheet" href="../experience.css"> <link rel="stylesheet" href="../blueprint.css">
-</head> <body class="blueprint-active"> <div class="page-wrapper"> <div id="header-container" data-header-type="simple"></div><div class="blueprint-preview"><section class="bp-shell"><div class="bp-pagehead"><h1>Communities</h1><p>Discover and support communities while swapping on Solana.</p></div><div class="bp-community-layout"><div><div class="bp-search"><div class="bp-field">⌕ &nbsp; Search communities...</div><div class="bp-field">All Communities ▾</div></div><div class="bp-tabs"><span class="active">Leaderboard</span><span>All Communities</span></div><div class="bp-card bp-table" style="margin-top:10px"><div class="bp-row head"><span>#</span><span>Community</span><span>Volume (SOL)</span><span>Supporters</span><span>Tier</span></div><div class="bp-row"><b>1</b><span>◎ &nbsp; Community</span><b>—</b><span>—</span><span>Gold</span></div><div class="bp-row"><b>2</b><span>◎ &nbsp; Community</span><b>—</b><span>—</span><span>Silver</span></div><div class="bp-row"><b>3</b><span>◎ &nbsp; Community</span><b>—</b><span>—</span><span>Silver</span></div><div class="bp-row"><b>4</b><span>◎ &nbsp; Community</span><b>—</b><span>—</span><span>Basic</span></div><div class="bp-row"><b>5</b><span>◎ &nbsp; Community</span><b>—</b><span>—</span><span>Basic</span></div></div></div><aside class="bp-card bp-profile"><div class="bp-profile-art"></div><img src="../assets/dnc-logo.png" alt=""><div class="bp-profile-body"><h2>Community</h2><small>Selected community profile</small><p>Learn who they are, see verified participation, and support them directly.</p><a class="bp-btn" style="width:100%">Support Community</a><a class="bp-btn secondary" style="width:100%;margin-top:8px">View Full Profile</a></div></aside></div><div class="bp-water"></div></section></div> <div class="page-content"> <div class="affiliates-hero"><span class="communities-kicker">DISCOVER YOUR PEOPLE</span><h1>Communities</h1><p class="affiliates-subtitle">Explore the communities building inside AquaVaults, see who is active, and choose who your onchain activity supports.</p></div> <section class="community-discovery-intro">
+<script src="../design-preview/mock-runtime.js"></script>
+<script src="../design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="../design-preview/preview-controls.css">
+<script src="../design-preview/preview-controls.js" defer></script>
+ <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>AquaVaults - Community Affiliates</title> <link rel="icon" type="image/png" href="../assets/logo.png" /> <link rel="apple-touch-icon" href="../assets/logo.png" /> <meta property="og:image" content="../assets/logo.png" /> <meta name="description" content="Community Affiliates - Support your favorite Solana communities" /> <link rel="stylesheet" href="communiity-affiliates.css" /> <link rel="stylesheet" href="../header/header.css" /> <link rel="stylesheet" href="../footer/footer.css" /> <script src="../header/header-loader.js" defer></script> <script src="../header/header.js" defer></script> <script src="../footer/footer-loader.js" defer></script> <link rel="stylesheet" href="../experience.css?v=mobile-v1"> <link rel="stylesheet" href="../blueprint.css?v=mobile-v1">
+</head> <body class="blueprint-active"> <div class="page-wrapper"> <div id="header-container" data-header-type="simple"></div><div class="blueprint-preview community-blueprint-v2">
+<section class="bp-shell community-experience">
+  <div class="community-experience-head">
+    <div><span class="bp-kicker">THE HEART OF AQUAVAULTS</span><h1>Communities</h1><p>Discover who's building here, see verified participation, and choose where your activity goes.</p></div>
+    <div class="community-head-actions"><a href="../account/" class="community-head-link">♡ My Communities</a><a href="../apply/" class="bp-btn secondary">Get Listed</a></div>
+  </div>
+
+  <div class="community-workspace">
+    <main class="community-browser">
+      <div class="community-controls">
+        <label class="community-search-shell"><span>⌕</span><input id="bpCommunitySearch" type="search" placeholder="Search communities..." autocomplete="off"></label>
+        <select id="bpCommunityFilter" class="community-filter"><option value="all">All Communities</option><option value="favorites">My Favorites</option></select>
+      </div>
+      <div class="community-tabs" role="tablist">
+        <button class="active" data-community-view="leaderboard">Leaderboard</button>
+        <button data-community-view="all">All Communities</button>
+        <button data-community-view="favorites">My Communities</button>
+      </div>
+
+      <div class="community-table-card">
+        <div class="community-table-head"><span>#</span><span>Community</span><span>Volume</span><span>Verified Supporters</span><span>Rewards Loyalty</span></div>
+        <div id="bpCommunityRows" class="community-table-body"></div>
+      </div>
+      <div class="community-browser-foot"><span><i></i> Verified AquaVaults participation data</span><a href="../apply/">Bring your community to AquaVaults →</a></div>
+    </main>
+
+    <aside id="bpCommunityProfile" class="community-profile-panel">
+      <div id="bpCommunityCover" class="community-profile-cover"></div>
+      <div class="community-profile-main">
+        <div class="community-profile-identity"><img id="bpCommunityLogo" src="../assets/pissin-logo.png" alt=""><button id="bpFavoriteBtn" class="community-favorite-btn" type="button" aria-label="Favorite community">♡</button></div>
+        <span class="community-profile-kicker">COMMUNITY PROFILE</span>
+        <h2 id="bpCommunityName">PISSIN</h2>
+        <div class="community-profile-signals"><span id="bpCommunityTier">Listed</span></div><div class="community-profile-stats"><div><b id="bpCommunitySupporters">—</b><small>Verified Supporters</small></div><div><b id="bpCommunityLoyalty">—</b><small>Rewards Loyalty</small></div></div>
+        <p id="bpCommunityDescription">Select a community to learn who they are and how to support them through AquaVaults.</p>
+        <div id="bpCommunitySocials" class="community-profile-socials"></div>
+        <div class="community-profile-actions"><a id="bpCommunitySupport" class="bp-btn" href="../swapper/swap/swap-card.html">Support Community</a><a id="bpCommunityWebsite" class="bp-btn secondary" href="#" target="_blank" rel="noopener">Visit Project</a></div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="community-bottom-strip">
+    <div><span>DISCOVER</span><b>Find your people.</b><small>Different communities. One AquaVaults ecosystem.</small></div>
+    <div><span>PARTICIPATE</span><b>Use the tools.</b><small>Swap, Rewards, Co-Op and more.</small></div>
+    <div><span>SUPPORT</span><b>Choose where activity goes.</b><small>Your activity can strengthen the communities you care about.</small></div>
+  </div>
+</section>
+</div> <div class="page-content"> <div class="affiliates-hero"><span class="communities-kicker">DISCOVER YOUR PEOPLE</span><h1>Communities</h1><p class="affiliates-subtitle">Explore the communities building inside AquaVaults, see who is active, and choose who your onchain activity supports.</p></div> <section class="community-discovery-intro">
   <div><span class="communities-kicker">FIND YOUR COMMUNITY</span><h2>Explore who's building here.</h2><p>Every community has its own identity, people and reason to participate. Browse first. Choose who matters to you. Then put your activity behind them.</p></div>
   <a href="../account/" class="community-my-link">My Communities <span>→</span></a>
 </section>
 <div class="affiliates-grid" id="affiliatesGrid"> </div>
 <section id="av-community-leaderboard" class="av-volume-panel av-leaderboard-section"> <div class="leaderboard-heading"><div><span class="communities-kicker">COMMUNITY PULSE</span><h2 class="av-leaderboard-title">See who's moving.</h2><div class="av-volume-sub">Ranked by SOL-equivalent swap volume. Participation signals add context without changing the ranking.</div></div></div><div id="av-leaderboard-list" class="av-leaderboard-list">Loading…</div> </section> <div class="join-section"> <div class="join-section-header"> <h2>Bring Your Community to AquaVaults</h2> <p class="join-lead">
 AquaVaults helps communities turn attention into participation. Whether you are building an NFT community, a token community, or something that blends both, a listing on AquaVaults gives your project a place to be discovered, supported, and actively chosen on-platform.
-</p> </div> <div class="join-highlights" aria-label="Community listing benefits"> <div class="join-highlight">Share in the platform fees your activity helps generate</div> <div class="join-highlight">Potential Co-op Mining Rig rewards</div> <div class="join-highlight">Optional Discord-capable notifications</div> </div> <a class="join-button" href="/apply">Apply for Listing</a> <p class="join-lead">Applications are submitted directly to AquaVaults for review, with no wallet or application fee required. If a Connector recommended AquaVaults, you may optionally enter their code on the form.</p> <details class="join-details"> <summary>Learn more about joining</summary> <div class="join-details-content"> <p>
+</p> </div> <div class="join-highlights" aria-label="Community listing benefits"> <div class="join-highlight">Share in the platform fees your activity helps generate</div> <div class="join-highlight">Potential Co-op Mining Rig rewards</div> <div class="join-highlight">Optional Discord-capable notifications</div> </div> <a class="join-button" href="../apply/">Apply for Listing</a> <p class="join-lead">Applications are submitted directly to AquaVaults for review, with no wallet or application fee required. If a Connector recommended AquaVaults, you may optionally enter their code on the form.</p> <details class="join-details"> <summary>Learn more about joining</summary> <div class="join-details-content"> <p>
 Your community can gain visibility, share in the platform fees its activity helps generate, and unlock tools built to keep leaders informed and communities engaged. Fee share applies to platform fees that swaps actually generate and depends on confirmed swaps and current program rules — it is not guaranteed revenue. Listed communities also have opportunities to benefit from potential rewards tied to the Co-op Mining Rig, creating another layer of value beyond visibility alone.
 </p> <div class="join-detail-grid"> <div class="join-detail-card"> <h3>What you get</h3> <ul> <li>A dedicated community listing on AquaVaults</li> <li>The ability to share in the platform fees your activity helps generate</li> <li>Potential rewards through the Co-op Mining Rig</li> <li>Access to the AquaVaults Discord for community leaders</li> <li>Optional Discord-capable notifications for important events</li> <li>Visibility to users looking for communities to support</li> <li>Access to future community-focused tools as AquaVaults expands</li> </ul> </div> <div class="join-detail-card join-detail-card-full"> <h3>Who this is for</h3> <p>
 We are looking for NFT communities, token communities, and hybrid projects with real identity, active presence, and people who want to build. Newer projects can apply too, but we care a lot about quality, consistency, and whether the community is genuinely showing up.
 </p> </div> <div class="join-detail-card join-detail-card-full"> <h3>How to join</h3> <p>
-Use the <a href="/apply">public community application</a> to introduce your project. An application is not a listing approval, and you can leave optional fields blank. If you have a Connector code, enter it on the form and verify it before submitting; the introduction remains a candidate until AquaVaults independently verifies it.
+Use the <a href="../apply/">public community application</a> to introduce your project. An application is not a listing approval, and you can leave optional fields blank. If you have a Connector code, enter it on the form and verify it before submitting; the introduction remains a candidate until AquaVaults independently verifies it.
 </p> </div> </div> </details> </div> </div> <div id="footer-container"></div> </div> <script src="../swapper/community-registry.js"></script> <script>
 // Load and display communities
 function loadCommunities() {
@@ -106,7 +152,7 @@ if (community.nftUrl) {
 websiteHTML += `<a href="${community.nftUrl}" target="_blank" rel="noopener" class="community-website">Mint/Buy an NFT →</a>`;
 }
 card.innerHTML = `
-<div class="community-header"> <img src="${community.logo}" alt="${community.name}" class="community-logo" /> <h3 class="community-name">${community.name}</h3> </div> <p class="community-description">${community.description}</p>
+<div class="community-header"> <img src="${community.logo?.startsWith('/assets/') ? '../' + community.logo.slice(1) : community.logo}" alt="${community.name}" class="community-logo" /> <h3 class="community-name">${community.name}</h3> </div> <p class="community-description">${community.description}</p>
 ${socialsHTML}
 ${websiteHTML}
 <button class="swap-with-community-btn" onclick="swapWithCommunity('${community.id}')">
@@ -343,4 +389,48 @@ document.addEventListener('DOMContentLoaded', loadLeaderboard);
 loadLeaderboard();
 }
 })();
-</script> </body> </html>>
+</script> 
+<script>
+(function(){
+  var selectedId='pissin';
+  var favorites=new Set();
+  try{favorites=new Set(JSON.parse(localStorage.getItem('av-preview-community-favorites')||'[]'));}catch(e){}
+  function previewPath(path){if(!path)return ''; if(/^https?:\/\//i.test(path))return path; return '../'+String(path).replace(/^\/+/, '');} function communities(){return window.CommunityRegistry?window.CommunityRegistry.getAll().filter(function(c){return c.id!=='aquavaults'&&!c.internalOnly;}):[];}
+  function shareImage(c){return c&&c.share&&c.share.image?c.share.image:'';}
+  function escapeText(v){return String(v||'');}
+  function renderRows(){
+    var host=document.getElementById('bpCommunityRows'); if(!host)return;
+    var q=(document.getElementById('bpCommunitySearch').value||'').toLowerCase();
+    var filter=document.getElementById('bpCommunityFilter').value;
+    var list=communities().filter(function(c){return (!q||c.name.toLowerCase().includes(q)||c.description.toLowerCase().includes(q))&&(filter!=='favorites'||favorites.has(c.id));});
+    host.innerHTML='';
+    list.forEach(function(c,i){
+      var row=document.createElement('button'); row.type='button'; row.className='community-table-row'+(c.id===selectedId?' selected':''); row.dataset.communityId=c.id;
+      row.innerHTML='<span class="community-rank">'+(i+1)+'</span><span class="community-cell-identity"><img src="'+previewPath(c.logo)+'" alt="" loading="lazy"><span><b>'+escapeText(c.name)+'</b><small>'+(favorites.has(c.id)?'★ Favorite':'View community')+'</small></span></span><span class="community-data" data-metric="volume">—</span><span class="community-data" data-metric="supporters">—</span><span class="community-data" data-metric="loyalty">—</span>';
+      row.addEventListener('click',function(){selectCommunity(c.id);});
+      host.appendChild(row);
+    });
+  }
+  function selectCommunity(id){
+    var c=communities().find(function(x){return x.id===id;}); if(!c)return; selectedId=id;
+    var cover=document.getElementById('bpCommunityCover'); var art=shareImage(c);
+    cover.style.backgroundImage=art?'linear-gradient(180deg,rgba(2,12,23,.02),rgba(2,12,23,.76)),url("'+previewPath(art)+'")':'linear-gradient(180deg,rgba(2,12,23,.05),rgba(2,12,23,.82)),url("'+previewPath('/assets/redesign/community-environment.png')+'")';
+    document.getElementById('bpCommunityLogo').src=previewPath(c.logo);
+    document.getElementById('bpCommunityLogo').alt=c.name;
+    document.getElementById('bpCommunityName').textContent=c.name;
+    document.getElementById('bpCommunityDescription').textContent=c.description; document.getElementById('bpCommunityTier').textContent='AquaVaults Community';
+    document.getElementById('bpCommunitySupport').href='../swapper/swap/swap-card.html?community='+encodeURIComponent(c.id);
+    var site=document.getElementById('bpCommunityWebsite'); site.href=c.website||c.nftUrl||'#'; site.style.display=(c.website||c.nftUrl)?'inline-flex':'none';
+    document.getElementById('bpFavoriteBtn').textContent=favorites.has(c.id)?'♥':'♡';
+    var socials=document.getElementById('bpCommunitySocials'); socials.innerHTML='';
+    [['twitter','𝕏'],['telegram','✈'],['discord','◌'],['reddit','●']].forEach(function(x){if(c.socials&&c.socials[x[0]]){var a=document.createElement('a');a.href=c.socials[x[0]];a.target='_blank';a.rel='noopener';a.textContent=x[1];a.title=x[0];socials.appendChild(a);}});
+    renderRows();
+  }
+  document.getElementById('bpCommunitySearch').addEventListener('input',renderRows);
+  document.getElementById('bpCommunityFilter').addEventListener('change',renderRows);
+  document.querySelectorAll('[data-community-view]').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('[data-community-view]').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');document.getElementById('bpCommunityFilter').value=btn.dataset.communityView==='favorites'?'favorites':'all';renderRows();});});
+  document.getElementById('bpFavoriteBtn').addEventListener('click',function(){if(favorites.has(selectedId))favorites.delete(selectedId);else favorites.add(selectedId);localStorage.setItem('av-preview-community-favorites',JSON.stringify(Array.from(favorites)));selectCommunity(selectedId);});
+  window.addEventListener('DOMContentLoaded',function(){renderRows();selectCommunity(selectedId);});
+})();
+</script>
+</body> </html>>

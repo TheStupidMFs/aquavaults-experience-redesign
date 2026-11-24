@@ -36,3 +36,42 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 }
 button,.button,.btn,a[class*="button"]{transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease}
 @media(max-width:760px){body{background-attachment:scroll!important;background-position:center top!important}}
+
+/* Core-journey cohesion V1: shared spacing, typography and interaction language */
+:root{
+ --av-content-width:1180px;--av-space-section:32px;--av-muted:#91adba;
+ --av-hairline:rgba(86,196,231,.18);--av-focus:rgba(85,220,241,.85);
+}
+html{scroll-behavior:smooth}
+body{color:#eaf8fc}
+:is(.account-page,.rewards-page,.page-content,.community-page,.communities-page) {max-width:var(--av-content-width)}
+:is(.tool-experience-heading,.account-hero,.rewards-hero) h1{line-height:1.06;letter-spacing:-.045em}
+:is(.tool-experience-heading,.account-hero,.rewards-hero) p{line-height:1.55}
+:is(button,a,input,select,textarea):focus-visible{outline:2px solid var(--av-focus)!important;outline-offset:3px}
+:is(button,a[class*="button"],.btn,.primary-btn):not(:disabled){transition:transform .18s ease,filter .18s ease,border-color .18s ease,box-shadow .18s ease}
+:is(button,a[class*="button"],.btn,.primary-btn):disabled{cursor:not-allowed}
+:is(.rewards-redesign-active,.coop-redesign-active,.account-redesign-active) :is(.rewards-section-intro,.account-overview-label,.tool-experience-heading){scroll-margin-top:96px}
+:is(.rewards-redesign-active,.coop-redesign-active,.account-redesign-active) :is(.rewards-card,.account-card,.coop-card){border-color:var(--av-hairline)}
+@media(max-width:760px){
+ html{scroll-behavior:auto}
+ :is(.tool-experience-heading,.account-hero,.rewards-hero) h1{overflow-wrap:break-word}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto!important}
+ *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+/* Mobile usability pass: shared controls, overflow and safe areas */
+html,body{max-width:100%;overflow-x:clip}
+img,video,canvas,svg{max-width:100%}
+button,input,select,textarea{max-width:100%}
+@media(max-width:760px){
+ :is(.account-page,.rewards-page,.page-content,.community-page,.communities-page){width:calc(100% - 28px)!important;max-width:none!important;margin-inline:auto!important}
+ :is(.account-page,.rewards-page,.page-content,.community-page,.communities-page) :is(input,select,textarea){font-size:max(16px,1rem)}
+ :is(.account-page,.rewards-page,.page-content,.community-page,.communities-page) :is(button,a[class*="button"],.btn){min-height:40px}
+ :is(.account-page,.rewards-page,.page-content,.community-page,.communities-page) :is(.account-hub-nav,.account-profile-tabs,.rewards-game-nav,.coop-simple-nav){-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+ :is(.account-page,.rewards-page,.page-content,.community-page,.communities-page) :is(.rewards-table-wrap,.account-hub-list){max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+}
+@media(max-width:380px){
+ :is(.account-page,.rewards-page,.page-content,.community-page,.communities-page){width:calc(100% - 22px)!important}
+}

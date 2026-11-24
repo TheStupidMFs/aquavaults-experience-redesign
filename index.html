@@ -19,18 +19,22 @@
   <script src="header/header-loader.js" defer></script>
   <script src="header/header.js" defer></script>
   <script src="footer/footer-loader.js" defer></script>
-  <link rel="stylesheet" href="experience.css">
-<link rel="stylesheet" href="blueprint.css?v=community-v3">
+  <link rel="stylesheet" href="experience.css?v=mobile-v1">
+<link rel="stylesheet" href="blueprint.css?v=mobile-v1">
 </head>
 <body class="blueprint-active">
 <div class="page-wrapper">
   <div id="header-container" data-header-type="simple"></div><div class="blueprint-preview">
-  <section class="bp-shell bp-home bp-home-community-v3">
+  <section class="bp-shell bp-home bp-home-community-v3 bp-home-video">
+    <video class="bp-hero-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+      <source src="assets/video/aquavaults-hero.mp4" type="video/mp4">
+    </video>
+    <div class="bp-hero-video-overlay" aria-hidden="true"></div>
     <div class="bp-home-copy">
       <span class="bp-kicker">COMMUNITIES ARE THE HEART OF AQUAVAULTS</span>
       <h1>Find your<br>community.<br><strong>Put your activity<br>behind it.</strong></h1>
       <p>Discover the people building here, choose who you care about, then swap, earn and participate across AquaVaults.</p>
-      <div class="bp-home-actions"><a class="bp-btn" href="community-affiliates/">Explore Communities →</a><a class="bp-btn secondary" href="swapper/swap/">Start a Swap</a></div>
+      <div class="bp-home-actions"><a class="bp-btn" href="community-affiliates/">Explore Communities →</a><a class="bp-btn secondary" href="swapper/swap/swap-card.html">Start a Swap</a></div>
     </div>
 
     <aside class="bp-featured-community">
@@ -39,7 +43,7 @@
         <div class="bp-featured-logo"><img src="assets/pissin-logo.png" alt="PISSIN"></div>
         <div class="bp-featured-title"><span>COMMUNITY SPOTLIGHT</span><h2>PISSIN</h2><small>Listed AquaVaults community</small></div>
         <p>Discover the community, see its participation, and choose to support it through your AquaVaults activity.</p>
-        <div class="bp-featured-actions"><a href="community-affiliates/">View Community</a><a href="swapper/swap/">Support →</a></div>
+        <div class="bp-featured-actions"><a href="community-affiliates/">View Community</a><a href="swapper/swap/swap-card.html">Support →</a></div>
       </div>
     </aside>
 
@@ -55,7 +59,7 @@
     </div>
 
     <div class="bp-home-shortcuts">
-      <a class="bp-shortcut" href="swapper/swap/"><span>⇄</span><div><b>Swap</b><small>Trade + choose support</small></div></a>
+      <a class="bp-shortcut" href="swapper/swap/swap-card.html"><span>⇄</span><div><b>Swap</b><small>Trade + choose support</small></div></a>
       <a class="bp-shortcut" href="rewards/"><span>◇</span><div><b>Rewards</b><small>Tasks + loyalty</small></div></a>
       <a class="bp-shortcut" href="coop-rig/"><span>◫</span><div><b>Co-Op</b><small>Participate together</small></div></a>
       <a class="bp-shortcut" href="account/"><span>◉</span><div><b>My Account</b><small>Identity + impact</small></div></a>
@@ -77,15 +81,15 @@
             <div class="activity-list">
               <a href="rewards/" class="activity-row"><span class="activity-icon">↗</span><div><b>Rewards standings</b><small>See current points, qualification and public participants.</small></div><strong>View</strong></a>
               <a href="account/" class="activity-row"><span class="activity-icon">◎</span><div><b>Your impact</b><small>Check verified contributions, supported communities and next actions.</small></div><strong>Open</strong></a>
-              <a href="swapper/swap/" class="activity-row"><span class="activity-icon">⇄</span><div><b>Make activity</b><small>Swap now and choose which community your eligible fee supports.</small></div><strong>Swap</strong></a>
+              <a href="swapper/swap/swap-card.html" class="activity-row"><span class="activity-icon">⇄</span><div><b>Make activity</b><small>Swap now and choose which community your eligible fee supports.</small></div><strong>Swap</strong></a>
             </div>
           </section>
 
           <section class="instant-panel community-now-panel">
             <div class="panel-heading"><div><span class="panel-kicker">INSTANT COMMUNITY</span><h2>Find your people</h2></div><a href="community-affiliates/">All communities →</a></div>
             <div class="community-now-list">
-              <a href="swapper/swap/?community=dnc" class="community-now-row"><img src="assets/dnc-logo.png" alt="$DNC"><div><b>$DNC</b><small>Collectibles + commerce</small></div><span>Support →</span></a>
-              <a href="swapper/swap/?community=sirnasty" class="community-now-row"><img src="assets/sirnasty-logo.png" alt="Sir Nasty"><div><b>Sir Nasty</b><small>Community ecosystem</small></div><span>Support →</span></a>
+              <a href="swapper/swap/swap-card.html?community=dnc" class="community-now-row"><img src="assets/dnc-logo.png" alt="$DNC"><div><b>$DNC</b><small>Collectibles + commerce</small></div><span>Support →</span></a>
+              <a href="swapper/swap/swap-card.html?community=sirnasty" class="community-now-row"><img src="assets/sirnasty-logo.png" alt="Sir Nasty"><div><b>Sir Nasty</b><small>Community ecosystem</small></div><span>Support →</span></a>
               <a href="community-affiliates/" class="community-now-row community-discover-row"><span class="discover-mark">+</span><div><b>Discover more</b><small>Browse every listed AquaVaults community.</small></div><span>Explore →</span></a>
             </div>
           </section>
@@ -93,11 +97,11 @@
           <section class="instant-panel tools-now-panel">
             <div class="panel-heading"><div><span class="panel-kicker">TOOLS</span><h2>Do something</h2></div></div>
             <div class="tool-launch-grid">
-              <a href="swapper/swap/"><span>⇄</span><b>Swap</b><small>Trade + support</small></a>
+              <a href="swapper/swap/swap-card.html"><span>⇄</span><b>Swap</b><small>Trade + support</small></a>
               <a href="rewards/"><span>◇</span><b>Rewards</b><small>Progress + standings</small></a>
-              <a href="coop/"><span>◫</span><b>Co-Op</b><small>Participate</small></a>
+              <a href="coop-rig/"><span>◫</span><b>Co-Op</b><small>Participate</small></a>
               <a href="connector/"><span>↗</span><b>Connector</b><small>Grow ecosystem</small></a>
-              <a href="swapper/autoswap/"><span>⟳</span><b>AutoSwap</b><small>Automate</small></a>
+              <a href="swapper/autoswap/autoswap-card.html"><span>⟳</span><b>AutoSwap</b><small>Automate</small></a>
               <a href="account/"><span>◉</span><b>Account</b><small>Your AquaVaults</small></a>
             </div>
           </section>
@@ -114,7 +118,7 @@
         <div class="community-principles">
           <a href="community-affiliates/" class="principle"><span>01</span><div><b>Discover</b><small>Find communities that fit you.</small></div></a>
           <a href="account/" class="principle"><span>02</span><div><b>Participate</b><small>Build identity, loyalty and activity.</small></div></a>
-          <a href="swapper/swap/" class="principle"><span>03</span><div><b>Support</b><small>Direct eligible fees where you choose.</small></div></a>
+          <a href="swapper/swap/swap-card.html" class="principle"><span>03</span><div><b>Support</b><small>Direct eligible fees where you choose.</small></div></a>
         </div>
       </section>
 
@@ -126,15 +130,15 @@
         <div class="featured-community-grid">
           <article class="featured-community-card" style="--community-art:url('assets/dnc-og2.png')">
             <div class="featured-community-art"><img src="assets/dnc-logo.png" alt="$DNC"></div>
-            <div class="featured-community-body"><span class="community-type">COLLECTIBLES + COMMERCE</span><h3>$DNC</h3><p>Vendorium's community connects collectibles, marketplace activity and onchain participation.</p><div class="community-live-metrics"><span><b>—</b> Verified Supporters</span><span><b>—</b> Monthly Loyalty</span></div><a href="swapper/swap/?community=dnc">Support $DNC <span>→</span></a></div>
+            <div class="featured-community-body"><span class="community-type">COLLECTIBLES + COMMERCE</span><h3>$DNC</h3><p>Vendorium's community connects collectibles, marketplace activity and onchain participation.</p><div class="community-live-metrics"><span><b>—</b> Verified Supporters</span><span><b>—</b> Monthly Loyalty</span></div><a href="swapper/swap/swap-card.html?community=dnc">Support $DNC <span>→</span></a></div>
           </article>
           <article class="featured-community-card" style="--community-art:url('assets/touchgrass-og.png')">
             <div class="featured-community-art"><img src="assets/touchgrass-logo.png" alt="Touch Grass"></div>
-            <div class="featured-community-body"><span class="community-type">COMMUNITY</span><h3>Touch Grass</h3><p>A listed AquaVaults community with its own identity, supporters and participation.</p><div class="community-live-metrics"><span><b>—</b> Verified Supporters</span><span><b>—</b> Monthly Loyalty</span></div><a href="swapper/swap/?community=touchgrass">Support Touch Grass <span>→</span></a></div>
+            <div class="featured-community-body"><span class="community-type">COMMUNITY</span><h3>Touch Grass</h3><p>A listed AquaVaults community with its own identity, supporters and participation.</p><div class="community-live-metrics"><span><b>—</b> Verified Supporters</span><span><b>—</b> Monthly Loyalty</span></div><a href="swapper/swap/swap-card.html?community=touchgrass">Support Touch Grass <span>→</span></a></div>
           </article>
           <article class="featured-community-card" style="--community-art:url('assets/sirnasty-og.png')">
             <div class="featured-community-art"><img src="assets/sirnasty-logo.png" alt="Sir Nasty"></div>
-            <div class="featured-community-body"><span class="community-type">COMMUNITY ECOSYSTEM</span><h3>Sir Nasty</h3><p>A community-driven Solana ecosystem blending meme culture, staking, governance and original worlds.</p><div class="community-live-metrics"><span><b>—</b> Verified Supporters</span><span><b>—</b> Monthly Loyalty</span></div><a href="swapper/swap/?community=sirnasty">Support Sir Nasty <span>→</span></a></div>
+            <div class="featured-community-body"><span class="community-type">COMMUNITY ECOSYSTEM</span><h3>Sir Nasty</h3><p>A community-driven Solana ecosystem blending meme culture, staking, governance and original worlds.</p><div class="community-live-metrics"><span><b>—</b> Verified Supporters</span><span><b>—</b> Monthly Loyalty</span></div><a href="swapper/swap/swap-card.html?community=sirnasty">Support Sir Nasty <span>→</span></a></div>
           </article>
         </div>
       </section>
@@ -161,7 +165,7 @@
             <p>Explore the people and projects building inside AquaVaults. Find the communities you actually want to get behind.</p>
             <span class="card-link">Explore communities →</span>
           </a>
-          <a class="journey-card" href="swapper/swap/">
+          <a class="journey-card" href="swapper/swap/swap-card.html">
             <div class="card-number">02</div>
             <div class="card-icon">⇄</div>
             <h3>Swap with purpose</h3>
@@ -203,7 +207,7 @@
         </div>
         <div class="ecosystem-grid">
           <a href="rewards/" class="ecosystem-card"><span class="mini-tag">PARTICIPATE</span><h3>User Rewards</h3><p>Complete eligible activity, follow your progress and see where you stand.</p><b>Explore Rewards ↗</b></a>
-          <a href="swapper/autoswap/" class="ecosystem-card"><span class="mini-tag">AUTOMATE</span><h3>AutoSwap</h3><p>Configure repeatable swap activity around your own timing and community.</p><b>Explore AutoSwap ↗</b></a>
+          <a href="swapper/autoswap/autoswap-card.html" class="ecosystem-card"><span class="mini-tag">AUTOMATE</span><h3>AutoSwap</h3><p>Configure repeatable swap activity around your own timing and community.</p><b>Explore AutoSwap ↗</b></a>
           <a href="connector/" class="ecosystem-card"><span class="mini-tag">GROW</span><h3>Connector</h3><p>Help bring new communities into the ecosystem and track your connector activity.</p><b>Explore Connector ↗</b></a>
           <a href="learn/" class="ecosystem-card"><span class="mini-tag">UNDERSTAND</span><h3>Learn AquaVaults</h3><p>Understand fee routing, community participation and the tools behind the ecosystem.</p><b>Start learning ↗</b></a>
         </div>

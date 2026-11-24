@@ -2,16 +2,38 @@
 <html lang="en">
 <head>
 <!-- AquaVaults DESIGN ONLY: synthetic mock APIs, no real wallet -->
-<script src="/design-preview/mock-runtime.js"></script>
-<script src="/design-preview/mock-extension.js"></script>
-<link rel="stylesheet" href="/design-preview/preview-controls.css">
-<script src="/design-preview/preview-controls.js" defer></script>
- <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>AquaVaults - Swapper</title> <link rel="icon" type="image/png" href="/assets/logo.png" /> <link rel="apple-touch-icon" href="/assets/logo.png" /> <meta property="og:image" content="/assets/logo.png" /> <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.8/lib/index.iife.min.js" integrity="sha384-ujeTtvHxhu2g5lnu14Roii2ajvVKJ74KQ6eo6GGfAi0IrKZ1YkF8N68Iw5VmIJO0" crossorigin="anonymous"></script> <link rel="stylesheet" href="/swapper/swap/swap-bundle.css" /> <link rel="stylesheet" href="/header/header.css" /> <link rel="stylesheet" href="/footer/footer.css" /> <script src="/header/header-loader.js" defer></script> <script src="/header/header.js" defer></script> <script src="/assets/wallet-widget.js"></script> <script src="/footer/footer-loader.js" defer></script>
-<link rel="stylesheet" href="../../experience.css">
-<link rel="stylesheet" href="../../blueprint.css">
-</head>
-<body class="blueprint-active">
-<div class="page-wrapper"> <div id="header-container" data-header-type="full"></div><div class="blueprint-preview"><section class="bp-shell"><div class="bp-pagehead"><h1>Swap</h1><p>Trade any token and support a community.</p></div><div class="bp-tool-layout"><aside class="bp-card bp-rail"><a class="active">◉ &nbsp; Swap</a><a>⟳ &nbsp; Auto Swap</a><a>⚙ &nbsp; Swap Settings</a><a>⌘ &nbsp; Share Link</a><a>▣ &nbsp; Activity Log</a></aside><div class="bp-card bp-swap-card"><div class="bp-tabs"><span class="active">Swap</span><span>Auto Swap</span></div><div style="height:10px"></div><div class="bp-token"><span><small>From</small><b>SOL</b></span><b>1.00</b></div><div style="text-align:center;margin:-5px 0;color:#5ee6f2">⇅</div><div class="bp-token"><span><small>To</small><b>USDC</b></span><b>185.41</b></div><div class="bp-field" style="margin-top:10px"><small>Support a Community</small><b>Choose community ▾</b></div><a class="bp-btn" style="width:100%;margin-top:12px">Connect Wallet to Swap</a></div><aside class="bp-grid"><div class="bp-card bp-community-context"><small>Your Swap Supports</small><h3>Selected Community</h3><p class="bp-sub">A portion of this swap fee goes to the community.</p><a class="bp-kicker">View Community →</a></div><div class="bp-card bp-stat"><small>Fee Share</small><b>—%</b><span class="bp-sub">Based on community tier</span></div></aside></div><div class="bp-water"></div></section></div> <div class="page-content"><header class="swap-experience-heading"><span>TRADE WITH PURPOSE</span><h1>Swap</h1><p>Trade any supported token, choose your fee, and choose the community your activity supports.</p></header> <div class="trade-shell"> <aside class="utility-rail"> <div class="utility-rail-heading">Context</div> <div class="community-selector-container"> <div class="tooltip-container" id="communityTooltipContainer"> <div class="community-selector" id="communitySelector" onclick="toggleCommunityDropdown()"> <div class="community-selected" id="communitySelected"> <span class="select-prompt">Select a community to enable swaps</span> </div> <script>
+<script src="../../design-preview/mock-runtime.js"></script>
+<script src="../../design-preview/mock-extension.js"></script>
+<link rel="stylesheet" href="../../design-preview/preview-controls.css">
+<script src="../../design-preview/preview-controls.js" defer></script>
+ <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>AquaVaults - Swapper</title> <link rel="icon" type="image/png" href="../../assets/logo.png" /> <link rel="apple-touch-icon" href="../../assets/logo.png" /> <meta property="og:image" content="../../assets/logo.png" /> <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.8/lib/index.iife.min.js" integrity="sha384-ujeTtvHxhu2g5lnu14Roii2ajvVKJ74KQ6eo6GGfAi0IrKZ1YkF8N68Iw5VmIJO0" crossorigin="anonymous"></script> <link rel="stylesheet" href="./swap-bundle.css?v=mobile-v1" /> <link rel="stylesheet" href="../../header/header.css" /> <link rel="stylesheet" href="../../footer/footer.css" /> <script src="../../header/header-loader.js" defer></script> <script src="../../header/header.js" defer></script> <script src="../../assets/wallet-widget.js"></script> <script src="../../footer/footer-loader.js" defer></script>
+<link rel="stylesheet" href="../../experience.css?v=mobile-v1">
+<link rel="stylesheet" href="../../blueprint.css?v=mobile-v1">
+<style>
+.swap-community-journey[hidden]{display:none!important}
+.swap-community-journey{padding:16px;border:1px solid rgba(81,207,232,.36);background:linear-gradient(130deg,rgba(15,94,128,.3),rgba(30,31,84,.2));border-radius:11px;margin:14px 0;color:#e8faff}
+.swap-community-journey-label{font-size:10px;font-weight:850;letter-spacing:.13em;color:#7be4f0}
+.swap-community-journey strong{display:block;font-size:19px;margin:7px 0}
+.swap-community-journey p{font-size:12px;line-height:1.55;color:#b6d2dd;margin:0 0 12px}
+.swap-community-journey button{cursor:pointer;background:transparent;border:1px solid rgba(101,202,233,.4);border-radius:7px;padding:9px 12px;color:#a7e9f6;font-size:12px}
+</style></head>
+<body class="swap-redesign-active">
+<div class="page-wrapper"> <div id="header-container" data-header-type="full"></div><div class="page-content"><header class="swap-experience-heading swap-v3-heading">
+    <span>TRADE WITH PURPOSE</span>
+    <h1>Swap</h1>
+    <p>Choose what to trade, choose your fee, and choose which community your activity supports.</p>
+  </header>
+  <div class="swap-flow-strip" aria-label="How AquaVaults support works">
+    <div><span>01</span><b>Choose Tokens</b><small>What are you swapping?</small></div>
+    <i>→</i>
+    <div><span>02</span><b>Choose Your Fee</b><small>0–10% on Solana</small></div>
+    <i>→</i>
+    <div class="accent"><span>03</span><b>Choose Community</b><small>Who should it support?</small></div>
+    <i>→</i>
+    <div><span>04</span><b>Swap</b><small>Review + confirm</small></div>
+  </div> <div class="trade-shell"> <aside class="utility-rail"> <div class="utility-rail-heading">YOUR SUPPORT</div>
+   <div class="swap-support-intro"><span>COMMUNITY ROUTING</span><h3>Who does this swap support?</h3><p>Select a community before swapping. Your chosen platform fee helps route support through AquaVaults.</p></div>
+   <div class="community-selector-container"> <div class="tooltip-container" id="communityTooltipContainer"> <div class="community-selector" id="communitySelector" onclick="toggleCommunityDropdown()"> <div class="community-selected" id="communitySelected"> <span class="select-prompt">Select a community to enable swaps</span> </div> <script>
 (function(){
 var id = localStorage.getItem('selectedCommunity');
 if (id) {
@@ -21,7 +43,7 @@ if (el) el.innerHTML = '<span style="color:transparent;font-size:0.85rem;font-we
 })();
 </script> <div class="community-dropdown-arrow">▼</div> </div> <span class="info-icon" onclick="toggleTooltip(event, 'communityTooltipContainer')" style="position: absolute; right: 2.5rem; top: 50%; transform: translateY(-50%); z-index: 10;">ⓘ</span> <div class="tooltip">
 Select which community receives swap fees. Each community may support different tokens through their fee vaults. Fees are routed to the selected community's token vaults or treasury wallet depending on the token.
-</div> </div> <div class="community-dropdown" id="communityDropdown"> </div> </div> <div class="active-vault-pill rail-hidden-vault-pill" id="vaultPill" aria-hidden="true"> <div class="vault-pill-header"><img src="/assets/logo-transparent.png" alt="AquaVaults" class="vault-logo" /><span>SOL Vault (AquaVaults):</span></div><div class="vault-pill-address">Loading...</div> </div> <div class="section"> <div class="constraints-container" id="constraintsContainer"> <div class="constraints-header" onclick="toggleConstraints()"> <div class="constraints-title">⚙️ Swap Settings</div> <div class="constraints-preview-inline"> <span id="feePreview">1.00%</span> • <span id="slippagePreview">1.00%</span> • <span id="priorityPreview">Auto</span> </div> </div> <div class="constraints-body"> <div class="constraint-field"> <div class="constraint-field-label tooltip-container" id="feeTooltipContainer">
+</div> </div> <div class="community-dropdown" id="communityDropdown"> </div> </div> <div class="active-vault-pill rail-hidden-vault-pill" id="vaultPill" aria-hidden="true"> <div class="vault-pill-header"><img src="../../assets/logo-transparent.png" alt="AquaVaults" class="vault-logo" /><span>SOL Vault (AquaVaults):</span></div><div class="vault-pill-address">Loading...</div> </div> <div class="section"> <div class="constraints-container" id="constraintsContainer"> <div class="constraints-header" onclick="toggleConstraints()"> <div class="constraints-title">⚙️ Swap Settings</div> <div class="constraints-preview-inline"> <span id="feePreview">1.00%</span> • <span id="slippagePreview">1.00%</span> • <span id="priorityPreview">Auto</span> </div> </div> <div class="constraints-body"> <div class="constraint-field"> <div class="constraint-field-label tooltip-container" id="feeTooltipContainer">
 💰 Platform Fee (in %)
 <span class="info-icon" onclick="toggleTooltip(event, 'feeTooltipContainer')">ℹ</span> <div class="tooltip">
 Fee you choose for using AquaVaults (separate from network/DEX fees). Depending on token support, the fee may be routed via affiliate vaults or collected as a separate transfer in the input token. Review your wallet prompt before signing.
@@ -58,7 +80,17 @@ type="button"
 title="Copy To mint"
 aria-label="Copy To token mint"
 >📋</button> </div> </div> <div class="form-row"> <div class="amount-label-row"> <label class="form-label">Amount</label> <div class="info-row balance-inline" id="balanceDisplay">Balance: —</div> </div> <div style="position: relative; display: flex; align-items: center; gap: 0.5rem;"> <input type="text" class="form-input" id="amountInput" placeholder="0.00" oninput="handleAmountChange()" style="flex: 1;" /> <button class="btn-max" onclick="handleMaxClick()" type="button">MAX</button> </div> </div> </div> <div class="section outcome-section"> <div class="info-row" id="estimateDisplay">Estimated output: —</div> <button class="btn btn-primary" id="swapBtn" onclick="handleSwap()" disabled style="width: 100%;">Swap</button> <div id="statusDisplay" style="margin-top: 0.4rem; font-size: 0.85rem;"></div> </div> </div> </div>
-</div> <div class="rail-actions-mobile"> <button class="btn btn-secondary" onclick="checkSettings()" type="button">📋 Check Settings</button> <button class="btn btn-secondary" onclick="openShareModal()" type="button">🔗 Generate Share Link</button> </div> </div> <div class="debug-console-shell"> <div class="debug-console-header"> <div class="debug-console-title">🖥️ Activity Log</div> <div class="debug-console-status" id="debugStatusIndicator">Initializing...</div> </div> <div class="debug-console-content"> <div class="debug-console-controls"> <button class="debug-control-btn danger" onclick="clearDebugLog()">🗑️ Clear</button> <button class="debug-control-btn primary" onclick="exportDebugLogs()">💾 Export</button> </div> <div class="debug-log-display" id="debugLogDisplay"> <div class="debug-log-entry info"> <span class="debug-log-time">[System]</span> <span class="debug-log-message">Initializing vault activity logging</span> </div> </div> <div class="debug-stats-section"> <div class="debug-stats-grid"> <div class="debug-stat-item"> <div class="debug-stat-label">Total</div> <div class="debug-stat-value" id="debugStatTotal">1</div> </div> <div class="debug-stat-item"> <div class="debug-stat-label">Errors</div> <div class="debug-stat-value" id="debugStatErrors">0</div> </div> <div class="debug-stat-item"> <div class="debug-stat-label">Warnings</div> <div class="debug-stat-value" id="debugStatWarnings">0</div> </div> <div class="debug-stat-item"> <div class="debug-stat-label">Success</div> <div class="debug-stat-value" id="debugStatSuccess">0</div> </div> </div> </div> </div>
+</div>
+  <aside class="swap-support-panel">
+    <span class="swap-support-kicker">YOUR SWAP SUPPORTS</span>
+    <div id="swapSupportVisual" class="swap-support-visual"><img id="swapSupportLogo" src="../../assets/logo-transparent.png" alt=""><div><small>Selected Community</small><b id="swapSupportName">Choose a community</b></div></div>
+    <div class="swap-support-stat"><small>Your Platform Fee</small><b id="swapSupportFee">1.0%</b><span>You control this fee.</span></div>
+    <div id="swapCommunityJourney" class="swap-community-journey" hidden role="status" aria-live="polite"><span class="swap-community-journey-label">COMMUNITY SELECTED</span><strong id="swapJourneyName"></strong><p>Your community choice was carried here. Review the fee and token pair before signing.</p><button id="swapJourneyChange" type="button">Change community ↗</button></div>
+    <div class="swap-support-explain"><b>Where does it go?</b><p>AquaVaults routes the applicable share of your chosen fee according to the selected community's configured fee route.</p></div>
+    <a id="swapSupportCommunityLink" class="swap-support-link" href="../../community-affiliates/">View community →</a>
+    <div class="swap-powered"><span>ROUTING</span><b>Powered by Jupiter</b><small>Review your wallet prompt before signing.</small></div>
+  </aside>
+  <div class="rail-actions-mobile"> <button class="btn btn-secondary" onclick="checkSettings()" type="button">📋 Check Settings</button> <button class="btn btn-secondary" onclick="openShareModal()" type="button">🔗 Generate Share Link</button> </div> </div> <div class="debug-console-shell"> <div class="debug-console-header"> <div class="debug-console-title">🖥️ Activity Log</div> <div class="debug-console-status" id="debugStatusIndicator">Initializing...</div> </div> <div class="debug-console-content"> <div class="debug-console-controls"> <button class="debug-control-btn danger" onclick="clearDebugLog()">🗑️ Clear</button> <button class="debug-control-btn primary" onclick="exportDebugLogs()">💾 Export</button> </div> <div class="debug-log-display" id="debugLogDisplay"> <div class="debug-log-entry info"> <span class="debug-log-time">[System]</span> <span class="debug-log-message">Initializing vault activity logging</span> </div> </div> <div class="debug-stats-section"> <div class="debug-stats-grid"> <div class="debug-stat-item"> <div class="debug-stat-label">Total</div> <div class="debug-stat-value" id="debugStatTotal">1</div> </div> <div class="debug-stat-item"> <div class="debug-stat-label">Errors</div> <div class="debug-stat-value" id="debugStatErrors">0</div> </div> <div class="debug-stat-item"> <div class="debug-stat-label">Warnings</div> <div class="debug-stat-value" id="debugStatWarnings">0</div> </div> <div class="debug-stat-item"> <div class="debug-stat-label">Success</div> <div class="debug-stat-value" id="debugStatSuccess">0</div> </div> </div> </div> </div>
 </div> </div> <div id="footer-container"></div> </div> <div class="token-picker-overlay" id="tokenPickerOverlay" style="display: none;"> <div class="token-picker-modal"> <div class="token-picker-header"> <h3 class="token-picker-title">Select Token</h3> <button class="token-picker-close" id="tokenPickerClose">×</button> </div> <div class="token-picker-search"> <input 
 type="text" 
 class="token-picker-input" 
@@ -73,6 +105,51 @@ Type to search, or paste a Solana token mint address
 </div> <div class="token-picker-overlay" id="shareLinkOverlay" style="display: none;"> <div class="token-picker-modal"> <div class="token-picker-header"> <h3 class="token-picker-title">Share Link</h3> <button class="token-picker-close" onclick="closeShareModal()" type="button">×</button> </div> <div style="padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.75rem;"> <div class="mode-tabs" id="sharePreviewTabs" role="tablist" aria-label="Preview style"> <button class="mode-tab active" id="sharePreviewCommunity" type="button" role="tab" aria-selected="true" onclick="setSharePreviewMode('community')">Community Brand</button> <button class="mode-tab" id="sharePreviewToken" type="button" role="tab" aria-selected="false" onclick="setSharePreviewMode('token')">Output Token</button> </div> <div class="token-picker-result" id="sharePreviewCard"> <div class="token-picker-result-icon"> <img id="sharePreviewImg" alt="" /> </div> <div class="token-picker-result-info"> <div class="token-picker-result-header"> <span class="token-picker-result-symbol" id="sharePreviewTitle"></span> </div> <div class="token-picker-result-name" id="sharePreviewSubtitle"></div> </div> </div> <div id="shareSummary"></div> <textarea class="token-picker-input" id="shareLinkInput" readonly rows="3" style="width: 100%; resize: vertical; font-family: monospace; word-break: break-all;"></textarea> </div> <div style="padding: 0.75rem 1.25rem; display: flex; gap: 0.5rem;"> <button class="btn btn-primary" id="shareCopyBtn" onclick="copyShareLink()" type="button" style="flex: 1;">Copy</button> <button class="btn btn-secondary" onclick="shareShareLinkX()" type="button" style="flex: 1;">Share on X</button> <button class="btn btn-secondary" onclick="closeShareModal()" type="button" style="flex: 1;">Close</button> </div> <div class="token-picker-footer"> <small class="token-picker-disclaimer">
 This link opens AquaVaults with your selected community and tokens preloaded.
 </small> </div> </div>
-</div> <script src="/swapper/swap/swap-bundle.js" defer></script>
+</div> <script src="./swap-bundle.js?v=swap-v3-3" defer></script>
+
+<script>
+(function(){
+  function assetPath(path){if(!path)return '';if(/^https?:\/\//i.test(path))return path;return '../../'+String(path).replace(/^\/+/, '');}
+  function applyCommunityFromUrl(){
+    var p=new URLSearchParams(window.location.search), id=p.get('community');
+    if(id && window.CommunityRegistry && window.CommunityRegistry.has(id)) localStorage.setItem('selectedCommunity',id);
+  }
+  function syncSupportPanel(){
+    if(!window.CommunityRegistry)return;
+    var id=localStorage.getItem('selectedCommunity')||'aquavaults';
+    var c=window.CommunityRegistry.get(id)||window.CommunityRegistry.get('aquavaults');
+    if(!c)return;
+    var logo=document.getElementById('swapSupportLogo'), name=document.getElementById('swapSupportName'), link=document.getElementById('swapSupportCommunityLink');
+    if(logo){logo.src=assetPath(c.logo);logo.alt=c.name;}
+    if(name)name.textContent=c.name;
+    if(link)link.href='../../community-affiliates/#community-'+encodeURIComponent(c.id);
+    var fee=document.getElementById('feeInput'), out=document.getElementById('swapSupportFee');
+    if(fee&&out)out.textContent=(parseFloat(fee.value)||0).toFixed(1)+'%';
+    var journey=document.getElementById('swapCommunityJourney'), journeyName=document.getElementById('swapJourneyName');
+    if(journey&&journeyName){
+      var incoming=new URLSearchParams(location.search).get('community');
+      var valid=!!(incoming&&window.CommunityRegistry.has(incoming));
+      journey.hidden=!valid;
+      if(valid)journeyName.textContent=c.name;
+    }
+  }
+  applyCommunityFromUrl();
+  window.addEventListener('DOMContentLoaded',function(){
+    setTimeout(function(){
+      var id=localStorage.getItem('selectedCommunity');
+      if(id&&typeof window.selectCommunity==='function')window.selectCommunity(id);
+      syncSupportPanel();
+    },250);
+    var fee=document.getElementById('feeInput'); if(fee)fee.addEventListener('input',syncSupportPanel);
+    var dropdown=document.getElementById('communityDropdown'); if(dropdown)dropdown.addEventListener('click',function(){setTimeout(syncSupportPanel,30);});
+    var change=document.getElementById('swapJourneyChange');
+    if(change)change.addEventListener('click',function(){
+      var dropdown=document.getElementById('communityDropdown');
+      if(dropdown){dropdown.scrollIntoView({behavior:'smooth',block:'center'});var trigger=dropdown.querySelector('button,[role="button"],.selected-community');if(trigger)trigger.click();}
+    });
+    window.addEventListener('storage',function(e){if(e.key==='selectedCommunity')syncSupportPanel();});
+  });
+})();
+</script>
 </body>
 </html>

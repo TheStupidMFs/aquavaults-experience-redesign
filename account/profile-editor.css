@@ -1,0 +1,21 @@
+/* Frontend profile editor, intentionally isolated from production account styles */
+.av-profile-editor[hidden]{display:none!important}
+.av-profile-editor{position:fixed;inset:0;z-index:10050;display:grid;place-items:center;padding:20px;background:rgba(0,7,16,.82);backdrop-filter:blur(12px)}
+.av-profile-dialog{width:min(620px,100%);max-height:calc(100dvh - 40px);overflow:auto;border:1px solid rgba(91,204,240,.35);border-radius:18px;background:#071b2a;color:#eaf9ff;box-shadow:0 30px 110px #0009;padding:22px}
+.av-profile-dialog-head{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.av-profile-dialog h2{font-size:24px;margin:0}.av-profile-dialog p{color:#9db9c8;font-size:12px;line-height:1.5}
+.av-profile-dialog button,.av-profile-dialog input,.av-profile-dialog textarea{font:inherit}
+.av-profile-dialog label{display:block;margin:14px 0 5px;color:#b7d7e4;font-size:12px;font-weight:750}
+.av-profile-dialog input[type=text],.av-profile-dialog textarea{display:block;width:100%;background:#03111e;border:1px solid #315467;border-radius:8px;color:white;padding:12px;font-size:14px}
+.av-profile-dialog textarea{min-height:80px;resize:vertical}
+.av-profile-banner-preview{height:140px;background:linear-gradient(135deg,#092c43,#17245a);background-position:center;background-size:cover;border-radius:10px;margin-top:12px}
+.av-profile-avatar-preview{width:78px;height:78px;border:3px solid #071b2a;border-radius:50%;margin:-32px 0 8px 14px;background:#16364d center/cover}
+.av-profile-file-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.av-profile-file-row input{width:100%;font-size:11px}
+.av-profile-dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
+.av-profile-dialog-actions button,.av-profile-close{border:1px solid #3a657b;background:#102e43;color:#e7faff;padding:11px 16px;border-radius:9px;cursor:pointer}
+.av-profile-dialog-actions button[type=submit]{background:linear-gradient(100deg,#176fd6,#6750dc);border-color:#66c5ed}
+.av-profile-status{min-height:22px;margin-top:12px;color:#84e4ee;font-size:12px}
+.av-editor-open{overflow:hidden}
+.account-social-avatar.av-avatar-has-image>span{opacity:0}
+@media(max-width:520px){.av-profile-dialog{padding:15px}.av-profile-file-row{grid-template-columns:1fr}.av-profile-banner-preview{height:115px}}
