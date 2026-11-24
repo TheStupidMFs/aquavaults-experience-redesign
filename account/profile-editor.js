@@ -50,6 +50,7 @@ async function save(event){
   if(adapter&&typeof adapter.save==='function'){
    result=await adapter.save({wallet:wallet(),displayName:name,bio,avatarFile:pendingAvatar,bannerFile:pendingBanner})||result;
   }
+  window.__avProfilePreviewEdited=true;
   $('accountProfileName').textContent=result.displayName||name;
   $('account-social-bio-text').textContent=result.bio??bio;
   const cover=document.querySelector('.account-social-cover');
