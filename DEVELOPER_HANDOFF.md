@@ -127,3 +127,10 @@ Added `coop-rig/participation-guide.js` and `coop-rig/participation-guide.css`, 
 All values remain sourced from existing Co-Op UI and backend. The guide explicitly distinguishes a confirmed on-chain contribution from a credited Droplet and avoids presenting weight as a payout guarantee.
 
 **QA needed:** verify the Activity tab and contribution history are visible after shortcut, test wallet disconnected/connected, pending credit retry, mobile and keyboard interaction, and ensure terminology aligns with current production program policy. No live transaction or browser QA was performed.
+
+## Co-Op layout and image fixes
+Removed the obsolete `coop-rig-stage` (“Rig ready”) and `coop-simple-flow` sections from `coop-rig/index.html` after user feedback. The original Participate/Rig Details/Activity navigation and contribution panel remain. The legacy inline HUD synchronization code uses null checks and can be cleaned up in a subsequent refactor.
+
+`coop-rig/coop-rig.js` now resolves registry logo paths via `avCoopLogoPath` for the community dropdown, selected community, and contribution breakdown. Leading `/assets/...` paths are mapped relative to the Co-Op page for GitHub Pages subpath hosting; absolute remote/data URLs are retained.
+
+**QA required:** visually verify the hero is gone, test all Co-Op tabs and contributions, confirm logos in dropdown/selected/breakdown on the GitHub Pages deployment, check missing-logo fallback and production root hosting. This commit was source-inspected but not browser-tested.
