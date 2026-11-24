@@ -152,7 +152,7 @@ if (community.nftUrl) {
 websiteHTML += `<a href="${community.nftUrl}" target="_blank" rel="noopener" class="community-website">Mint/Buy an NFT →</a>`;
 }
 card.innerHTML = `
-<div class="community-header"> <img src="${community.logo}" alt="${community.name}" class="community-logo" /> <h3 class="community-name">${community.name}</h3> </div> <p class="community-description">${community.description}</p>
+<div class="community-header"> <img src="${community.logo?.startsWith('/assets/') ? '../' + community.logo.slice(1) : community.logo}" alt="${community.name}" class="community-logo" /> <h3 class="community-name">${community.name}</h3> </div> <p class="community-description">${community.description}</p>
 ${socialsHTML}
 ${websiteHTML}
 <button class="swap-with-community-btn" onclick="swapWithCommunity('${community.id}')">
