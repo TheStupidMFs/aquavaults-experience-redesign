@@ -419,7 +419,7 @@ loadLeaderboard();
     document.getElementById('bpCommunityLogo').alt=c.name;
     document.getElementById('bpCommunityName').textContent=c.name;
     document.getElementById('bpCommunityDescription').textContent=c.description; document.getElementById('bpCommunityTier').textContent='AquaVaults Community';
-    document.getElementById('bpCommunitySupport').href='../swapper/swap/?community='+encodeURIComponent(c.id);
+    document.getElementById('bpCommunitySupport').href='../swapper/swap/swap-card.html?community='+encodeURIComponent(c.id);
     var site=document.getElementById('bpCommunityWebsite'); site.href=c.website||c.nftUrl||'#'; site.style.display=(c.website||c.nftUrl)?'inline-flex':'none';
     document.getElementById('bpFavoriteBtn').textContent=favorites.has(c.id)?'♥':'♡';
     var socials=document.getElementById('bpCommunitySocials'); socials.innerHTML='';
