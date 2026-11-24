@@ -106,3 +106,10 @@ A production integration should also implement **add** from Communities, enforce
 Files: `account/my-communities.js`, `account/my-communities.css`, `account/index.html`.
 
 **Not yet verified in a browser:** cross-page favorites synchronization, responsive cards, image URLs, all routes, wallet changes and adapter failure handling.
+
+## Community → Swap contextual journey (frontend V1)
+Links from Communities and Account My Communities now point directly to `swapper/swap/swap-card.html?community=<canonical-id>`. Swap already validates the query ID against `window.CommunityRegistry.has(id)` before storing the selection and invoking the existing `window.selectCommunity(id)` hook. The added contextual panel identifies an incoming valid selection and prompts the user to review the fee and token pair. This is **not** a quote, fee split calculation, transaction guarantee or wallet confirmation.
+
+The community ID must be resolved against the production registry and fee routing must still be independently validated by the transaction backend. Do not trust query parameters or localStorage to authorize fee recipients. Existing swap execution and signing code was intentionally not changed.
+
+**QA to perform:** navigate from community detail and Account favorites, verify the correct ID and displayed beneficiary, change the selection, verify invalid IDs don't create a trusted beneficiary, inspect the actual fee and wallet signing prompts, test refresh/back/mobile and disconnected wallet. Verify no stale selection from a previous visit is silently treated as a new community choice.
