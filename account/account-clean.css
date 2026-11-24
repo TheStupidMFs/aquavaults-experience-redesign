@@ -29,3 +29,32 @@ body.account-redesign-active .account-hub-list li{border-bottom:1px solid var(--
 body.account-redesign-active .account-profile-customize{border:0!important;border-top:1px solid var(--account-line)!important;padding:24px 0!important}
 body.account-redesign-active :is(.account-dashboard-title h2,.account-social-name h2){letter-spacing:-.045em}
 @media(max-width:700px){body.account-redesign-active .account-hub-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}body.account-redesign-active .account-hub-stat:nth-child(2n){border-right:0!important}body.account-redesign-active .account-hub-stat{padding:18px 12px!important;border-bottom:1px solid var(--account-line)!important}body.account-redesign-active .account-social-cover{min-height:145px}body.account-redesign-active .account-profile-tabs,body.account-redesign-active .account-hub-nav{overflow-x:auto;scrollbar-width:thin}}
+
+/* Wallet identity: remove remaining outlined container and let content breathe. */
+body.account-redesign-active section.account-connection.account-card{
+ background:transparent!important;border:0!important;outline:0!important;
+ box-shadow:none!important;border-radius:0!important;
+ padding:20px 0 28px!important;margin:0!important;
+ max-width:none!important;width:100%!important;
+ backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+body.account-redesign-active .account-connection .account-section-heading{border:0!important;padding:0 0 16px!important;margin:0!important}
+body.account-redesign-active .account-connection .account-wallet-row{
+ background:transparent!important;border:0!important;border-radius:0!important;
+ box-shadow:none!important;padding:0 0 16px!important;
+ display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+}
+body.account-redesign-active .account-connection #accountWallet{
+ background:transparent!important;border:0!important;box-shadow:none!important;
+ padding:0!important;overflow-wrap:anywhere;word-break:break-word;min-width:0;
+}
+body.account-redesign-active .account-connection .account-help{margin:0 0 18px!important;max-width:720px}
+body.account-redesign-active .account-connection .account-actions{
+ background:transparent!important;border:0!important;border-top:1px solid rgba(102,189,217,.17)!important;
+ box-shadow:none!important;border-radius:0!important;padding:18px 0 0!important;
+ margin-top:18px!important;display:flex;flex-wrap:wrap;gap:10px;
+}
+@media(max-width:700px){
+ body.account-redesign-active section.account-connection.account-card{padding:16px 0 24px!important}
+ body.account-redesign-active .account-connection .account-wallet-row{align-items:flex-start;gap:12px}
+}
