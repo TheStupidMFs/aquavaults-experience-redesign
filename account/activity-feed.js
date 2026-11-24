@@ -65,6 +65,7 @@ async function load(){
 document.addEventListener('DOMContentLoaded',()=>{
  document.querySelectorAll('[data-activity-open]').forEach(b=>b.addEventListener('click',()=>show(true)));
  $('avActivityBack')?.addEventListener('click',()=>show(false));
+ document.querySelectorAll('[data-profile-section="overview"]').forEach(b=>b.addEventListener('click',()=>show(false)));
  document.querySelectorAll('[data-activity-filter]').forEach(b=>b.addEventListener('click',()=>{
   filter=b.dataset.activityFilter;
   document.querySelectorAll('[data-activity-filter]').forEach(x=>{const active=x===b;x.classList.toggle('active',active);x.setAttribute('aria-pressed',String(active))});
