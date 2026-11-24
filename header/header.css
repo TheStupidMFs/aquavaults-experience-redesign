@@ -42,3 +42,14 @@
 @media(max-width:1080px){.header-center.av-brand{min-width:165px}.av-brand-name{font-size:.92rem}.nav-tab{padding:.68rem .55rem;font-size:.72rem}}
 @media(max-width:860px){.header-center.av-brand{min-width:auto}.av-brand-name{display:none}.page-nav{border:1px solid rgba(75,190,229,.20);border-radius:12px;background:rgba(2,14,27,.97);padding:7px}.nav-tab{border-radius:8px!important;padding:.62rem .72rem}.nav-tab.active{background:rgba(53,165,214,.10)!important}.nav-tab:after{display:none}}
 @media(max-width:640px){.av-brand-name{display:block;font-size:.94rem}.av-brand-mark{width:36px;height:36px}.av-brand-mark img{width:30px;height:30px}}
+
+/* Keep the desktop Tools flyout attached to its trigger: no pointer dead zone. */
+@media(min-width:641px){
+ .page-nav .nav-dropdown>.nav-dropdown-menu{top:100%;margin-top:0;z-index:10020}
+ .page-nav .nav-dropdown>.nav-dropdown-menu:before{content:none}
+ .page-nav .nav-dropdown{z-index:10010}
+}
+/* Community indicator is a navigation state, not a permanent notification. */
+.page-nav .nav-community-dot{background:rgba(136,165,181,.48);box-shadow:none;opacity:.5}
+.page-nav .nav-community.active .nav-community-dot{background:#4ce3ef;box-shadow:0 0 9px rgba(76,227,239,.75);opacity:1}
+.page-nav .nav-tab:not(.active):not(:hover):after{opacity:0}
