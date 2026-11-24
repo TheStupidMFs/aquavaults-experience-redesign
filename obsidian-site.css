@@ -79,3 +79,81 @@ body.av-obsidian-site.account-redesign-active section.account-connection.account
 body.av-obsidian-site.learn-redesign-active .feature-grid>.feature-card{
  background:linear-gradient(145deg,rgba(2,9,18,.92),rgba(3,14,26,.84))!important;
 }
+
+/* Final page-by-page refinement: open canvases, functional controls, quiet dividers. */
+body.av-obsidian-site :is(.page-content,.rewards-page,.account-page,.wheel-page,.docs-layout){
+ isolation:isolate;
+}
+body.av-obsidian-site :is(.tool-experience-heading,.swap-experience-heading,.affiliates-hero,.rewards-hero,.account-hero,.wheel-heading,.docs-landing-hero){
+ position:relative;
+}
+body.av-obsidian-site :is(.tool-experience-heading,.swap-experience-heading,.affiliates-hero,.rewards-hero,.account-hero,.wheel-heading,.docs-landing-hero):after{
+ content:"";display:block;width:72px;height:1px;margin-top:20px;
+ background:linear-gradient(90deg,var(--av-cyan),transparent);
+}
+
+/* Communities: keep the artwork and data; remove the dashboard-card feeling. */
+body.av-obsidian-site.blueprint-active :is(.community-table-card,.community-profile-panel){
+ background:rgba(5,8,11,.58)!important;box-shadow:none!important;
+ border-color:rgba(183,196,207,.14)!important;
+}
+body.av-obsidian-site.blueprint-active .community-table-card{
+ border-left:0!important;border-right:0!important;border-radius:0!important;
+}
+body.av-obsidian-site.blueprint-active .community-profile-panel{
+ border-radius:2px!important;
+}
+body.av-obsidian-site.blueprint-active :is(.community-table-row,.community-profile-stat){
+ border-color:rgba(183,196,207,.11)!important;
+}
+
+/* Trading tools: the form remains contained, while the surrounding context stays open. */
+body.av-obsidian-site:is(.swap-redesign-active,.autoswap-redesign-active,.limit-redesign-active,.evm-redesign-active) .tool-experience-heading{
+ border-bottom:1px solid var(--av-stroke)!important;
+}
+body.av-obsidian-site.swap-redesign-active :is(.utility-rail,.swap-support-panel){
+ background:rgba(5,8,11,.52)!important;box-shadow:none!important;
+}
+body.av-obsidian-site.swap-redesign-active .card-shell{
+ box-shadow:none!important;
+}
+body.av-obsidian-site.limit-redesign-active :is(.order-card,.orders-card){
+ background:transparent!important;box-shadow:none!important;
+ border-radius:0!important;border-left:0!important;border-right:0!important;
+}
+
+/* Progression and Co-Op read as one experience instead of stacked widgets. */
+body.av-obsidian-site.rewards-redesign-active :is(.rewards-card,.rewards-cycle-card,.rewards-score-card,.rewards-task-catalog-card,.rewards-leaderboard-card,.rewards-rules-card),
+body.av-obsidian-site.coop-redesign-active :is(.coop-card,.coop-participate-panel,.coop-pending-credit-panel,.coop-onchain-mode-card,.coop-inline-card){
+ box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+body.av-obsidian-site.coop-redesign-active :is(.coop-participate-panel,.coop-pending-credit-panel,.coop-onchain-mode-card){
+ border-left:0!important;border-right:0!important;border-radius:0!important;
+ background:linear-gradient(90deg,transparent,rgba(5,16,25,.64) 8%,rgba(5,16,25,.64) 92%,transparent)!important;
+}
+
+/* Long-form and utility pages share the same readable measure. */
+body.av-obsidian-site :is(.docs-main,.campaigns-redesign-active .page-content){
+ min-width:0;
+}
+body.av-obsidian-site .docs-content{
+ max-width:760px;
+}
+body.av-obsidian-site.campaigns-redesign-active .campaigns-footnote{
+ background:transparent!important;border-left:0!important;border-right:0!important;border-radius:0!important;
+}
+
+@media(max-width:760px){
+ body.av-obsidian-site :is(.tool-experience-heading,.swap-experience-heading,.affiliates-hero,.rewards-hero,.account-hero,.wheel-heading,.docs-landing-hero):after{
+ margin-top:14px;
+ }
+ body.av-obsidian-site.blueprint-active .community-profile-panel{
+ border-left:0!important;border-right:0!important;
+ }
+ body.av-obsidian-site :is(button,.btn,.bp-btn,.primary-btn,.account-button,.rewards-button){
+ min-height:42px;
+ }
+ body.av-obsidian-site :is(input,select,textarea){
+ font-size:16px!important;
+ }
+}
