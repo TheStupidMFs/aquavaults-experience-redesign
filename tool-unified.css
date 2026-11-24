@@ -68,3 +68,25 @@ body.evm-redesign-active .card-shell :is(.form-row,.form-group){border-color:var
 @media(max-width:900px){body.learn-redesign-active .docs-pillar-grid{grid-template-columns:repeat(2,minmax(0,1fr))}body.evm-redesign-active .trade-shell{gap:20px}}
 @media(max-width:700px){body.learn-redesign-active .docs-pillar-grid{grid-template-columns:minmax(0,1fr)}body.evm-redesign-active .trade-shell{grid-template-columns:minmax(0,1fr)}:is(body.evm-redesign-active,body.lp-redesign-active,body.campaigns-redesign-active,body.wheel-redesign-active,body.learn-redesign-active) :is(.tool-experience-heading,.lp-hero,.wheel-heading,.docs-landing-hero){padding-top:20px!important}}
 @media(prefers-reduced-motion:reduce){body.learn-redesign-active .docs-pillar{transition:none}}
+
+/* Learn Hub: near-black glass replaces legacy slate-grey feature cards. */
+body.learn-redesign-active .feature-grid{gap:14px!important}
+body.learn-redesign-active .feature-grid>.feature-card{
+ background:linear-gradient(145deg,rgba(2,9,18,.92),rgba(3,14,26,.84))!important;
+ border:1px solid rgba(79,172,218,.23)!important;
+ border-radius:12px!important;
+ box-shadow:inset 0 1px 0 rgba(131,214,245,.035)!important;
+ backdrop-filter:blur(10px);
+ -webkit-backdrop-filter:blur(10px);
+ padding:22px!important;
+ transition:border-color .2s ease,background .2s ease,transform .2s ease!important;
+}
+body.learn-redesign-active .feature-grid>.feature-card:hover{
+ background:linear-gradient(145deg,rgba(4,19,34,.96),rgba(3,14,27,.9))!important;
+ border-color:rgba(85,207,246,.48)!important;
+ transform:translateY(-2px);
+ box-shadow:none!important;
+}
+body.learn-redesign-active .feature-grid>.feature-card h3{color:#eefaff!important}
+body.learn-redesign-active .feature-grid>.feature-card p{color:#9eb9c9!important}
+@media(prefers-reduced-motion:reduce){body.learn-redesign-active .feature-grid>.feature-card{transition:none!important}}
