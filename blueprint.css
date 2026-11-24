@@ -72,3 +72,14 @@ body.blueprint-active>.rewards-page,body.blueprint-active>.account-page,body.blu
 .community-profile-socials{margin-bottom:10px}.community-profile-actions .bp-btn{min-height:36px}
 .community-browser-foot{padding:8px 4px 3px}.community-bottom-strip{margin-top:10px}.community-bottom-strip>div{padding:10px 14px}
 @media(max-width:900px){.community-profile-panel{position:relative;top:auto}.community-table-row.selected:after{display:none}}
+
+/* Core journey cohesion: community discovery and swap composition */
+.community-blueprint-v2{margin-top:20px!important}
+.community-blueprint-v2 .community-experience{border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;overflow:visible!important}
+.community-blueprint-v2 .community-experience-head{border-bottom:1px solid rgba(80,190,226,.18)}
+.community-blueprint-v2 .community-bottom-strip{border-top:1px solid rgba(80,190,226,.16)}
+.community-blueprint-v2 .community-bottom-strip>div{background:transparent!important;border-radius:0!important}
+.community-blueprint-v2 .community-profile-panel{box-shadow:none!important}
+.swap-redesign-active .swap-v3-heading{margin-top:8px}
+.swap-redesign-active .swap-support-panel{box-shadow:none!important}
+@media(max-width:760px){.community-blueprint-v2{margin-top:12px!important}.community-blueprint-v2 .community-experience{overflow:hidden!important}}
