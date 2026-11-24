@@ -83,3 +83,33 @@ body.blueprint-active>.rewards-page,body.blueprint-active>.account-page,body.blu
 .swap-redesign-active .swap-v3-heading{margin-top:8px}
 .swap-redesign-active .swap-support-panel{box-shadow:none!important}
 @media(max-width:760px){.community-blueprint-v2{margin-top:12px!important}.community-blueprint-v2 .community-experience{overflow:hidden!important}}
+
+/* Cohesion V2: Communities as a readable discovery workspace */
+.community-blueprint-v2 .community-experience{padding:18px 0 24px!important}
+.community-blueprint-v2 .community-experience:before{opacity:.14!important}
+.community-blueprint-v2 .community-experience-head{padding:0 4px 19px!important;margin-bottom:18px!important}
+.community-blueprint-v2 .community-experience-head h1{font-size:clamp(36px,4vw,48px)!important}
+.community-blueprint-v2 .community-experience-head p{font-size:13px!important}
+.community-blueprint-v2 .community-workspace{grid-template-columns:minmax(0,1fr) minmax(280px,330px);gap:22px!important}
+.community-blueprint-v2 .community-table-card{border:0!important;border-top:1px solid rgba(81,193,226,.20)!important;border-bottom:1px solid rgba(81,193,226,.20)!important;border-radius:0!important;background:rgba(2,15,28,.28)!important}
+.community-blueprint-v2 .community-table-head{font-size:10px!important;min-height:42px!important}
+.community-blueprint-v2 .community-table-row{min-height:61px!important;padding:8px 13px!important}
+.community-blueprint-v2 .community-cell-identity img{width:38px!important;height:38px!important}
+.community-blueprint-v2 .community-cell-identity b{font-size:12px!important}
+.community-blueprint-v2 .community-cell-identity small{font-size:9px!important}
+.community-blueprint-v2 .community-rank,.community-blueprint-v2 .community-data{font-size:11px!important}
+.community-blueprint-v2 .community-table-row.selected:after{font-size:8px!important}
+.community-blueprint-v2 .community-search-shell input{font-size:12px!important}
+.community-blueprint-v2 .community-filter,.community-blueprint-v2 .community-tabs button{font-size:11px!important}
+.community-blueprint-v2 .community-profile-panel{border:0!important;border-top:1px solid rgba(81,193,226,.22)!important;border-bottom:1px solid rgba(81,193,226,.22)!important;border-radius:0!important;background:rgba(3,19,32,.46)!important}
+.community-blueprint-v2 .community-profile-main h2{font-size:25px!important}
+.community-blueprint-v2 .community-profile-main p{font-size:11px!important;line-height:1.6!important}
+.community-blueprint-v2 .community-profile-signals span{font-size:9px!important}
+.community-blueprint-v2 .community-profile-kicker{font-size:9px!important}
+.community-blueprint-v2 .community-profile-actions .bp-btn{font-size:10px!important}
+.community-blueprint-v2 .community-bottom-strip{border:0!important;border-top:1px solid rgba(81,193,226,.16)!important;border-radius:0!important;background:transparent!important}
+.community-blueprint-v2 .community-bottom-strip span{font-size:9px!important}
+.community-blueprint-v2 .community-bottom-strip b{font-size:12px!important}
+.community-blueprint-v2 .community-bottom-strip small{font-size:10px!important}
+@media(max-width:900px){.community-blueprint-v2 .community-workspace{grid-template-columns:1fr!important}.community-blueprint-v2 .community-profile-panel{position:static!important}}
+@media(max-width:650px){.community-blueprint-v2 .community-experience{padding:12px 0!important}.community-blueprint-v2 .community-table-head,.community-blueprint-v2 .community-table-row{grid-template-columns:30px minmax(120px,1fr) .6fr!important}.community-blueprint-v2 .community-cell-identity img{width:32px!important;height:32px!important}.community-blueprint-v2 .community-table-row.selected:after{display:none!important}}
