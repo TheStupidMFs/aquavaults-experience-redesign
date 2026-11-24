@@ -9,7 +9,14 @@
  <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>AquaVaults - Swapper</title> <link rel="icon" type="image/png" href="../../assets/logo.png" /> <link rel="apple-touch-icon" href="../../assets/logo.png" /> <meta property="og:image" content="../../assets/logo.png" /> <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.8/lib/index.iife.min.js" integrity="sha384-ujeTtvHxhu2g5lnu14Roii2ajvVKJ74KQ6eo6GGfAi0IrKZ1YkF8N68Iw5VmIJO0" crossorigin="anonymous"></script> <link rel="stylesheet" href="./swap-bundle.css?v=mobile-v1" /> <link rel="stylesheet" href="../../header/header.css" /> <link rel="stylesheet" href="../../footer/footer.css" /> <script src="../../header/header-loader.js" defer></script> <script src="../../header/header.js" defer></script> <script src="../../assets/wallet-widget.js"></script> <script src="../../footer/footer-loader.js" defer></script>
 <link rel="stylesheet" href="../../experience.css?v=mobile-v1">
 <link rel="stylesheet" href="../../blueprint.css?v=mobile-v1">
-</head>
+<style>
+.swap-community-journey[hidden]{display:none!important}
+.swap-community-journey{padding:16px;border:1px solid rgba(81,207,232,.36);background:linear-gradient(130deg,rgba(15,94,128,.3),rgba(30,31,84,.2));border-radius:11px;margin:14px 0;color:#e8faff}
+.swap-community-journey-label{font-size:10px;font-weight:850;letter-spacing:.13em;color:#7be4f0}
+.swap-community-journey strong{display:block;font-size:19px;margin:7px 0}
+.swap-community-journey p{font-size:12px;line-height:1.55;color:#b6d2dd;margin:0 0 12px}
+.swap-community-journey button{cursor:pointer;background:transparent;border:1px solid rgba(101,202,233,.4);border-radius:7px;padding:9px 12px;color:#a7e9f6;font-size:12px}
+</style></head>
 <body class="swap-redesign-active">
 <div class="page-wrapper"> <div id="header-container" data-header-type="full"></div><div class="page-content"><header class="swap-experience-heading swap-v3-heading">
     <span>TRADE WITH PURPOSE</span>
@@ -78,6 +85,7 @@ aria-label="Copy To token mint"
     <span class="swap-support-kicker">YOUR SWAP SUPPORTS</span>
     <div id="swapSupportVisual" class="swap-support-visual"><img id="swapSupportLogo" src="../../assets/logo-transparent.png" alt=""><div><small>Selected Community</small><b id="swapSupportName">Choose a community</b></div></div>
     <div class="swap-support-stat"><small>Your Platform Fee</small><b id="swapSupportFee">1.0%</b><span>You control this fee.</span></div>
+    <div id="swapCommunityJourney" class="swap-community-journey" hidden role="status" aria-live="polite"><span class="swap-community-journey-label">COMMUNITY SELECTED</span><strong id="swapJourneyName"></strong><p>Your community choice was carried here. Review the fee and token pair before signing.</p><button id="swapJourneyChange" type="button">Change community ↗</button></div>
     <div class="swap-support-explain"><b>Where does it go?</b><p>AquaVaults routes the applicable share of your chosen fee according to the selected community's configured fee route.</p></div>
     <a id="swapSupportCommunityLink" class="swap-support-link" href="../../community-affiliates/">View community →</a>
     <div class="swap-powered"><span>ROUTING</span><b>Powered by Jupiter</b><small>Review your wallet prompt before signing.</small></div>
@@ -117,6 +125,13 @@ This link opens AquaVaults with your selected community and tokens preloaded.
     if(link)link.href='../../community-affiliates/#community-'+encodeURIComponent(c.id);
     var fee=document.getElementById('feeInput'), out=document.getElementById('swapSupportFee');
     if(fee&&out)out.textContent=(parseFloat(fee.value)||0).toFixed(1)+'%';
+    var journey=document.getElementById('swapCommunityJourney'), journeyName=document.getElementById('swapJourneyName');
+    if(journey&&journeyName){
+      var incoming=new URLSearchParams(location.search).get('community');
+      var valid=!!(incoming&&window.CommunityRegistry.has(incoming));
+      journey.hidden=!valid;
+      if(valid)journeyName.textContent=c.name;
+    }
   }
   applyCommunityFromUrl();
   window.addEventListener('DOMContentLoaded',function(){
@@ -127,6 +142,12 @@ This link opens AquaVaults with your selected community and tokens preloaded.
     },250);
     var fee=document.getElementById('feeInput'); if(fee)fee.addEventListener('input',syncSupportPanel);
     var dropdown=document.getElementById('communityDropdown'); if(dropdown)dropdown.addEventListener('click',function(){setTimeout(syncSupportPanel,30);});
+    var change=document.getElementById('swapJourneyChange');
+    if(change)change.addEventListener('click',function(){
+      var dropdown=document.getElementById('communityDropdown');
+      if(dropdown){dropdown.scrollIntoView({behavior:'smooth',block:'center'});var trigger=dropdown.querySelector('button,[role="button"],.selected-community');if(trigger)trigger.click();}
+    });
+    window.addEventListener('storage',function(e){if(e.key==='selectedCommunity')syncSupportPanel();});
   });
 })();
 </script>
