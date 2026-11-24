@@ -79,6 +79,7 @@ document.addEventListener("click",function(e){
 (function(){
  function txt(id,value){var e=document.getElementById(id);if(e)e.textContent=value;}
  function syncProfileIdentity(){
+   if(window.__avProfilePreviewEdited)return;
    var wallet=document.getElementById('accountWallet'), name=document.getElementById('identityCurrentUsername'), display=document.getElementById('identityCurrentDisplayName');
    var n=(display&&display.textContent.trim()&&display.textContent.trim()!=='—')?display.textContent.trim():(name&&name.textContent.trim()&&name.textContent.trim()!=='—'?'@'+name.textContent.trim().replace(/^@/,''):'Your AquaVaults identity');
    txt('accountProfileName',n);
