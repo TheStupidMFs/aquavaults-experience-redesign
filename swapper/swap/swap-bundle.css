@@ -70,3 +70,22 @@
 .swap-redesign-active .av-rewards-discovery strong{font-size:11px!important}
 .swap-redesign-active .av-rewards-discovery-link{font-size:9px!important}
 @media(max-width:950px){.swap-redesign-active .trade-shell{left:auto!important}}
+
+/* Mobile journey: prioritize actual swap controls over utility chrome */
+@media(max-width:950px){
+ .swap-redesign-active .trade-shell{display:flex!important;flex-direction:column!important;gap:12px!important;width:min(100%,680px)!important;max-width:100%!important;margin-inline:auto!important;padding-inline:0!important;left:auto!important}
+ .swap-redesign-active .card-shell{order:1!important;width:100%!important;min-width:0!important;margin:0!important}
+ .swap-redesign-active .swap-support-panel{order:2!important;width:100%!important;min-width:0!important;margin:0!important}
+ .swap-redesign-active .utility-rail{order:3!important;width:100%!important;min-width:0!important;margin:0!important}
+ .swap-redesign-active .swap-card{padding:14px!important}
+ .swap-redesign-active .form-row{min-width:0!important}
+ .swap-redesign-active .form-input,.swap-redesign-active .form-select{min-width:0!important}
+ .swap-redesign-active #swapBtn{min-height:48px!important}
+}
+@media(max-width:480px){
+ .swap-redesign-active .trade-shell{width:calc(100% - 20px)!important}
+ .swap-redesign-active .card-shell{border-radius:8px!important}
+ .swap-redesign-active .swap-card{padding:12px!important}
+ .swap-redesign-active .swap-support-panel{padding:14px!important}
+ .swap-redesign-active .form-row{padding:12px!important}
+}
