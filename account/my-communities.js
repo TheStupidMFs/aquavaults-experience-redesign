@@ -12,6 +12,7 @@ function getRegistry(){try{return window.CommunityRegistry?.getAll?.()||[]}catch
 function show(active){
  const shell=$('accountDashboard'),section=$('avCommunitiesSection');if(!shell||!section)return;
  shell.classList.toggle('av-communities-active',active);section.hidden=!active;
+ if(active){shell.classList.remove('av-activity-active');const a=$('avActivitySection');if(a)a.hidden=true;document.querySelectorAll('[data-activity-open]').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false')});}
  document.querySelectorAll('[data-my-communities-open]').forEach(b=>{b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});
  document.querySelectorAll('[data-profile-section="overview"]').forEach(b=>b.classList.toggle('active',!active));
  if(active){refresh();section.scrollIntoView({behavior:'smooth',block:'start'})}
