@@ -38,3 +38,35 @@
 .swap-redesign-active .debug-console-shell{margin-top:10px!important}.swap-redesign-active .debug-console-shell:not(.collapsed){max-height:170px;overflow:hidden}
 @media(min-width:951px){.swap-redesign-active .card-shell{min-width:0}.swap-redesign-active .utility-rail,.swap-support-panel{top:88px}}
 @media(max-width:1150px) and (min-width:951px){.swap-redesign-active .trade-shell{grid-template-columns:205px minmax(470px,1fr) 240px!important}}
+
+/* Cohesion V2: human-scale swap controls and quieter panels */
+@media(min-width:951px){
+.swap-redesign-active .trade-shell{grid-template-columns:minmax(205px,235px) minmax(0,1fr) minmax(220px,265px)!important;gap:18px!important;left:auto!important;max-width:1200px!important;margin:0 auto!important}
+.swap-redesign-active .card-shell{max-width:none!important;width:100%!important;min-width:0!important}
+}
+.swap-redesign-active .utility-rail,.swap-redesign-active .card-shell,.swap-redesign-active .swap-support-panel{border-color:rgba(82,193,225,.18)!important;box-shadow:none!important}
+.swap-redesign-active .utility-rail,.swap-redesign-active .swap-support-panel{background:rgba(3,17,30,.46)!important}
+.swap-redesign-active .card-shell{background:rgba(3,17,30,.60)!important;border-radius:12px!important}
+.swap-redesign-active .swap-card{padding:17px!important}
+.swap-redesign-active .swap-form{gap:12px!important}
+.swap-redesign-active .form-row{padding:13px 14px!important}
+.swap-redesign-active .form-label,.swap-redesign-active .constraints-title{font-size:11px!important}
+.swap-redesign-active .form-select,.swap-redesign-active .form-input{font-size:14px!important;min-height:44px!important}
+.swap-redesign-active .selected-mint-row,.swap-redesign-active .selected-mint-value{font-size:10px!important}
+.swap-redesign-active .balance-inline,.swap-redesign-active .constraint-field-label{font-size:10px!important}
+.swap-redesign-active .mode-tab{font-size:12px!important}
+.swap-redesign-active .community-selected-name{font-size:12px!important}
+.swap-redesign-active .community-selected-link{font-size:10px!important}
+.swap-redesign-active .constraints-preview-inline,.swap-redesign-active .utility-rail>.btn{font-size:10px!important}
+.swap-redesign-active .swap-support-kicker,.swap-redesign-active .swap-support-intro span{font-size:9px!important}
+.swap-redesign-active .swap-support-intro h3,.swap-redesign-active .swap-support-visual b{font-size:14px!important}
+.swap-redesign-active .swap-support-intro p,.swap-redesign-active .swap-support-explain p{font-size:11px!important;line-height:1.55!important}
+.swap-redesign-active .swap-support-explain b,.swap-redesign-active .swap-powered b{font-size:11px!important}
+.swap-redesign-active .swap-support-stat small,.swap-redesign-active .swap-support-stat span,.swap-redesign-active .swap-support-visual small{font-size:10px!important}
+.swap-redesign-active .swap-support-link{font-size:11px!important}
+.swap-redesign-active .swap-powered span,.swap-redesign-active .swap-powered small{font-size:9px!important}
+.swap-redesign-active #swapBtn{min-height:48px!important;font-size:13px!important}
+.swap-redesign-active .av-rewards-discovery{font-size:10px!important;line-height:1.5!important}
+.swap-redesign-active .av-rewards-discovery strong{font-size:11px!important}
+.swap-redesign-active .av-rewards-discovery-link{font-size:9px!important}
+@media(max-width:950px){.swap-redesign-active .trade-shell{left:auto!important}}
