@@ -48,9 +48,9 @@ Sign and Enroll This Wallet
   </div>
 </section>
 <nav class="rewards-game-nav" aria-label="Rewards sections">
- <button type="button" class="active" data-game-view="play">Play</button>
- <button type="button" data-game-view="standings">Leaderboard</button>
- <button type="button" data-game-view="details">Details</button>
+ <button type="button" class="active" data-game-view="standings">Leaderboard</button>
+ <button type="button" data-game-view="play">My Progress</button>
+ <button type="button" data-game-view="details">How It Works</button>
 </nav> <section class="rewards-card rewards-score-card rewards-progression-stage rewards-game-detail"><div class="rewards-stage-label"><span>CURRENT PROGRESSION</span><small>Verified activity only</small></div><div class="rewards-score-main"> <div> <span class="rewards-eyebrow">Verified points</span> <div class="rewards-score" id="verifiedPoints">0</div> </div> <div class="rewards-threshold-copy" id="thresholdCopy">No active cycle</div> </div> <div class="rewards-progress" aria-hidden="true"> <span id="overallProgressBar"></span> </div> <div class="rewards-score-meta" id="scoreMeta"></div> </section> <section class="rewards-card rewards-game-detail" id="pendingActivityPanel"> <div class="rewards-card-heading"> <div> <span class="rewards-eyebrow">Your recent activity</span> <h3>Pending Activity</h3> </div> <span class="rewards-pill" id="pendingActivityCount">0 pending</span> </div> <div class="rewards-history-list" id="pendingActivityList"></div> <div class="rewards-score-meta"> <span>
 Last points update:
 <strong id="lastPointsUpdate">—</strong> </span> <span>
@@ -127,7 +127,7 @@ type="button"
    if(name==='standings'){var e=document.querySelector('.rewards-standings-intro');if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
  }
  window.addEventListener('DOMContentLoaded',function(){
-   view('play');
+   view('standings');
    document.querySelectorAll('[data-game-view]').forEach(function(b){b.addEventListener('click',function(){view(b.getAttribute('data-game-view'))})});
    var ob=document.getElementById('gameObjectivesButton');if(ob)ob.addEventListener('click',function(){var e=document.getElementById('gameObjectives');if(e)e.scrollIntoView({behavior:'smooth',block:'start'})});
    syncGame(); var c=0, timer=setInterval(function(){syncGame();if(++c>12)clearInterval(timer)},750);

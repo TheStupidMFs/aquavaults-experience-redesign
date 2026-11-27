@@ -317,6 +317,26 @@ body.av-obsidian-site.coop-redesign-active .btn-max{
 body.av-obsidian-site.coop-redesign-active :is(.coop-onchain-help,.coop-share-btn){
  color:#71d4e8!important;
 }
+.coop-retirement-notice{
+ display:flex;
+ align-items:flex-start;
+ gap:14px;
+ max-width:760px;
+ margin:0 auto 24px;
+ padding:14px 16px;
+ border-top:1px solid rgba(69,200,236,.28);
+ border-bottom:1px solid rgba(160,183,196,.13);
+ background:linear-gradient(90deg,rgba(69,200,236,.08),rgba(8,11,15,.32),transparent);
+ color:#9cb3bd;
+ font-size:.82rem;
+ line-height:1.55;
+}
+.coop-retirement-notice strong{
+ flex:0 0 auto;
+ color:#e9fbff;
+ font-size:.78rem;
+ letter-spacing:.02em;
+}
 
 /* LP and Wheel: replace remaining indigo controls and slate fields. */
 body.av-obsidian-site.lp-redesign-active,
@@ -363,6 +383,8 @@ body.av-obsidian-site.wheel-redesign-active .wheel-step{
 }
 
 @media(max-width:760px){
+ .coop-retirement-notice{display:block;margin:0 14px 20px;padding:13px 2px}
+ .coop-retirement-notice strong{display:block;margin-bottom:5px}
  body.av-obsidian-site.lp-redesign-active,
  body.av-obsidian-site.wheel-redesign-active,
  body.av-obsidian-site.campaigns-redesign-active,
