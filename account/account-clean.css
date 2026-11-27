@@ -58,3 +58,12 @@ body.account-redesign-active .account-connection .account-actions{
  body.account-redesign-active section.account-connection.account-card{padding:16px 0 24px!important}
  body.account-redesign-active .account-connection .account-wallet-row{align-items:flex-start;gap:12px}
 }
+
+/* Account is the personal participation home: identity, Rewards and communities. */
+.account-value-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:28px;border-top:1px solid rgba(92,205,232,.18);border-bottom:1px solid rgba(92,205,232,.18)}
+.account-value-strip>div{display:grid;grid-template-columns:auto 1fr;column-gap:12px;row-gap:2px;padding:17px 20px}
+.account-value-strip>div+div{border-left:1px solid rgba(92,205,232,.18)}
+.account-value-strip span{grid-row:1/3;color:#52dff1;font-size:.7rem;font-weight:900;letter-spacing:.12em}
+.account-value-strip strong{color:#eefcff;font-size:.82rem}
+.account-value-strip small{color:#7897a5;font-size:.7rem;line-height:1.45}
+@media(max-width:720px){.account-value-strip{grid-template-columns:1fr}.account-value-strip>div+div{border-left:0;border-top:1px solid rgba(92,205,232,.18)}}

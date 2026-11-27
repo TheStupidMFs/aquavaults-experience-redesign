@@ -1,0 +1,4 @@
+.rewards-hero-actions{display:flex;gap:11px;flex-wrap:wrap;margin:22px 0 4px}
+.rewards-hero-actions a,.rewards-game-account-link{display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(76,211,235,.3);border-radius:8px;padding:10px 15px;color:#dffcff;text-decoration:none;font-size:.7rem;font-weight:900;letter-spacing:.03em;background:rgba(4,17,25,.5)}
+.rewards-hero-actions a:first-child{background:linear-gradient(100deg,#43cde9,#6659f6);border-color:transparent;color:#fff}
+.rewards-game-account-link{margin-left:auto;border-radius:0;border-width:0 0 2px;background:transparent;color:#8adfec;padding:11px 16px}
