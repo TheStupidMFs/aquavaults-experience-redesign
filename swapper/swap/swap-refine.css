@@ -1,0 +1,10 @@
+.swap-support-fee-control{margin:10px 0;padding:12px;border-top:1px solid rgba(80,190,226,.16);border-bottom:1px solid rgba(80,190,226,.16)}
+.swap-support-fee-control>span{display:block;color:#58dce8;font-size:9px;font-weight:900;letter-spacing:.13em}
+.swap-support-fee-control>p{margin:5px 0 10px;color:#7895a3;font-size:11px;line-height:1.5}
+.swap-support-fee-control .constraint-field{display:grid!important;grid-template-columns:1fr 92px;gap:10px!important;padding:0!important;background:transparent!important;border:0!important}
+.swap-support-fee-control .constraint-field-label{font-size:11px!important}.swap-support-fee-control .constraint-field-input,.swap-support-fee-control .input-wrapper{width:100%!important;min-width:0!important}
+.swap-support-fee-control .constraint-input{min-height:40px;border:1px solid rgba(82,193,225,.32)!important;background:rgba(3,18,31,.7)!important;font-size:13px!important}
+.swap-redesign-active .outcome-section #swapBtn+.av-rewards-discovery{margin-top:10px!important;margin-bottom:0!important}
+.swap-redesign-active .constraints-preview-inline #feePreview{display:none}.swap-redesign-active .constraints-preview-inline #feePreview+*{display:none}
+@media(max-width:950px){.swap-support-fee-control .constraint-field{grid-template-columns:1fr minmax(110px,180px)}}
+@media(max-width:540px){.swap-support-fee-control .constraint-field{grid-template-columns:1fr}.swap-support-fee-control{padding-inline:0}}

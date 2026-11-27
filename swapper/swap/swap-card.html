@@ -17,6 +17,7 @@
 .swap-community-journey p{font-size:12px;line-height:1.55;color:#b6d2dd;margin:0 0 12px}
 .swap-community-journey button{cursor:pointer;background:transparent;border:1px solid rgba(101,202,233,.4);border-radius:7px;padding:9px 12px;color:#a7e9f6;font-size:12px}
 </style><link rel="stylesheet" href="../../obsidian-site.css?v=4">
+<link rel="stylesheet" href="./swap-refine.css?v=1">
 </head>
 <body class="swap-redesign-active av-obsidian-site">
 <div class="page-wrapper"> <div id="header-container" data-header-type="full"></div><div class="page-content"><header class="swap-experience-heading swap-v3-heading">
@@ -86,6 +87,7 @@ aria-label="Copy To token mint"
     <span class="swap-support-kicker">YOUR SWAP SUPPORTS</span>
     <div id="swapSupportVisual" class="swap-support-visual"><img id="swapSupportLogo" src="../../assets/logo-transparent.png" alt=""><div><small>Selected Community</small><b id="swapSupportName">Choose a community</b></div></div>
     <div class="swap-support-stat"><small>Your Platform Fee</small><b id="swapSupportFee">1.0%</b><span>You control this fee.</span></div>
+    <div id="swapSupportFeeControl" class="swap-support-fee-control"><span>ADJUST SUPPORT</span><p>Set the AquaVaults platform fee for this swap. Solana supports 0–10%.</p></div>
     <div id="swapCommunityJourney" class="swap-community-journey" hidden role="status" aria-live="polite"><span class="swap-community-journey-label">COMMUNITY SELECTED</span><strong id="swapJourneyName"></strong><p>Your community choice was carried here. Review the fee and token pair before signing.</p><button id="swapJourneyChange" type="button">Change community ↗</button></div>
     <div class="swap-support-explain"><b>Where does it go?</b><p>AquaVaults routes the applicable share of your chosen fee according to the selected community's configured fee route.</p></div>
     <a id="swapSupportCommunityLink" class="swap-support-link" href="../../community-affiliates/">View community →</a>
@@ -106,7 +108,7 @@ Type to search, or paste a Solana token mint address
 </div> <div class="token-picker-overlay" id="shareLinkOverlay" style="display: none;"> <div class="token-picker-modal"> <div class="token-picker-header"> <h3 class="token-picker-title">Share Link</h3> <button class="token-picker-close" onclick="closeShareModal()" type="button">×</button> </div> <div style="padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.75rem;"> <div class="mode-tabs" id="sharePreviewTabs" role="tablist" aria-label="Preview style"> <button class="mode-tab active" id="sharePreviewCommunity" type="button" role="tab" aria-selected="true" onclick="setSharePreviewMode('community')">Community Brand</button> <button class="mode-tab" id="sharePreviewToken" type="button" role="tab" aria-selected="false" onclick="setSharePreviewMode('token')">Output Token</button> </div> <div class="token-picker-result" id="sharePreviewCard"> <div class="token-picker-result-icon"> <img id="sharePreviewImg" alt="" /> </div> <div class="token-picker-result-info"> <div class="token-picker-result-header"> <span class="token-picker-result-symbol" id="sharePreviewTitle"></span> </div> <div class="token-picker-result-name" id="sharePreviewSubtitle"></div> </div> </div> <div id="shareSummary"></div> <textarea class="token-picker-input" id="shareLinkInput" readonly rows="3" style="width: 100%; resize: vertical; font-family: monospace; word-break: break-all;"></textarea> </div> <div style="padding: 0.75rem 1.25rem; display: flex; gap: 0.5rem;"> <button class="btn btn-primary" id="shareCopyBtn" onclick="copyShareLink()" type="button" style="flex: 1;">Copy</button> <button class="btn btn-secondary" onclick="shareShareLinkX()" type="button" style="flex: 1;">Share on X</button> <button class="btn btn-secondary" onclick="closeShareModal()" type="button" style="flex: 1;">Close</button> </div> <div class="token-picker-footer"> <small class="token-picker-disclaimer">
 This link opens AquaVaults with your selected community and tokens preloaded.
 </small> </div> </div>
-</div> <script src="./swap-bundle.js?v=swap-v3-4" defer></script>
+</div> <script src="./swap-bundle.js?v=swap-v3-4" defer></script><script src="./swap-refine.js?v=1" defer></script>
 
 <script>
 (function(){

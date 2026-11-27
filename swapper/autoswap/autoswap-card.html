@@ -10,12 +10,14 @@
 <link rel="stylesheet" href="../../experience.css">
 <link rel="stylesheet" href="../../blueprint.css"><link rel="stylesheet" href="./autoswap-guide.css?v=1"><link rel="stylesheet" href="./autoswap-flat.css?v=1">
 <link rel="stylesheet" href="../../obsidian-site.css?v=4">
+<link rel="stylesheet" href="./autoswap-refine.css?v=1">
 </head>
 <body class="autoswap-redesign-active av-obsidian-site">
 <div class="page-wrapper"> <div id="header-container" data-header-type="full"></div><div class="page-content"><header class="tool-experience-heading"><span>AUTOMATED ACTIVITY</span><h1>AutoSwap</h1><p>Turn one swap setup into repeatable onchain participation while keeping community support in the loop.</p></header>
+<div class="autoswap-flow-strip" aria-label="How AutoSwap works"><div class="accent"><span>01</span><b>Choose Community</b><small>Every completed swap supports the same selection.</small></div><div><span>02</span><b>Configure Swaps</b><small>Set tokens, amount, count and timing.</small></div><div><span>03</span><b>Review Settings</b><small>Confirm the fee and plan before starting.</small></div><div><span>04</span><b>Start and Approve</b><small>Approve each transaction in your wallet.</small></div></div>
 <div class="trade-shell estimator-layout">
 <aside class="utility-rail">
-<div class="utility-rail-heading">Context</div> <div class="asw-block"> <div class="community-selector-container"> <div class="asw-hint-holder" id="communityTooltipContainer"> <div class="community-selector" id="communitySelector" onclick="toggleCommunityDropdown()"> <div class="community-selected" id="communitySelected"> <span class="select-prompt">Select a community to enable swaps</span> </div> <script>
+<div class="utility-rail-heading">Your AutoSwap Supports</div><div class="autoswap-support-summary"><span>COMMUNITY ROUTING</span><strong id="autoswapSupportName">Choose a community</strong><p>One community stays selected for the full cycle. Stop the cycle before changing it.</p><div><small>Platform fee</small><b id="autoswapSupportFee">1.0%</b></div></div> <div class="asw-block"> <div class="community-selector-container"> <div class="asw-hint-holder" id="communityTooltipContainer"> <div class="community-selector" id="communitySelector" onclick="toggleCommunityDropdown()"> <div class="community-selected" id="communitySelected"> <span class="select-prompt">Select a community to enable swaps</span> </div> <script>
 (function(){
 var id = localStorage.getItem('selectedCommunity');
 if (id) {
@@ -319,7 +321,7 @@ Random
 <div class="asw-action-buttons" style="display: flex; gap: 0.5rem; flex-direction: row; height: auto; position: relative; transform: none; left: auto; top: auto; width: 100%; max-width: none; min-width: auto;">
 <button class="asw-button asw-button-action" disabled="" id="autoStart" onclick="handleAutoStart()" style="flex: 1; border-radius: 8px; padding: 0.65rem 1rem; position: static; transform: none; width: auto; max-width: none; min-width: auto;">Start Auto Swap</button>
 <button class="asw-button asw-button-action" disabled="" id="autoStop" onclick="handleAutoStop()" style="display:none; flex: 1; border-radius: 8px; padding: 0.65rem 1rem; position: static; transform: none; width: auto; max-width: none; min-width: auto;">Stop</button>
-</div> </div>
+</div><p class="autoswap-cycle-note">Your wallet still asks you to approve each transaction. If funds remain unavailable after retries, the cycle stops and records the reason in the Activity Log.</p> </div>
 <div class="asw-debug-panel" id="debug" style="display:none;"></div>
 </div>
 </div>
@@ -563,5 +565,5 @@ Type to search, or paste a Solana token mint address
 </div> </div> <div class="token-picker-footer"> <small class="token-picker-disclaimer">
 ⚠️ Token info provided by third parties (Jupiter). Verification indicators are informational only. Always verify the mint address.
 </small> </div> </div>
-</div> <script src="../../swapper/autoswap/autoswap-bundle.js" defer></script><script src="./autoswap-guide.js?v=1" defer></script> </body>
+</div> <script src="../../swapper/autoswap/autoswap-bundle.js" defer></script><script src="./autoswap-guide.js?v=1" defer></script><script src="./autoswap-refine.js?v=1" defer></script> </body>
 </html>
