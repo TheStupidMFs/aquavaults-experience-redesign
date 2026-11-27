@@ -3,7 +3,7 @@
     const p=window.location.pathname;
     return p.startsWith("/aquavaults-experience-redesign/")?"/aquavaults-experience-redesign":"";
   }
-  function headerPath(type){return basePath()+"/header/header-"+type+".html"}
+  function headerPath(type){return basePath()+"/header/header-"+type+".html?v=5"}
   function init(){
     const el=document.getElementById("header-container");
     if(!el){console.warn("Header container not found");return}
