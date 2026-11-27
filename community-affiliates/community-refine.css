@@ -1,0 +1,9 @@
+.community-blueprint-v2 .community-experience-head{align-items:flex-start!important}
+.community-blueprint-v2 .community-experience-head>div:first-child{max-width:720px}
+.community-blueprint-v2 .community-experience-head h1{max-width:680px;font-size:clamp(38px,5vw,60px)!important;line-height:.96!important}
+.community-blueprint-v2 .community-experience-head p{max-width:650px!important;font-size:14px!important;line-height:1.65!important}
+.community-order-note{display:flex;gap:12px;align-items:baseline;padding:13px 4px 4px;color:#7899a8;font-size:11px;line-height:1.5}
+.community-order-note strong{flex:0 0 auto;color:#dff8fc;font-size:11px}
+.community-profile-signals span{font-size:10px!important}
+.community-head-actions .bp-btn,.community-head-link{min-height:40px;display:inline-flex;align-items:center;justify-content:center;padding:0 15px!important;font-size:11px!important}
+@media(max-width:650px){.community-order-note{align-items:flex-start;flex-direction:column;gap:3px}.community-blueprint-v2 .community-experience-head h1{font-size:40px!important}.community-head-actions{display:grid!important;grid-template-columns:1fr 1fr}}
