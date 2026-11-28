@@ -236,3 +236,69 @@ body.autoswap-redesign-active .estimator-rail .est-rail-scroll{max-height:none!i
   body.autoswap-redesign-active .asw-content-box{padding:12px!important}
   body.autoswap-redesign-active .tool-experience-heading h1{font-size:34px}
 }
+
+/* Exact visual alignment with the live Swap page. */
+body.autoswap-redesign-active .page-content{
+  width:min(1180px,calc(100% - 32px))!important;
+  max-width:1180px!important;
+}
+body.autoswap-redesign-active .trade-shell.estimator-layout{
+  grid-template-columns:235px minmax(0,1fr) 265px!important;
+  width:100%!important;
+  max-width:1180px!important;
+  gap:19px!important;
+}
+body.autoswap-redesign-active .asw-header-tabs{
+  min-height:43px!important;
+  background:rgba(3,15,27,.82)!important;
+}
+body.autoswap-redesign-active .asw-tab-button{
+  min-height:43px!important;
+  color:#8ea4b0!important;
+  font-size:12px!important;
+  box-shadow:none!important;
+}
+body.autoswap-redesign-active .asw-tab-button.active{
+  color:#f3fbff!important;
+  background:rgba(7,24,37,.72)!important;
+  border-bottom:2px solid #45d8ec!important;
+  box-shadow:none!important;
+}
+body.autoswap-redesign-active .utility-rail{
+  background:rgba(3,17,30,.72)!important;
+}
+body.autoswap-redesign-active .utility-rail .asw-button,
+body.autoswap-redesign-active .utility-rail .asw-button-link{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  min-height:40px!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:6px!important;
+  background:#071d31!important;
+  color:#c7e5ef!important;
+  box-shadow:none!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  text-decoration:none!important;
+}
+body.autoswap-redesign-active .utility-rail .asw-button:hover,
+body.autoswap-redesign-active .utility-rail .asw-button-link:hover{
+  background:#0a2942!important;
+  color:#fff!important;
+}
+body.autoswap-redesign-active .asw-content-box{
+  background:rgba(3,17,30,.35)!important;
+}
+body.autoswap-redesign-active .estimator-rail{
+  background:rgba(3,17,30,.72)!important;
+}
+
+@media(max-width:1150px) and (min-width:951px){
+  body.autoswap-redesign-active .trade-shell.estimator-layout{grid-template-columns:205px minmax(470px,1fr)!important}
+}
+@media(max-width:950px){
+  body.autoswap-redesign-active .trade-shell.estimator-layout{grid-template-columns:200px minmax(0,1fr)!important}
+}
