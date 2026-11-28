@@ -3,18 +3,36 @@
 
 (function () {
 
+  function projectRoot() {
+    return window.location.pathname.indexOf('/aquavaults-experience-redesign/') === 0
+      ? '/aquavaults-experience-redesign'
+      : '';
+  }
+
+  function resolveProjectLinks(container) {
+    var root = projectRoot();
+    if (!root || !container) return;
+    container.querySelectorAll('a[href^="/"]').forEach(function (link) {
+      link.setAttribute('href', root + link.getAttribute('href'));
+    });
+    container.querySelectorAll('img[src^="/"]').forEach(function (image) {
+      image.setAttribute('src', root + image.getAttribute('src'));
+    });
+  }
+
   // ── 1. Sidebar loader ──────────────────────────────────
   function loadSidebar() {
     var container = document.getElementById('docs-sidebar');
     if (!container) return;
 
-    fetch('/learn/docs-sidebar.html')
+    fetch(projectRoot() + '/learn/docs-sidebar.html?v=6')
       .then(function (r) {
         if (!r.ok) throw new Error('sidebar ' + r.status);
         return r.text();
       })
       .then(function (html) {
         container.innerHTML = html;
+        resolveProjectLinks(container);
         setActiveSidebarLink();
         initMobileNav();
       })
@@ -25,10 +43,14 @@
 
   // ── 2. Mark the current page's sidebar link active ─────
   function setActiveSidebarLink() {
-    var path = window.location.pathname.replace(/\/$/, '');
+    var path = window.location.pathname
+      .replace(/^\/aquavaults-experience-redesign(?=\/|$)/, '')
+      .replace(/\/$/, '');
     var links = document.querySelectorAll('.docs-sidebar-link');
     links.forEach(function (link) {
-      var href = (link.getAttribute('href') || '').replace(/\/$/, '');
+      var href = (link.pathname || link.getAttribute('href') || '')
+        .replace(/^\/aquavaults-experience-redesign(?=\/|$)/, '')
+        .replace(/\/$/, '');
       // Exact match, or landing-page root match
       if (href === path || (href === '/learn' && path === '/learn')) {
         link.classList.add('active');
