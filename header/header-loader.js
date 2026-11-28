@@ -4,6 +4,18 @@
     return p.startsWith("/aquavaults-experience-redesign/")?"/aquavaults-experience-redesign":"";
   }
   function headerPath(type){return basePath()+"/header/header-"+type+".html?v=5"}
+  function normalizeProjectPaths(scope){
+    const root=basePath();
+    if(!root)return;
+    (scope||document).querySelectorAll('a[href^="/"]').forEach(a=>{
+      const href=a.getAttribute("href");
+      if(href&&href.indexOf(root+"/")!==0)a.setAttribute("href",root+href);
+    });
+    (scope||document).querySelectorAll('img[src^="/"]').forEach(i=>{
+      const src=i.getAttribute("src");
+      if(src&&src.indexOf(root+"/")!==0)i.setAttribute("src",root+src);
+    });
+  }
   function init(){
     const el=document.getElementById("header-container");
     if(!el){console.warn("Header container not found");return}
@@ -35,6 +47,9 @@
         el.querySelectorAll('a[href^="/"]').forEach(a=>a.setAttribute("href",root+a.getAttribute("href")));
         el.querySelectorAll('img[src^="/"]').forEach(i=>i.setAttribute("src",root+i.getAttribute("src")));
       }
+      normalizeProjectPaths(document);
+      setTimeout(()=>normalizeProjectPaths(document),0);
+      setTimeout(()=>normalizeProjectPaths(document),600);
       const boot=()=>{if(window.AquaVaultsHeader&&window.AquaVaultsHeader.init){window.AquaVaultsHeader.init();if(type==="full"&&window.AquaVaultsWalletWidget&&window.AquaVaultsWalletWidget.mount)window.AquaVaultsWalletWidget.mount({el:"av-wallet",autoConnect:true})}else setTimeout(boot,50)};boot();
     }).catch(err=>{console.error("Error loading header:",err);el.innerHTML='<header class="app-header"><a class="header-center" href="'+basePath()+'/"><h1 class="header-title">AquaVaults</h1></a></header>'})
   }
