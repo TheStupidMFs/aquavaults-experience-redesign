@@ -80,3 +80,33 @@ body:is(.blueprint-active,.swap-redesign-active,.account-redesign-active,.reward
  body:is(.blueprint-active,.swap-redesign-active,.account-redesign-active,.rewards-redesign-active,.coop-redesign-active,.evm-redesign-active,.lp-redesign-active,.campaigns-redesign-active,.wheel-redesign-active,.learn-redesign-active,.autoswap-redesign-active,.limit-redesign-active)
  :is(.feature-card,.journey-card,.flow-card,.ecosystem-card,.instant-panel,.activity-panel,.community-now-panel,.tools-now-panel,.account-card,.account-hub-panel,.rewards-card,.coop-card,.community-table-card){background:#030e1a!important;backdrop-filter:none;-webkit-backdrop-filter:none}
 }
+
+/* Mobile QA V6 — shared safeguards for every public experience. */
+html,body{max-width:100%;overflow-x:clip}
+body :is(main,.page-wrapper,.page-content,.docs-layout,.docs-main,.rewards-page,.account-page,.wheel-page){min-width:0}
+body :is(img,video,canvas,svg){max-width:100%}
+body :is(input,select,textarea,button){max-width:100%}
+
+@media(max-width:640px){
+  #header-container{min-height:72px;padding:8px!important}
+  .app-header{min-height:56px!important;padding:7px 8px!important;gap:5px!important;border-radius:13px!important}
+  .app-header .av-brand{min-width:0!important;flex:1 1 auto!important;padding-right:2px!important;overflow:hidden}
+  .app-header .av-brand-mark{width:min(138px,38vw)!important;min-width:98px!important}
+  .app-header .av-glossy-logo{width:100%!important;object-fit:contain!important;object-position:left center!important}
+  .app-header .header-right{flex:0 1 auto!important;min-width:0!important;gap:4px!important}
+  .app-header .header-account-status{min-width:32px!important;min-height:32px!important;padding:0 8px!important;justify-content:center!important}
+  .app-header .nav-toggle{display:inline-flex!important;width:34px!important;height:34px!important;flex:0 0 34px!important}
+  .app-header .page-nav{top:calc(100% + 6px)!important;max-height:calc(100dvh - 82px)!important;overflow-y:auto!important;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  .app-header.nav-open .page-nav .nav-tab{min-height:42px!important;display:flex!important;align-items:center!important;font-size:.875rem!important}
+  .app-header.nav-open .page-nav .nav-dropdown-menu{margin-left:0!important;max-height:none!important}
+  body :is(button,.btn,.primary-btn,.account-button,.rewards-button,.bp-btn){min-height:42px}
+  body :is(input,select,textarea){font-size:16px!important}
+  body :is(.table-wrap,.rewards-table-wrap,.rewards-catalog-table-wrap){max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+}
+
+@media(max-width:420px){
+  .app-header .header-account-state{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .app-header .header-account-status{width:32px!important;padding:0!important}
+  .app-header .header-account-status:before{width:8px;height:8px;flex-basis:8px}
+  .app-header #av-wallet button{min-height:34px!important;padding:8px 9px!important;font-size:.75rem!important}
+}
